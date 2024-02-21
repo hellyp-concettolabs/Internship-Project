@@ -1,5 +1,6 @@
-import './App.css'
-import Header from './Header'
+import Header from "./Components/Navbar/Header"
+
+
 
 function App() {
 
