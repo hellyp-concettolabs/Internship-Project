@@ -1,5 +1,4 @@
-import Header from "./Components/Navbar/Header"
-
+import HeaderSection from "./Components/Navbar/HeaderSection"
 
 
 function App() {
@@ -7,7 +6,7 @@ function App() {
 
   return (
     <>
-      <Header/>
+      <HeaderSection/>
     </>
   )
 }
