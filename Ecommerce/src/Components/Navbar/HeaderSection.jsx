@@ -8,10 +8,11 @@ import "../Navbar/header.scss"
 function HeaderSection() {
   return (
     <div>
-      <header className='shadow-sm'>
+      <header className='shadow-sm mb-3'>
         <Container fluid="lg">
           <Row className='align-items-center'>
-            <Col className='leftsection'>
+            <Col className='leftsection d-flex align-items-center '>
+              <i className="bi bi-list d-md-none "></i>
               <Navbar.Brand href="#home">
                 <Image src={main_logo} className=' img-fluid '/>
               </Navbar.Brand>
