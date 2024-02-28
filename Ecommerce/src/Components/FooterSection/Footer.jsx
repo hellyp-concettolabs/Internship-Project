@@ -60,8 +60,8 @@ function Footer() {
                 </Row>
                 <hr></hr>
                 <div className="bottom-footer text-center pt-3 ">
-                    <Row className=" align-items-center ">
-                        <Col className=" d-flex gap-4">
+                    <Row className="align-items-center g-3 gap-lg-0 ">
+                        <Col className=" d-flex gap-4 col-12 col-lg-4 justify-content-center justify-content-lg-start ">
                             <div className="rounded-circle bg-primary px-3 py-3 ">
                                 <i className="bi bi-facebook "></i>
                             </div>
@@ -75,10 +75,10 @@ function Footer() {
                                 <i className="bi bi-pinterest"></i>
                             </div>
                         </Col>
-                        <Col>
+                        <Col className=" col-12 col-lg-4">
                             <p className=" text-light ">All rights reserved © 2023 BargainFox.com</p>
                         </Col>
-                        <Col className=" text-center text-xl-end ">
+                        <Col className=" text-center text-xl-end col-12 col-lg-4">
                             <p  className=" text-light ">Terms of Service| Privacy Policy</p>
                         </Col>
                     </Row>

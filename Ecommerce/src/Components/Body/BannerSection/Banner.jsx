@@ -3,13 +3,15 @@ import { Image, Container, Row, Col } from "react-bootstrap"
 
 function Banner() {
   return (
-    <Container fluid className=" mb-4 p-0">
+    <>
+    <Container fluid className=" my-3">
       <Row>
         <Col>
             <Image src={banner} className=" img-fluid "/>
         </Col>
       </Row>
     </Container>
+    </>
   )
 }
 
