@@ -54,7 +54,7 @@ function Trending() {
     <>
       <Container className="px-0 my-4">
         <Row className="mb-4 position-relative">
-          <Col className="mb-4 mb-md-0 px-4 d-flex align-items-center">
+          <Col className="mb-4 mb-md-0 px-4 d-flex align-items-center col-8 ">
             <h2 className="mb-0">Trending on BargainFox</h2>
           </Col>
           <Col className="d-flex justify-content-md-end align-items-center gap-2 ">
@@ -76,7 +76,7 @@ function Trending() {
           <div className=" text-center ">
             <div>
                 <div className="d-flex flex-column align-items-center bg-body-secondary rounded-circle m-2">
-                    <Image src={kitchen} className="img-fluid mt-2" />
+                    <Image src={kitchen} className="img-fluid" />
                     <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
                 </div>
             </div>
@@ -85,7 +85,7 @@ function Trending() {
           <div className=" text-center ">
             <div>
                 <div className="d-flex flex-column align-items-center bg-body-secondary rounded-circle m-2">
-                    <Image src={home} className="img-fluid mt-2 " />
+                    <Image src={home} className="img-fluid" />
                     <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
                 </div>
             </div>
@@ -94,7 +94,7 @@ function Trending() {
           <div className=" text-center ">
             <div>
                 <div className="d-flex flex-column align-items-center bg-body-secondary rounded-circle m-2">
-                    <Image src={toys} className="img-fluid mt-2 " />
+                    <Image src={toys} className="img-fluid" />
                     <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
                 </div>
             </div>
@@ -103,7 +103,7 @@ function Trending() {
           <div className=" text-center ">
             <div>
                 <div className="d-flex flex-column align-items-center bg-body-secondary rounded-circle m-2">
-                    <Image src={sports} className="img-fluid mt-2 " />
+                    <Image src={sports} className="img-fluid" />
                     <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
                 </div>
             </div>
@@ -112,7 +112,7 @@ function Trending() {
           <div className=" text-center ">
             <div>
                 <div className="d-flex flex-column align-items-center bg-body-secondary rounded-circle m-2">
-                    <Image src={cabinet} className="img-fluid mt-2 " />
+                    <Image src={cabinet} className="img-fluid " />
                     <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
                 </div>
             </div>
@@ -121,7 +121,7 @@ function Trending() {
           <div className=" text-center ">
             <div>
                 <div className="d-flex flex-column align-items-center bg-body-secondary rounded-circle m-2">
-                    <Image src={pets} className="img-fluid mt-2 " />
+                    <Image src={pets} className="img-fluid" />
                     <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
                 </div>
             </div>
