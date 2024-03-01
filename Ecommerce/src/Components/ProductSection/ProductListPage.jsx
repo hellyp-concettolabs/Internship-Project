@@ -1,7 +1,8 @@
-import { Col, Container, Row } from "react-bootstrap"
+import { Col, Container, Form, FormControl, Row } from "react-bootstrap"
 import CheckboxCard from "./CheckboxCard"
 import WomenProductList from "./WomenProductList"
 import wp1 from "../../assets/wp1.png"
+import "../ProductSection/productlist.scss"
 function ProductListPage() {
 
     const conditions = [
@@ -72,7 +73,7 @@ function ProductListPage() {
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
-            price: `8.25`,
+            price: `9.25`,
             actualprice:`16.50`,
             dicount:`50%`
         },
@@ -177,9 +178,13 @@ function ProductListPage() {
     ]
   return (
     <>
-     <Container fluid className=" d-flex flex-row">
-        <Container className=" col-3 ">
-            <Col className="">
+     <Container className=" p-0 ">
+        <Row className=" mb-4 ">
+            <span>Home &gt; Clothing &gt; Women</span>
+        </Row>
+        <Row>
+
+            <Col className="className= col-3">
                 <Row>
                     <div className=" text-secondary fw-bold fs-5">Filters</div>
                 </Row>
@@ -202,18 +207,37 @@ function ProductListPage() {
                         </Col>
                 </Row>            
             </Col>
-        </Container>
-        <Container className=" col-9">
-            <Col className=" d-flex flex-column">
-                <Row className=" mb-3 ">
-                    <div className=" fs-4 fw-bold ">Results</div>
+
+            <Col className=" d-flex flex-column col-9">
+                <Row className=" mb-3 justify-content-end  ">
+                    <Col>
+                        <div className=" fs-4 fw-bold ">Results</div>
+                    </Col>
+                    <Col className=" col-lg-4">
+                           <Form>
+                                <div className=" align-items-center d-flex rounded-5 border border-secondary p-1">
+                                    <Form.Label className=" m-0 small fw-bold text-secondary text-center col-4">Sort By:</Form.Label>
+                                    <div className="dropdown d-flex justify-content-center col-7">
+                                        <FormControl type="text" placeholder="Select..." className="border-0 p-0" style={{ boxShadow:"none", cursor:"pointer"}} data-bs-toggle="dropdown" aria-expanded="false"/>
+                                        <div className=" dropdown-toggle " data-bs-toggle="dropdown" style={{cursor:"pointer"}}></div>
+                                        <ul className=" dropdown-menu Dropdownmenu">
+                                        <li className=" dropdown-item ">Select...</li>
+                                        <li className=" dropdown-item ">Lowest Price</li>
+                                        <li className=" dropdown-item ">Highest Price</li>                       
+                                        <li className=" dropdown-item ">Tops Customer Review</li>                       
+                                        <li className=" dropdown-item ">Most Recent</li>                       
+                                        </ul>
+                                    </div>
+                                </div>
+                            </Form>
+                    </Col>
                 </Row>
                 <Row>
                         <WomenProductList data={data}/>
                 </Row>
             </Col>
-        </Container>
 
+        </Row>
     </Container> 
     </>
   )

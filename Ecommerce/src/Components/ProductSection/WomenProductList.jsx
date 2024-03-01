@@ -5,8 +5,8 @@ function WomenProductList({data}) {
   return (
     <>
             {data && data.map((d) => (
-            <Col className=" col-3 " key={d.title}>
-            <div className=" mx-2 ">
+            <Col className=" col-3 mb-3" key={d.title}>
+            <div className="">
                 <div className=" border rounded-5 ">
                     <div>
                         <Image src={d.img} className=" img-fluid w-100 "/>
