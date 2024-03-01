@@ -12,13 +12,27 @@ function Menu() {
       <Row className=" d-flex align-items-center justify-content-center">
         <Col className=" d-none d-xl-block "></Col>
         <Col className=" d-none d-lg-block "></Col>
-        <Col className=" d-flex flex-column text-center ">
+        <Col className=" d-flex flex-column text-center dropdown  Home" >
             <Image src={HomeKitchen} className=" img-fluid "/>
             <span className=" mt-1">Home & Kitchen</span>
+            <div className=" dropdown-menu dropdown-content">
+              <ul className=" list-unstyled ">
+                <li className=" dropdown-item ">Application</li>
+                <li className=" dropdown-item ">Home</li>
+                <li className=" dropdown-item ">Kitchen</li>
+              </ul>
+            </div>
         </Col>
-        <Col className=" d-flex flex-column text-center">
+        <Col className=" d-flex flex-column text-center dropdown  Home" >
             <Image src={HealthBeauty} className=" img-fluid "/>
             <span className=" mt-1">Health & Beauty</span>
+            <div className=" dropdown-menu dropdown-content">
+              <ul className=" list-unstyled ">
+                <li className=" dropdown-item ">Application</li>
+                <li className=" dropdown-item ">Home</li>
+                <li className=" dropdown-item ">Kitchen</li>
+              </ul>
+            </div>
         </Col>
         <Col className=" d-flex flex-column text-center">
             <Image src={Electronics} className=" img-fluid"/>

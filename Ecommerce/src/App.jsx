@@ -1,32 +1,23 @@
 import "./App.css"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HeaderSection from "./Components/Navbar/HeaderSection"
-import Menu from "./Components/Body/MenuBar/Menu"
-import Banner from "./Components/Body/BannerSection/Banner"
-import Trending from "./Components/Body/TrendingSection/Trending"
 import Footer from "./Components/FooterSection/Footer"
-import Blogs from "./Components/Body/BlogsSection/Blogs"
-import Deal from "./Components/Body/DealsOfTheDay/Deal"
-import Subscribe from "./Components/Body/SubscribeSection/Subscribe"
-import DealTendingSelection from "./Components/Body/Deal&TrendingSection/DealTendingSelection"
-import Electronics from "./Components/Body/ElectronicsSection/Electronics"
-import Garden from "./Components/Body/GardenSection/Garden"
+import MainBody from "./Components/Body/MainBody"
 
 function App() {
 
-
   return (
     <>
-      <HeaderSection/>
-      <Menu/>
-      <Banner/>
-      <Deal/>
-      <Trending/>
-      <DealTendingSelection/>
-      <Garden/>
-      <Subscribe/>
-      <Electronics/>
-      <Blogs/>
-      <Footer/>
+      <BrowserRouter>
+        <HeaderSection/>
+        <Routes>
+          <Route index path="/" element={<MainBody/>}/>
+            {/* <Route index element={}/>
+            <Route path="blogs" element={<Blogs/>}/>
+            <Route path="contact" element={<Contact/>}/> */}
+        </Routes>
+        <Footer/>
+      </BrowserRouter>
     </>
   )
 }

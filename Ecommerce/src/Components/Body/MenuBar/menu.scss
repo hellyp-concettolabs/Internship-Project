@@ -1,5 +1,24 @@
 
 span{
-        font-size: 0.700rem;
+        font-size: 0.650rem;
 }
 
+.dropdown-content :hover{
+        background-color: #ddd;
+        cursor: pointer;
+}
+
+ul > .dropdown-item :hover{
+        background-color: red;
+}
+
+@media (min-width:768px) {
+        .Home:hover >
+          .dropdown-content {
+          display: block;
+          cursor: pointer;
+          position: absolute;
+          z-index: 1;
+          margin-top: 105px;
+        }
+        }
