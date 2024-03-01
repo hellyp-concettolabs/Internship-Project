@@ -20,10 +20,15 @@
    cursor: pointer;
    position: absolute;
    z-index: 1;
-   margin-top: 350px;
+   margin-top: 340px;
  }
  }
  
+ @media (max-width:1243px) and (min-width:768px) {
+  #SignupDropdown {
+    right: 0;
+  }
+ }
 
 // #SignupDropdown {
 //   position: absolute;

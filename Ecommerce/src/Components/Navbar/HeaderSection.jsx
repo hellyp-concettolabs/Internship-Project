@@ -56,14 +56,14 @@ function HeaderSection() {
                     </div>
                     <div className=' bg-light rounded-4 dropdown-content dropdown-menu position-md-static' id="SignupDropdown" >
                         <ListGroup as="ul"  className=' dropdown-item p-0'>
-                          <ListGroup.Item as="li" action href='#' className=' px-3'>
+                          <ListGroup.Item as="li"  className=' px-3'>
                             <Button onClick={() => setShow(true)} className=' text-center bg-primary text-light border-0 rounded-5 py-2 px-3 '>Login/Register</Button>
                           </ListGroup.Item>
-                          <ListGroup.Item as="li" action href='#' className='dropdown-item '>Your Profile</ListGroup.Item>
-                          <ListGroup.Item as="li" action href='#' className='dropdown-item '>Your Orders</ListGroup.Item>
-                          <ListGroup.Item as="li" action href='#' className='dropdown-item '>Address</ListGroup.Item>
-                          <ListGroup.Item as="li" action href='#' className='dropdown-item '>Notifications</ListGroup.Item>
-                          <ListGroup.Item as="li" action href='#' className='dropdown-item '>Wishlists</ListGroup.Item>
+                          <ListGroup.Item as="li"  className='dropdown-item '>Your Profile</ListGroup.Item>
+                          <ListGroup.Item as="li"  className='dropdown-item '>Your Orders</ListGroup.Item>
+                          <ListGroup.Item as="li"  className='dropdown-item '>Address</ListGroup.Item>
+                          <ListGroup.Item as="li"  className='dropdown-item '>Notifications</ListGroup.Item>
+                          <ListGroup.Item as="li"  className='dropdown-item '>Wishlists</ListGroup.Item>
                         </ListGroup>
                     </div>
                   </div>

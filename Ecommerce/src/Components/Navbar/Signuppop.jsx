@@ -17,7 +17,9 @@ function Signuppop(props) {
         <Modal.Title id="contained-modal-title-vcenter" className=' text-center col-11'>
             <div className=' fs-1 fw-bold '>
                 Sign In / Register
+                {/* <CloseButton aria-label="Hide" /> */}
             </div>
+            
         </Modal.Title>
       </Modal.Header>
       <div className='text-secondary text-center pb-4 '>

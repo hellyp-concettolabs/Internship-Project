@@ -16,10 +16,11 @@ function Menu() {
             <Image src={HomeKitchen} className=" img-fluid "/>
             <span className=" mt-1">Home & Kitchen</span>
             <div className=" dropdown-menu dropdown-content">
+              <div className=" bg-primary rounded-circle "></div>
               <ul className=" list-unstyled ">
-                <li className=" dropdown-item ">Application</li>
                 <li className=" dropdown-item ">Home</li>
                 <li className=" dropdown-item ">Kitchen</li>
+                <li className=" dropdown-item ">Office</li>
               </ul>
             </div>
         </Col>
