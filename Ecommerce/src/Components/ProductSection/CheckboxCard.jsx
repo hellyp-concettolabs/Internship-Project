@@ -1,6 +1,11 @@
-
 import { Form } from "react-bootstrap"
+import PropTypes from 'prop-types';
 
+CheckboxCard.propTypes = {
+    conditions: PropTypes.arrayOf(PropTypes.object).isRequired,
+    discounts: PropTypes.arrayOf(PropTypes.object).isRequired,
+    prices: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 function CheckboxCard({ conditions , discounts , prices}) {
    

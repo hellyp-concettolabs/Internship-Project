@@ -23,14 +23,14 @@ function HeaderSection() {
               <button className='Menu d-md-none border-0 bg-light ' data-bs-toggle="collapse" data-bs-target="#responsive-navbar-nav" aria-expanded="false" aria-controls="responsive-navbar-nav">
                 <i className="bi bi-list "></i>
               </button>
-              <Navbar.Brand href="#home">
+              <Navbar.Brand href="/">
                 <Image src={main_logo} className=' img-fluid '/>
               </Navbar.Brand>
             </Col>
 
             <Col className='centersection d-none d-md-block'>
                         <Form className='search d-flex w-100 '>
-                            <Form.Control type="text" placeholder="Search Products" className='rounded-start-2 rounded-end-0' />
+                            <Form.Control type="text" placeholder="Search Products" className='rounded-start-2 rounded-end-0'style={{boxShadow:"none",borderColor:"#e2e3e5"}} />
                             <Button variant="outline-success" className='search-icon rounded-end-2 rounded-start-0'>
                               <img src={search}/>
                             </Button>

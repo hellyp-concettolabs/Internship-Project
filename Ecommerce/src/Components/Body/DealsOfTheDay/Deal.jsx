@@ -12,6 +12,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../DealsOfTheDay/deal.scss"
+import { Link } from "react-router-dom"
 
 function Deal() {
 
@@ -109,8 +110,10 @@ function Deal() {
             </Row>
           </Col>
           <Col className=" d-flex justify-content-end align-items-end gap-3 col-6 col-sm-4">
-            <span className=" small fs-md-5">View All Deals</span> 
-            <Image src={rightarrow} className=" img-fluid mb-1"/>
+            <Link to="/dealsoftheday" className=" text-decoration-none ">
+              <span className=" small fs-md-5 px-2 text-dark ">View All Deals</span> 
+              <Image src={rightarrow} className=" img-fluid mb-1"/>
+            </Link>
           </Col>
         </Row>
 

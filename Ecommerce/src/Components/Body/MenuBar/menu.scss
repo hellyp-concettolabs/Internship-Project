@@ -4,12 +4,10 @@ span{
 }
 
 .dropdown-content :hover{
-        background-color: #ddd;
-        cursor: pointer;
+        background-color: white;
 }
-
-ul > .dropdown-item :hover{
-        background-color: red;
+li :hover{
+        color: red;
 }
 
 @media (min-width:768px) {
@@ -21,4 +19,20 @@ ul > .dropdown-item :hover{
           z-index: 1;
           margin-top: 105px;
         }
+        .ToysCrafts:hover >
+          .dropdown-content {
+          display: block;
+          cursor: pointer;
+          position: absolute;
+          z-index: 1;
         }
+        .Hom > .cat:hover >
+          .dropdown-content1 {
+          display: flex;
+          cursor: pointer;
+          position: absolute;
+          z-index: 1;
+        }
+        }
+
+        

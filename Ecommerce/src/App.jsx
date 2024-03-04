@@ -4,6 +4,7 @@ import HeaderSection from "./Components/Navbar/HeaderSection"
 import Footer from "./Components/FooterSection/Footer"
 import MainBody from "./Components/Body/MainBody"
 import ProductListPage from "./Components/ProductSection/ProductListPage";
+import Dealsoftheday from "./Components/Body/DealsOfTheDay/Dealsoftheday";
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route index path="/" element={<MainBody/>}/>
           <Route path="productlist" element={<ProductListPage/>}/>
+          <Route path="dealsoftheday" element={<Dealsoftheday/>}/>
             {/* <Route index element={}/>
             <Route path="blogs" element={<Blogs/>}/>
             <Route path="contact" element={<Contact/>}/> */}
