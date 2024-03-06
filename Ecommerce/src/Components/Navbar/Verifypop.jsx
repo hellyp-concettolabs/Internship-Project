@@ -1,4 +1,4 @@
-import { CloseButton, Container,Modal } from "react-bootstrap"
+import { Button, CloseButton, Container,FormControl,FormLabel,Modal } from "react-bootstrap"
 import PropTypes from 'prop-types';
 
 Verifypop.propTypes = {
@@ -24,8 +24,24 @@ function Verifypop(props) {
             A verification code is sent to stephenparker@gmail.com
         </div>
         <Modal.Body className=''>
-          <Container>
-            
+          <Container className=" px-5">
+            <FormLabel >Verification code</FormLabel>
+            <div className=" d-flex flex-row gap-5">
+            <FormControl className=" bg-body-secondary py-3"></FormControl>
+            <FormControl className=" bg-body-secondary py-3"></FormControl>
+            <FormControl className=" bg-body-secondary py-3"></FormControl>
+            <FormControl className=" bg-body-secondary py-3"></FormControl>
+            <FormControl className=" bg-body-secondary py-3"></FormControl>
+            </div>
+            <div className=" d-flex justify-content-between mt-3 ">
+              <span className=" small ">
+               Expires in 00:30
+              </span>
+              <span className=" text-primary ">
+              Resend Code
+              </span>
+            </div>
+            <Button className=" bg-primary text-light rounded-5 w-100 ">Verify</Button>
           </Container>
         </Modal.Body>
         </div>

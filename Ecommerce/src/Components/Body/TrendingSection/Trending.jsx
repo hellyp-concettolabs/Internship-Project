@@ -71,7 +71,7 @@ function Trending() {
                     <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
                 </div>
             </div>
-            <span className="mt-2 fs-5 ">Electronics</span>
+            <span className="mt-2 small ">Electronics</span>
           </div>
           <div className=" text-center ">
             <div>
@@ -80,7 +80,7 @@ function Trending() {
                     <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
                 </div>
             </div>
-            <span className="mt-2 fs-5 ">Kitchen</span>
+            <span className="mt-2 small ">Kitchen</span>
           </div>
           <div className=" text-center ">
             <div>
@@ -89,7 +89,7 @@ function Trending() {
                     <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
                 </div>
             </div>
-            <span className="mt-2 fs-5 ">Home</span>
+            <span className="mt-2 small ">Home</span>
           </div>
           <div className=" text-center ">
             <div>
@@ -98,7 +98,7 @@ function Trending() {
                     <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
                 </div>
             </div>
-            <span className="mt-2 fs-5 ">Toys</span>
+            <span className="mt-2 small ">Toys</span>
           </div>
           <div className=" text-center ">
             <div>
@@ -107,7 +107,7 @@ function Trending() {
                     <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
                 </div>
             </div>
-            <span className="mt-2 fs-5 ">Sports</span>
+            <span className="mt-2 small ">Sports</span>
           </div>
           <div className=" text-center ">
             <div>
@@ -116,7 +116,7 @@ function Trending() {
                     <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
                 </div>
             </div>
-            <span className="mt-2 fs-5 ">Cabinet</span>
+            <span className="mt-2 small ">Cabinet</span>
           </div>
           <div className=" text-center ">
             <div>
@@ -125,7 +125,7 @@ function Trending() {
                     <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
                 </div>
             </div>
-            <span className="mt-2 fs-5 ">Pets</span>
+            <span className="mt-2 small ">Pets</span>
           </div>
          
           </Slider>
