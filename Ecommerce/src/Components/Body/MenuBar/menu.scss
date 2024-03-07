@@ -1,6 +1,25 @@
+$base-font-size: 12px;
 
-span{
-        font-size: 0.650rem;
+.menusection{
+        span{
+                font-size: $base-font-size;
+        }
+@media (max-width: 1400px) {
+        span {
+                font-size: $base-font-size * 0.8; 
+        }
+}
+@media (max-width: 383px) {
+        span {
+                font-size: $base-font-size * 0.7; 
+        }
+}
+@media (max-width: 348px) {
+        span {
+                font-size: $base-font-size * 0.5; 
+        }
+}
+
 }
 
 .dropdown-content :hover{

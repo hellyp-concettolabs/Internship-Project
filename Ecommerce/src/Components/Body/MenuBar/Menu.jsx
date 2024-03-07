@@ -6,74 +6,34 @@ import ToysCrafts from "../../../assets/ToysCrafts.png"
 import SportsLeisure from "../../../assets/SportsLeisure.png"
 import Clearance from "../../../assets/Clearance.png"
 import '../MenuBar/menu.scss'
+
 function Menu() {
   return (
-    <Container fluid  className=" container-lg mb-4">
+    <Container fluid  className=" menusection container-lg mb-4">
       <Row className=" d-flex align-items-center justify-content-center">
         <Col className=" d-none d-xl-block "></Col>
         <Col className=" d-none d-lg-block "></Col>
         <Col className=" d-flex flex-column text-center dropdown  Home" >
             <Image src={HomeKitchen} className=" img-fluid "/>
             <span className=" mt-1">Home & Kitchen</span>
-              <div className="dropdown-menu dropdown-content">
-              <ul className=" list-unstyled ">
-                <li className=" dropdown-item Home d-flex ">Home
-                  <div className=" mx-3 ">
-                    <li>Appliances & Accessories</li>
-                    <li>Cleaning & Household</li>
-                  </div>
-                </li>
-                <li className=" dropdown-item Kitchen">Kitchen</li>
-                <li className=" dropdown-item Office">Office</li>
-              </ul>
-              </div>
         </Col>
         <Col className=" d-flex flex-column text-center dropdown  Home" >
             <Image src={HealthBeauty} className=" img-fluid "/>
             <span className=" mt-1">Health & Beauty</span>
-            <div className=" dropdown-menu dropdown-content">
-              <ul className=" list-unstyled ">
-                <li className=" dropdown-item ">Health</li>
-                <li className=" dropdown-item ">Beauty</li>
-                <li className=" dropdown-item ">Baby & Kids</li>
-              </ul>
-            </div>
         </Col>
         <Col className=" d-flex flex-column text-center dropdown Home">
             <Image src={Electronics} className=" img-fluid"/>
             <span className=" mt-1 ">Electronics</span>
-            <div className=" dropdown-menu dropdown-content">
-              <div className=" bg-primary rounded-circle "></div>
-              <ul className=" list-unstyled ">
-                <li className=" dropdown-item ">Computing</li>
-                <li className=" dropdown-item ">Appliances</li>
-              </ul>
-            </div>
         </Col>
-        <Col className=" d-flex flex-column text-center d-none d-md-block dropdown ToysCrafts">
+        <Col className=" d-flex flex-column text-center d-none d-md-flex  dropdown ToysCrafts">
             <Image src={ToysCrafts} className=" img-fluid"/>
             <span className=" mt-1 ">Toys & Crafts</span>
-            <div className=" dropdown-menu dropdown-content">
-              <ul className=" list-unstyled ">
-                <li className="dropdown-item  ">Toys & Games</li>
-                <li className=" dropdown-item ">Carfts & Party</li>
-              </ul>
-            </div>
         </Col>
-        <Col className=" d-flex flex-column text-center d-none d-md-block dropdown ToysCrafts">
+        <Col className=" d-flex flex-column text-center d-none d-md-flex dropdown ToysCrafts">
             <Image src={SportsLeisure} className=" img-fluid"/>
             <span className="  mt-1 ">Sports & Leisure</span>
-            <div className=" dropdown-menu dropdown-content">
-              <div className=" bg-primary rounded-circle "></div>
-              <ul className=" list-unstyled ">
-                <li className=" dropdown-item ">Sports and Games</li>
-                <li className=" dropdown-item ">Travel & Camping</li>
-                <li className=" dropdown-item ">Garden & DIY</li>
-                <li className=" dropdown-item ">Entertainment</li>
-              </ul>
-            </div>
         </Col>
-        <Col className=" d-flex flex-column text-center d-none d-md-block">
+        <Col className=" d-flex flex-column text-center d-none d-md-flex">
             <Image src={Clearance} className=" img-fluid"/>
             <span className=" mt-1 ">Clearance</span>
         </Col>
