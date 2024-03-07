@@ -1,11 +1,11 @@
 import {Navbar,Row, Col, Nav, Form, Button, Container, Image, ListGroup} from 'react-bootstrap';
+import { useState } from 'react';
 import main_logo from '../../assets/main-logo.png'
 import search from '../../assets/search-normal.png'
 import wishlist from '../../assets/wishlist.png'
 import shopping_cart from '../../assets/shopping-cart.png'
 import user from '../../assets/user.png'
 import "../Navbar/header.scss"
-import { useState } from 'react';
 import Signuppop from './Signuppop';
 
 function HeaderSection() {

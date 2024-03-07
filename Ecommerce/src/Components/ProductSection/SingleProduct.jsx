@@ -81,7 +81,7 @@ const settingsMain = {
                     <Slider {...settingsMain} asNavFor={nav2} ref={slider => (setSlider1(slider))}>
                         {data.map((slide,id) =>
                             <div className="slick-slide" key={id}>
-                                <Image className="slick-slide-image img-fluid" src={slide.img1} />
+                                <Image className="slick-slide-image img-fluid w-100 " src={slide.img1} />
                             </div>
                     )}
                     </Slider>
