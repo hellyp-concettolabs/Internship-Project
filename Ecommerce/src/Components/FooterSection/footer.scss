@@ -1,0 +1,49 @@
+$base-font-size: 20px;
+
+.footersection {
+  .footertext > div {
+    font-size: $base-font-size;
+  }
+
+  @media (max-width: 1399px) and (min-width: 1200px) {
+    .footertext > div {
+      font-size: $base-font-size * 0.9; 
+    }
+  }
+
+  @media (max-width: 991px) {
+    .footertext > div {
+      font-size: $base-font-size * 0.7; 
+    }
+  }
+  @media (max-width: 768px) {
+    .footertext > div {
+      font-size: $base-font-size * 0.6; 
+    }
+  }
+}
+
+.footersection{
+    p{
+        font-size: $base-font-size;
+    }
+    @media screen and (max-width: 768px) {
+        p {
+          font-size: $base-font-size * 0.7; 
+        }
+      }
+      @media screen and (max-width: 424px) {
+        p{
+          font-size: $base-font-size * 0.5; 
+        }
+      }
+
+}
+
+
+
+
+//--------------------Just for info--------------------
+//body {
+//   font-size: 1rem; // This will be equal to the base font size
+// }

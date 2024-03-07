@@ -42,12 +42,12 @@ function HeaderSection() {
                     <Image src={wishlist} className=' img-fluid '/>
                   </Nav.Link>
 
-                  <Nav.Link href='#shopping_cart'>
+                  <Nav.Link href='/cart'>
                     <Image src={shopping_cart} className=' img-fluid '/>
                   </Nav.Link>
 
                   <div className=' Signup d-flex align-items-center navbar navbar-expand-md position-relative dropdown '  aria-expanded="false">
-                    <Nav.Link href='#user' className=''>
+                    <Nav.Link href='#user' onClick={() => setShow(true)} className=''>
                       <Image src={user} className=' img-fluid '/>
                     </Nav.Link>
                     <div className='greet d-flex flex-column  small d-none d-xl-block'>
