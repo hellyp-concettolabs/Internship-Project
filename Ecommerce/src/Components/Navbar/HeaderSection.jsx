@@ -16,22 +16,22 @@ function HeaderSection() {
     <div>
       
       <header className='shadow-sm mb-3'>
-        <Container fluid="lg" className='navbar-expand-lg'>
-          <Row className='align-items-center'>
+        <Container fluid className='navsection'>
+          <Row className='align-items-center px-md-3 py-2 '>
 
             <Col className='leftsection d-flex align-items-center '>
               <button className='Menu d-md-none border-0 bg-light ' data-bs-toggle="collapse" data-bs-target="#responsive-navbar-nav" aria-expanded="false" aria-controls="responsive-navbar-nav">
                 <i className="bi bi-list "></i>
               </button>
               <Navbar.Brand href="/">
-                <Image src={main_logo} className=' img-fluid '/>
+                <Image src={main_logo} className=' img-fluid col-sm-9  '/>
               </Navbar.Brand>
             </Col>
 
             <Col className='centersection d-none d-md-block'>
-                        <Form className='search d-flex w-100 '>
-                            <Form.Control type="text" placeholder="Search Products" className='rounded-start-2 rounded-end-0'style={{boxShadow:"none",borderColor:"#e2e3e5"}} />
-                            <Button variant="outline-success" className='search-icon rounded-end-2 rounded-start-0'>
+                        <Form className='search d-flex  '>
+                            <Form.Control type="text" placeholder="Search Products" className='searchtext rounded-start-2 rounded-end-0'style={{boxShadow:"none",borderColor:"#e2e3e5"}} />
+                            <Button className='search-icon rounded-end-2 rounded-start-0'>
                               <img src={search}/>
                             </Button>
                         </Form>
@@ -50,12 +50,12 @@ function HeaderSection() {
                     <Nav.Link href='#user' onClick={() => setShow(true)} className=''>
                       <Image src={user} className=' img-fluid '/>
                     </Nav.Link>
-                    <div className='greet d-flex flex-column  small d-none d-xl-block'>
-                      <p className='mb-0'>Hello there,</p>
-                      <span className='fw-bold'>SIGN IN/REGISTER</span>
+                    <div className='d-flex flex-column  small d-none d-xl-block'>
+                      <p className='greet mb-0'>Hello there,</p>
+                      <span className='signin'>SIGN IN/REGISTER</span>
                     </div>
-                    <div className=' bg-light rounded-4 dropdown-content dropdown-menu position-md-static' id="SignupDropdown" >
-                        <ListGroup as="ul"  className=' dropdown-item p-0'>
+                    <div className=' p-0 dropdown-content dropdown-menu position-md-static' id="SignupDropdown" >
+                        <ListGroup as="ul"  className=' dropdown-item p-0 '>
                           <ListGroup.Item as="li"  className=' px-3'>
                             <Button onClick={() => setShow(true)} className=' text-center bg-primary text-light border-0 rounded-5 py-2 px-3 '>Login/Register</Button>
                           </ListGroup.Item>

@@ -6,13 +6,12 @@ import shoes from "../../../assets/shoes.png"
 import sportsshoe from "../../../assets/sportsshoe.png"
 import jewellery from "../../../assets/jewellery.png"
 import sunglasses from "../../../assets/sunglasses.png"
-//import left from "../../../assets/left.png"
-//import right from "../../../assets/right.png"
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../DealsOfTheDay/deal.scss"
 import { Link } from "react-router-dom"
+import DealCard from "./DealCard"
 
 function Deal() {
 
@@ -90,9 +89,11 @@ function Deal() {
   return (
     <>
       <Container className=" mt-3 ">
-        <Row className=" d-flex justify-content-between mb-2 mb-sm-3 mb-lg-5">
+
+        {/* ----------  Heading of Section  ---------- */}
+        <Row className="dealheader d-flex justify-content-between mb-2 mb-sm-3 mb-lg-5">
           <Col className=" d-flex justify-content-start align-items-end gap-3 col-sm-8 col-6 ">
-            <span className=" fw-bold fs-4">Deals of the Day</span> 
+            <span className="dealheading ">Deals of the Day</span> 
             <p className="fs-5 m-0 d-none d-md-block " style={{color:"#A4A4B8"}}> Ends in</p>
             <Row className=" d-flex justify-content-between align-items-center gap-2 d-none d-md-flex">
               <Col className=" d-flex flex-column justify-content-center align-items-center rounded " style={{backgroundColor:"#2569F3", color:"white"}}>
@@ -111,7 +112,7 @@ function Deal() {
           </Col>
           <Col className=" d-flex justify-content-end align-items-end gap-3 col-6 col-sm-4">
             <Link to="/dealsoftheday" className=" text-decoration-none ">
-              <span className=" small fs-md-5 px-2 text-dark ">View All Deals</span> 
+              <span className="viewall px-2 text-dark ">View All Deals</span> 
               <Image src={rightarrow} className=" img-fluid mb-1"/>
             </Link>
           </Col>
@@ -136,22 +137,14 @@ function Deal() {
             </Row>
           </Col>
         </Row>
-        </Container>
+      </Container>
+
+      {/* ---------- Cards ----------- */}
         <Container>
             <div className=" mt-3 Slider">
               <Slider {...settings}>
               {data.map((d) => (
-                <div key={d.title} className="px-2 ">
-                  <div className="border rounded-5">
-                  <div>
-                    <Image src={d.img} className=" img-fluid w-100"/>
-                  </div>
-                  <div>
-                    <span className=" px-2 ">{d.discount}</span>
-                    <p className=" fw-bold px-2 ">{d.title}</p>
-                  </div>
-                  </div>
-                </div>
+                <DealCard d={d} key={d.title}/>
               ))}
               </Slider>
             </div>

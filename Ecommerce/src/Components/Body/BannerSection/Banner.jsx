@@ -4,7 +4,7 @@ import { Image, Container, Row, Col } from "react-bootstrap"
 function Banner() {
   return (
     <>
-    <Container fluid className=" my-3">
+    <Container fluid className="my-3">
       <Row>
         <Col>
             <Image src={banner} className=" img-fluid w-100 "/>

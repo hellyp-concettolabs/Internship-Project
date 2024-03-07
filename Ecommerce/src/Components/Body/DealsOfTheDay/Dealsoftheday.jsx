@@ -7,7 +7,7 @@ import jewellery from "../../../assets/jewellery.png"
 import sunglasses from "../../../assets/sunglasses.png"
 import Slider from "react-slick"
 import FilterSection from "../../ProductSection/FilterSection"
-import WomenProductList from "../../ProductSection/WomenProductList"
+import ProductList from "../../ProductSection/ProductsList"
 import wp1 from "../../../assets/wp1.png"
 
 
@@ -249,7 +249,7 @@ function Dealsoftheday() {
             <FilterSection/>
         </Col>
         <Col className=" d-flex flex-column col-lg-9 col-12">
-            <WomenProductList data={data}/>
+            <ProductList data={data}/>
         </Col>
         </Row>
     </Container>

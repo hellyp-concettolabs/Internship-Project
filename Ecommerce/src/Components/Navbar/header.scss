@@ -1,7 +1,21 @@
 .search{
     .search-icon{
-      background-color: #FF7900;
+      background-color: #0063FF;
     }
+  }
+
+  .searchtext::placeholder {
+    font-size: 14px !important;
+    color: #707070 !important;
+    font-weight: 450;
+  }
+
+  .greet{
+    font-size: 14px;
+  }
+  .signin{
+    font-size: 14px;
+    font-weight: 600;
   }
 
   #responsive-navbar-nav{
@@ -9,7 +23,6 @@
     width: 75%;
     transition: 0.2s;
   }
-
  .dropdown-content :hover {
    background-color: #ddd;
  }

@@ -8,13 +8,14 @@ import Clearance from "../../../assets/Clearance.png"
 import '../MenuBar/menu.scss'
 
 function Menu() {
+  
   return (
     <Container fluid  className=" menusection container-lg mb-4">
       <Row className=" d-flex align-items-center justify-content-center">
         <Col className=" d-none d-xl-block "></Col>
         <Col className=" d-none d-lg-block "></Col>
         <Col className=" d-flex flex-column text-center dropdown  Home" >
-            <Image src={HomeKitchen} className=" img-fluid "/>
+          <div><Image src={HomeKitchen} className=" img-fluid "/></div>
             <span className=" mt-1">Home & Kitchen</span>
         </Col>
         <Col className=" d-flex flex-column text-center dropdown  Home" >

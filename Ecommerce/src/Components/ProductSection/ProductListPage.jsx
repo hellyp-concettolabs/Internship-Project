@@ -1,5 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap"
-import WomenProductList from "./WomenProductList"
+import ProductList from "./ProductsList.jsx"
 import wp1 from "../../assets/wp1.png"
 import "../ProductSection/productlist.scss"
 import FilterSection from "./FilterSection"
@@ -131,7 +131,7 @@ function ProductListPage() {
             </Col>
 
             <Col className=" d-flex flex-column col-lg-9 col-12">
-                <WomenProductList data={data}/>
+                <ProductList data={data}/>
             </Col>
 
         </Row>
