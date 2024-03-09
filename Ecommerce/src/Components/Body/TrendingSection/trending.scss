@@ -1,0 +1,51 @@
+$base-font-size :16px;
+$base-font1-size :36px;
+
+.trendcontainer{
+    padding: 30px 0 ;
+}
+@media (max-width:1024px) {
+    .trendcontainer{
+        padding: 15px 0;
+    }
+}
+
+.viewall{
+    font-size: $base-font-size;
+    font-weight:600;
+  }
+  @media (max-width: 768px) {
+    .viewall{
+      font-size: $base-font-size * 0.8; 
+    }
+  }
+  @media (max-width:456px) {
+    .viewall{
+        font-size: $base-font-size * 0.6;
+    }
+  }
+
+  .trendheader{
+    font-size: $base-font1-size;
+    font-weight: bold;
+  }
+  @media (max-width:1024px) {
+    .trendheader{
+        font-size: $base-font1-size * 0.8;
+    }
+  }
+  @media (max-width:768px) {
+    .trendheader{
+        font-size: $base-font1-size * 0.6;
+    }
+  }
+  @media (max-width:456px) {
+    .trendheader{
+        font-size: $base-font1-size * 0.5;
+    }
+  }
+  @media (max-width:388px) {
+    .trendheader{
+        font-size: $base-font1-size * 0.4;
+    }
+  }

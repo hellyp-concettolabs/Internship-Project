@@ -1,5 +1,4 @@
 import { Col, Container, Image, Row } from "react-bootstrap"
-import rightarrow from "../../../assets/rightarrow.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -8,19 +7,22 @@ import glowgarden from "../../../assets/glowgarden.png"
 import sprinkler from "../../../assets/sprinkler.png"
 import headphone from "../../../assets/headphone.png"
 import watch from "../../../assets/watch.png"
+import rightarrow from "../../../assets/rightarrow.png";
+import ProductCard from "../../ProductCard/ProductCard";
+import "./garden.scss"
 
 function Garden() {
 
     const data = [
         {
             img: glowgarden ,
-            title: `Apple iPad (9th Generation): with A13 Bionic chip, 10.2-inch Retina Display, 256GB, Wi-Fi, 12MP`,
+            title: `Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden...`,
             price:`44`,
             actualprice:`50.50`,
             discount:`10%`,
         },
         {
-            img: sprinkler ,
+            img: sprinkler,
             title: `Eilik - an Electronic Robot Pets Toys with Intelligent and Interactive | Abundant Emotions, Idle...`,
             price:`44`,
             actualprice:`50.50`,
@@ -72,39 +74,21 @@ function Garden() {
 
   return (
     <>
-     <Container className="px-0 my-4">
+     <Container className="gardencontainer">
         <Row className="mb-4 position-relative mb-2 mb-md-4 ">
-          <Col className="px-4 d-flex align-items-center col-8 ">
-            <h2 className="mb-0">Garden & DIY</h2>
+          <Col className="d-flex align-items-center col-8 ">
+            <div className="gardenheader mb-0">Garden & DIY</div>
           </Col>
-          <Col className="d-flex justify-content-md-end align-items-center gap-2 ">
-            <span className="fs-6 ">View All</span>
+          <Col className="d-flex justify-content-end align-items-center gap-2 ">
+            <span className="viewall">View All</span>
             <Image src={rightarrow} className="img-fluid" />
           </Col>
         </Row>
 
         <div>
             <Slider {...settings}>
-                {data.map((d) =>(
-                    <div key={d.title} className=" px-2 ">
-                        <div className=" border rounded-5 ">
-                            <div>
-                                <Image src={d.img} className=" img-fluid w-100 "/>
-                            </div>
-                            <div className=" p-3 ">
-                                <p className=" small">{d.title}</p>
-                                <div className=" d-flex justify-content-between align-items-center ">
-                                    <div className="">
-                                        <span className=" fw-bold mx-2 fs-6 "><sup>$</sup>{d.price}</span>
-                                        <span className=" text-decoration-line-through ">${d.actualprice}</span>
-                                    </div>
-                                    <div>
-                                        <span>{d.discount}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                {data.map((d,i) =>(
+                    <ProductCard d={d} key={i}/>
                 ))}
             </Slider>
         </div>

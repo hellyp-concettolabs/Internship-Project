@@ -1,0 +1,60 @@
+$base-font-size :16px;
+$base-font1-size :18px;
+.trendcard{
+    width: 12%;
+        .trendsec1{
+            margin-bottom: 10px;
+            .trenddiscount{
+                background-color: #0036FF;
+                color: white;
+                font-size: $base-font-size;
+                padding: 6px 12px;
+            }
+            @media (max-width:1200px) {
+                .trenddiscount{
+                    font-size: $base-font-size * 0.7;
+                }
+            }
+            @media (max-width:992px) {
+                .trenddiscount{
+                    font-size: $base-font-size * 0.5;
+                }
+            }
+            @media (max-width:768px) {
+                .trenddiscount{
+                    font-size: $base-font-size * 0.1;
+                }
+            }
+        }
+        .trendtitle{
+            font-size: $base-font1-size;
+            font-weight: 600;
+        }
+}
+.trendcard{
+    @media (max-width:1400px) {
+        .trendtitle{
+            font-size: $base-font1-size * 0.9;
+        }
+    }
+    @media (max-width:1200px) {
+        .trendtitle{
+            font-size: $base-font1-size * 0.7;
+        }
+    }
+    @media (max-width:992px) {
+        .trendtitle{
+            font-size: $base-font1-size * 0.5;
+        }
+    }
+    @media (max-width:770px) {
+        .trendtitle{
+            font-size: $base-font1-size * 0.4;
+        }
+    }
+}
+@media (max-width:768px) {
+    .trendcard{
+        width: 10%;
+    }    
+}

@@ -1,6 +1,6 @@
 import {Navbar,Row, Col, Nav, Form, Button, Container, Image, ListGroup} from 'react-bootstrap';
 import { useState } from 'react';
-import main_logo from '../../assets/main-logo.png'
+import eCart from "../../assets/eCart.svg"
 import search from '../../assets/search-normal.png'
 import wishlist from '../../assets/wishlist.png'
 import shopping_cart from '../../assets/shopping-cart.png'
@@ -20,11 +20,11 @@ function HeaderSection() {
           <Row className='align-items-center px-md-3 py-2 '>
 
             <Col className='leftsection d-flex align-items-center '>
-              <button className='Menu d-md-none border-0 bg-light ' data-bs-toggle="collapse" data-bs-target="#responsive-navbar-nav" aria-expanded="false" aria-controls="responsive-navbar-nav">
+              <button className='Menu d-md-none border-0' data-bs-toggle="collapse" data-bs-target="#responsive-navbar-nav" aria-expanded="false" aria-controls="responsive-navbar-nav" style={{backgroundColor:"white"}}>
                 <i className="bi bi-list "></i>
               </button>
               <Navbar.Brand href="/">
-                <Image src={main_logo} className=' img-fluid col-sm-9  '/>
+                <Image src={eCart} className=' img-fluid col-sm-4 col-8'/>
               </Navbar.Brand>
             </Col>
 
@@ -37,18 +37,24 @@ function HeaderSection() {
                         </Form>
               </Col>
 
-              <Col className=' rightsection d-flex align-items-center gap-2 gap-sm-4 justify-content-end '>
+              <Col className=' rightsection d-flex align-items-center gap-3 gap-sm-4 justify-content-end '>
                   <Nav.Link href='#wishlist'>
-                    <Image src={wishlist} className=' img-fluid '/>
+                    <div className='wishlist-container'>
+                      <Image src={wishlist} className=' img-fluid wishlist-icon'/>
+                      <div className='wishlist-count'>0</div>
+                    </div>
                   </Nav.Link>
 
                   <Nav.Link href='/cart'>
-                    <Image src={shopping_cart} className=' img-fluid '/>
+                    <div className='shopping-cart-container'>
+                      <Image src={shopping_cart} className='img-fluid shopping-cart-icon'/>
+                      <div className='shopping-cart-count'>0</div>
+                    </div>
                   </Nav.Link>
 
                   <div className=' Signup d-flex align-items-center navbar navbar-expand-md position-relative dropdown '  aria-expanded="false">
                     <Nav.Link href='#user' onClick={() => setShow(true)} className=''>
-                      <Image src={user} className=' img-fluid '/>
+                      <div className='user-container'><Image src={user} className=' img-fluid user-icon'/></div>
                     </Nav.Link>
                     <div className='d-flex flex-column  small d-none d-xl-block'>
                       <p className='greet mb-0'>Hello there,</p>

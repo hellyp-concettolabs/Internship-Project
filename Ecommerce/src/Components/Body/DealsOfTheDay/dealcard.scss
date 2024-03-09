@@ -1,0 +1,78 @@
+$base-font-size: 14px;
+$base-font1-size: 18px;
+
+.dealcards{
+    .submaindiv{
+        border-radius: 18px;
+    }
+    .dealdiscount{
+        font-size: $base-font-size;
+        color: #292D32;
+        font-weight: normal;
+        margin-top: 12px !important;
+    }
+    .dealtitle{
+        color: #292D32;
+        font-size: $base-font1-size;
+        font-weight: 600;
+        height: 48px;
+        margin-top: 10px;
+        margin-bottom: 24px;
+    }
+    @media (max-width:1400px) {
+        .dealdiscount{
+            font-size: $base-font-size * 0.8;
+        }
+        .dealtitle{
+            font-size: $base-font1-size * 0.8;
+            height: 35px;
+        }
+    }
+    @media (max-width:1200px) {
+        .dealdiscount{
+            font-size: $base-font-size * 0.7;
+        }
+        .dealtitle{
+            font-size: $base-font1-size * 0.7;
+            height: 28px;
+            margin-top: 6px;
+            margin-bottom: 18px;
+        }
+    }
+    @media (max-width:465px) {
+        .dealdiscount{
+            font-size: $base-font-size * 0.7;
+        }
+        .dealtitle{
+            font-size: $base-font1-size * 0.6;
+            height: 25px;
+        }
+    }
+    @media (max-width:414px) {
+        .dealdiscount{
+            font-size: $base-font-size * 0.5;
+        }
+        .dealtitle{
+            font-size: $base-font1-size * 0.5;
+            height: 20px;
+        }
+    }
+    @media (max-width:380px) {
+        .dealdiscount{
+            font-size: $base-font-size * 0.5;
+        }
+        .dealtitle{
+            font-size: $base-font1-size * 0.5;
+            height: 20px;
+        }
+    }
+    @media (max-width:365px) {
+        .dealdiscount{
+            font-size: $base-font-size * 0.4;
+        }
+        .dealtitle{
+            font-size: $base-font1-size * 0.4;
+            height: 15px;
+        }
+    }
+}

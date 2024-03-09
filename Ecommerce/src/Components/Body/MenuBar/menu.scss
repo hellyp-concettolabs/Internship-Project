@@ -10,6 +10,11 @@ $base-font-size: 11.5px;
                 font-size: $base-font-size * 0.8; 
         }
 }
+@media (max-width: 767px) and (min-width: 460px) {
+        span {
+                font-size: $base-font-size ; 
+        }
+}
 @media (max-width: 383px) {
         span {
                 font-size: $base-font-size * 0.7; 

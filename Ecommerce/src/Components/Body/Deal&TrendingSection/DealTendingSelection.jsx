@@ -3,12 +3,13 @@ import dealsofweek from "../../../assets/dealsofweek.png"
 import trending from "../../../assets/trending.png"
 import clearance2 from "../../../assets/clearance2.png"
 import { Link } from "react-router-dom"
+import "./dealtrending.scss"
 
 
 function DealTendingSelection() {
   return (
     <>
-      <Container className=" my-3 ">
+      <Container className="dtccontainer ">
         <Row>
           <Col className=" col-12 col-xs-6 col-sm-6 col-md-4 col-xl-4 col-xxl-4 ">
           <Link to="/dealsoftheday" className=" text-decoration-none text-dark ">

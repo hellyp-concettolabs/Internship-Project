@@ -1,0 +1,26 @@
+$base-font-size :16px;
+$base-font1-size :30px;
+
+.detailsection{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+.cardtitle{
+    color: #292D32;
+    font-size: $base-font-size;
+    font-weight: normal;
+    height: 68px;
+}
+.actualprice{
+    color: #292D32;
+    font-size: $base-font-size;
+    font-weight: normal;
+}
+.disprice{
+    font-size: $base-font1-size;
+    font-weight: 600;
+    color: #292D32;
+}
+
+}

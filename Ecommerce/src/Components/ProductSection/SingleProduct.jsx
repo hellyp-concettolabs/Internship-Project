@@ -8,6 +8,7 @@ import "../ProductSection/singleproduct.scss"
 import deliveryvan from "../../assets/deliveryvan.png"
 import warranty from "../../assets/warranty.png"
 import returntimer from "../../assets/returntimer.png"
+import Star from "../ProductCard/Star";
 
 function SingleProduct() {
 
@@ -251,13 +252,7 @@ const settingsMain = {
                                 <span className=" fw-bold fs-1 text-center ">0</span>
                             </Row>
                             <Row>
-                            <div className=" d-flex justify-content-center gap-2 ">
-                                <i className="bi bi-star img-fluid "></i>
-                                <i className="bi bi-star img-fluid "></i>
-                                <i className="bi bi-star img-fluid "></i>
-                                <i className="bi bi-star img-fluid "></i>
-                                <i className="bi bi-star img-fluid "></i>
-                            </div>
+                                <Star/>
                             </Row>
                             <Row>
                                 <span className=" text-center ">0 Ratings & Review</span>

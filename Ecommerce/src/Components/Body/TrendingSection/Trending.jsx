@@ -1,4 +1,4 @@
-import { Col, Container, Row, Image, Button } from "react-bootstrap";
+import { Col, Container, Row, Image} from "react-bootstrap";
 import rightarrow from "../../../assets/rightarrow.png";
 import electronics2 from "../../../assets/electronics2.png";
 import kitchen from "../../../assets/kitchen.png"
@@ -7,128 +7,69 @@ import toys from "../../../assets/toys.png"
 import sports from "../../../assets/sports.png"
 import cabinet from "../../../assets/cabinet.png"
 import pets from "../../../assets/pets.png"
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../DealsOfTheDay/deal.scss"
+import TrendingCard from "./TrendingCard";
+import "./trending.scss"
 function Trending() {
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 5,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: false
-        }
-      },
-      {
-        breakpoint: 990,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: false
-        }
-      },
-      {
-        breakpoint: 766,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: false
-        }
-      },
-    ]
-  };
+  const data= [
+    {
+      img: electronics2,
+      title: `Electronics`,
+      discount:`Up to 10% off`
+    },
+    {
+      img: kitchen,
+      title: `Kitchen`,
+      discount:`Up to 50% off`
+    },
+    {
+      img: home,
+      title: `Home`,
+      discount:`From £50`
+    },
+    {
+      img: toys,
+      title: `Toys & Crafts`,
+      discount:`From £100`
+    },
+    {
+      img: sports,
+      title: `Sports & Leisure`,
+      discount:`Up to 5% off`
+    },
+    {
+      img: cabinet,
+      title: `Job Lots`,
+      discount:`Up to 15% off`
+    },
+    {
+      img: pets,
+      title: `Pets`,
+      discount:`Up to 10% off`
+    },
+  ]
+
+
 
   return (
     <>
-      <Container className="px-0 my-4">
+      <Container className="trendcontainer">
         <Row className="mb-4 position-relative">
-          <Col className="mb-4 mb-md-0 px-4 d-flex align-items-center col-8 ">
-            <h2 className="mb-0">Trending on BargainFox</h2>
+          <Col className="d-flex align-items-center col-8 ">
+            <h2 className="trendheader mb-0">Trending on BargainFox</h2>
           </Col>
-          <Col className="d-flex justify-content-md-end align-items-center gap-2 ">
-            <span className="fs-6 ">View All</span>
+          <Col className="d-flex justify-content-end align-items-center gap-2 ">
+            <span className="viewall">View All</span>
             <Image src={rightarrow} className="img-fluid" />
           </Col>
         </Row>
-        <div className=" gap-3  px-4">
-          <Slider {...settings}>
-          <div className=" text-center ">
-            <div>
-                <div className="d-flex flex-column align-items-center bg-body-secondary rounded-circle m-2">
-                    <Image src={electronics2} className="img-fluid " />
-                    <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
-                </div>
-            </div>
-            <span className="mt-2 small ">Electronics</span>
-          </div>
-          <div className=" text-center ">
-            <div>
-                <div className="d-flex flex-column align-items-center bg-body-secondary rounded-circle m-2">
-                    <Image src={kitchen} className="img-fluid" />
-                    <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
-                </div>
-            </div>
-            <span className="mt-2 small ">Kitchen</span>
-          </div>
-          <div className=" text-center ">
-            <div>
-                <div className="d-flex flex-column align-items-center bg-body-secondary rounded-circle m-2">
-                    <Image src={home} className="img-fluid" />
-                    <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
-                </div>
-            </div>
-            <span className="mt-2 small ">Home</span>
-          </div>
-          <div className=" text-center ">
-            <div>
-                <div className="d-flex flex-column align-items-center bg-body-secondary rounded-circle m-2">
-                    <Image src={toys} className="img-fluid" />
-                    <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
-                </div>
-            </div>
-            <span className="mt-2 small ">Toys</span>
-          </div>
-          <div className=" text-center ">
-            <div>
-                <div className="d-flex flex-column align-items-center bg-body-secondary rounded-circle m-2">
-                    <Image src={sports} className="img-fluid" />
-                    <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
-                </div>
-            </div>
-            <span className="mt-2 small ">Sports</span>
-          </div>
-          <div className=" text-center ">
-            <div>
-                <div className="d-flex flex-column align-items-center bg-body-secondary rounded-circle m-2">
-                    <Image src={cabinet} className="img-fluid " />
-                    <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
-                </div>
-            </div>
-            <span className="mt-2 small ">Cabinet</span>
-          </div>
-          <div className=" text-center ">
-            <div>
-                <div className="d-flex flex-column align-items-center bg-body-secondary rounded-circle m-2">
-                    <Image src={pets} className="img-fluid" />
-                    <Button className="rounded-5 p-2 mt-3 w-100">Up to 10% off</Button>
-                </div>
-            </div>
-            <span className="mt-2 small ">Pets</span>
-          </div>
-         
-          </Slider>
+        <div className="d-flex justify-content-between align-items-center ">
+          {data.map((d,i) => (
+            <TrendingCard d={d} key={i}/>
+          ))}
         </div>
       </Container>
     </>

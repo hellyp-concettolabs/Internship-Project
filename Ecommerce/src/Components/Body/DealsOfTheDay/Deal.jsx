@@ -10,7 +10,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../DealsOfTheDay/deal.scss"
-import { Link } from "react-router-dom"
+import { Link} from "react-router-dom"
 import DealCard from "./DealCard"
 
 function Deal() {
@@ -88,25 +88,25 @@ function Deal() {
 
   return (
     <>
-      <Container className=" mt-3 ">
+      <Container className="dealcontainer mt-3 ">
 
         {/* ----------  Heading of Section  ---------- */}
         <Row className="dealheader d-flex justify-content-between mb-2 mb-sm-3 mb-lg-5">
           <Col className=" d-flex justify-content-start align-items-end gap-3 col-sm-8 col-6 ">
             <span className="dealheading ">Deals of the Day</span> 
-            <p className="fs-5 m-0 d-none d-md-block " style={{color:"#A4A4B8"}}> Ends in</p>
+            <p className="subhead d-none d-md-block " > Ends in</p>
             <Row className=" d-flex justify-content-between align-items-center gap-2 d-none d-md-flex">
-              <Col className=" d-flex flex-column justify-content-center align-items-center rounded " style={{backgroundColor:"#2569F3", color:"white"}}>
-                <div className=" fw-bold ">11</div>
-                <div className=" fs-6 ">Hours</div>
+              <Col className="timer d-flex flex-column justify-content-center align-items-center rounded " style={{backgroundColor:"#2569F3", color:"white"}}>
+                <div className="time">11</div>
+                <div className="timeing">Hours</div>
               </Col>
-              <Col className=" d-flex flex-column justify-content-center align-items-center rounded " style={{backgroundColor:"#2569F3", color:"white"}}>
-                <div className=" fw-bold ">11</div>
-                <div className=" fs-6 ">Mins</div>
+              <Col className="timer d-flex flex-column justify-content-center align-items-center rounded " style={{backgroundColor:"#2569F3", color:"white"}}>
+                <div className="time">11</div>
+                <div className="timeing">Mins</div>
               </Col>
-              <Col className=" d-flex flex-column justify-content-center align-items-center rounded " style={{backgroundColor:"#2569F3", color:"white"}}>
-                <div className=" fw-bold ">11</div>
-                <div className=" fs-6 ">Secs</div>
+              <Col className="timer d-flex flex-column justify-content-center align-items-center rounded " style={{backgroundColor:"#2569F3", color:"white"}}>
+                <div className="time">11</div>
+                <div className="timeing">Secs</div>
               </Col>
             </Row>
           </Col>
@@ -118,21 +118,21 @@ function Deal() {
           </Col>
         </Row>
 
-        <Row className=" d-flex d-md-none justify-content-between mb-4">
+        <Row className="mdsubhead d-flex d-md-none justify-content-between mb-4">
           <Col className=" d-flex justify-content-start align-items-end gap-3 ">
-            <p className="small m-0 d-flex d-md-none " style={{color:"#A4A4B8"}}> Ends in</p>
+            <p className="subhead d-flex d-md-none " style={{color:"#A4A4B8"}}> Ends in</p>
             <Row className=" d-flex justify-content-between align-items-center gap-2 d-flex d-md-none">
-              <Col className=" d-flex flex-column justify-content-center align-items-center rounded " style={{backgroundColor:"#2569F3", color:"white"}}>
-                <div className=" fw-bold ">11</div>
-                <div className=" fs-6 ">Hours</div>
+              <Col className="timer d-flex flex-column justify-content-center align-items-center rounded " >
+                <div className="time">11</div>
+                <div className="timeing">Hours</div>
               </Col>
-              <Col className=" d-flex flex-column justify-content-center align-items-center rounded " style={{backgroundColor:"#2569F3", color:"white"}}>
-                <div className=" fw-bold ">11</div>
-                <div className=" fs-6 ">Mins</div>
+              <Col className="timer d-flex flex-column justify-content-center align-items-center rounded " >
+                <div className="time">11</div>
+                <div className="timeing">Mins </div>
               </Col>
-              <Col className=" d-flex flex-column justify-content-center align-items-center rounded " style={{backgroundColor:"#2569F3", color:"white"}}>
-                <div className=" fw-bold ">11</div>
-                <div className=" fs-6 ">Secs</div>
+              <Col className="timer d-flex flex-column justify-content-center align-items-center rounded " >
+                <div className="time">11</div>
+                <div className="timeing">Secs</div>
               </Col>
             </Row>
           </Col>
@@ -140,11 +140,13 @@ function Deal() {
       </Container>
 
       {/* ---------- Cards ----------- */}
-        <Container>
+        <Container className="dealcardcontainer">
             <div className=" mt-3 Slider">
               <Slider {...settings}>
-              {data.map((d) => (
+              {data.map((d,i) => (
+                <Link key={i} to="/productlist" className=" text-decoration-none ">
                 <DealCard d={d} key={d.title}/>
+                </Link>
               ))}
               </Slider>
             </div>

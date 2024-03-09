@@ -14,8 +14,8 @@ function Menu() {
       <Row className=" d-flex align-items-center justify-content-center">
         <Col className=" d-none d-xl-block "></Col>
         <Col className=" d-none d-lg-block "></Col>
-        <Col className=" d-flex flex-column text-center dropdown  Home" >
-          <div><Image src={HomeKitchen} className=" img-fluid "/></div>
+        <Col className=" d-flex flex-column text-center dropdown " >
+          <Image src={HomeKitchen} className=" img-fluid "/>
             <span className=" mt-1">Home & Kitchen</span>
         </Col>
         <Col className=" d-flex flex-column text-center dropdown  Home" >
