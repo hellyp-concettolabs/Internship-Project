@@ -15,7 +15,6 @@
   }
 }
 
-
 $base-font-size: 16px;
 $base-font1-size : 20px;
 $base-font2-size : 12px;
@@ -94,24 +93,7 @@ $base-font2-size : 12px;
   }
 }
 
-.slick-prev {
-    background-color: blue;
-    border-radius: 50%;
-    z-index: 1;
-  }
-  .slick-next {
-    background-color: blue;
-    border-radius: 50%;
-    z-index: 1;
-  }
-@media (max-width:1024px) {
-    .slick-prev {
-        left: 0.5% !important;
-      }
-      .slick-next {
-        right: 0.5% !important;
-      }
-}
+
 @media (max-width:517px){
     .Slider{
         p{

@@ -12,8 +12,11 @@ import "slick-carousel/slick/slick-theme.css";
 import "../DealsOfTheDay/deal.scss"
 import { Link} from "react-router-dom"
 import DealCard from "./DealCard"
+import { useRef } from "react"
 
 function Deal() {
+
+  const sliderRef = useRef();
 
   const data = [
     {
@@ -86,6 +89,14 @@ function Deal() {
     ]
   };
 
+  const goToPrev = () => {
+    sliderRef.current.slickPrev();
+  };
+
+  const goToNext = () => {
+    sliderRef.current.slickNext();
+  };
+
   return (
     <>
       <Container className="dealcontainer mt-3 ">
@@ -141,15 +152,29 @@ function Deal() {
 
       {/* ---------- Cards ----------- */}
         <Container className="dealcardcontainer">
-            <div className=" mt-3 Slider">
-              <Slider {...settings}>
-              {data.map((d,i) => (
-                <Link key={i} to="/productlist" className=" text-decoration-none ">
-                <DealCard d={d} key={d.title}/>
-                </Link>
-              ))}
-              </Slider>
-            </div>
+            <Row className=" mt-3 Slider d-flex justify-content-center align-items-center">
+              <Col className="leftarrow">
+                <div className=" p-0 w-100 h-100 d-flex justify-content-center align-items-center " style={{backgroundColor:"#F5F5FC", borderRadius:"50%", textAlign:"center"}}
+                onClick={goToPrev}>
+                  <i className="bi bi-arrow-left-short" style={{ color: '#0036FF' }}></i>
+                </div>
+              </Col>
+              <Col className="centerslider">
+                  <Slider ref={sliderRef} {...settings}>
+                    {data.map((d,i) => (
+                      <Link key={i} to="/productlist" className=" text-decoration-none ">
+                      <DealCard d={d} key={d.title}/>
+                      </Link>
+                    ))}
+                  </Slider>
+              </Col>
+              <Col className="rightarrow">
+                <div className=" p-0 w-100 h-100 d-flex justify-content-center align-items-center " style={{backgroundColor:"#F5F5FC", borderRadius:"50%", textAlign:"center"}}
+                   onClick={goToNext}>
+                  <i className="bi bi-arrow-right-short" style={{ color: '#0036FF' }}></i>
+                </div>
+             </Col>   
+            </Row>
         </Container>
         
     </> 

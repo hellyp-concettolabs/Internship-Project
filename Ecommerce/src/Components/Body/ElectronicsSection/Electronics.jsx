@@ -8,8 +8,12 @@ import tablet from "../../../assets/tablet.png"
 import robot from "../../../assets/robot.png"
 import headphone from "../../../assets/headphone.png"
 import watch from "../../../assets/watch.png"
+import ProductCard from "../../ProductCard/ProductCard";
+import { useRef } from "react";
 
 function Electronics() {
+
+  const sliderRef = useRef();
 
     const data = [
         {
@@ -50,7 +54,7 @@ function Electronics() {
         slidesToScroll: 4,
         responsive: [
           {
-            breakpoint: 1024,
+            breakpoint: 1200,
             settings: {
               slidesToShow: 3,
               slidesToScroll: 1,
@@ -70,44 +74,48 @@ function Electronics() {
         ]
       };
 
+      const goToPrev = () => {
+        sliderRef.current.slickPrev();
+      };
+
+      const goToNext = () => {
+        sliderRef.current.slickNext();
+      };
+
   return (
     <>
-     <Container className="px-0 my-4">
-        <Row className="mb-4 position-relative mb-2 mb-md-4 ">
-          <Col className="px-4 d-flex align-items-center col-8 ">
-            <h2 className="mb-0">Electronics</h2>
+     <Container className="gardencontainer">
+        <Row className="mb-3 mb-md-4 ">
+          <Col className="d-flex align-items-center col-8 ">
+            <h2 className="gardenheader">Electronics</h2>
           </Col>
           <Col className="d-flex justify-content-md-end align-items-center gap-2 ">
-            <span className="fs-6 ">View All</span>
+            <span className="viewall ">View All</span>
             <Image src={rightarrow} className="img-fluid" />
           </Col>
         </Row>
 
-        <div>
-            <Slider {...settings}>
-                {data.map((d) =>(
-                    <div key={d.title} className=" px-2 ">
-                        <div className=" border rounded-5 ">
-                            <div>
-                                <Image src={d.img} className=" img-fluid w-100 "/>
-                            </div>
-                            <div className=" p-3 ">
-                                <p className=" small">{d.title}</p>
-                                <div className=" d-flex justify-content-between align-items-center ">
-                                    <div className="">
-                                        <span className=" fw-bold mx-2 fs-6 "><sup>$</sup>{d.price}</span>
-                                        <span className=" text-decoration-line-through ">${d.actualprice}</span>
-                                    </div>
-                                    <div>
-                                        <span>{d.discount}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <Row className=" d-flex justify-content-center align-items-center ">
+          <Col className="leftarrow">
+            <div className=" p-0 w-100 h-100 d-flex justify-content-center align-items-center " style={{backgroundColor:"#F5F5FC", borderRadius:"50%", textAlign:"center"}}
+              onClick={goToPrev}>
+              <i className="bi bi-arrow-left-short" style={{ color: '#0036FF' }}></i>
+            </div>
+          </Col>
+          <Col className="centerslider">
+            <Slider ref={sliderRef} {...settings}>
+                {data.map((d,i) =>(
+                    <ProductCard d={d} key={i}/>
                 ))}
             </Slider>
-        </div>
+          </Col>
+          <Col className="rightarrow">
+          <div className=" p-0 w-100 h-100 d-flex justify-content-center align-items-center " style={{backgroundColor:"#F5F5FC", borderRadius:"50%", textAlign:"center"}}
+           onClick={goToNext}>
+              <i className="bi bi-arrow-right-short" style={{ color: '#0036FF' }}></i>
+            </div>
+          </Col>
+        </Row>
     </Container> 
     </>
   )

@@ -10,9 +10,11 @@ import watch from "../../../assets/watch.png"
 import rightarrow from "../../../assets/rightarrow.png";
 import ProductCard from "../../ProductCard/ProductCard";
 import "./garden.scss"
+import { useRef } from "react";
 
 function Garden() {
 
+  const sliderRef = useRef();
     const data = [
         {
             img: glowgarden ,
@@ -23,21 +25,21 @@ function Garden() {
         },
         {
             img: sprinkler,
-            title: `Eilik - an Electronic Robot Pets Toys with Intelligent and Interactive | Abundant Emotions, Idle...`,
+            title: `Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden...`,
             price:`44`,
             actualprice:`50.50`,
             discount:`10%`,
         },
         {
             img: headphone ,
-            title: `LOBKIN Wireless Bluetooth Headphones, Over-Ear Headphones with Built-in HD Mic`,
+            title: `Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden...`,
             price:`44`,
             actualprice:`50.50`,
             discount:`10%`,
         },
         {
             img: watch,
-            title: `SAMSUNG Galaxy Watch 5 40mm Bluetooth Smartwatch w/ Body, Health, Fitness and Sleep Tracker..`,
+            title: `Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden...`,
             price:`44`,
             actualprice:`50.50`,
             discount:`10%`,
@@ -46,13 +48,14 @@ function Garden() {
 
     const settings = {
         dots: false,
+        arrow: false,
         infinite: true,
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 4,
         responsive: [
           {
-            breakpoint: 1024,
+            breakpoint: 1200,
             settings: {
               slidesToShow: 3,
               slidesToScroll: 1,
@@ -72,12 +75,20 @@ function Garden() {
         ]
       };
 
+      const goToPrev = () => {
+        sliderRef.current.slickPrev();
+      };
+
+      const goToNext = () => {
+        sliderRef.current.slickNext();
+      };
+
   return (
     <>
      <Container className="gardencontainer">
-        <Row className="mb-4 position-relative mb-2 mb-md-4 ">
+        <Row className=" mb-3 mb-md-4 ">
           <Col className="d-flex align-items-center col-8 ">
-            <div className="gardenheader mb-0">Garden & DIY</div>
+            <div className="gardenheader">Garden & DIY</div>
           </Col>
           <Col className="d-flex justify-content-end align-items-center gap-2 ">
             <span className="viewall">View All</span>
@@ -85,13 +96,27 @@ function Garden() {
           </Col>
         </Row>
 
-        <div>
-            <Slider {...settings}>
+        <Row className=" d-flex justify-content-center align-items-center ">
+          <Col className="leftarrow">
+            <div className=" p-0 w-100 h-100 d-flex justify-content-center align-items-center " style={{backgroundColor:"#F5F5FC", borderRadius:"50%", textAlign:"center"}}
+            onClick={goToPrev}>
+              <i className="bi bi-arrow-left-short" style={{ color: '#0036FF' }}></i>
+            </div>
+          </Col>
+          <Col className="centerslider">
+            <Slider ref={sliderRef} {...settings}>
                 {data.map((d,i) =>(
                     <ProductCard d={d} key={i}/>
                 ))}
             </Slider>
-        </div>
+          </Col>
+          <Col className="rightarrow">
+          <div className=" p-0 w-100 h-100 d-flex justify-content-center align-items-center " style={{backgroundColor:"#F5F5FC", borderRadius:"50%", textAlign:"center"}}
+          onClick={goToNext}>
+              <i className="bi bi-arrow-right-short" style={{ color: '#0036FF' }}></i>
+            </div>
+          </Col>
+        </Row>
     </Container> 
     </>
   )

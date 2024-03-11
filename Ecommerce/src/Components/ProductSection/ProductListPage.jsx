@@ -11,112 +11,112 @@ function ProductListPage() {
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `9.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
     ]
   return (

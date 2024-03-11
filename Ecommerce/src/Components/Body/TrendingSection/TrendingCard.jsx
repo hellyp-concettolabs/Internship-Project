@@ -16,5 +16,4 @@ function TrendingCard(props) {
   </div>
   )
 }
-
 export default TrendingCard

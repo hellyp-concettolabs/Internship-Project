@@ -4,7 +4,8 @@ import Modal from 'react-bootstrap/Modal';
 import PropTypes from 'prop-types';
 import {useForm} from 'react-hook-form'
 import { useState } from 'react';
-import Verifypop from './Verifypop';
+//import Verifypop from './Verifypop';
+import Register from './Register';
 
 Signuppop.propTypes = {
   onHide: PropTypes.func.isRequired,
@@ -39,10 +40,11 @@ function Signuppop(props) {
             <Form className='search d-flex flex-column gap-2' onSubmit={handleSubmit(onSubmit)}>
               <Form.Control type="email" placeholder="" className=' rounded-5 ' {...register("email",{pattern:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,required:"Enter valid e-mail"})}/>
               {errors.email && <div style={{color:"red"}}>{errors.email.message}</div>}
-              <Button onClick={() => setVerify(true)} variant="outline-success" className='search-icon rounded-5 bg-primary text-light submit' type="submit">
+              <Button onClick={() => setVerify(true)}  className='search-icon rounded-5 bg-primary text-light submit' type="submit">
                 Continue
               </Button>
-              <Verifypop show={verify} onHide={() => setVerify(false)}/>
+              {/* <Verifypop show={verify} onHide={() => setVerify(false)}/> */}
+              <Register show={verify} onHide={() => setVerify(false)}/>
             </Form>
           </Container>
         </Modal.Body>

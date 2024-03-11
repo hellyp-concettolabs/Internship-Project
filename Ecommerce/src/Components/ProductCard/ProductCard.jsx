@@ -8,13 +8,13 @@ ProductCard.propTypes = {
   };
 function ProductCard(props) {
   return (
-    <div className=" px-2 ">
-        <div className=" border rounded-4 ">
+        <div className=" border rounded-4 ProductCard">
             <div>
                 <Image src={props.d.img} className=" img-fluid w-100 "/>
+                <span className="discount1 d-flex d-md-none ">-{props.d.discount}</span>
             </div>
-            <div className="detailsection p-3">
-                <p className="cardtitle m-0 ">{props.d.title}</p>
+            <div className="detailsection p-2 p-lg-3 ">
+                <div className="cardtitle"><p className="titletext m-0 ">{props.d.title}</p></div>
                 <div className="stars d-flex justify-content-start "><Star/></div>
                 <div className=" d-flex justify-content-between align-items-center ">
                     <div className=" d-flex justify-content-between align-items-center gap-3 ">
@@ -22,12 +22,11 @@ function ProductCard(props) {
                         <span className="actualprice text-decoration-line-through ">${props.d.actualprice}</span>
                     </div>
                     <div>
-                        <span className="discount">{props.d.discount}</span>
+                        <span className="discount d-none d-md-flex ">-{props.d.discount}</span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
   )
 }
 

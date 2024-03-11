@@ -9,10 +9,11 @@ import Slider from "react-slick"
 import FilterSection from "../../ProductSection/FilterSection"
 import ProductList from "../../ProductSection/ProductsList"
 import wp1 from "../../../assets/wp1.png"
-
+import { useRef } from "react"
 
 function Dealsoftheday() {
 
+  const sliderRef = useRef();
     const data1 = [
         {
           img : womenclothes,
@@ -98,114 +99,121 @@ function Dealsoftheday() {
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `9.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
         {
             img:wp1,
             title:`Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's... Clothing`,
             price: `8.25`,
             actualprice:`16.50`,
-            dicount:`50%`
+            discount:`50%`
         },
     ]
+    const goToPrev = () => {
+      sliderRef.current.slickPrev();
+    };
+  
+    const goToNext = () => {
+      sliderRef.current.slickNext();
+    };
   return (
     <>
       <Container fluid className=" py-5" style={{backgroundColor:"#f5f5fc"}}>
@@ -215,6 +223,8 @@ function Dealsoftheday() {
                     <span  className=" fs-3 fw-bold ">Deals of the Day</span>
                 </Col>
             </Row>
+
+
             <Row>
                 <Col className=" text-center ">
                     <span className=" text-secondary small ">
@@ -222,37 +232,53 @@ function Dealsoftheday() {
                     </span>
                 </Col>
             </Row>
-            <Row>
-            <div className=" mt-3 Slider">
-              <Slider {...settings}>
-              {data1.map((d) => (
-                <div key={d.title} className="px-2">
-                  <div className=" d-flex flex-column align-items-center ">
-                  <div className=" rounded-circle ">
-                    <Image src={d.img} className=" img-fluid rounded-circle "/>
-                  </div>
-                  <div className=" text-center ">
-                    <span className=" p-2 bg-primary rounded-5 ">{d.discount}</span>
-                    <p className="px-2 small mt-2 ">{d.title}</p>
-                  </div>
-                  </div>
+
+
+            <Row  className=" mt-3 Slider d-flex justify-content-center align-items-center">
+              <Col className="leftarrow">
+                <div className=" p-0 w-100 h-100 d-flex justify-content-center align-items-center " style={{backgroundColor:"#F5F5FC", borderRadius:"50%", textAlign:"center"}}
+                  onClick={goToPrev}>
+                  <i className="bi bi-arrow-left-short" style={{ color: '#0036FF' }}></i>
                 </div>
-              ))}
-              </Slider>
-            </div>
+              </Col>
+              <Col className="centerslider">
+                  <Slider ref={sliderRef} {...settings}>
+                  {data1.map((d) => (
+                    <div key={d.title} >
+                      <div className=" d-flex flex-column align-items-center ">
+                      <div className=" rounded-circle d-flex align-items-center " >
+                        <Image src={d.img} className=" img-fluid rounded-circle "style={{height:"100px"}}/>
+                      </div>
+                      <div className=" text-center ">
+                        <span className=" p-2 bg-primary rounded-5 ">{d.discount}</span>
+                        <p className="px-2 small mt-2 ">{d.title}</p>
+                      </div>
+                      </div>
+                    </div>
+                  ))}
+                  </Slider>
+              </Col>
+              <Col className="rightarrow">
+                <div className=" p-0 w-100 h-100 d-flex justify-content-center align-items-center " style={{backgroundColor:"#F5F5FC", borderRadius:"50%", textAlign:"center"}}
+                   onClick={goToNext}>
+                  <i className="bi bi-arrow-right-short" style={{ color: '#0036FF' }}></i>
+                </div>
+             </Col> 
             </Row>
         </Container>
       </Container>
-    <Container fluid className=" container-lg mt-5">
-        <Row>
-        <Col className="className= col-3 d-none d-lg-block">
-            <FilterSection/>
-        </Col>
-        <Col className=" d-flex flex-column col-lg-9 col-12">
-            <ProductList data={data}/>
-        </Col>
-        </Row>
-    </Container>
+
+
+      <Container fluid className=" container-lg mt-5">
+          <Row>
+          <Col className="className= col-3 d-none d-lg-block">
+              <FilterSection/>
+          </Col>
+          <Col className=" d-flex flex-column col-lg-9 col-12">
+              <ProductList data={data}/>
+          </Col>
+          </Row>
+      </Container>
 
     </>
   )

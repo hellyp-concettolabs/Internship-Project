@@ -111,14 +111,8 @@ const settingsMain = {
                     </Col>
                 </Row>
                 <Row>
-                    <Col className=" col-6">
-                        <div className=" d-flex gap-2 ">
-                            <i className="bi bi-star img-fluid "></i>
-                            <i className="bi bi-star img-fluid "></i>
-                            <i className="bi bi-star img-fluid "></i>
-                            <i className="bi bi-star img-fluid "></i>
-                            <i className="bi bi-star img-fluid "></i>
-                        </div>
+                    <Col className="d-flex col-6">
+                        <Star/>
                     </Col>
                     <Col className=" col-6 text-end ">
                         <span className=" text-secondary ">374 sold, by <b className=" text-dark ">Celby Store</b></span>
@@ -263,13 +257,9 @@ const settingsMain = {
                         </Col>
                     </Row>
 
-                    <Row className=" border-top border-bottom py-2 ">
-                        <Col className=" d-flex gap-2 ">
-                            <i className="bi bi-star img-fluid "></i>
-                            <i className="bi bi-star img-fluid "></i>
-                            <i className="bi bi-star img-fluid "></i>
-                            <i className="bi bi-star img-fluid "></i>
-                            <i className="bi bi-star img-fluid "></i>
+                    <Row className="d-flex border-top border-bottom py-2 ">
+                        <Col className="col-6">
+                            <Star/>
                         </Col>
                         <Col className=" fw-bold text-end ">
                             Rate This Product

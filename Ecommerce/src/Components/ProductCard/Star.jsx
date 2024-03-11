@@ -1,7 +1,7 @@
-
+import "./star.scss"
 function Star() {
   return (
-    <div className=" d-flex justify-content-center gap-2 ">
+    <div className="stars d-flex justify-content-center">
         <i className="bi bi-star img-fluid "></i>
         <i className="bi bi-star img-fluid "></i>
         <i className="bi bi-star img-fluid "></i>

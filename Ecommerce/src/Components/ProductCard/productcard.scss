@@ -1,20 +1,30 @@
 $base-font-size :16px;
 $base-font1-size :30px;
+$base-font2-size :14px;
+
+.ProductCard {
+    margin-right: 10px;
+    margin-left: 10px; 
+  }
 
 .detailsection{
     display: flex;
     flex-direction: column;
     gap: 16px;
-
 .cardtitle{
+    height: 68px;
+    overflow: hidden;
+}
+.titletext{
     color: #292D32;
     font-size: $base-font-size;
-    font-weight: normal;
-    height: 68px;
+    font-weight: 500;
+    //white-space: nowrap; 
+    //text-overflow: ellipsis; 
 }
 .actualprice{
     color: #292D32;
-    font-size: $base-font-size;
+    font-size: $base-font-size * 0.9;
     font-weight: normal;
 }
 .disprice{
@@ -22,5 +32,71 @@ $base-font1-size :30px;
     font-weight: 600;
     color: #292D32;
 }
+.discount{
+    font-size: $base-font2-size;
+    font-weight: 600;
+    width: 52px;
+    height: 52px;
+    background-color: #0036FF; 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+@media (max-width:1200px) {
+    .discount{
+        font-size: $base-font2-size * 0.8;
+        width: 38px;
+        height: 38px;
+    }
+}
+@media (max-width:992px) {
+    .discount{
+        font-size: $base-font2-size * 0.6;
+        width: 40px;
+        height: 40px;
+    }
+}
+@media (max-width:1200px) {
+    .actualprice{
+        font-size: $base-font-size * 0.7;
+    }
+    .disprice{
+        font-size: $base-font1-size * 0.7;
+    }
+}
+@media (max-width:1024px) {
+    .actualprice{
+        font-size: $base-font-size * 0.6;
+    }
+    .disprice{
+        font-size: $base-font1-size * 0.6;
+    }
+}
+@media (max-width:767px) {
+    .actualprice{
+        font-size: $base-font-size * 0.55;
+    }
+    .disprice{
+        font-size: $base-font1-size * 0.5;
+    }
+}
+}
 
+.discount1{
+    font-size: $base-font2-size * 0.6;
+    font-weight: 600;
+    position: absolute;
+    top: 10px; 
+    width: 36px;
+    height: 36px;
+    background-color: #0036FF; 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    color: white;
+    margin-left: 0.3%;
 }

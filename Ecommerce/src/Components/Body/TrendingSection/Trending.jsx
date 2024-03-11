@@ -68,7 +68,7 @@ function Trending() {
         </Row>
         <div className="d-flex justify-content-between align-items-center ">
           {data.map((d,i) => (
-            <TrendingCard d={d} key={i}/>
+              <TrendingCard d={d} key={i}/>
           ))}
         </div>
       </Container>
