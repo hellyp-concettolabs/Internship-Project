@@ -1,25 +1,44 @@
-import { Col, Form, FormControl, Row } from "react-bootstrap"
+import { Col, Form, FormControl, Offcanvas, Row } from "react-bootstrap"
 import PropTypes from 'prop-types';
 import SingleProductCard from "./SingleProductCard";
 import "./productlist.scss"
+import { useState } from "react";
+import FilterSection from "./FilterSection.jsx"
 
 ProductList.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 function ProductList({data}) {
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+   const handleFilter = () => setShow(true);
+
   return (
     <>
         <Row className=" mb-3 justify-content-between flex-row-reverse flex-lg-row ">
             <Col className="d-none d-lg-flex ">
                 <div className="resultheading">Results</div>
             </Col>
+
             <Col className=" d-flex justify-content-end d-lg-none col-3">
-                <div className=" d-flex justify-content-end align-items-center">
+                <div className=" d-flex justify-content-end align-items-center"
+                    onClick={handleFilter}>
                     <i className="bi bi-filter"></i>
                     <span>Filter</span>
                 </div>
+
+                <Offcanvas show={show} onHide={handleClose}>
+                    <Offcanvas.Header className=" d-flex justify-content-end " closeButton></Offcanvas.Header>
+                    <Offcanvas.Body>
+                        <FilterSection/>
+                    </Offcanvas.Body>
+                </Offcanvas>
+
             </Col>
+
             <Col className=" col-sm-5 col-9 ">
                    <Form>
                         <div className=" align-items-center d-flex rounded-5 border border-secondary p-1">
