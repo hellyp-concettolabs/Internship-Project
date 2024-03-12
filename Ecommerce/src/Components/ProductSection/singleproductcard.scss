@@ -1,0 +1,138 @@
+$base-font-size :16px;
+$base-font1-size :30px;
+$base-font2-size :14px;
+
+.singleproductcard{
+    width: 25% !important;
+    margin-bottom: 2%;
+    padding-left: 0;
+    padding-right: 0;
+}
+@media (max-width:1400px) {
+    .singleproductcard{
+        width: 33% !important;
+    }
+}
+@media (max-width:560px) {
+    .singleproductcard{
+        width: 50% !important;
+    }
+}
+
+.sdetailsection{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.scardtitle{
+    height: 68px;
+    overflow: hidden;
+}
+.stitletext{
+    color: #292D32;
+    font-size: $base-font-size;
+    font-weight: 500;
+    //white-space: nowrap; 
+    //text-overflow: ellipsis; 
+}
+.sactualprice{
+    color: #292D32;
+    font-size: $base-font-size * 0.8;
+    font-weight: normal;
+}
+.sdisprice{
+    font-size: $base-font1-size * 0.8;
+    font-weight: 600;
+    color: #292D32;
+}
+.sdiscount{
+    font-size: $base-font2-size * 0.9;
+    font-weight: 600;
+    width: 46px;
+    height: 46px;
+    background-color: #0036FF; 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+@media (max-width:1200px) {
+    .sdisprice{
+        font-size: $base-font1-size * 0.7;
+    }
+    .sdiscount{
+        font-size: $base-font2-size * 0.7;
+        width: 38px;
+        height: 38px;
+    }
+}
+
+@media (max-width:991px) {
+    .sdisprice{
+        font-size: $base-font1-size * 0.8;
+    }
+    .sactualprice{
+        font-size: $base-font-size * 0.9;
+    }
+    .sdiscount{
+        font-size: $base-font2-size * 0.8;
+        width: 42px;
+        height: 42px;
+    }
+}
+@media (max-width:650px) {
+    .sdisprice{
+        font-size: $base-font1-size * 0.6;
+    }
+    .sactualprice{
+        font-size: $base-font-size * 0.8;
+    }
+}
+
+.sdiscount1{
+    font-size: $base-font2-size * 0.6;
+    font-weight: 600;
+    position: absolute;
+    margin-top: -28%;
+    width: 36px;
+    height: 36px;
+    background-color: #0036FF; 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    color: white;
+    margin-left: 0.3%;
+}
+
+@media (max-width:600px) {
+    .sdiscount1{
+        font-size: $base-font2-size * 0.5;
+        width: 30px;
+        height: 30px;
+    }
+}
+@media (max-width:560px) {
+    .sdiscount1{
+        font-size: $base-font2-size * 0.6;
+        width: 34px;
+        height: 34px;
+        margin-top: -43%;
+    }
+}
+@media (max-width:460px) {
+    .sdiscount1{
+        font-size: $base-font2-size * 0.4;
+        width: 25px;
+        height: 25px;
+    }
+}
+@media (max-width:425px) {
+    .sdiscount1{
+        margin-top: -40%;
+    }
+}
+

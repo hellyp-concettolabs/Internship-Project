@@ -14,10 +14,10 @@ function SingleProductCard(props) {
                 <span className="sdiscount1 d-flex d-md-none ">-{props.d.discount}</span>
             </div>
             <div className="sdetailsection p-2 p-lg-3 ">
-                <div className="scardtitle"><p className="titletext m-0 ">{props.d.title}</p></div>
+                <div className="scardtitle"><p className="stitletext m-0 ">{props.d.title}</p></div>
                 <div className="sstars d-flex justify-content-start "><Star/></div>
                 <div className=" d-flex justify-content-between align-items-center ">
-                    <div className=" d-flex justify-content-between align-items-center gap-3 ">
+                    <div className=" d-flex justify-content-between align-items-center gap-2 ">
                         <span className="sdisprice"><sup>$</sup>{props.d.price}</span>
                         <span className="sactualprice text-decoration-line-through ">${props.d.actualprice}</span>
                     </div>

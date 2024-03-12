@@ -1,0 +1,22 @@
+$base-font-size : 36px;
+
+.resultheading{
+    color: #292D32;
+    font-size: $base-font-size;
+    font-weight: bold;
+}
+
+.sortby{
+    color: #A4A4B8;
+    margin: 0 !important;
+    text-align: center;
+    font-size: $base-font-size - 20;
+    font-weight: 600;
+}
+
+// .Dropdownmenu{
+//     right: 0;
+// }
+li{
+    cursor: pointer;
+}
