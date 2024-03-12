@@ -17,6 +17,29 @@ function HeaderSection() {
   const handleHamburgerClose = () => setShowList(false);
   const handleHamburger = () => setShowList(true);
 
+  const data = [
+    {
+      item:`Your Profile`,
+      link:`profile`
+    },
+    {
+      item:`Your Orders`,
+      link:`profile`
+    },
+    {
+      item:`Address`,
+      link:`profile`
+    },
+    {
+      item:`Notifications`,
+      link:`profile`
+    },
+    {
+      item:`Wishlists`,
+      link:`profile`
+    },
+  ]
+
   return (
     <div>
       
@@ -71,11 +94,11 @@ function HeaderSection() {
                           <ListGroup.Item as="li"  className=' px-3'>
                             <Button onClick={() => setShow(true)} className=' text-center bg-primary text-light border-0 rounded-5 py-2 px-3 '>Login/Register</Button>
                           </ListGroup.Item>
-                          <ListGroup.Item as="li"  className='dropdown-item '>Your Profile</ListGroup.Item>
-                          <ListGroup.Item as="li"  className='dropdown-item '>Your Orders</ListGroup.Item>
-                          <ListGroup.Item as="li"  className='dropdown-item '>Address</ListGroup.Item>
-                          <ListGroup.Item as="li"  className='dropdown-item '>Notifications</ListGroup.Item>
-                          <ListGroup.Item as="li"  className='dropdown-item '>Wishlists</ListGroup.Item>
+                          {data.map((d,i) => (
+                            <a href={`/${d.link}`} key={i} className=' text-decoration-none '>
+                              <ListGroup.Item as="li"  className='dropdown-item '>{d.item}</ListGroup.Item>
+                            </a>
+                          ))}
                         </ListGroup>
                     </div>
                   </div>
@@ -90,12 +113,15 @@ function HeaderSection() {
               </Offcanvas.Header>
               <Offcanvas.Body className='d-flex justify-content-center '>
                 <ul className='list-unstyled w-75 d-flex flex-column gap-3 '>
-                  <li  className='text-center bg-primary text-light rounded-5 py-2 px-3 ' onClick={() => setShow(true)}>Login/Register</li>
-                  <li>Your Profile</li>
-                  <li>Your Orders</li>
-                  <li>Address</li>
-                  <li>Notifications</li>
-                  <li>Wishlists</li>
+                  <li  className='text-center bg-primary text-light rounded-5 py-2 px-3 ' 
+                    onClick={() => setShow(true)}>
+                      Login/Register
+                  </li>
+                  {data.map((d,i) => (
+                    <a key={i} href={`/${d.link}`}className=' text-decoration-none text-dark'>
+                      <li>{d.item}</li>
+                    </a>
+                  ))}
                 </ul>
               </Offcanvas.Body>
             </Offcanvas>

@@ -2,12 +2,14 @@ import { Image } from "react-bootstrap"
 import PropTypes from 'prop-types';
 import Star from "../ProductCard/Star.jsx"
 import "./singleproductcard.scss"
+import { Link } from "react-router-dom";
 
 SingleProductCard.propTypes = {
     d: PropTypes.arrayOf(PropTypes.object).isRequired,
   };
 function SingleProductCard(props) {
   return (
+    <Link to="/singleproduct" className=" text-decoration-none " style={{color:"black"}}>
         <div className=" border rounded-4 SProductCard">
             <div>
                 <Image src={props.d.img} className=" img-fluid w-100 "/>
@@ -27,6 +29,7 @@ function SingleProductCard(props) {
                 </div>
             </div>
         </div>
+    </Link>
   )
 }
 
