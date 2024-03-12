@@ -1,5 +1,6 @@
 import { Col, Row } from "react-bootstrap"
 import CheckboxCard from "./CheckboxCard"
+import "./filtersection.scss"
 
 function FilterSection() {
     const conditions = [
@@ -62,22 +63,22 @@ function FilterSection() {
   return (
     <div>
         <Row>
-            <div className=" text-secondary fw-bold fs-5">Filters</div>
+            <div className="filterheading text-secondary fw-bold fs-5">Filters</div>
         </Row>
         <Row className=" mt-3 ">
-            <div className=" border-bottom pb-2 fw-bold ">Condition</div>
+            <div className="subheading">Condition</div>
                 <Col className=" mt-3 ">
                     <CheckboxCard conditions={conditions}/>
                 </Col>
         </Row>
         <Row className=" mt-3 ">
-            <div className=" border-bottom pb-2 fw-bold ">Discount</div>
+            <div className="subheading">Discount</div>
                 <Col className=" mt-3 ">
                     <CheckboxCard discounts={discounts}/>
                 </Col>
         </Row>
         <Row className=" mt-3 ">
-            <div className=" border-bottom pb-2 fw-bold ">Price</div>
+            <div className="subheading">Price</div>
                 <Col className=" mt-3 ">
                     <CheckboxCard prices={prices}/>
                 </Col>

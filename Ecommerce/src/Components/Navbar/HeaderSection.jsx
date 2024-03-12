@@ -1,4 +1,4 @@
-import {Navbar,Row, Col, Nav, Form, Button, Container, Image, ListGroup} from 'react-bootstrap';
+import {Navbar,Row, Col, Nav, Form, Button, Container, Image, ListGroup, Offcanvas} from 'react-bootstrap';
 import { useState } from 'react';
 import eCart from "../../assets/eCart.svg"
 import search from '../../assets/search-normal.png'
@@ -12,6 +12,11 @@ function HeaderSection() {
 
   const [show, setShow] = useState(false);
 
+  const [showList, setShowList] = useState(false);
+
+  const handleHamburgerClose = () => setShowList(false);
+  const handleHamburger = () => setShowList(true);
+
   return (
     <div>
       
@@ -20,7 +25,8 @@ function HeaderSection() {
           <Row className='align-items-center px-md-3 py-2 '>
 
             <Col className='leftsection d-flex align-items-center '>
-              <button className='Menu d-md-none border-0' data-bs-toggle="collapse" data-bs-target="#responsive-navbar-nav" aria-expanded="false" aria-controls="responsive-navbar-nav" style={{backgroundColor:"white"}}>
+              <button className='Menu d-md-none border-0' style={{backgroundColor:"white"}}
+                onClick={handleHamburger}>
                 <i className="bi bi-list "></i>
               </button>
               <Navbar.Brand href="/">
@@ -78,20 +84,21 @@ function HeaderSection() {
           <Signuppop show={show} onHide={() => setShow(false)}/>
 
           <Row>
-          <div className=" collapse collapse-horizontal position-absolute" id="responsive-navbar-nav">
-                <div className='bg-light rounded-4 '>
-                  <ListGroup className=''>
-                    <ListGroup.Item className=' px-3'>
-                      <div className=' text-center bg-primary text-light rounded-5 py-2 px-3 '>Login/Register</div>
-                    </ListGroup.Item>
-                    <ListGroup.Item className=' '>Your Profile</ListGroup.Item>
-                    <ListGroup.Item className=' '>Your Orders</ListGroup.Item>
-                    <ListGroup.Item className=' '>Address</ListGroup.Item>
-                    <ListGroup.Item className=' '>Notifications</ListGroup.Item>
-                    <ListGroup.Item className=' '>Wishlists</ListGroup.Item>
-                  </ListGroup>
-                </div>
-              </div>
+            <Offcanvas show={showList} onHide={handleHamburgerClose}>
+              <Offcanvas.Header closeButton className='col-12 justify-content-end '>
+                
+              </Offcanvas.Header>
+              <Offcanvas.Body className='d-flex justify-content-center '>
+                <ul className='list-unstyled w-75 d-flex flex-column gap-3 '>
+                  <li  className='text-center bg-primary text-light rounded-5 py-2 px-3 ' onClick={() => setShow(true)}>Login/Register</li>
+                  <li>Your Profile</li>
+                  <li>Your Orders</li>
+                  <li>Address</li>
+                  <li>Notifications</li>
+                  <li>Wishlists</li>
+                </ul>
+              </Offcanvas.Body>
+            </Offcanvas>
           </Row>
 
           <Row>

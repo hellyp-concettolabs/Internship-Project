@@ -1,121 +1,63 @@
-import { useEffect, useState } from "react";
 import { Button, Col, Container, Image, Row } from "react-bootstrap"
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import main from "../../assets/main.png"
-import "../ProductSection/singleproduct.scss"
+import "./singleproductdetail.scss"
 import deliveryvan from "../../assets/deliveryvan.png"
 import warranty from "../../assets/warranty.png"
 import returntimer from "../../assets/returntimer.png"
 import Star from "../ProductCard/Star";
+import ImageAndThumbnail from "./ImageAndThumbnail";
+import main from "../../assets/main.png"
+import SingleProductTitle from "./SingleProductTitle";
+import Share from "./Share";
+import VenderName from "./VenderName";
 
-function SingleProduct() {
+function SingleProductDetail() {
 
-    const [nav1, setNav1] = useState(null);
-    const [nav2, setNav2] = useState(null);
-    const [slider1, setSlider1] = useState(null);
-    const [slider2, setSlider2] = useState(null);
-  
-    useEffect(() => {
-  
-      setNav1(slider1);
-      setNav2(slider2);
-  
-    });
+    const data = [
 
-const data = [
-
-    {
-        img1 : main
-    },
-    {
-        img1 : main
-    },
-    {
-        img1 : main 
-    },
-    {
-        img1 : main
-    },
-    {
-        img1 : main 
-    },
-    {
-        img1 : main 
-    },
-]
-
-const settingsMain = {
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    fade: true,
-    asNavFor: '.slider-nav',
-    vertical: true,
-    // verticalSwiping: true,
-  };
-
-  const settingsThumbs = {
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    asNavFor: '.slider-for',
-    dots: false,
-    arrows:false,
-    centerMode: true,
-    swipeToSlide: true,
-    focusOnSelect: true,
-    //centerPadding: '10px',
-    infinite : true,
-    vertical: true,
-    verticalSwiping: true,
-  };
+        {
+            img1 : main,
+            title:`Women's Blouse Solid Simple Long Sleeve V Neck Button Blouse`,
+            vender:`Celby Store`
+        },
+        {
+            img1 : main
+        },
+        {
+            img1 : main 
+        },
+        {
+            img1 : main
+        },
+        {
+            img1 : main 
+        },
+        {
+            img1 : main 
+        },
+      ]
 
   return (
     <>
         <Container fluid id="productdetailcontainer">
-            <Row className=" py-lg-5 py-2 d-block d-lg-flex ">
+            <Row className="productimageanddetail py-lg-5 py-2">
+                <Col className="border-bottom pb-3 ">
+                    <ImageAndThumbnail data={data}/>
+                </Col>
 
-            <Col className=" col-lg-6 col-md-12 border-bottom pb-3 ">
-                <Row className="slider-wrapper d-flex flex-row-reverse ">
-                    <Col className=" bg-body-secondary col-10 ">
-                    <Slider {...settingsMain} asNavFor={nav2} ref={slider => (setSlider1(slider))}>
-                        {data.map((slide,id) =>
-                            <div className="slick-slide" key={id}>
-                                <Image className="slick-slide-image img-fluid w-100 " src={slide.img1} />
-                            </div>
-                    )}
-                    </Slider>
-                    </Col>
-                    <Col className="thumbnail-slider-wrap col-2">
-                    <Slider {...settingsThumbs} asNavFor={nav1} ref={slider => (setSlider2(slider))}>
-                        {data.map((slide,id) =>
-                            <div className="slick-slide" key={id}>
-                                <Image className="slick-slide-image img-fluid " src={slide.img1} />
-                            </div>
-                        )}
-                    </Slider>
-                    </Col>
-                </Row>
-            </Col>
+                <Col className="d-flex flex-column gap-3 border-bottom pb-3 ">
 
-            <Col className=" col-lg-6 col-md-12 d-flex flex-column gap-3 border-bottom pb-3 ">
-                <Row>
-                    <Col className=" col-11 ">
-                            <span className=" fw-bold fs-5">Women&#39;s Blouse Solid Simple Long Sleeve V Neck Button Blouse</span>
-                    </Col>
-                    <Col className=" col-1 align-items-center">
-                            <div className="">
-                                <i className="bi bi-box-arrow-up-right img-fluid "></i>
-                            </div>
-                    </Col>
-                </Row>
+                    <Row>
+                        <SingleProductTitle data={data[0]}/>
+                        <Share/>
+                    </Row>
                 <Row>
                     <Col className="d-flex col-6">
                         <Star/>
                     </Col>
                     <Col className=" col-6 text-end ">
-                        <span className=" text-secondary ">374 sold, by <b className=" text-dark ">Celby Store</b></span>
+                        <VenderName data={data[0]}/>
                     </Col>
                 </Row>
                 <Row>
@@ -274,4 +216,4 @@ const settingsMain = {
   )
 }
 
-export default SingleProduct
+export default SingleProductDetail

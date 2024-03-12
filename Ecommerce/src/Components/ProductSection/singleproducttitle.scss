@@ -1,0 +1,20 @@
+$base-font-size :20px;
+.productmaintitle{
+    font-size: $base-font-size;
+    font-weight: 600;
+}
+@media (max-width:630px) {
+    .productmaintitle{
+        font-size: $base-font-size * 0.8;
+    }
+}
+@media (max-width:500px) {
+    .productmaintitle{
+        font-size: $base-font-size * 0.7;
+    }
+}
+@media (max-width:400px) {
+    .productmaintitle{
+        font-size: $base-font-size * 0.6;
+    }
+}

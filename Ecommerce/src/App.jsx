@@ -4,9 +4,9 @@ import Footer from "./Components/FooterSection/Footer"
 import HomeBody from "./Components/Body/HomeBody"
 import ProductListPage from "./Components/ProductSection/ProductListPage";
 import Dealsoftheday from "./Components/Body/DealsOfTheDay/Dealsoftheday";
-import SingleProduct from "./Components/ProductSection/SingleProduct";
 import CartPage from "./Components/CartSection/CartPage";
 import Profile from "./Components/Navbar/Profile";
+import SingleProductDetail from "./Components/ProductSection/SingleProductDetail";
 
 function App() {
 
@@ -19,7 +19,7 @@ function App() {
           <Route path="profile" element={<Profile/>}/>
           <Route path="productlist" element={<ProductListPage/>}/>
           <Route path="dealsoftheday" element={<Dealsoftheday/>}/>
-          <Route path="singleproduct" element={<SingleProduct/>}/>
+          <Route path="singleproduct" element={<SingleProductDetail/>}/>
           <Route path="cart" element={<CartPage/>}/>
         </Routes>
         <Footer/>

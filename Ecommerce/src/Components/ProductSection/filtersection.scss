@@ -1,0 +1,21 @@
+$base-font-size :26px;
+
+.filterheading{
+    color: #A4A4B8;
+    font-size: $base-font-size;
+    font-weight: bold;
+}
+
+.subheading{
+    color: #292D32;
+    font-size: $base-font-size - 6;
+    font-weight: 600;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #A4A4B8;
+}
+
+.subcheck{
+    font-size: $base-font-size -10 ;
+    font-weight: normal;
+    padding-bottom: 24px;
+}

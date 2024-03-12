@@ -1,6 +1,6 @@
 import { Col, Form, FormControl, Row } from "react-bootstrap"
 import PropTypes from 'prop-types';
-import ProductCard from "../ProductCard/ProductCard";
+import SingleProductCard from "./SingleProductCard";
 
 ProductList.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -38,10 +38,11 @@ function ProductList({data}) {
                     </Form>
             </Col>
         </Row>
+        
         <Row>
             {data && data.map((d,i) => (
                 <div key={i} className="singleproductcard">
-                    <ProductCard d={d} />
+                    <SingleProductCard d={d} />
                 </div>
             ))}     
         </Row>   

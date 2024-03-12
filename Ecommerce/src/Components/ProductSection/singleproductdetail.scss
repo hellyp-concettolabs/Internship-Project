@@ -20,19 +20,16 @@
     padding-right: 50px;
   }
 }
-  .thumbnail-slider-wrap  .slick-slide .slick-slide-image{
-    align-items: center;
-    width: 80%;
-    height: 100%;
-    border-radius: 20%;
-    margin-bottom: 10px;
+
+.productimageanddetail{
+  display: flex;
+  gap:54px !important;
+}
+@media (max-width:998px) {
+  .productimageanddetail{
+    display: block !important;
   }
-
-  .thumbnail-slider-wrap  .slick-slide .slick-slide-image:focus{
-    border: 1px solid black;
-  }
+}
 
 
-  //  .slider-wrapper .slick-slide .slick-slide-image{
-  //   height: 50%;
-  //  }
+

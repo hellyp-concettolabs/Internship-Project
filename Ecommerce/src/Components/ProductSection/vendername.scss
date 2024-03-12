@@ -1,0 +1,19 @@
+$base-font-size :16px;
+.productid{
+    color: #A4A4B8;
+    font-size: $base-font-size;
+    font-weight: normal;
+}
+.soldby{
+    color: #292D32;
+    font-size: $base-font-size;
+    font-weight: 600;
+}
+@media (max-width:470px) {
+    .productid{
+        font-size: $base-font-size * 0.7;
+    }
+    .soldby{
+        font-size: $base-font-size * 0.7;
+    }
+}

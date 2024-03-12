@@ -15,7 +15,7 @@ function CheckboxCard({ conditions , discounts , prices}) {
         <Form>
             
                 {conditions && conditions.map((condition,index) =>(
-                    <div key={index} className=" pb-2">
+                    <div key={index} className="subcheck">
                         <Form.Check 
                             type={"checkbox"}
                             id={condition.cat}
@@ -24,7 +24,7 @@ function CheckboxCard({ conditions , discounts , prices}) {
                     </div>
                 ))}
                 {discounts && discounts.map((discount,index) =>(
-                    <div key={index} className=" pb-2">
+                    <div key={index} className="subcheck">
                         <Form.Check 
                             type={"checkbox"}
                             id={discount.dis}
@@ -33,7 +33,7 @@ function CheckboxCard({ conditions , discounts , prices}) {
                     </div>
                 ))}
                 {prices && prices.map((price,index) =>(
-                    <div key={index} className=" pb-2">
+                    <div key={index} className="subcheck">
                         <Form.Check 
                             type={"checkbox"}
                             id={price.p}

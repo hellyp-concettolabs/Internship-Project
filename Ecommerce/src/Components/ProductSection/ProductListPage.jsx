@@ -1,7 +1,7 @@
 import { Col, Container, Row } from "react-bootstrap"
 import ProductList from "./ProductsList.jsx"
 import wp1 from "../../assets/wp1.png"
-import "../ProductSection/productlist.scss"
+import "./productlistpage.scss"
 import FilterSection from "./FilterSection"
 function ProductListPage() {
 
@@ -122,10 +122,10 @@ function ProductListPage() {
   return (
     <>
      <Container fluid className=" container-lg ">
-        <Row className=" mb-4 ">
+        <Row className="">
             <span className="">Home &gt; Clothing &gt; Women</span>
         </Row>
-        <Row>
+        <Row className="productlistcontainer">
             <Col className="className= col-3 d-none d-lg-block">
                 <FilterSection/>        
             </Col>
