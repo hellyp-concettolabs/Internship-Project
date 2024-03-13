@@ -236,7 +236,7 @@ function Dealsoftheday() {
 
             <Row  className=" mt-3 Slider d-flex justify-content-center align-items-center">
               <Col className="leftarrow">
-                <div className=" p-0 w-100 h-100 d-flex justify-content-center align-items-center " style={{backgroundColor:"#F5F5FC", borderRadius:"50%", textAlign:"center"}}
+                <div className=" p-0 w-100 h-100 d-flex justify-content-center align-items-center " style={{backgroundColor:"#fff", borderRadius:"50%", textAlign:"center"}}
                   onClick={goToPrev}>
                   <i className="bi bi-arrow-left-short" style={{ color: '#0036FF' }}></i>
                 </div>
@@ -259,7 +259,7 @@ function Dealsoftheday() {
                   </Slider>
               </Col>
               <Col className="rightarrow">
-                <div className=" p-0 w-100 h-100 d-flex justify-content-center align-items-center " style={{backgroundColor:"#F5F5FC", borderRadius:"50%", textAlign:"center"}}
+                <div className=" p-0 w-100 h-100 d-flex justify-content-center align-items-center " style={{backgroundColor:"#fff", borderRadius:"50%", textAlign:"center"}}
                    onClick={goToNext}>
                   <i className="bi bi-arrow-right-short" style={{ color: '#0036FF' }}></i>
                 </div>

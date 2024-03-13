@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import "./singleproducttitle.scss";
 
 SingleProductTitle.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
