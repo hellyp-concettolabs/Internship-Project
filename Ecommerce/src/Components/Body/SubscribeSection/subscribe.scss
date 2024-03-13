@@ -1,0 +1,171 @@
+$base-font-size : 36px;
+
+.subscontainer{
+    padding: 0px 41px 40px;
+    align-items: center;
+
+    .subscon1{
+        padding-top: 40px;
+        padding-right: 0px;
+
+        .subscribeheading{
+            font-size: $base-font-size * 0.9;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+            padding: 0;
+        }
+        .subdesp{
+            font-size: $base-font-size - 20 ;
+            color: white;
+        }
+    }
+    .subarrow{
+        padding-left: 0px;
+        padding-right: 0px;
+        margin-bottom: -15px;
+        margin-left: -15px;
+    }
+
+    .subscon2{
+        padding-top: 40px;
+        padding-right: 0px;
+
+        .subsearch::placeholder {
+            font-size: $base-font-size - 20;
+            color: #707070;
+            padding-left: 25px;
+        }
+        .subnow{
+            font-size: $base-font-size - 20;
+            font-weight: 600;
+            color: white;
+            background-color: black;
+            padding: 15px 25px;
+        }
+    }
+
+    @media (max-width:1399px) and (min-width:1366px) {
+        .subscon1{
+            width: 39%;
+        }
+        .subscribeheading{
+            font-size: $base-font-size * 0.8;
+        }
+        .subscon2{
+            width: 50%;
+        }
+    }
+
+    @media (max-width:1199px) {
+        .subarrow{
+            display: none;
+        }
+        .subscon1{
+            width: 54%;
+
+            .subscribeheading{
+                font-size: $base-font-size * 0.88;
+            }
+        }
+        .subscon2{
+            width: 46%;
+
+            .subnow{
+                font-size: ($base-font-size - 20) * 0.7;
+            }
+        }
+    }
+    @media (max-width:992px) and (min-width:991px) {
+        .subscon1{
+            width: 33% !important;
+
+            .subscribeheading{
+                font-size: $base-font-size * 0.88;
+            }
+        }
+        .subscon2{
+            width: 67% !important;
+
+            .subnow{
+                font-size: ($base-font-size - 20) * 0.7;
+            }
+        }
+    }
+    @media (max-width:560px) {
+        .subnow{
+            font-size: ($base-font-size - 20) * 0.8 !important;
+            padding: 7px 15px !important;
+        }
+    }
+    @media (max-width:347px) {
+        .subnow{
+            font-size: ($base-font-size - 20) * 0.6 !important;
+        }
+    }
+}
+@media (max-width:1199px) {
+    .subscontainer{
+        display: flex;
+        flex-wrap: nowrap !important;
+        gap: 1.5rem;
+    }
+}
+@media (max-width:990px) {
+    .subscontainer{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap !important;
+        gap: 1.5rem;
+
+        .subscon1{
+            width: 100%;
+            text-align: center;
+
+            .subscribeheading{
+                font-size: $base-font-size * 0.7;
+            }
+        }
+        .subscon2{
+            padding: 0;
+            width: 75%;
+
+            .subnow{
+                font-size: ($base-font-size - 20) * 0.9;
+            }
+        }
+    }
+}
+@media (max-width:768px) {
+    .subscontainer{
+        gap: 1rem;
+
+        .subscon1{
+            width: 100%;
+            text-align: center;
+
+            .subscribeheading{
+                font-size: $base-font-size * 0.6;
+            }
+            .subdesp{
+                font-size: ($base-font-size - 20) * 0.9 ;
+            }
+        }
+        .subscon2{
+            padding: 0;
+            width: 100%;
+
+            .subnow{
+                font-size: ($base-font-size - 20) * 0.9;
+            }
+        }
+    }
+}
+@media (max-width:560px) {
+    .subscontainer{
+        padding: 0px 21px 20px;
+    }
+    .subscon1{
+        padding-top: 20px !important;
+    }
+}
