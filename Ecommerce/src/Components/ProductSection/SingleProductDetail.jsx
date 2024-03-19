@@ -60,7 +60,7 @@ function SingleProductDetail() {
 
                 <Col className="d-flex flex-column gap-3 border-bottom pb-3 ">
 
-                    <Row>
+                    <Row className="productmaintitle">
                         <SingleProductTitle data={data[0]}/>
                         <Share/>
                     </Row>

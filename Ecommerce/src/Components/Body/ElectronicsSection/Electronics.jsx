@@ -85,6 +85,7 @@ function Electronics() {
   return (
     <>
      <Container className="gardencontainer">
+      <div>
         <Row className="mb-3 mb-md-4 ">
           <Col className="d-flex align-items-center col-8 ">
             <h2 className="gardenheader">Electronics</h2>
@@ -116,6 +117,7 @@ function Electronics() {
             </div>
           </Col>
         </Row>
+        </div>
     </Container> 
     </>
   )

@@ -121,16 +121,16 @@ function ProductListPage() {
     ]
   return (
     <>
-     <Container fluid className=" container-lg ">
-        <Row className="">
+     <Container fluid >
+        {/* <Row className="">
             <span className="">Home &gt; Clothing &gt; Women</span>
-        </Row>
+        </Row> */}
         <Row className="productlistcontainer">
-            <Col className="className= col-3 d-none d-lg-block">
+            <Col className=" d-none d-lg-flex filtersec">
                 <FilterSection/>        
             </Col>
 
-            <Col className=" d-flex flex-column col-lg-9 col-12">
+            <Col className=" d-flex flex-column productlistsec">
                 <ProductList data={data}/>
             </Col>
 

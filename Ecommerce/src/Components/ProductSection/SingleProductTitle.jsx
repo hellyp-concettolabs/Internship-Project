@@ -7,7 +7,7 @@ function SingleProductTitle(props) {
   return (
     <>
         <div className="col-sm-11 col-10">
-            <span className="productmaintitle">{props.data.title}</span>
+            <span>{props.data.title}</span>
         </div>
     </>
   )

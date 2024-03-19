@@ -45,7 +45,7 @@ function HeaderSection() {
       
       <header className='shadow-sm mb-3'>
         <Container fluid className='navsection'>
-          <Row className='align-items-center px-md-3 py-2 '>
+          <Row className='align-items-center px-md-4 px-1 py-2 '>
 
             <Col className='leftsection d-flex align-items-center '>
               <button className='Menu d-md-none border-0' style={{backgroundColor:"white"}}

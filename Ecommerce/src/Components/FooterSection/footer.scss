@@ -1,49 +1,126 @@
-$base-font-size: 16px;
+$base-font-size: 20px;
 
-.footersection {
-  .footertext > div {
-    font-size: $base-font-size;
-  }
-
-  @media (max-width: 1399px) and (min-width: 1200px) {
-    .footertext > div {
-      font-size: $base-font-size * 0.9; 
+footer{
+  background-color: #222222;
+  padding-top: 70px;
+  padding-bottom: 30px;
+  
+  .footersection{
+    .footertopsec{
+      border-bottom: 1px solid #A4A4B8;
+      .footertopsubsec{
+        margin-bottom: 20px;
+        .footerheading{
+          color: white;
+          font-size: $base-font-size;
+          font-weight: 600;
+          margin-bottom: 22px;
+        }
+        .footersublist{
+          color: #A4A4B8;
+          font-size: $base-font-size - 4;
+          font-weight: normal;
+          margin-bottom: 23px;
+        }
+      }
     }
-  }
 
-  @media (max-width: 991px) {
-    .footertext > div {
-      font-size: $base-font-size * 0.7; 
-    }
-  }
-  @media (max-width: 768px) {
-    .footertext > div {
-      font-size: $base-font-size * 0.6; 
+    .footerbottomsec{
+      display: flex;
+      padding-top: 32px;
+      text-align: center;
+
+      .socialicon{
+        background-color: #0036FF;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .rights, .terms{
+        color: #A4A4B8;
+        font-size: $base-font-size - 4;
+        font-weight: normal;
+      }
     }
   }
 }
 
-.footersection{
-    p{
-        font-size: $base-font-size;
+@media (max-width:1399px) {
+  footer{    
+    .footersection{
+      .footertopsec{
+        .footertopsubsec{
+          .footerheading{
+            font-size: $base-font-size * 0.8;
+          }
+          .footersublist{
+            font-size: ($base-font-size - 4) * 0.8;
+          }
+        }
+      }
     }
-    @media screen and (max-width: 768px) {
-        p {
-          font-size: $base-font-size * 0.7; 
-        }
-      }
-      @media screen and (max-width: 424px) {
-        p{
-          font-size: $base-font-size * 0.5; 
-        }
-      }
-
+  }
 }
 
+@media (max-width:1200px) {
+  footer{
+    .footerbottomsec{
+      .rights{
+        font-size: ($base-font-size - 4) * 0.8 !important;
+      }.terms{
+        font-size: ($base-font-size - 4) * 0.8 !important;
+      }
+    }
+  }
+}
+@media (max-width:991px) {
+  .footersection{
+    .footerbottomsec{
+      .terms{
+        text-align: center !important;
+      }
+    }
+}
+}
+@media (max-width:576px) {
+footer{
+  .footersection{
+    .footertopsec{
+      .footertopsubsec{
+        .footerheading{
+          font-size: $base-font-size * 0.7 !important;
+        }
+        .footersublist{
+          font-size: ($base-font-size - 4) * 0.7;
+        }
+      }
+    }
 
+    .footerbottomsec{
+      display: flex;
+      padding-top: 32px;
+      text-align: center;
 
+      .socialicon{
+        background-color: #0036FF;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-//--------------------Just for info--------------------
-//body {
-//   font-size: 1rem; // This will be equal to the base font size
-// }
+      .rights, .terms{
+        color: #A4A4B8;
+        font-size: $base-font-size - 4;
+        font-weight: normal;
+      }
+    }
+  }
+}
+}

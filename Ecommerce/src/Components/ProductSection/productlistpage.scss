@@ -1,5 +1,35 @@
 .productlistcontainer{
     margin-top: 50px !important;
+    padding: 0px 60px;
+    gap: 1.5%;
+
+    .filtersec{
+        max-width: 24% !important;
+    }
+    .productlistsec{
+        width: 75% !important;
+    }
 }
+@media (max-width:1400px) {
+    .productlistcontainer{
+    padding: 0px 30px;
+}
+}
+@media (max-width:991px) {
+    .productlistsec{
+        max-width: 100% !important;
+    }
+}
+@media (max-width:768px) {
+    .productlistcontainer{
+    padding: 0px 15px;
+}
+}
+@media (max-width:330px) {
+    .productlistcontainer{
+    padding: 0px 0px;
+}
+}
+
 
 

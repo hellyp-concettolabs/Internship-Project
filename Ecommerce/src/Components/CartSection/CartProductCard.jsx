@@ -1,6 +1,7 @@
 import {Form, Image} from "react-bootstrap"
 import main from "../../assets/main.png"
-
+import SingleProductQuantity from "../ProductSection/SingleProductQuantity.jsx"
+import SingleProductTitle from "../ProductSection/SingleProductTitle.jsx"
 function CartProductCard() {
 
     const data = [
@@ -39,8 +40,8 @@ function CartProductCard() {
                     <Image src={d.img} className=" w-100 rounded-4"/>
                 </div>
                 <div className=" col-lg-10 d-flex flex-column gap-2">
-                        <div>
-                                <span className=" small ">{d.title}</span>
+                        <div className="cartproducttitle">
+                                <SingleProductTitle data={d}/>
                         </div>
                         <div>
                             <div className=" d-flex flex-row align-items-center gap-2 ">
@@ -51,7 +52,7 @@ function CartProductCard() {
                         </div>
                     <div className=" d-none d-md-flex ">
                         <div className=" d-flex align-items-center gap-3">
-                            <div className=" fw-bold text-secondary ">Quantity: | - | 1 | + |</div>
+                            <SingleProductQuantity/>
                             <div className="fw-bold px-2 " style={{borderLeft:"2px solid #A4A4B8"}}>Delete</div>
                             <div className="fw-bold px-2 " style={{borderLeft:"2px solid #A4A4B8"}}>Share</div>
                         </div>
