@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 import {Formik} from 'formik'
 //import Verifypop from './Verifypop';
 //import Register from './Register';
-//import axios from 'axios';
+import axios from 'axios';
 
 Signuppop.propTypes = {
   onHide: PropTypes.func.isRequired,
 };
 function Signuppop(props) {
-
 
 
   return (
@@ -34,7 +33,7 @@ function Signuppop(props) {
           <Container>
             <span className=' fw-medium '>Enter phone number or email</span>
             <Formik
-              initialValues={{emial:''}}
+              initialValues={{email:''}}
               validate={values => {
                 const errors = {};
                 if(!values.email || values.email===null){
@@ -47,8 +46,15 @@ function Signuppop(props) {
                 return errors;
               }}
               onSubmit={(values, { setSubmitting }) => {
-                  console.log(JSON.stringify(values, null, 2));
-                  setSubmitting(false);
+                axios.post('https://bargainfox-dev.concettoprojects.com/api/send-otp', values)
+                .then(response => {
+                console.log(response.data);
+                console.log(values);
+                })
+                .catch(error => {
+                  console.error(error);
+                });
+               setSubmitting(false);
               }}
             >
               {({

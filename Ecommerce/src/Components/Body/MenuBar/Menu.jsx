@@ -59,9 +59,6 @@ function Menu() {
 //       img: Clearance,
 //       menu: 'Clearance',
 //       submenus: ['Clearance'],
-//       subcategories: {
-//         Clearance: ['Home', 'Kitchen', 'Electronics', 'Toys & Crafts', 'Sports & Leisure', 'Health & Beauty']
-//       }
 // },
 //     {
 //       img: Clearance,
