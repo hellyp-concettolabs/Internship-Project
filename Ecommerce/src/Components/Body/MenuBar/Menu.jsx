@@ -97,7 +97,7 @@ function Menu() {
         <Col className="d-none d-xl-block"></Col>
         <Col className="d-none d-lg-block"></Col>
         {data.map((d,i) => (
-          <Col key={d.menu} className="d-flex flex-column position-relative"
+          <Col key={d.menu} className="d-flex flex-column position-relative text-center "
             onMouseEnter={() => handleMenuHover(i)} onMouseLeave={handleMenuLeave}>
             <Image src={d.img} className="img-fluid" />
             <span className="mt-1">{d.menu}</span>

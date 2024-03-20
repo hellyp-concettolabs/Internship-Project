@@ -1,0 +1,80 @@
+$base-font-size:30px;
+$xl:1366px;
+$md:768px;
+$sm:576px;
+@mixin breakpoint($type, $size) {
+    @if $type == 'min' {
+      @media (min-width: $size) {
+        @content;
+      }
+    }
+    @else if $type == 'max' {
+      @media (max-width: $size) {
+        @content;
+      }
+    }
+  }
+  
+@media (min-width: 576px){
+.modal-dialog {
+    max-width: 600px !important;
+}
+}
+.btn-close{
+    position: absolute;
+    padding: 0 !important;
+    top: 25px;
+    right: 25px;
+    width: 15px !important;
+    height: 15px !important;
+    @include breakpoint(max, $sm) {
+        top: 20px;
+        right: 20px;
+      };
+}
+.signupcontainer{
+    padding: 30px 50px;
+    @include breakpoint(max, $xl) {
+      padding: 30px;
+    };
+}
+.signin-register{
+    color: #292D32;
+    font-size: $base-font-size;
+    font-weight: bold;
+    @include breakpoint(max, $xl) {
+        font-size: $base-font-size * 0.8;
+      };
+    @include breakpoint(max, $md) {
+        font-size: $base-font-size * 0.7;
+      };
+}
+.popupsubheader{
+  color: #707070;
+  font-size: $base-font-size - 16px;
+  text-align: center;
+  @include breakpoint(max, $md) {
+    font-size: ($base-font-size - 16px) * 0.9;
+  };
+}
+.signupemail{
+    background-color: #F2F2F8;
+    border: none;
+
+    &:focus-visible{
+        border: none;
+        outline: none;
+        box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
+    }
+}
+
+.signupmsg{
+  color: #000000B3;
+  font-size: $base-font-size - 16px;
+  font-weight: 600;
+}
+
+.search-icon{
+  font-size: $base-font-size - 14px;
+  font-weight: 500;
+}

@@ -5,6 +5,8 @@ import "./register.scss"
 
 Register.propTypes = {
     onHide: PropTypes.func.isRequired,
+    register: PropTypes.bool.isRequired,
+    setRegister: PropTypes.func.isRequired
   };
 
 function Register(props) {

@@ -104,7 +104,7 @@ function HeaderSection() {
                   </div>
               </Col>
           </Row>
-          <Signuppop show={show} onHide={() => setShow(false)}/>
+          <Signuppop show={show} setShow={setShow} onHide={() => setShow(false)}/>
 
           <Row>
             <Offcanvas show={showList} onHide={handleHamburgerClose}>

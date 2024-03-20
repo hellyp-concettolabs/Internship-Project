@@ -2,54 +2,61 @@ import { CloseButton, Container} from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import PropTypes from 'prop-types';
 import {Formik} from 'formik'
-//import Verifypop from './Verifypop';
+import Verifypop from './Verifypop';
 //import Register from './Register';
 import axios from 'axios';
+import * as Yup from 'yup';
+import "./signuppop.scss"
+import { useState } from 'react';
 
 Signuppop.propTypes = {
+  show: PropTypes.bool.isRequired,
+  setShow: PropTypes.func.isRequired,
   onHide: PropTypes.func.isRequired,
 };
 function Signuppop(props) {
 
+  const [verify, setVerify] = useState(false);
+  const [userValues,setValues] = useState('')
 
   return (
     <>
-      <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter"centered className=' rounded-5 '>
-        <div className=' py-4 px-4'>
+      <Modal {...props} centered className=' rounded-5 '>
+        <div className='signupcontainer'>
         <Modal.Header className=' d-flex flex-column p-2 border-0 '>
-          <div className=' col-12 d-flex '>
+          <div className='closebtn '>
             <CloseButton style={{boxShadow:"none"}} onClick={props.onHide}/>
           </div>
-          <Modal.Title id="contained-modal-title-vcenter" className=' text-center col-11'>
-            <div className=' fs-3 fw-bold '>
+          <Modal.Title id="contained-modal-title-vcenter" className=' text-center'>
+            <div className='signin-register'>
                 Sign In / Register
             </div>  
           </Modal.Title>
         </Modal.Header>
-        <div className='text-secondary text-center'>
+        <div className='popupsubheader'>
             Please enter your phone number or email below
         </div>
-        <Modal.Body className=''>
-          <Container>
-            <span className=' fw-medium '>Enter phone number or email</span>
+        <Modal.Body className='px-0 py-4'>
+          <Container className=' p-0 '>
+            <div className='signupmsg mb-1'>Enter phone number or email</div>
             <Formik
               initialValues={{email:''}}
-              validate={values => {
-                const errors = {};
-                if(!values.email || values.email===null){
-                  errors.email= 'Required';
-                } else if(
-                  !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                ){
-                  errors.email = 'Invalid email address';
-                }
-                return errors;
-              }}
+              validationSchema={Yup.object({
+                email: Yup.string()
+                  .email('Please enter valid phone number or email')
+                  .required('Please enter your phone number or email')
+                  .matches(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i)
+              })}
               onSubmit={(values, { setSubmitting }) => {
                 axios.post('https://bargainfox-dev.concettoprojects.com/api/send-otp', values)
                 .then(response => {
                 console.log(response.data);
-                console.log(values);
+                setValues(values.email);
+                console.log(values.email);
+                if(response.data.status === 200){
+                  props.setShow(false)
+                  setVerify(true)
+                }
                 })
                 .catch(error => {
                   console.error(error);
@@ -65,19 +72,19 @@ function Signuppop(props) {
                  handleBlur,
                  handleSubmit,
                  isSubmitting,
-                 /* and other goodies */
               }) => (
-                 <form onSubmit={handleSubmit} className='search d-flex flex-column gap-3'>
+                 <form onSubmit={handleSubmit} className='d-flex flex-column'>
                    <input
-                     type="email"
+                     type="text"
                      name="email"
                      onChange={handleChange}
                      onBlur={handleBlur}
                      value={values.email}
-                     className=' rounded-5 w-100 border-1'
+                     autoCorrect='false'
+                     className='signupemail rounded-5 w-100 px-3 py-2'
                    />
-                   {errors.email}
-                   <button type="submit" disabled={isSubmitting} className='search-icon rounded-5 bg-primary text-light submit w-100 border-0 py-1 '>
+                   <p className=' text-danger small '>{errors.email}</p>
+                   <button type="submit" disabled={isSubmitting} className='search-icon rounded-5 bg-primary text-light w-100 border-0 py-2 '>
                    Continue
                    </button>
                  </form>
@@ -87,6 +94,7 @@ function Signuppop(props) {
         </Modal.Body>
         </div>
       </Modal>
+      <Verifypop show={verify} setVerify={setVerify} values={userValues} onHide={() => setVerify(false)}/>
     </>
   )
 }
