@@ -1,3 +1,6 @@
-.registercontainer{
-    
+$base-font-size: 13px;
+
+.form-label{
+    font-size: $base-font-size;
+    margin-bottom: 5px !important;
 }

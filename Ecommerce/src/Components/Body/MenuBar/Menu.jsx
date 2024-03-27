@@ -1,70 +1,32 @@
 import { Container, Row, Col, Image } from "react-bootstrap"
-import HomeKitchen from "../../../assets/HomeKitchen.png"
-import HealthBeauty from "../../../assets/HealthBeauty.png"
-import Electronics from "../../../assets/Electronics.png"
-import ToysCrafts from "../../../assets/ToysCrafts.png"
-import SportsLeisure from "../../../assets/SportsLeisure.png"
-import Clearance from "../../../assets/Clearance.png"
 import '../MenuBar/menu.scss'
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 function Menu() {
-  const data = [
-    {
-      img: HomeKitchen,
-      menu: 'Home & Kitchen',
-      submenus: ['Home', 'Kitchen', 'Office'],
-      subcategories: {
-        Home: ['Appliances & Accessories', 'Cleaning & Household', 'Lighting', 'Bathroom', 'Bedroom', 'Furnishings', 'Decor', 'Pets', 'Mix'],
-        Kitchen: ['Cookware', 'Bakeware', 'Small Appliances', 'Countertop Appliances', 'Kitchen Tools & Gadgets', 'Dinnerware', 'Glassware', 'Flatware', 'Serveware'],
-        Office: ['Office Supplies', 'Office Furniture', 'Printers', 'Shredders', 'Projectors', 'Monitors', 'Computers', 'Tablets', 'Phone & Mobile']
-      }
-    },
-    {
-      img: HealthBeauty,
-      menu: 'Health & Beauty',
-      submenus: ['Health', 'Beauty'],
-      subcategories: {
-        Health: ['Vitamins & Supplements', 'First Aid', 'Medical Supplies', 'Sexual Wellness', 'Baby', 'Mom & Pregnancy', 'Sports Nutrition', 'Weight Management', 'Personal Care'],
-        Beauty: ['Skin Care', 'Makeup', 'Hair Care', 'Fragrance', 'Men’s Grooming', 'Bath& Body', 'Tools & Brushes', 'Nails', 'Hair Accessories']
-      }
-    },
-    {
-      img: Electronics,
-      menu: 'Electronics',
-      submenus: ['Electronics'],
-      subcategories: {
-        Electronics: ['TV & Video', 'Home Audio', 'Camera & Photo', 'Cell Phones', 'Car Electronics', 'Computers & Tablets', 'Wearable Technology', 'Video Games', 'Smart Home']
-      }
-    },
-    {
-      img: ToysCrafts,
-      menu: 'Toys & Crafts',
-      submenus: ['Toys', 'Crafts'],
-      subcategories: {
-        Toys: ['Action Figures', 'Building Sets', 'Dolls', 'Games', 'Puzzles', 'Outdoor & Sports', 'Bikes', 'Ride-Ons', 'Tricycles & Trikes'],
-        Crafts: ['Art Supplies', 'Craft Kits', 'Painting', 'Drawing', 'Sewing & Knitting', 'Paper Crafts', 'Model Kits', 'Jewelry Making', 'Scrapbooking']
-      }
-    },
-    {
-      img: SportsLeisure,
-      menu: 'Sports & Leisure',
-      submenus: ['Sports', 'Leisure'],
-      subcategories: {
-        Sports: ['Fitness & Exercise', 'Outdoor Recreation', 'Camping & Hiking', 'Biking', 'Water Sports', 'Winter Sports', 'Team Sports', 'Sports Apparel', 'Sports Equipment'],
-        Leisure: ['Games', 'Puzzles', 'Hobbies', 'DIY', 'Home & Garden', 'Pool & Spa', 'Patio & Garden', 'Lawn & Garden', 'Home Improvement']
-      }
-    },
-//     {
-//       img: Clearance,
-//       menu: 'Clearance',
-//       submenus: ['Clearance'],
-// },
-//     {
-//       img: Clearance,
-//       menu: 'View more',
-//     },
-  ]
+
+const [data,setData] = useState([]);
+const [requestMade,setRequestMade] = useState(false);
+
+useEffect( () => {
+  const fetchData = async() =>{
+    if(!requestMade){
+     await axios.get(' https://bargainfox-dev.concettoprojects.com/api/category-list')
+    .then(response => {
+      setData(response.data.result);
+      setRequestMade(true);
+    })
+    .catch(error =>{
+      console.error('Error making GET request:', error);
+    })
+  }
+}
+  fetchData();
+}, [requestMade])
+
+useEffect( () =>{
+  console.log(data)
+},[data])
 
   const [hoveredMenu, setHoveredMenu] = useState(new Array(data.length).fill(false));
 
@@ -92,52 +54,44 @@ function Menu() {
   };
 
   return (
-    <Container fluid className="menusection container-lg mb-4">
-      <Row className="d-flex align-items-center justify-content-center">
-        <Col className="d-none d-xl-block"></Col>
-        <Col className="d-none d-lg-block"></Col>
-        {data.map((d,i) => (
-          <Col key={d.menu} className="d-flex flex-column position-relative text-center "
-            onMouseEnter={() => handleMenuHover(i)} onMouseLeave={handleMenuLeave}>
-            <Image src={d.img} className="img-fluid" />
-            <span className="mt-1">{d.menu}</span>
-            {hoveredMenu[i] && (
-              <div className="Categories position-absolute bg-light-subtle">
+    <Container fluid className=" container-lg mb-4">
+      <Row className="menusection">
+
+        {data.map((d) => (
+          <Col key={d.id} className="menulist" onMouseEnter={() => handleMenuHover(d.id)} 
+            onMouseLeave={handleMenuLeave}>
+            <Image src={d.thumbnail_image_url} className="img-fluid" />
+            <span className="mt-1">{d.title}</span>
+            {hoveredMenu[d.id] && (
+              <div className="Categories">
                 <ul className="list-unstyled p-2">
-                  {d.submenus.map((submenu) => (
-                      <li key={submenu} className="submenu" onMouseEnter={() => handleSubMenuHover(submenu)}
-                        onMouseLeave={handleSubMenuLeave}>
-                      <span className="">{submenu}</span>
-                    {(hoveredSubMenu[submenu])&& (
+                  {d.subcategory.map((submenu) => (
+                    <div key={submenu.id} className=" d-flex gap-2 ">
+                      <div className="submenu">
+                        <li key={submenu.id} onMouseEnter={() => handleSubMenuHover(submenu.id)}
+                          onMouseLeave={handleSubMenuLeave}>
+                        <span className="">{submenu.title}</span>
+                        </li>
+                      </div>
                       <div id={submenu} className="submenusubcat">
-                      {d.subcategories[submenu] && (
-                        <ul className="list-unstyled">
-                          {d.subcategories[submenu].map((category) => (
-                            <li key={category}>
-                             <span>{category}</span>
-                            </li>
-                          ))}
-                        </ul>
+                      {(hoveredSubMenu[submenu.id])&& (
+                             <ul className="list-unstyled">
+                               {submenu.collection.map((category) => (
+                                 <li key={category.id}>
+                                  <span>{category.title}</span>
+                                 </li>
+                               ))}
+                             </ul>
                       )}
                       </div>
-                      )}
-                      </li>
+                   </div>
                   ))}
                 </ul>
               </div>
             )}
           </Col>
         ))}
-        <Col className=" d-flex flex-column text-center d-none d-md-flex">
-             <Image src={Clearance} className=" img-fluid"/>
-             <span className=" mt-1 ">Clearance</span>
-         </Col>
-         <Col className=" d-flex flex-column text-center ">
-             <Image src={Clearance} className=" img-fluid"/>
-             <span className=" mt-1 ">View more</span>
-         </Col>
-        <Col className="d-none d-xl-block"></Col>
-        <Col className="d-none d-lg-block"></Col>
+
       </Row>
     </Container>
   );
@@ -146,60 +100,6 @@ function Menu() {
 export default Menu;
 
 
-
-
-// import { Container,Row, Col, Image } from "react-bootstrap"
-// import HomeKitchen from "../../../assets/HomeKitchen.png"
-// import HealthBeauty from "../../../assets/HealthBeauty.png"
-// import Electronics from "../../../assets/Electronics.png"
-// import ToysCrafts from "../../../assets/ToysCrafts.png"
-// import SportsLeisure from "../../../assets/SportsLeisure.png"
-// import Clearance from "../../../assets/Clearance.png"
-// import '../MenuBar/menu.scss'
-
-// function Menu() {
-  
-//   return (
-//     <Container fluid  className=" menusection container-lg mb-4">
-//       <Row className=" d-flex align-items-center justify-content-center">
-//         <Col className=" d-none d-xl-block "></Col>
-//         <Col className=" d-none d-lg-block "></Col>
-//         <Col className=" d-flex flex-column text-center dropdown " >
-//           <Image src={HomeKitchen} className=" img-fluid "/>
-//             <span className=" mt-1">Home & Kitchen</span>
-//         </Col>
-//         <Col className=" d-flex flex-column text-center dropdown  Home" >
-//             <Image src={HealthBeauty} className=" img-fluid "/>
-//             <span className=" mt-1">Health & Beauty</span>
-//         </Col>
-//         <Col className=" d-flex flex-column text-center dropdown Home">
-//             <Image src={Electronics} className=" img-fluid"/>
-//             <span className=" mt-1 ">Electronics</span>
-//         </Col>
-//         <Col className=" d-flex flex-column text-center d-none d-md-flex  dropdown ToysCrafts">
-//             <Image src={ToysCrafts} className=" img-fluid"/>
-//             <span className=" mt-1 ">Toys & Crafts</span>
-//         </Col>
-//         <Col className=" d-flex flex-column text-center d-none d-md-flex dropdown ToysCrafts">
-//             <Image src={SportsLeisure} className=" img-fluid"/>
-//             <span className="  mt-1 ">Sports & Leisure</span>
-//         </Col>
-//         <Col className=" d-flex flex-column text-center d-none d-md-flex">
-//             <Image src={Clearance} className=" img-fluid"/>
-//             <span className=" mt-1 ">Clearance</span>
-//         </Col>
-//         <Col className=" d-flex flex-column text-center ">
-//             <Image src={Clearance} className=" img-fluid"/>
-//             <span className=" mt-1 ">View more</span>
-//         </Col>
-//         <Col className=" d-none d-xl-block "></Col>
-//         <Col className=" d-none  d-lg-block "></Col>
-//       </Row>
-//     </Container>
-//   )
-// }
-
-// export default Menu
 
 
 

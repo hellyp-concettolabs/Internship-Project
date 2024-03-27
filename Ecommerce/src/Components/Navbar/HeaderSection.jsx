@@ -1,12 +1,15 @@
 import {Navbar,Row, Col, Nav, Form, Button, Container, Image, ListGroup, Offcanvas} from 'react-bootstrap';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import eCart from "../../assets/eCart.svg"
 import search from '../../assets/search-normal.png'
 import wishlist from '../../assets/wishlist.png'
 import shopping_cart from '../../assets/shopping-cart.png'
-import user from '../../assets/user.png'
+import usericon from '../../assets/user.png'
 import "../Navbar/header.scss"
 import Signuppop from './Signuppop';
+import { UserContext } from '../UserData/StoreUserContext';
+import axios from 'axios';
+
 
 function HeaderSection() {
 
@@ -40,6 +43,23 @@ function HeaderSection() {
     },
   ]
 
+  const {userData} = useContext(UserContext);
+  const {setUserData} = useContext(UserContext);
+  
+  const handleLogout =() =>{
+    axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+    axios.get(' https://bargainfox-dev.concettoprojects.com/api/logout')
+    .then(response => {
+      console.log(response);
+      if(response.data.status === 200){
+        setUserData('');
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  
+  }
   return (
     <div>
       
@@ -83,22 +103,41 @@ function HeaderSection() {
 
                   <div className=' Signup d-flex align-items-center navbar navbar-expand-md position-relative dropdown '  aria-expanded="false">
                     <Nav.Link href='#user' onClick={() => setShow(true)} className=''>
-                      <div className='user-container'><Image src={user} className=' img-fluid user-icon'/></div>
+                      <div className='user-container'><Image src={usericon} className=' img-fluid user-icon'/></div>
                     </Nav.Link>
                     <div className='d-flex flex-column  small d-none d-xl-block'>
-                      <p className='greet mb-0'>Hello there,</p>
-                      <span className='signin'>SIGN IN/REGISTER</span>
+                      <p className='greet mb-0'>
+                        {userData ? (`Welcome ${userData.name},`):(`Hello there,`)}
+                      </p>
+                      <span className='signin'>
+                        {userData ? ('ACCOUNT & ORDER') : ('SIGN IN/REGISTER')}
+                      </span>
                     </div>
                     <div className=' p-0 dropdown-content dropdown-menu position-md-static' id="SignupDropdown" >
                         <ListGroup as="ul"  className=' dropdown-item p-0 '>
-                          <ListGroup.Item as="li"  className=' px-3'>
+                          {!userData ?
+                          (<ListGroup.Item as="li"  className=' px-2'>
                             <Button onClick={() => setShow(true)} className=' text-center bg-primary text-light border-0 rounded-5 py-2 px-3 '>Login/Register</Button>
-                          </ListGroup.Item>
+                          </ListGroup.Item>) :
+                          (<ListGroup.Item as="li"  className=' px-2'>
+                            <a href='/profile' className=' d-flex align-items-center gap-2 text-black text-decoration-none '>
+                              <Image src={usericon} className=' img-fluid' style={{width:"28px", height:"28px"}}/>
+                              <p className=' m-0 ' style={{fontSize:"15px", fontWeight:"500" ,color:"#0036FF", textTransform:"capitalize"}}>
+                                {userData.name}
+                                <div style={{fontSize:"13px", color:"black", fontWeight:"500"}}>View Profile</div>
+                              </p>
+                            </a>
+                          </ListGroup.Item>)
+                          }
                           {data.map((d,i) => (
                             <a href={`/${d.link}`} key={i} className=' text-decoration-none '>
                               <ListGroup.Item as="li"  className='dropdown-item '>{d.item}</ListGroup.Item>
                             </a>
                           ))}
+                          {userData &&
+                            (<ListGroup.Item as="li"  className=' px-2'>
+                              <Button onClick={handleLogout} className=' text-center bg-primary text-light border-0 rounded-5 p-1 w-100 '>Logout</Button>
+                            </ListGroup.Item>) }
                         </ListGroup>
                     </div>
                   </div>

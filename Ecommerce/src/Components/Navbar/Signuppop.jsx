@@ -3,7 +3,6 @@ import Modal from 'react-bootstrap/Modal';
 import PropTypes from 'prop-types';
 import {Formik} from 'formik'
 import Verifypop from './Verifypop';
-//import Register from './Register';
 import axios from 'axios';
 import * as Yup from 'yup';
 import "./signuppop.scss"
@@ -17,11 +16,12 @@ Signuppop.propTypes = {
 function Signuppop(props) {
 
   const [verify, setVerify] = useState(false);
-  const [userValues,setValues] = useState('')
+  const [userValues,setValues] = useState('');
+
 
   return (
     <>
-      <Modal {...props} centered className=' rounded-5 '>
+      <Modal show={props.show} onHide={props.onHide} centered className=' rounded-5 '>
         <div className='signupcontainer'>
         <Modal.Header className=' d-flex flex-column p-2 border-0 '>
           <div className='closebtn '>
@@ -94,7 +94,7 @@ function Signuppop(props) {
         </Modal.Body>
         </div>
       </Modal>
-      <Verifypop show={verify} setVerify={setVerify} values={userValues} onHide={() => setVerify(false)}/>
+      <Verifypop show={verify} setVerify={setVerify} useremail={userValues} onHide={() => setVerify(false)}/>
     </>
   )
 }
@@ -103,60 +103,4 @@ export default Signuppop
 
 
 
-  // const {register, formState: {errors}} = useForm()
-  // //const [verify, setVerify] = useState(false);
-  // // const onSubmit = () => {
-  // //   props.onHide();
-  // // }
 
-  // const [email,setEmail] = useState("");
-  // //const [data,setData] = useState([]);
-  // //const [status,setstatus] = useState(false);
-  // const handleinput = (e) =>{
-  //  // e.preventDefault();
-  //   setEmail(e.target.value);
-  // }
-
-
-
-//const createUser = async(e) =>{
-  //       e.preventDefault();
-  //       if(email !== ''){
-  //         setEmail[{...email},email];
-  //         let item = {email};
-  //         let res = await fetch( 'https://bargainfox-dev.concettoprojects.com/api/send-otp',{
-  //               method:'Post',
-  //               headers:{
-  //                 "Content-Type":"application/json",
-  //                 "Accept":"*/*"
-  //               },
-  //               body: JSON.stringify(item)
-  //           })
-  //           res = await res.json();
-  //           localStorage.setItem("user-info",JSON.stringify(res))
-  //         }
-  // }
-
-
-
- {/* <Form className='search d-flex flex-column gap-2'>
-              <Form.Control type="text" placeholder="" className=' rounded-5 '
-                onChange={handleinput}
-                {...register("email",{ pattern: {
-                  value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                  message: "Enter a valid e-mail",
-                },
-                required: "Email is required",})}/>
-              {errors.email && <div style={{color:"red"}}>{errors.email.message}</div>}
-              <Button onClick={createUser} className='search-icon rounded-5 bg-primary text-light submit' type="submit">
-                Continue
-              </Button>
-            </Form> */}
-
-
-
-
-
-
-              {/* <Verifypop show={verify} onHide={() => setVerify(false)}/> */}
-              {/* <Register show={verify} onHide={() => setVerify(false)}/> */}

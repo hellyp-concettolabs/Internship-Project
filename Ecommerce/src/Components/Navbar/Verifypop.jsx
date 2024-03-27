@@ -5,12 +5,16 @@ import {useEffect, useRef, useState} from "react";
 import axios from 'axios';
 import { useForm } from "react-hook-form";
 import Register from "./Register";
+//import { ToastContainer, toast } from 'react-toastify';
+//import 'react-toastify/dist/ReactToastify.css';
+import { useContext} from 'react';
+import { UserContext } from '../UserData/StoreUserContext';
 
 Verifypop.propTypes = {
-  //onOtpSubmit: PropTypes.func.isRequired,
   onHide: PropTypes.func.isRequired,
-  values: PropTypes.string.isRequired,
+  useremail: PropTypes.string.isRequired,
   setVerify: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired
 };
 
 function Verifypop(props) {
@@ -21,6 +25,10 @@ function Verifypop(props) {
   const [otp, setOtp] = useState(new Array(length).fill(""));
   const [combinedOtp,setCombinedOtp] = useState("")
   const inputRefs = useRef([]);
+  const [expires,setExpires] = useState(5);
+  const [intervalId, setIntervalId] = useState(null);
+  const {setUserData} = useContext(UserContext);
+  
   const {
    handleSubmit,
   } = useForm()
@@ -30,6 +38,19 @@ function Verifypop(props) {
       inputRefs.current[0].focus();
     }
   }, []);
+
+  useEffect(() => {
+    if(props.show){
+       const id = setInterval(() => {
+        setExpires(expires =>expires>1 ? String(expires - 1).padStart(2,'0'): '00');
+      }, 1000);
+      setIntervalId(id);
+  }else {
+    setExpires(30)
+    clearInterval(intervalId);
+  }
+  return () => clearInterval(intervalId);
+  }, [props.show]);
 
   const handleChange = (index, e) => {
     const value = e.target.value;
@@ -72,11 +93,13 @@ function Verifypop(props) {
   const onSubmit = () => {
     axios.post('https://bargainfox-dev.concettoprojects.com/api/verify-otp', 
     {otp: combinedOtp,
-    email: props.values})
+    email: props.useremail})
     .then(response => {
     console.log(response.data);
+    console.log(response.data.result);
     setOtp(Array(length).fill(""));
     if(response.data.status === 200 && response.data.result.is_new_user === false){
+      setUserData(response.data.result)
       props.setVerify(false);
     }else if(response.data.status === 200 && response.data.result.is_new_user === true){
       props.setVerify(false);
@@ -87,10 +110,16 @@ function Verifypop(props) {
       console.error(error);
     });
   };
+  
+  const handleResend = () =>{
+    //toast.success(`Verifaction Code send to ${props.values}`);
+    setExpires(30);
+  }
+
 
   return (
     <div>
-      <Modal {...props} centered className=' rounded-5 '>
+      <Modal{...props} centered className=' rounded-5 '>
         <div className='signupcontainer'>
           <Modal.Header className=' d-flex flex-column p-2 border-0 '>
             <div className='closebtn col-12 d-flex '>
@@ -103,7 +132,7 @@ function Verifypop(props) {
             </Modal.Title>
           </Modal.Header>
           <div className='popupsubheader'>
-              A verification code is sent to {props.values}
+              A verification code is sent to <b>{props.useremail}</b>
           </div>
           <Modal.Body className='p-0'>
             <Container className="px-0 py-4 ">
@@ -126,12 +155,19 @@ function Verifypop(props) {
                 })}
               </div>
               <div className=" d-flex justify-content-between mt-2 mb-4">
+                {expires !== '00'&&
                 <span className=" small ">
-                 Expires in 00:30
+                 Expires in 00:{expires}
                 </span>
-                <span className=" text-primary ">
-                Resend Code
-                </span>
+                }
+                {expires === '00' &&
+                <div className="col-12 d-flex justify-content-end ">
+                  <button onClick={handleResend} className="text-primary small border-0 " style={{backgroundColor:"white"}}>
+                  Resend Code
+                  </button>
+                  {/* <ToastContainer position="top-right"/> */}
+                </div>
+                } 
               </div>
               <Button type="submit" className=" bg-primary text-light rounded-5 w-100 ">Verify</Button>
               </form>
@@ -139,7 +175,7 @@ function Verifypop(props) {
           </Modal.Body>
         </div>
       </Modal>
-      <Register show={register} setRegister={setRegister} onHide={() => setRegister(false)}/>
+      <Register show={register} useremail={props.useremail} setRegister={setRegister} onHide={() => setRegister(false)}/>
     </div>
   )
 }

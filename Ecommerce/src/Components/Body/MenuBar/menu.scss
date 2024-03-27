@@ -1,10 +1,7 @@
-$base-font-size: 11.5px;
+$base-font-size: 12px;
 
 .menusection{
-        span{
-                font-size: $base-font-size;
-                font-weight: 600;
-        }
+        
 @media (max-width: 1400px) {
         span {
                 font-size: $base-font-size * 0.8; 
@@ -27,45 +24,65 @@ $base-font-size: 11.5px;
 }
 }
 .menusection {
-        padding: 0;
+        padding: 0 15%;
         margin: 0;
         border-radius: 0;
         background-color: transparent;
-      
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+}
+.menulist{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        text-align: center;
+        padding: 0 !important;
+        img{
+                width: 60% !important;
+        }
+
+        span{
+                font-size: $base-font-size;
+                font-weight: 600;
+        }
+}
         .Categories {
           top: 100%;
           left: 0;
           z-index: 1000;
-          border-radius: 0;
+          border-radius: 18px;
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
           width: auto;
+          position: absolute;
+          background-color: white;
+          text-align: start;
       
-          ul {
-            li {
-              padding: 0.5rem 1rem;
-      
-              &:last-child {
-                border-bottom: none;
-              }
-      
-              span {
-                display: block;
-                font-size: 0.875rem;
-                font-weight: 500;
-                color: #333;
-                line-height: 1.5;
-                white-space: nowrap;
-              }
-      
-              .submenusubcat {
+          .submenu {
                 position: relative;
-                left: 50%;
+             li {
+                padding: 0.5rem 1rem;
+                span {
+                    display: block;
+                    font-size: 0.875rem;
+                    font-weight: 500;
+                    color: #333;
+                    line-height: 1.5;
+                    white-space: nowrap;
+                }
+                }
+            }
+
+            .submenusubcat {
+                
                 li {
-                  padding: 0;
+                  padding:  0.35rem 1rem;
 
                   span {
                     font-size: 0.8rem;
-                    font-weight: 400;
+                    font-weight: 500;
                     color: #666;
                     line-height: 1.5;
                     white-space: nowrap;
@@ -73,40 +90,8 @@ $base-font-size: 11.5px;
               }
           }
         }
-            }
-          }
-        }
+        
 
-// .dropdown-content :hover{
-//         background-color: white;
-// }
-// li :hover{
-//         color: red;
-// }
 
-// @media (min-width:768px) {
-//         .Home:hover >
-//           .dropdown-content {
-//           display: block;
-//           cursor: pointer;
-//           position: absolute;
-//           z-index: 1;
-//           margin-top: 105px;
-//         }
-//         .ToysCrafts:hover >
-//           .dropdown-content {
-//           display: block;
-//           cursor: pointer;
-//           position: absolute;
-//           z-index: 1;
-//         }
-//         .Hom > .cat:hover >
-//           .dropdown-content1 {
-//           display: flex;
-//           cursor: pointer;
-//           position: absolute;
-//           z-index: 1;
-//         }
-//         }
 
         

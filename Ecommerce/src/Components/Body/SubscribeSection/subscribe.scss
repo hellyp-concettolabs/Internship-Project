@@ -56,7 +56,11 @@ $base-font-size : 36px;
             width: 50%;
         }
     }
-
+    @media (max-width:1366px) {
+        .subnow{
+            padding: 15px !important;
+        }
+    }
     @media (max-width:1199px) {
         .subarrow{
             display: none;

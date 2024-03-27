@@ -6,7 +6,7 @@ import DealTendingSelection from "./Deal&TrendingSection/DealTendingSelection"
 import Garden from "./GardenSection/Garden"
 import Subscribe from "./SubscribeSection/Subscribe"
 import Electronics from "./ElectronicsSection/Electronics"
-import Blogs from "./BlogsSection/Blogs"
+//import Blogs from "./BlogsSection/Blogs"
 
 function MainBody() {
   return (
@@ -19,7 +19,7 @@ function MainBody() {
         <Garden/>
         <Subscribe/>
         <Electronics/>
-        <Blogs/>
+        {/* <Blogs/> */}
     </>
   )
 }

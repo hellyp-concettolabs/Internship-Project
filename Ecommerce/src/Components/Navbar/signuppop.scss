@@ -58,8 +58,8 @@ $sm:576px;
   };
 }
 .signupemail{
-    background-color: #F2F2F8;
-    border: none;
+    background-color: #F2F2F8 !important;
+    border: none !important;
 
     &:focus-visible{
         border: none;

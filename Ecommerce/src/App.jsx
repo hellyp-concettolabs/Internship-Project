@@ -7,11 +7,12 @@ import Dealsoftheday from "./Components/Body/DealsOfTheDay/Dealsoftheday";
 import CartPage from "./Components/CartSection/CartPage";
 import Profile from "./Components/Navbar/Profile";
 import SingleProductDetail from "./Components/ProductSection/SingleProductDetail";
-
+import { UserProvider } from "./Components/UserData/StoreUserContext.jsx"
 function App() {
 
   return (
     <>
+    <UserProvider>
       <BrowserRouter>
         <HeaderSection/>
         <Routes>
@@ -24,6 +25,7 @@ function App() {
         </Routes>
         <Footer/>
       </BrowserRouter>
+      </UserProvider>
     </>
   )
 }

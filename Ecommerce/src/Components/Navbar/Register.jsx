@@ -1,53 +1,114 @@
 import { Button, CloseButton, Container, Form, Modal } from "react-bootstrap"
-import { useForm } from "react-hook-form";
 import PropTypes from 'prop-types';
 import "./register.scss"
+import {Formik} from 'formik'
+import axios from 'axios';
+import { useContext } from "react";
+import { UserContext } from "../UserData/StoreUserContext";
 
 Register.propTypes = {
     onHide: PropTypes.func.isRequired,
     register: PropTypes.bool.isRequired,
-    setRegister: PropTypes.func.isRequired
+    setRegister: PropTypes.func.isRequired,
+    useremail: PropTypes.string.isRequired,
   };
 
 function Register(props) {
 
-    const {register, handleSubmit, formState: {errors}} = useForm()
+  const {setUserData} = useContext(UserContext);
 
   return (
     <>
-        <Modal {...props} size="lg" centered className='registercontainer rounded-5 '>
-            <div className=' py-4 px-4'>
+        <Modal {...props} size="lg" centered className='rounded-5 '>
+            <div className='signupcontainer'>
                 <Modal.Header className=' d-flex flex-column p-2 border-0 '>
-                  <div className=' col-12 d-flex '>
+                  <div className='closebtn'>
                     <CloseButton style={{boxShadow:"none"}} onClick={props.onHide}/>
                   </div>
                   <Modal.Title id="contained-modal-title-vcenter" className=' text-center col-11'>
-                    <div className=' fs-3 fw-bold '>
+                    <div className='signin-register'>
                     Looks like you are new here
                     </div>  
                   </Modal.Title>
                 </Modal.Header>
-                <div className='text-secondary text-center'>
+                <div className='popupsubheader'>
                     Please fill your information below.
                 </div>
 
                 <Modal.Body className=''>
-                  <Container>
-                    <Form className='search d-flex flex-column gap-2' onSubmit={handleSubmit()}>
-                      <span className=' fw-medium '>Name*</span>
-                      <Form.Control type="text" className=' rounded-5 ' {...register("username")}/>
-                      {errors.email && <div style={{color:"red"}}>{errors.email.message}</div>}
-                      <span className=' fw-medium '>Phone number</span>
-                      <Form.Control type="number" className=' rounded-5 ' {...register("phonenumber")}/>
-                      {errors.email && <div style={{color:"red"}}>{errors.email.message}</div>}
-                      <span className=' fw-medium '>Email</span>
-                      <Form.Control type="email" className=' rounded-5 ' {...register("email",{pattern:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,required:"Enter valid e-mail"})}/>
-                      {errors.email && <div style={{color:"red"}}>{errors.email.message}</div>}
-
-                      <Button onClick  className='search-icon rounded-5 bg-primary text-light submit' type="submit">
-                        Register
-                      </Button>
-                    </Form>
+                  <Container className=" p-0 ">
+                    <Formik
+                      initialValues={{
+                        name:'',
+                        mobile:'',
+                        email:`${props.useremail}`,
+                        //country_code:'+91'
+                      }}
+                      
+                      onSubmit={(values) => {
+                        axios.post('https://bargainfox-dev.concettoprojects.com/api/register', values)
+                        .then(response => {
+                          console.log(response.data);
+                         if(response.status === 200){
+                          setUserData(response.data.result);
+                          props.setRegister(false);
+                         }
+                          })
+                          .catch(error => {
+                            console.error(error);
+                          });
+                      }}
+                    >
+                      {({
+                        values,
+                        //touched,
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                      }) => (
+                      <form onSubmit={handleSubmit} className='d-flex flex-column gap-3'>
+                        <Form.Group>
+                          <Form.Label>Name<span className=" text-danger ">*</span></Form.Label>
+                          <Form.Control 
+                            type="text" 
+                            id="name" 
+                            name="name"
+                            value={values.name}
+                            onChange={handleChange}
+                            onBlur={handleBlur} 
+                            className='signupemail rounded-5 w-100 px-3 py-2'/>
+                          {/* <div style={{color:"red"}}>{}</div> */}
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>Phone Number<span className=" text-danger ">*</span></Form.Label>
+                          <Form.Control 
+                            type="text" 
+                            id="phone_number" 
+                            name="mobile"
+                            value={values.mobile}
+                            onChange={handleChange}
+                            onBlur={handleBlur} 
+                            className='signupemail rounded-5 w-100 px-3 py-2'/>
+                          {/* <div style={{color:"red"}}>{}</div> */}
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>Email<span className=" text-danger ">*</span></Form.Label>
+                          <Form.Control 
+                            type="email" 
+                            value={props.useremail}
+                            disabled
+                            id="email" 
+                            name="email"
+                            onChange={handleChange}
+                            onBlur={handleBlur} 
+                            className='signupemail rounded-5 w-100 px-3 py-2'/>
+                        </Form.Group>
+                        <Button className='search-icon rounded-5 bg-primary text-light w-100 border-0 py-2 ' type="submit">
+                          Register
+                        </Button>
+                      </form>
+                      )}
+                    </Formik>
                   </Container>
                 </Modal.Body>
             </div>
