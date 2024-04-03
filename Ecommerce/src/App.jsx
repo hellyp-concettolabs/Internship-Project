@@ -8,11 +8,13 @@ import CartPage from "./Components/CartSection/CartPage";
 import Profile from "./Components/Navbar/Profile";
 import SingleProductDetail from "./Components/ProductSection/SingleProductDetail";
 import { UserProvider } from "./Components/UserData/StoreUserContext.jsx"
+import { ProductProvider } from "./Components/ProductData/StoreProductContext.jsx";
 function App() {
 
   return (
     <>
     <UserProvider>
+      <ProductProvider>
       <BrowserRouter>
         <HeaderSection/>
         <Routes>
@@ -25,6 +27,7 @@ function App() {
         </Routes>
         <Footer/>
       </BrowserRouter>
+      </ProductProvider>
       </UserProvider>
     </>
   )

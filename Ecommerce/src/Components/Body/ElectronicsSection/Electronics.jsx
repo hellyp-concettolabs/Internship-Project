@@ -4,47 +4,14 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../ElectronicsSection/electronics.scss"
-import tablet from "../../../assets/tablet.png"
-import robot from "../../../assets/robot.png"
-import headphone from "../../../assets/headphone.png"
-import watch from "../../../assets/watch.png"
 import ProductCard from "../../ProductCard/ProductCard";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
+import { ProductContext } from "../../ProductData/StoreProductContext";
 
 function Electronics() {
 
   const sliderRef = useRef();
-
-    const data = [
-        {
-            img: tablet ,
-            title: `Apple iPad (9th Generation): with A13 Bionic chip, 10.2-inch Retina Display, 256GB, Wi-Fi, 12MP`,
-            price:`44`,
-            actualprice:`50.50`,
-            discount:`10%`,
-        },
-        {
-            img: robot ,
-            title: `Eilik - an Electronic Robot Pets Toys with Intelligent and Interactive | Abundant Emotions, Idle...`,
-            price:`44`,
-            actualprice:`50.50`,
-            discount:`10%`,
-        },
-        {
-            img: headphone ,
-            title: `LOBKIN Wireless Bluetooth Headphones, Over-Ear Headphones with Built-in HD Mic`,
-            price:`44`,
-            actualprice:`50.50`,
-            discount:`10%`,
-        },
-        {
-            img: watch,
-            title: `SAMSUNG Galaxy Watch 5 40mm Bluetooth Smartwatch w/ Body, Health, Fitness and Sleep Tracker..`,
-            price:`44`,
-            actualprice:`50.50`,
-            discount:`10%`,
-        },
-    ]
+  const {productData} = useContext(ProductContext);
 
     const settings = {
         dots: false,
@@ -105,7 +72,7 @@ function Electronics() {
           </Col>
           <Col className="centerslider">
             <Slider ref={sliderRef} {...settings}>
-                {data.map((d,i) =>(
+                {productData.map((d,i) =>(
                     <ProductCard d={d} key={i}/>
                 ))}
             </Slider>

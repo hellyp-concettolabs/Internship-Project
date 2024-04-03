@@ -6,15 +6,23 @@ import { useState } from "react";
 import FilterSection from "./FilterSection.jsx"
 
 ProductList.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  productdata: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-function ProductList({data}) {
+function ProductList(props) {
 
     const [show, setShow] = useState(false);
-
+    const[selectedValue,setSelectedValue] = useState('');
+    const sortData = ['Select...','Lowest Price','Highest Price','Tops Customer Review','Most Recent'];
+    const[filteredValue,setFilteredValue] = useState(sortData);
     const handleClose = () => setShow(false);
    const handleFilter = () => setShow(true);
+
+   const handleSort = (data) =>{
+    return () =>{
+        setSelectedValue(data);
+    }
+   }
 
   return (
     <>
@@ -40,18 +48,29 @@ function ProductList({data}) {
             </Col>
 
             <Col className=" col-sm-5 col-9 ">
-                   <Form>
+                    <Form>
                         <div className=" align-items-center d-flex rounded-5 border border-secondary p-1">
                             <Form.Label className="sortby col-4">Sort By:</Form.Label>
                             <div className="dropdown d-flex justify-content-center align-items-center col-7">
-                                <FormControl type="text" placeholder="Select..." className="border-0 p-0" style={{ boxShadow:"none", cursor:"pointer"}} data-bs-toggle="dropdown" aria-expanded="false"/>
+                                <FormControl type="select" placeholder="Select..." className="border-0 p-0" 
+                                    style={{ boxShadow:"none", cursor:"pointer"}} data-bs-toggle="dropdown"
+                                    value={selectedValue} 
+                                    onChange={(e) => {
+                                        const userInput = e.target.value;
+                                        setSelectedValue(userInput);
+                                        const filteredOptions = sortData.filter((option) =>
+                                            option.toLowerCase().includes(userInput.toLowerCase())
+                                        );
+                                            setFilteredValue(filteredOptions);
+                                        }}/>
                                 <div className=" dropdown-toggle " data-bs-toggle="dropdown" style={{cursor:"pointer"}}></div>
                                 <ul className=" dropdown-menu Dropdownmenu">
-                                <li className=" dropdown-item ">Select...</li>
-                                <li className=" dropdown-item ">Lowest Price</li>
-                                <li className=" dropdown-item ">Highest Price</li>                       
-                                <li className=" dropdown-item ">Tops Customer Review</li>                       
-                                <li className=" dropdown-item ">Most Recent</li>                       
+                                    {filteredValue.map((data,i) =>
+                                      <button key={i} onClick={handleSort(data)}
+                                        style={{border:"0", backgroundColor:"white"}}>
+                                        <li className=" dropdown-item ">{data}</li>   
+                                      </button>                                
+                                    )}
                                 </ul>
                             </div>
                         </div>
@@ -60,9 +79,9 @@ function ProductList({data}) {
         </Row>
 
         <Row>
-            {data && data.map((d,i) => (
-                <div key={i} className="singleproductcard">
-                    <SingleProductCard d={d} />
+            {props.productdata && props.productdata.map((d) => (
+                <div key={d.id} className="singleproductcard">
+                    <SingleProductCard d={d} key={d.id}/>
                 </div>
             ))}     
         </Row>   

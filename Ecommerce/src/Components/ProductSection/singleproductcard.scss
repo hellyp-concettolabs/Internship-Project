@@ -19,6 +19,14 @@ $base-font2-size :14px;
     }
 }
 
+    .SProductCardimg{
+        aspect-ratio: 3/2 !important;
+        object-fit: contain !important;
+        border-radius: 20px 20px 0px 0px;
+        vertical-align: middle !important;
+        height: 179.33px !important;
+    }
+
 .sdetailsection{
     display: flex;
     flex-direction: column;
@@ -41,12 +49,12 @@ $base-font2-size :14px;
     font-weight: normal;
 }
 .sdisprice{
-    font-size: $base-font1-size * 0.8;
+    font-size: $base-font1-size * 0.75;
     font-weight: 600;
     color: #292D32;
 }
 .sdiscount{
-    font-size: $base-font2-size * 0.9;
+    font-size: $base-font2-size * 0.75;
     font-weight: 600;
     width: 46px;
     height: 46px;
@@ -70,6 +78,9 @@ $base-font2-size :14px;
 }
 
 @media (max-width:991px) {
+    .SProductCardimg{
+        height: auto !important;
+    }
     .sdisprice{
         font-size: $base-font1-size * 0.8;
     }

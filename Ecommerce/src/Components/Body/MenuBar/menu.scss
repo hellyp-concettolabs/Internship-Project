@@ -23,6 +23,7 @@ $base-font-size: 12px;
         }
 }
 }
+
 .menusection {
         padding: 0 15%;
         margin: 0;
@@ -61,9 +62,8 @@ $base-font-size: 12px;
           text-align: start;
       
           .submenu {
-                position: relative;
-             li {
-                padding: 0.5rem 1rem;
+                padding: 6px;
+                height: fit-content;
                 span {
                     display: block;
                     font-size: 0.875rem;
@@ -71,14 +71,16 @@ $base-font-size: 12px;
                     color: #333;
                     line-height: 1.5;
                     white-space: nowrap;
+                    padding: 0.5rem 1rem;
                 }
                 }
-            }
 
             .submenusubcat {
-                
                 li {
                   padding:  0.35rem 1rem;
+                  :hover{
+                        color: #0036FF;
+                  }
 
                   span {
                     font-size: 0.8rem;

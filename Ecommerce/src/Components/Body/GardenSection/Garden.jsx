@@ -3,48 +3,16 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../ElectronicsSection/electronics.scss"
-import glowgarden from "../../../assets/glowgarden.png"
-import sprinkler from "../../../assets/sprinkler.png"
-import headphone from "../../../assets/headphone.png"
-import watch from "../../../assets/watch.png"
 import rightarrow from "../../../assets/rightarrow.png";
 import ProductCard from "../../ProductCard/ProductCard";
 import "./garden.scss"
-import { useRef } from "react";
+import { useContext, useRef } from "react";
+import { ProductContext } from "../../ProductData/StoreProductContext";
 
 function Garden() {
 
   const sliderRef = useRef();
-    const data = [
-        {
-            img: glowgarden ,
-            title: `Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden...`,
-            price:`44`,
-            actualprice:`50.50`,
-            discount:`10%`,
-        },
-        {
-            img: sprinkler,
-            title: `Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden...`,
-            price:`44`,
-            actualprice:`50.50`,
-            discount:`10%`,
-        },
-        {
-            img: headphone ,
-            title: `Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden...`,
-            price:`44`,
-            actualprice:`50.50`,
-            discount:`10%`,
-        },
-        {
-            img: watch,
-            title: `Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden...`,
-            price:`44`,
-            actualprice:`50.50`,
-            discount:`10%`,
-        },
-    ]
+  const {productData} = useContext(ProductContext);
 
     const settings = {
         dots: false,
@@ -105,7 +73,7 @@ function Garden() {
           </Col>
           <Col className="centerslider">
             <Slider ref={sliderRef} {...settings}>
-                {data.map((d,i) =>(
+                {productData.map((d,i) =>(
                     <ProductCard d={d} key={i}/>
                 ))}
             </Slider>
