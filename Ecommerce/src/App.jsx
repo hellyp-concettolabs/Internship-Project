@@ -7,6 +7,7 @@ import Dealsoftheday from "./Components/Body/DealsOfTheDay/Dealsoftheday";
 import CartPage from "./Components/CartSection/CartPage";
 import Profile from "./Components/Navbar/Profile";
 import SingleProductDetail from "./Components/ProductSection/SingleProductDetail";
+import ProductsData from "../src/Components/ProductData/ProductsData.jsx"
 import { UserProvider } from "./Components/UserData/StoreUserContext.jsx"
 import { ProductProvider } from "./Components/ProductData/StoreProductContext.jsx";
 function App() {
@@ -15,20 +16,21 @@ function App() {
     <>
     <UserProvider>
       <ProductProvider>
-      <BrowserRouter>
-        <HeaderSection/>
-        <Routes>
-          <Route index path="/" element={<HomeBody/>}/>
-          <Route path="profile" element={<Profile/>}/>
-          <Route path="productlist" element={<ProductListPage/>}/>
-          <Route path="dealsoftheday" element={<Dealsoftheday/>}/>
-          <Route path="singleproduct" element={<SingleProductDetail/>}/>
-          <Route path="cart" element={<CartPage/>}/>
-        </Routes>
-        <Footer/>
-      </BrowserRouter>
+        <BrowserRouter>
+          <HeaderSection/>
+          <ProductsData/>
+          <Routes>
+            <Route index path="/" element={<HomeBody/>}/>
+            <Route path="profile" element={<Profile/>}/>
+            <Route path="productlist" element={<ProductListPage/>}/>
+            <Route path="dealsoftheday" element={<Dealsoftheday/>}/>
+            <Route path="singleproduct" element={<SingleProductDetail/>}/>
+            <Route path="cart" element={<CartPage/>}/>
+          </Routes>
+          <Footer/>
+        </BrowserRouter>
       </ProductProvider>
-      </UserProvider>
+    </UserProvider>
     </>
   )
 }

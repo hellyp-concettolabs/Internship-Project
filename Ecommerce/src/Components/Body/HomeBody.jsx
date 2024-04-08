@@ -6,13 +6,11 @@ import DealTendingSelection from "./Deal&TrendingSection/DealTendingSelection"
 import Garden from "./GardenSection/Garden"
 import Subscribe from "./SubscribeSection/Subscribe"
 import Electronics from "./ElectronicsSection/Electronics"
-import ProductsData from "../ProductData/ProductsData"
 //import Blogs from "./BlogsSection/Blogs"
 
 function MainBody() {
   return (
     <>
-        <ProductsData/>
         <Menu/>
         <Banner/>
         <Deal/>

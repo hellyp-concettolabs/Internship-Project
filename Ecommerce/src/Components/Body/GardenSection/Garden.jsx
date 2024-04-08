@@ -13,6 +13,9 @@ function Garden() {
 
   const sliderRef = useRef();
   const {productData} = useContext(ProductContext);
+  const filteredProductData = productData.filter((product) => {
+    return [18].includes(product.sub_category_id);
+  });
 
     const settings = {
         dots: false,
@@ -20,7 +23,7 @@ function Garden() {
         infinite: true,
         speed: 500,
         slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToScroll: 3,
         responsive: [
           {
             breakpoint: 1200,
@@ -73,7 +76,7 @@ function Garden() {
           </Col>
           <Col className="centerslider">
             <Slider ref={sliderRef} {...settings}>
-                {productData.map((d,i) =>(
+                {filteredProductData.map((d,i) =>(
                     <ProductCard d={d} key={i}/>
                 ))}
             </Slider>

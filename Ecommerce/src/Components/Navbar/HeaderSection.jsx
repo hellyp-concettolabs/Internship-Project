@@ -1,4 +1,4 @@
-import {Navbar,Row, Col, Nav, Form, Button, Container, Image, ListGroup, Offcanvas} from 'react-bootstrap';
+import { Navbar, Row, Col, Nav, Form, Button, Container, Image, ListGroup, Offcanvas } from 'react-bootstrap';
 import { useContext, useState } from 'react';
 import eCart from "../../assets/eCart.svg"
 import search from '../../assets/search-normal.png'
@@ -9,12 +9,14 @@ import "../Navbar/header.scss"
 import Signuppop from './Signuppop';
 import { UserContext } from '../UserData/StoreUserContext';
 import axios from 'axios';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
+import { ProductContext } from '../ProductData/StoreProductContext';
+import Downshift from 'downshift';
 
 
 function HeaderSection() {
 
   const [show, setShow] = useState(false);
-
   const [showList, setShowList] = useState(false);
 
   const handleHamburgerClose = () => setShowList(false);
@@ -22,142 +24,204 @@ function HeaderSection() {
 
   const data = [
     {
-      item:`Your Profile`,
-      link:`profile`
+      item: `Your Profile`,
+      link: `profile`
     },
     {
-      item:`Your Orders`,
-      link:`profile`
+      item: `Your Orders`,
+      link: `profile`
     },
     {
-      item:`Address`,
-      link:`profile`
+      item: `Address`,
+      link: `profile`
     },
     {
-      item:`Notifications`,
-      link:`profile`
+      item: `Notifications`,
+      link: `profile`
     },
     {
-      item:`Wishlists`,
-      link:`profile`
+      item: `Wishlists`,
+      link: `profile`
     },
   ]
 
-  const {userData} = useContext(UserContext);
-  const {setUserData} = useContext(UserContext);
-  
-  const handleLogout =() =>{
+  const { userData } = useContext(UserContext);
+  const { setUserData } = useContext(UserContext);
+  const { productData } = useContext(ProductContext);
+  const [filterProductData,setFilterProductData] = useState(productData.name);
+
+  const handleLogout = () => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
     axios.get(' https://bargainfox-dev.concettoprojects.com/api/logout')
-    .then(response => {
-      console.log(response);
-      if(response.data.status === 200){
-        setUserData('');
-      }
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  
+      .then(response => {
+        console.log(response);
+        if (response.data.status === 200) {
+          setUserData('');
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
   }
+
+  const handleSelection = (selectedItem) => {
+    console.log('Selected item:', selectedItem);
+    
+  }
+
   return (
     <div>
-      
       <header className='shadow-sm mb-3'>
         <Container fluid className='navsection'>
           <Row className='align-items-center px-md-4 px-1 py-2 '>
 
             <Col className='leftsection d-flex align-items-center '>
-              <button className='Menu d-md-none border-0' style={{backgroundColor:"white"}}
+              <button className='Menu d-md-none border-0' style={{ backgroundColor: "white" }}
                 onClick={handleHamburger}>
                 <i className="bi bi-list "></i>
               </button>
               <Navbar.Brand href="/">
-                <Image src={eCart} className=' img-fluid col-sm-4 col-8'/>
+                <Image src={eCart} className=' img-fluid col-sm-4 col-8' />
               </Navbar.Brand>
             </Col>
 
             <Col className='centersection d-none d-md-block'>
-                        <Form className='search d-flex  '>
-                            <Form.Control type="text" placeholder="Search Products" className='searchtext rounded-start-2 rounded-end-0'style={{boxShadow:"none",borderColor:"#e2e3e5"}} />
-                            <Button className='search-icon rounded-end-2 rounded-start-0'>
-                              <img src={search}/>
-                            </Button>
-                        </Form>
-              </Col>
-
-              <Col className=' rightsection d-flex align-items-center gap-3 gap-sm-4 justify-content-end '>
-                  <Nav.Link href='#wishlist'>
-                    <div className='wishlist-container'>
-                      <Image src={wishlist} className=' img-fluid wishlist-icon'/>
-                      <div className='wishlist-count'>0</div>
-                    </div>
-                  </Nav.Link>
-
-                  <Nav.Link href='/cart'>
-                    <div className='shopping-cart-container'>
-                      <Image src={shopping_cart} className='img-fluid shopping-cart-icon'/>
-                      <div className='shopping-cart-count'>0</div>
-                    </div>
-                  </Nav.Link>
-
-                  <div className=' Signup d-flex align-items-center navbar navbar-expand-md position-relative dropdown '  aria-expanded="false">
-                    <Nav.Link href='#user' onClick={() => setShow(true)} className=''>
-                      <div className='user-container'><Image src={usericon} className=' img-fluid user-icon'/></div>
-                    </Nav.Link>
-                    <div className='d-flex flex-column  small d-none d-xl-block'>
-                      <p className='greet mb-0'>
-                        {userData ? (`Welcome ${userData.name},`):(`Hello there,`)}
-                      </p>
-                      <span className='signin'>
-                        {userData ? ('ACCOUNT & ORDER') : ('SIGN IN/REGISTER')}
-                      </span>
-                    </div>
-                    <div className=' p-0 dropdown-content dropdown-menu position-md-static' id="SignupDropdown" >
-                        <ListGroup as="ul"  className=' dropdown-item p-0 '>
-                          {!userData ?
-                          (<ListGroup.Item as="li"  className=' px-2'>
-                            <Button onClick={() => setShow(true)} className=' text-center bg-primary text-light border-0 rounded-5 py-2 px-3 '>Login/Register</Button>
-                          </ListGroup.Item>) :
-                          (<ListGroup.Item as="li"  className=' px-2'>
-                            <a href='/profile' className=' d-flex align-items-center gap-2 text-black text-decoration-none '>
-                              <Image src={usericon} className=' img-fluid' style={{width:"28px", height:"28px"}}/>
-                              <p className=' m-0 ' style={{fontSize:"15px", fontWeight:"500" ,color:"#0036FF", textTransform:"capitalize"}}>
-                                {userData.name}
-                                <div style={{fontSize:"13px", color:"black", fontWeight:"500"}}>View Profile</div>
-                              </p>
-                            </a>
-                          </ListGroup.Item>)
-                          }
-                          {data.map((d,i) => (
-                            <a href={`/${d.link}`} key={i} className=' text-decoration-none '>
-                              <ListGroup.Item as="li"  className='dropdown-item '>{d.item}</ListGroup.Item>
-                            </a>
-                          ))}
-                          {userData &&
-                            (<ListGroup.Item as="li"  className=' px-2'>
-                              <Button onClick={handleLogout} className=' text-center bg-primary text-light border-0 rounded-5 p-1 w-100 '>Logout</Button>
-                            </ListGroup.Item>) }
-                        </ListGroup>
-                    </div>
+              <Downshift
+                onChange={handleSelection}
+                itemToString={(item) => (item ? item.name : '')}
+              >
+                {({
+                  getInputProps,
+                  getItemProps,
+                  getMenuProps,
+                  highlightedIndex,
+                  isOpen,
+                  //selectedItem,
+                }) => (
+                  <div>
+                    <Form className='search d-flex  '>
+                      <Form.Control
+                        {...getInputProps({
+                        type:"text",
+                        placeholder:"Search Products",
+                        className:'searchtext rounded-start-2 rounded-end-0',
+                        style:{ boxShadow: "none", borderColor: "#e2e3e5" },
+                        onChange:(e) =>{
+                          const userInput = e.target.value;
+                          const filtertitle = productData.filter((option) =>
+                            option.name.toLowerCase().includes(userInput.toLowerCase())
+                          );
+                          setFilterProductData(filtertitle);
+                        }
+                      })}
+                      />
+                      <Button className='search-icon rounded-end-2 rounded-start-0'>
+                        <img src={search} alt="Search" />
+                      </Button>
+                    </Form>
+                    {isOpen && (
+                      <div {...getMenuProps()} className="downshift-menu">
+                        <ul>
+                        {filterProductData.map((item, index) => (
+                          <li
+                          key={index}
+                            {...getItemProps({
+                              key: item.id,
+                              index,
+                              item,
+                              style: {
+                                backgroundColor:
+                                  highlightedIndex === index ? '#fafafa' : 'transparent',
+                              },
+                            })}
+                          >
+                            <div className=' d-flex align-items-center '>
+                              <Image src={item.product_images[0].product_image_url}/>
+                              {item.name}
+                            </div>
+                          </li>
+                        ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
-              </Col>
+                )}
+              </Downshift>
+            </Col>
+
+            <Col className=' rightsection d-flex align-items-center gap-3 gap-sm-4 justify-content-end '>
+              <Nav.Link href='#wishlist'>
+                <div className='wishlist-container'>
+                  <Image src={wishlist} className=' img-fluid wishlist-icon' />
+                  <div className='wishlist-count'>0</div>
+                </div>
+              </Nav.Link>
+
+              <Nav.Link href='/cart'>
+                <div className='shopping-cart-container'>
+                  <Image src={shopping_cart} className='img-fluid shopping-cart-icon' />
+                  <div className='shopping-cart-count'>0</div>
+                </div>
+              </Nav.Link>
+
+              <div className=' Signup d-flex align-items-center navbar navbar-expand-md position-relative dropdown ' aria-expanded="false">
+                <Nav.Link href='#user' onClick={() => setShow(true)} className=''>
+                  <div className='user-container'><Image src={usericon} className=' img-fluid user-icon' /></div>
+                </Nav.Link>
+                <div className='d-flex flex-column  small d-none d-xl-block'>
+                  <p className='greet mb-0'>
+                    {userData ? (`Welcome ${userData.name},`) : (`Hello there,`)}
+                  </p>
+                  <span className='signin'>
+                    {userData ? ('ACCOUNT & ORDER') : ('SIGN IN/REGISTER')}
+                  </span>
+                </div>
+                <div className=' p-0 dropdown-content dropdown-menu position-md-static' id="SignupDropdown" >
+                  <ListGroup as="ul" className=' dropdown-item p-0 '>
+                    {!userData ?
+                      (<ListGroup.Item as="li" className=' px-2'>
+                        <Button onClick={() => setShow(true)} className=' text-center bg-primary text-light border-0 rounded-5 py-2 px-3 '>Login/Register</Button>
+                      </ListGroup.Item>) :
+                      (<ListGroup.Item as="li" className=' px-2'>
+                        <a href='/profile' className=' d-flex align-items-center gap-2 text-black text-decoration-none '>
+                          <Image src={usericon} className=' img-fluid' style={{ width: "28px", height: "28px" }} />
+                          <p className=' m-0 ' style={{ fontSize: "15px", fontWeight: "500", color: "#0036FF", textTransform: "capitalize" }}>
+                            {userData.name}
+                            <div style={{ fontSize: "13px", color: "black", fontWeight: "500" }}>View Profile</div>
+                          </p>
+                        </a>
+                      </ListGroup.Item>)
+                    }
+                    {data.map((d, i) => (
+                      <a href={`/${d.link}`} key={i} className=' text-decoration-none '>
+                        <ListGroup.Item as="li" className='dropdown-item '>{d.item}</ListGroup.Item>
+                      </a>
+                    ))}
+                    {userData &&
+                      (<ListGroup.Item as="li" className=' px-2'>
+                        <Button onClick={handleLogout} className=' text-center bg-primary text-light border-0 rounded-5 p-1 w-100 '>Logout</Button>
+                      </ListGroup.Item>)}
+                  </ListGroup>
+                </div>
+              </div>
+            </Col>
           </Row>
-          <Signuppop show={show} setShow={setShow} onHide={() => setShow(false)}/>
+          <Signuppop show={show} setShow={setShow} onHide={() => setShow(false)} />
 
           <Row>
             <Offcanvas show={showList} onHide={handleHamburgerClose}>
               <Offcanvas.Header closeButton className='col-12 justify-content-end '>
-                
+
               </Offcanvas.Header>
               <Offcanvas.Body className='d-flex justify-content-center '>
                 <ul className='list-unstyled w-75 d-flex flex-column gap-3 '>
-                  <li  className='text-center bg-primary text-light rounded-5 py-2 px-3 ' 
+                  <li className='text-center bg-primary text-light rounded-5 py-2 px-3 '
                     onClick={() => setShow(true)}>
-                      Login/Register
+                    Login/Register
                   </li>
-                  {data.map((d,i) => (
-                    <a key={i} href={`/${d.link}`}className=' text-decoration-none text-dark'>
+                  {data.map((d, i) => (
+                    <a key={i} href={`/${d.link}`} className=' text-decoration-none text-dark'>
                       <li>{d.item}</li>
                     </a>
                   ))}
@@ -168,13 +232,13 @@ function HeaderSection() {
 
           <Row>
             <Col className='centersection d-md-none m-2'>
-                <Form className='search d-flex w-100 '>
-                    <Form.Control type="text" placeholder="Search Products" className='rounded-start-2 rounded-end-0' />
-                    <Button variant="outline-success" className='search-icon rounded-end-2 rounded-start-0'>
-                      <img src={search}/>
-                    </Button>
-                </Form>
-              </Col>
+              <Form className='search d-flex w-100 '>
+                <Form.Control type="text" placeholder="Search Products" className='rounded-start-2 rounded-end-0' />
+                <Button variant="outline-success" className='search-icon rounded-end-2 rounded-start-0'>
+                  <img src={search} alt="Search" />
+                </Button>
+              </Form>
+            </Col>
           </Row>
         </Container>
 

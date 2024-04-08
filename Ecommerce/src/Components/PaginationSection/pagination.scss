@@ -1,0 +1,22 @@
+
+.pagination{
+    gap: 1rem;
+}
+.prev:focus, .next:focus{
+    box-shadow: 0 0 0 0 rgb(250, 252, 255) !important;
+    background: none !important;
+}
+.prev:hover , .next:hover{
+    background: none !important;
+}
+.prev , .next{
+    border: none !important;
+    color: black !important;
+    font-weight: 600;
+}
+.page_no{
+    border-radius: 15%;
+    font-weight: 600;
+}   :focus{
+    box-shadow: 0 0 0 0 rgb(250, 252, 255) !important;
+}

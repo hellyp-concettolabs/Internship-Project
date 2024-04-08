@@ -2,7 +2,7 @@ import { Col, Form, FormControl, Offcanvas, Row } from "react-bootstrap"
 import PropTypes from 'prop-types';
 import SingleProductCard from "./SingleProductCard";
 import "./productlist.scss"
-import { useState } from "react";
+import {useEffect, useState } from "react";
 import FilterSection from "./FilterSection.jsx"
 
 ProductList.propTypes = {
@@ -18,9 +18,37 @@ function ProductList(props) {
     const handleClose = () => setShow(false);
    const handleFilter = () => setShow(true);
 
+    //set sortvalue after pageload
+    useEffect(() => {
+        const storedSelectedValue = localStorage.getItem('selectedValue');
+        if (storedSelectedValue) {
+            setSelectedValue(storedSelectedValue);
+        }
+        return () => {
+            localStorage.removeItem('selectedValue'); 
+        };
+    }, []);
    const handleSort = (data) =>{
     return () =>{
         setSelectedValue(data);
+        //store value in local storgae
+        localStorage.setItem('selectedValue', data);
+    }
+   }
+   const sortProductData = (data) =>{
+    switch (data){
+        case 'Lowest Price':
+            return props.productdata.slice().sort((a,b) => a.my_sale_price - b.my_sale_price);
+        case 'Highest Price':
+            return props.productdata.slice().sort((a,b) => b.my_sale_price - a.my_sale_price);
+        case 'Tops Customer Review':
+            return props.productdata.slice().sort((a,b) => a.total_review - b.total_review);
+        case 'Most Recent':
+            return props.productdata.slice().sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
+        case 'Select...' :
+            return props.productdata
+        default:
+            return props.productdata;
     }
    }
 
@@ -79,7 +107,8 @@ function ProductList(props) {
         </Row>
 
         <Row>
-            {props.productdata && props.productdata.map((d) => (
+            {sortProductData(selectedValue)
+            .map((d) => (
                 <div key={d.id} className="singleproductcard">
                     <SingleProductCard d={d} key={d.id}/>
                 </div>

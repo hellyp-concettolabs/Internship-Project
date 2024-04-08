@@ -12,13 +12,16 @@ function Electronics() {
 
   const sliderRef = useRef();
   const {productData} = useContext(ProductContext);
+  const filteredProductData = productData.filter((product) => {
+    return [9, 10, 11].includes(product.sub_category_id);
+  });
 
     const settings = {
         dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToScroll: 3,
         responsive: [
           {
             breakpoint: 1200,
@@ -72,7 +75,7 @@ function Electronics() {
           </Col>
           <Col className="centerslider">
             <Slider ref={sliderRef} {...settings}>
-                {productData.map((d,i) =>(
+                {filteredProductData.map((d,i) =>(
                     <ProductCard d={d} key={i}/>
                 ))}
             </Slider>
