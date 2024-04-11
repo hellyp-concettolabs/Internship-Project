@@ -7,18 +7,14 @@ import Dealsoftheday from "./Components/Body/DealsOfTheDay/Dealsoftheday";
 import CartPage from "./Components/CartSection/CartPage";
 import Profile from "./Components/Navbar/Profile";
 import SingleProductDetail from "./Components/ProductSection/SingleProductDetail";
-import ProductsData from "../src/Components/ProductData/ProductsData.jsx"
 import { UserProvider } from "./Components/UserData/StoreUserContext.jsx"
-import { ProductProvider } from "./Components/ProductData/StoreProductContext.jsx";
 function App() {
 
   return (
     <>
     <UserProvider>
-      <ProductProvider>
         <BrowserRouter>
           <HeaderSection/>
-          <ProductsData/>
           <Routes>
             <Route index path="/" element={<HomeBody/>}/>
             <Route path="profile" element={<Profile/>}/>
@@ -29,7 +25,6 @@ function App() {
           </Routes>
           <Footer/>
         </BrowserRouter>
-      </ProductProvider>
     </UserProvider>
     </>
   )

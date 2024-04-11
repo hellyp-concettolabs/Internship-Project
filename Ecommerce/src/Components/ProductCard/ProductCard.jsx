@@ -26,7 +26,7 @@ function ProductCard(props) {
                         <span className="actualprice text-decoration-line-through ">${props.d.main_rrp}</span>
                     </div>
                     <div>
-                        <span className="discount d-none d-md-flex ">{props.d.discount_percentage}%</span>
+                        <span className="discount d-none d-md-flex ">{Math.floor(props.d.discount_percentage)}%</span>
                     </div>
                 </div>
             </div>

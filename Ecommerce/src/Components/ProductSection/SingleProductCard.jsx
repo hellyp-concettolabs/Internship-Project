@@ -24,7 +24,7 @@ function SingleProductCard(props) {
                         <span className="sactualprice text-decoration-line-through ">${props.d.main_rrp}</span>
                     </div>
                     <div>
-                        <span className="sdiscount d-none d-md-flex ">-{props.d.discount_percentage}%</span>
+                        <span className="sdiscount d-none d-md-flex ">{Math.floor(props.d.discount_percentage)}%</span>
                     </div>
                 </div>
             </div>

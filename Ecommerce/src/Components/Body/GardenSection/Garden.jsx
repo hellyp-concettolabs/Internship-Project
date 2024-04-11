@@ -6,16 +6,37 @@ import "../ElectronicsSection/electronics.scss"
 import rightarrow from "../../../assets/rightarrow.png";
 import ProductCard from "../../ProductCard/ProductCard";
 import "./garden.scss"
-import { useContext, useRef } from "react";
-import { ProductContext } from "../../ProductData/StoreProductContext";
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 function Garden() {
 
   const sliderRef = useRef();
-  const {productData} = useContext(ProductContext);
-  const filteredProductData = productData.filter((product) => {
-    return [18].includes(product.sub_category_id);
-  });
+
+  const[productData,setProductData] = useState([]);
+  const [requestMade,setRequestMade] = useState(false);
+  useEffect(() => {
+    const fetchData = async() =>{
+    if(!requestMade){
+    await axios.post(' https://bargainfox-dev.concettoprojects.com/api/product/list',{
+      per_page:"100",
+      category_id:"sports-leisure",
+      sub_category_id:"garden-diy"
+   })
+    .then(response =>{
+      setProductData(response.data.result.data)
+      setRequestMade(true);
+    })
+    .catch(error =>{
+      console.error('Error making GET request:', error);
+    })
+  }
+  }
+  fetchData();
+  },[requestMade])
+
+  useEffect( () =>{
+  },[productData]);
 
     const settings = {
         dots: false,
@@ -76,7 +97,7 @@ function Garden() {
           </Col>
           <Col className="centerslider">
             <Slider ref={sliderRef} {...settings}>
-                {filteredProductData.map((d,i) =>(
+                {productData.map((d,i) =>(
                     <ProductCard d={d} key={i}/>
                 ))}
             </Slider>

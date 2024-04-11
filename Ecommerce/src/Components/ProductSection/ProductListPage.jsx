@@ -1,44 +1,54 @@
 import { Col, Container, Row } from "react-bootstrap"
-import ProductList from "./ProductsList.jsx"
+import ProductsList from "./ProductsList.jsx"
 import "./productlistpage.scss"
 import FilterSection from "./FilterSection"
-import { useContext, useState} from "react"
-import { ProductContext } from "../ProductData/StoreProductContext.jsx"
-import Pagination from "../PaginationSection/Pagination.jsx"
+import { useEffect, useState} from "react"
+import axios from "axios";
+
 function ProductListPage() {
 
-    const {productData} = useContext(ProductContext);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [recordsPerPage] = useState(20);
-    const indexOfLastRecord = currentPage * recordsPerPage;
-    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-    const currentRecords = productData.slice(indexOfFirstRecord, indexOfLastRecord);
-    const nPages = Math.ceil(productData.length / recordsPerPage);
+    const[productData,setProductData] = useState([]);
+    const [requestMade,setRequestMade] = useState(false);
+    useEffect(() => {
+      const fetchData = async() =>{
+      if(!requestMade){
+      await axios.post(' https://bargainfox-dev.concettoprojects.com/api/product/list',{
+        per_page:"100",
+        category_id:"",
+        sub_category_id:"",
+        collection_id:""
+     })
+      .then(response =>{
+        setProductData(response.data.result.data)
+        setRequestMade(true);
+      })
+      .catch(error =>{
+        console.error('Error making GET request:', error);
+      })
+    }
+    }
+    fetchData();
+    },[requestMade])
+
+    useEffect(() =>{
+      console.log(productData);
+    },[productData])
+
   return (
     <>
      <Container fluid >
-        {/* <Row className="">
-            <span className="">Home &gt; Clothing &gt; Women</span>
-        </Row> */}
+
         <Row className="productlistcontainer">
             <Col className=" d-none d-lg-flex filtersec">
                 <FilterSection/>        
             </Col>
 
             <Col className=" d-flex flex-column productlistsec">
-                <ProductList productdata={currentRecords}/>
+                <ProductsList productdata={productData} />
             </Col>
         </Row>
-        {currentRecords > 20 &&(
-        <Row>
-            <Col>
-                <Pagination
-                nPages={nPages}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}/>
-            </Col>
-        </Row>
-        )}
+
+
     </Container> 
     </>
   )

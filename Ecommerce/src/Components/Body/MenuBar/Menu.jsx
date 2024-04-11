@@ -2,6 +2,7 @@ import { Container, Row, Col, Image } from "react-bootstrap"
 import '../MenuBar/menu.scss'
 import { useEffect, useState } from "react"
 import axios from "axios"
+import { Link } from "react-router-dom";
 
 function Menu() {
 
@@ -51,20 +52,6 @@ useEffect( () =>{
      setHoveredMenu(new Array(data.length).fill(false));
    };
 
-   const handleSubmenu = (category,sub_category) =>{
-    return () => {
-     axios.post(' https://bargainfox-dev.concettoprojects.com/api/category-detail-list',
-     {
-      category: {category},
-      sub_category: {sub_category}
-     })
-     .then(reponse =>{
-      console.log(reponse.data);
-     })
-     .catch(error => {
-      console.error('Error making POST request:', error);
-    });
-   }}
 
   return (
     <Container fluid className=" container-lg mb-4">
@@ -81,17 +68,22 @@ useEffect( () =>{
                     <div key={submenu.id} className=" d-flex gap-2 "
                       onMouseEnter={() => handleMenuHover(d.id,submenu.id)} onMouseLeave={handleMenuLeave}>
                         <div className="submenu">
-                          <button onClick={handleSubmenu(d.seo_title,submenu.seo_title)}
-                              style={{border:"0", backgroundColor:"white"}}>
+                        <Link
+                          className="text-decoration-none link"
+                          to={`${d.slug}/${submenu.slug}`}>
                             <span className="">{submenu.title}</span>
-                          </button>
+                        </Link>
                         </div>
                         <div className="submenusubcat">
                           {(hoveredMenu[submenu.id])&& (
                               <ul className="list-unstyled">
                                {submenu.collection.map((category) => (
                                  <li key={category.id}>
-                                  <span>{category.title}</span>
+                                  <Link
+                                    className=" text-decoration-none "
+                                    to={`${d.slug}/${submenu.slug}/${category.slug}`}>
+                                    <span>{category.title}</span>
+                                  </Link>
                                  </li>
                                ))}
                               </ul>

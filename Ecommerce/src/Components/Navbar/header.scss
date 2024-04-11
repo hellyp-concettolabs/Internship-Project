@@ -9,6 +9,12 @@
     color: #707070 !important;
     font-weight: 450;
   }
+  .form-control{
+    border-end-end-radius: 0px !important;
+    border-start-end-radius: 0px !important;
+  }  :focus{
+    box-shadow: none !important;
+  }
 
   .greet{
     font-size: 14px;
@@ -84,35 +90,26 @@
 .centersection{
   position: relative;
 }
-.downshift-menu{
-  position: absolute;
-  z-index: 1;
-  background-color: white;
-  padding: 2px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-  width: auto;
-  height: 300px !important;
-  overflow: scroll;
   
-  ul{
+  #async-example{
     list-style: none;
-    padding: 0;
-
-    li{
-      font-size: 12px;
+    width: 116% !important;
+    .suggestiontext{
+      font-size: 13px;
       font-weight: 500;
       display: flex;
       align-items: center;
       gap: 1rem;
       padding: 4px 40px 4px 4px;
-      img{
-        width: 10%;
-        height: 20%;
-        margin: 0px 12px 0px 0px;
-      }
+
+    }
+    img{
+      width: 10%;
+      height: 20%;
+      margin: 0px 12px 0px 0px;
     }
   }
-}
+
 
 
   

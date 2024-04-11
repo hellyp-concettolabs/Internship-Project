@@ -8,13 +8,13 @@ import sunglasses from "../../../assets/sunglasses.png"
 import Slider from "react-slick"
 import FilterSection from "../../ProductSection/FilterSection"
 import ProductList from "../../ProductSection/ProductsList"
-import { useContext, useRef } from "react"
-import { ProductContext } from "../../ProductData/StoreProductContext"
+import {useRef } from "react"
+
 
 function Dealsoftheday() {
 
   const sliderRef = useRef();
-  const {productData} = useContext(ProductContext);
+  
     const data1 = [
         {
           img : womenclothes,
@@ -163,7 +163,7 @@ function Dealsoftheday() {
               <FilterSection/>
           </Col>
           <Col className=" d-flex flex-column col-lg-9 col-12">
-              <ProductList productdata={productData}/>
+              <ProductList/>
           </Col>
           </Row>
       </Container>

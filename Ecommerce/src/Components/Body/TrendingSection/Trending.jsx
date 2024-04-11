@@ -1,77 +1,102 @@
 import { Col, Container, Row, Image} from "react-bootstrap";
 import rightarrow from "../../../assets/rightarrow.png";
-import electronics2 from "../../../assets/electronics2.png";
-import kitchen from "../../../assets/kitchen.png"
-import home from "../../../assets/home.png"
-import toys from "../../../assets/toys.png"
-import sports from "../../../assets/sports.png"
-import cabinet from "../../../assets/cabinet.png"
-import pets from "../../../assets/pets.png"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../DealsOfTheDay/deal.scss"
-import TrendingCard from "./TrendingCard";
-import "./trending.scss"
+import "../ElectronicsSection/electronics.scss"
+import ProductCard from "../../ProductCard/ProductCard";
+import {useEffect, useRef, useState } from "react";
+import Slider from "react-slick";
+import axios from "axios";
 function Trending() {
 
-  const data= [
-    {
-      img: electronics2,
-      title: `Electronics`,
-      discount:`Up to 10% off`
-    },
-    {
-      img: kitchen,
-      title: `Kitchen`,
-      discount:`Up to 50% off`
-    },
-    {
-      img: home,
-      title: `Home`,
-      discount:`From £50`
-    },
-    {
-      img: toys,
-      title: `Toys & Crafts`,
-      discount:`From £100`
-    },
-    {
-      img: sports,
-      title: `Sports & Leisure`,
-      discount:`Up to 5% off`
-    },
-    {
-      img: cabinet,
-      title: `Job Lots`,
-      discount:`Up to 15% off`
-    },
-    {
-      img: pets,
-      title: `Pets`,
-      discount:`Up to 10% off`
-    },
-  ]
+  const[trendingProduct,setTrendingProduct] = useState([]);
+  useEffect(() => {
+    axios.post(' https://bargainfox-dev.concettoprojects.com/api/trending-product',{
+      trending:true
+    })
+    .then(response =>{
+      setTrendingProduct(response.data.result.data)
+    })
+  },[])
+  useEffect( () =>{
+  },[trendingProduct]);
 
+  const sliderRef = useRef();
+  
+  const settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 3,
+        responsive: [
+          {
+            breakpoint: 1200,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 1,
+              infinite: true,
+              dots: false
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1,
+              infinite: true,
+              dots: false
+            }
+          },
+        ]
+      };
 
+      const goToPrev = () => {
+        sliderRef.current.slickPrev();
+      };
+
+      const goToNext = () => {
+        sliderRef.current.slickNext();
+      };
 
   return (
     <>
-      <Container className="trendcontainer">
-        <Row className="mb-4 position-relative">
+
+<Container className="gardencontainer">
+      <div>
+        <Row className="mb-3 mb-md-4 ">
           <Col className="d-flex align-items-center col-8 ">
-            <h2 className="trendheader mb-0">Trending on BargainFox</h2>
+            <h2 className="gardenheader">Trending on eCart</h2>
           </Col>
-          <Col className="d-flex justify-content-end align-items-center gap-2 ">
-            <span className="viewall">View All</span>
+          <Col className="d-flex justify-content-md-end align-items-center gap-2 ">
+            <span className="viewall ">View All</span>
             <Image src={rightarrow} className="img-fluid" />
           </Col>
         </Row>
-        <div className="d-flex justify-content-between align-items-center ">
-          {data.map((d,i) => (
-              <TrendingCard d={d} key={i}/>
-          ))}
+
+        <Row className=" d-flex justify-content-center align-items-center ">
+          <Col className="leftarrow">
+            <div className=" p-0 w-100 h-100 d-flex justify-content-center align-items-center " style={{backgroundColor:"#F5F5FC", borderRadius:"50%", textAlign:"center"}}
+              onClick={goToPrev}>
+              <i className="bi bi-arrow-left-short" style={{ color: '#0036FF' }}></i>
+            </div>
+          </Col>
+          <Col className="centerslider">
+            <Slider ref={sliderRef} {...settings}>
+                {trendingProduct.map((d,i) =>(
+                    <ProductCard d={d} key={i}/>
+                ))}
+            </Slider>
+          </Col>
+          <Col className="rightarrow">
+          <div className=" p-0 w-100 h-100 d-flex justify-content-center align-items-center " style={{backgroundColor:"#F5F5FC", borderRadius:"50%", textAlign:"center"}}
+           onClick={goToNext}>
+              <i className="bi bi-arrow-right-short" style={{ color: '#0036FF' }}></i>
+            </div>
+          </Col>
+        </Row>
         </div>
-      </Container>
+    </Container>
     </>
   );
 }

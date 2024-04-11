@@ -5,17 +5,37 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../ElectronicsSection/electronics.scss"
 import ProductCard from "../../ProductCard/ProductCard";
-import { useContext, useRef } from "react";
-import { ProductContext } from "../../ProductData/StoreProductContext";
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 function Electronics() {
 
   const sliderRef = useRef();
-  const {productData} = useContext(ProductContext);
-  const filteredProductData = productData.filter((product) => {
-    return [9, 10, 11].includes(product.sub_category_id);
-  });
+  const[productData,setProductData] = useState([]);
+  const [requestMade,setRequestMade] = useState(false);
+  useEffect(() => {
+    const fetchData = async() =>{
+    if(!requestMade){
+    await axios.post(' https://bargainfox-dev.concettoprojects.com/api/product/list',{
+      per_page:"100",
+      category_id:"electronics",
+   })
+    .then(response =>{
+      setProductData(response.data.result.data)
+      //console.log(productData);
+      setRequestMade(true);
+    })
+    .catch(error =>{
+      console.error('Error making GET request:', error);
+    })
+  }
+  }
+  fetchData();
+  },[requestMade]);
 
+  useEffect( () =>{
+  },[productData]);
+  
     const settings = {
         dots: false,
         infinite: true,
@@ -75,7 +95,7 @@ function Electronics() {
           </Col>
           <Col className="centerslider">
             <Slider ref={sliderRef} {...settings}>
-                {filteredProductData.map((d,i) =>(
+                {productData.map((d,i) =>(
                     <ProductCard d={d} key={i}/>
                 ))}
             </Slider>

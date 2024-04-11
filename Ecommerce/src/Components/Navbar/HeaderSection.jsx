@@ -10,9 +10,7 @@ import Signuppop from './Signuppop';
 import { UserContext } from '../UserData/StoreUserContext';
 import axios from 'axios';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-import { ProductContext } from '../ProductData/StoreProductContext';
-import Downshift from 'downshift';
-
+import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 
 function HeaderSection() {
 
@@ -47,8 +45,12 @@ function HeaderSection() {
 
   const { userData } = useContext(UserContext);
   const { setUserData } = useContext(UserContext);
-  const { productData } = useContext(ProductContext);
-  const [filterProductData,setFilterProductData] = useState(productData.name);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchResult,setSearchResult] = useState([])
+  const [query,setQuery] = useState('');
+
+  //const [filterProductData,setFilterProductData] = useState(productData.name);
 
   const handleLogout = () => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
@@ -64,12 +66,31 @@ function HeaderSection() {
       });
 
   }
+  
+   
 
-  const handleSelection = (selectedItem) => {
-    console.log('Selected item:', selectedItem);
-    
+  const handleSearch = async (query) =>{
+
+    if(query.length > 0 ){
+      setIsLoading(true);
+    }
+
+    try{
+      const response = await axios.post(" https://bargainfox-dev.concettoprojects.com/api/product/list",{
+      search : query
+      })
+      if(response.status === 200){
+        setSearchResult(response.data.result.data);
+        setIsLoading(false);
+      }
+    }
+    catch(error){
+      console.log("error while searching",error);
+    }
   }
-
+  const filterBy = () => true;
+ 
+  
   return (
     <div>
       <header className='shadow-sm mb-3'>
@@ -87,67 +108,39 @@ function HeaderSection() {
             </Col>
 
             <Col className='centersection d-none d-md-block'>
-              <Downshift
-                onChange={handleSelection}
-                itemToString={(item) => (item ? item.name : '')}
-              >
-                {({
-                  getInputProps,
-                  getItemProps,
-                  getMenuProps,
-                  highlightedIndex,
-                  isOpen,
-                  //selectedItem,
-                }) => (
-                  <div>
-                    <Form className='search d-flex  '>
-                      <Form.Control
-                        {...getInputProps({
-                        type:"text",
-                        placeholder:"Search Products",
-                        className:'searchtext rounded-start-2 rounded-end-0',
-                        style:{ boxShadow: "none", borderColor: "#e2e3e5" },
-                        onChange:(e) =>{
-                          const userInput = e.target.value;
-                          const filtertitle = productData.filter((option) =>
-                            option.name.toLowerCase().includes(userInput.toLowerCase())
-                          );
-                          setFilterProductData(filtertitle);
-                        }
-                      })}
-                      />
-                      <Button className='search-icon rounded-end-2 rounded-start-0'>
-                        <img src={search} alt="Search" />
-                      </Button>
-                    </Form>
-                    {isOpen && (
-                      <div {...getMenuProps()} className="downshift-menu">
-                        <ul>
-                        {filterProductData.map((item, index) => (
-                          <li
-                          key={index}
-                            {...getItemProps({
-                              key: item.id,
-                              index,
-                              item,
-                              style: {
-                                backgroundColor:
-                                  highlightedIndex === index ? '#fafafa' : 'transparent',
-                              },
-                            })}
-                          >
-                            <div className=' d-flex align-items-center '>
-                              <Image src={item.product_images[0].product_image_url}/>
-                              {item.name}
-                            </div>
-                          </li>
-                        ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
+              <div className=' d-flex '>
+              <AsyncTypeahead
+                filterBy={filterBy}
+                id="async-example"
+                className="w-100 "
+                isLoading={isLoading}
+                labelKey="name"
+                minLength={1}
+                onChange={() => setQuery([])}
+                onSearch={handleSearch}
+                options={searchResult}
+                placeholder="Search Products..."
+                renderMenuItemChildren={(item) => (
+                <>
+                <div className='suggestion d-flex'>
+                  <img
+                    src={item.product_images[0].product_image_url}
+                    style={{
+                      height: "24px",
+                      marginRight: "10px",
+                      width: "24px",
+                    }}
+                  />
+                  <div className='suggestiontext'>{item.name}</div>
+                </div>
+                </>
                 )}
-              </Downshift>
+                selected={query}
+              />
+              <Button className='search-icon rounded-end-2 rounded-start-0'>
+                <img src={search} alt="Search" />
+              </Button>
+              </div>
             </Col>
 
             <Col className=' rightsection d-flex align-items-center gap-3 gap-sm-4 justify-content-end '>
