@@ -1,11 +1,23 @@
+import PropTypes from 'prop-types';
 
-function SingleProductPrice() {
+SingleProductPrice.propTypes = {
+  productSalePrice: PropTypes.string,
+  productprice: PropTypes.string,
+  productDiscount: PropTypes.string,
+  };
+
+function SingleProductPrice({productSalePrice,productprice,productDiscount}) {
+
   return (
-    <div className="pricecontainer ">
-        <div className="price "><sup>$</sup>12</div>
-        <div className="cutprice">$38.98</div>
-        <div className="discountoff rounded-5 ">65% off</div>
-    </div>
+    <>
+      {productSalePrice && productprice && productDiscount &&
+      <div className="pricecontainer ">
+          <div className="price "><sup>$</sup>{productSalePrice}</div>
+          <div className="cutprice">${productprice}</div>
+          <div className="discountoff rounded-5 ">{Math.floor(productDiscount)}% off</div>
+      </div>
+      }
+    </>
   )
 }
 

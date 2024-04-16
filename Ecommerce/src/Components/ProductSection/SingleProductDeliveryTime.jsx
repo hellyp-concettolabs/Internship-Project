@@ -1,8 +1,16 @@
+import PropTypes from 'prop-types';
 
-function SingleProductDeliveryTime() {
+SingleProductDeliveryTime.propTypes = {
+  productDeliveryTime: PropTypes.string,
+};
+function SingleProductDeliveryTime({productDeliveryTime}) {
+  const [time, shipping, date] = productDeliveryTime.match(/<span class='time'>(.*?)<\/span>.*?<span class='shipping'>(.*?)<\/span>.*?<strong>(.*?)<\/strong>/).slice(1);
+
   return (
     <>
-      <div className="deliverytime mt-2">Order within 2h 25m and choose Express Shipping to get it by Tuesday 25/7/2023</div>
+      {productDeliveryTime &&
+        <div className="deliverytime mt-2">Order within {time} and choose {shipping} to get it by {date}</div>
+      }
     </>
   )
 }

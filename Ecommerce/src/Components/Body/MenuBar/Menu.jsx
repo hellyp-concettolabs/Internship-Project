@@ -7,23 +7,19 @@ import { Link } from "react-router-dom";
 function Menu() {
 
 const [data,setData] = useState([]);
-const [requestMade,setRequestMade] = useState(false);
 
 useEffect( () => {
   const fetchData = async() =>{
-    if(!requestMade){
      await axios.get(' https://bargainfox-dev.concettoprojects.com/api/category-list')
     .then(response => {
       setData(response.data.result);
-      setRequestMade(true);
     })
     .catch(error =>{
       console.error('Error making GET request:', error);
     })
-  }
 }
   fetchData();
-}, [requestMade])
+}, [])
 
 useEffect( () =>{
   console.log(data);
@@ -31,26 +27,26 @@ useEffect( () =>{
 
   const [hoveredMenu, setHoveredMenu] = useState(new Array(data.length).fill(false));
 
-   const handleMenuHover = (id,submenu) => {
-     const newHoverState = [...hoveredMenu];
-     newHoverState.fill(false);
-     newHoverState[id] = true;
-     for(let i = 0; i<data.length - 1 ; i++){
-    if(id+1 === data[i].subcategory[0].id){
-      newHoverState[data[i].subcategory[0].id] = true;
-    }
-    
-    if(submenu >data[i].subcategory[0].id ){
-      newHoverState[submenu] = true;
-      newHoverState[data[i].subcategory[0].id] = false;
-    }
+  const handleMenuHover = (id,submenu) => {
+    const newHoverState = [...hoveredMenu];
+    newHoverState.fill(false);
+    newHoverState[id] = true;
+    for(let i = 0; i<data.length - 1 ; i++){
+   if(id+1 === data[i].subcategory[0].id){
+     newHoverState[data[i].subcategory[0].id] = true;
+   }
+   
+   if(submenu >data[i].subcategory[0].id ){
+     newHoverState[submenu] = true;
+     newHoverState[data[i].subcategory[0].id] = false;
+   }
   }
-     setHoveredMenu(newHoverState);
-   };
+    setHoveredMenu(newHoverState);
+  };
 
-   const handleMenuLeave = () => {
-     setHoveredMenu(new Array(data.length).fill(false));
-   };
+  const handleMenuLeave = () => {
+    setHoveredMenu(new Array(data.length).fill(false));
+  };
 
 
   return (
@@ -61,21 +57,25 @@ useEffect( () =>{
           <Col key={d.id} className="menulist" onMouseEnter={() => handleMenuHover(d.id)} 
             onMouseLeave={handleMenuLeave}>
             <Image src={d.thumbnail_image_url} className="img-fluid" />
-            <span className="mt-1">{d.title}</span>
+            <Link className="text-decoration-none text-dark "
+                to={`${d.slug}`}>
+              <span className="mt-1">{d.title}</span>
+            </Link>
             {hoveredMenu[d.id] && (
               <div className="Categories">
                   {d.subcategory.map((submenu) => (
                     <div key={submenu.id} className=" d-flex gap-2 "
                       onMouseEnter={() => handleMenuHover(d.id,submenu.id)} onMouseLeave={handleMenuLeave}>
                         <div className="submenu">
-                        <Link
-                          className="text-decoration-none link"
-                          to={`${d.slug}/${submenu.slug}`}>
-                            <span className="">{submenu.title}</span>
-                        </Link>
+                          <Link
+                            className="text-decoration-none link"
+                            to={`${d.slug}/${submenu.slug}`}>
+                              <span className="">{submenu.title}</span>
+                          </Link>
                         </div>
                         <div className="submenusubcat">
                           {(hoveredMenu[submenu.id])&& (
+                            <div>
                               <ul className="list-unstyled">
                                {submenu.collection.map((category) => (
                                  <li key={category.id}>
@@ -87,6 +87,7 @@ useEffect( () =>{
                                  </li>
                                ))}
                               </ul>
+                            </div>
                           )}
                       </div>
                     </div>

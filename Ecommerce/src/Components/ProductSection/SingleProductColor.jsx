@@ -1,17 +1,21 @@
 import PropTypes from 'prop-types';
 
 SingleProductColor.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  productColor: PropTypes.arrayOf(PropTypes.object),
 };
-function SingleProductColor(props) {
+function SingleProductColor({productColor}) {
   return (
     <>
-        <div className='colorheading'>Color: Orange</div>
-        <div className=" d-flex gap-2 mt-2 "> 
-            {props.data.color.map((d) => (
-                <div key={d} className="colormenu rounded-2" style={{backgroundColor:`${d}`}}></div>
-            ))}
-        </div>
+      {productColor &&
+        <>
+          <div className='colorheading'>Color: {productColor.variation_name}</div>
+          <div className=" d-flex gap-2 mt-2 "> 
+              {productColor.map((d) => (
+                  <div key={d.variation_id} className="colormenu rounded-2" style={{backgroundColor:`${d.variation_name}`}}></div>
+              ))}
+          </div>
+        </>
+      }
     </>
   )
 }

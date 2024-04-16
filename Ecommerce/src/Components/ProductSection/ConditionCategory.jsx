@@ -45,7 +45,7 @@ function ConditionCategory() {
             {conditions.map((condition,id) =>(
             <div className="form-check pb-2" key={id}>
                 <input 
-                    className="form-check-input"
+                    className="form-check-input rounded-circle "
                     type="checkbox"
                     id={condition.id}
                     value={condition.value}

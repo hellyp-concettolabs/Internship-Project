@@ -2,13 +2,16 @@ import "./vendername.scss"
 import PropTypes from 'prop-types';
 
 VenderName.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  venderName: PropTypes.object,
 };
 
-function VenderName(props) {
+function VenderName({venderName}) {
+
   return (
     <>
-        <span className="productid">374 sold, by <b className="soldby">{props.data.vender}</b></span> 
+      {venderName && 
+        <span className="productid">374 sold, by <b className="soldby">{venderName.first_name} {venderName.last_name}</b></span> 
+      }
     </>
   )
 }

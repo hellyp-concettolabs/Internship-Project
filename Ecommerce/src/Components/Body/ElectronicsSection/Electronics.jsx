@@ -7,6 +7,7 @@ import "../ElectronicsSection/electronics.scss"
 import ProductCard from "../../ProductCard/ProductCard";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Electronics() {
 
@@ -96,7 +97,13 @@ function Electronics() {
           <Col className="centerslider">
             <Slider ref={sliderRef} {...settings}>
                 {productData.map((d,i) =>(
+                  <div key={i}>
+                  <Link
+                    className=" text-decoration-none " style={{color:"black"}}
+                    to={`/singleproduct/${d.sku}/${d.unique_id}`}>
                     <ProductCard d={d} key={i}/>
+                    </Link>
+                    </div>
                 ))}
             </Slider>
           </Col>

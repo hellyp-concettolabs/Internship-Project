@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 
 SingleProductTitle.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  name: PropTypes.string,
 };
-function SingleProductTitle(props) {
+  function SingleProductTitle({name}) {
   return (
     <>
         <div className="col-sm-11 col-10">
-            <span>{props.data.title}</span>
+            <span>{name}</span>
         </div>
     </>
   )

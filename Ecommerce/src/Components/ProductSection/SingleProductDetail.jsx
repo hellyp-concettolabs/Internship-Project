@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "./singleproductdetail.scss"
 import Star from "../ProductCard/Star";
 import ImageAndThumbnail from "./ImageAndThumbnail";
-import main from "../../assets/main.png"
 import SingleProductTitle from "./SingleProductTitle";
 import Share from "./Share";
 import VenderName from "./VenderName";
@@ -19,35 +18,29 @@ import SingleProductCartBtn from "./SingleProductCartBtn.jsx";
 import SingleProductDeliveryTime from "./SingleProductDeliveryTime.jsx";
 import SingleProductHighlight from "./SingleProductHighlight.jsx";
 import SingleProductReview from "./SingleProductReview.jsx";
+import { useParams } from "react-router";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import SingleProductCondition from "./SingleProductCondition.jsx";
 
 function SingleProductDetail() {
 
-    const data = [
+      const[productData,setProductData] = useState({});
+      const{sku , unique_id} = useParams();
 
-        {
-            img1 : main,
-            title:`Women's Blouse Solid Simple Long Sleeve V Neck Button Blouse`,
-            vender:`Celby Store`,
-            color : [`#F76F3D`,`#000000`,`#327E07`,`#1B3497`],
-            size: [`XS`,`S`,`M`,`L`,`XL`,'XXL'],
-        },
-        {
-            img1 : main
-        },
-        {
-            img1 : main 
-        },
-        {
-            img1 : main
-        },
-        {
-            img1 : main 
-        },
-        {
-            img1 : main 
-        },
-      ]
-
+      const fetchData = async() =>{
+        await axios.get(` https://bargainfox-dev.concettoprojects.com/api/product/detail/${sku}/${unique_id}`)
+        .then(response =>{
+            setProductData(response.data.result)
+        })
+        .catch(error =>{
+            console.error('Error making GET request:', error);
+          })
+      }
+      useEffect(() => {
+        fetchData(); 
+      },[])
+console.log(productData)
   return (
     <>
         <Container fluid id="productdetailcontainer">
@@ -55,13 +48,13 @@ function SingleProductDetail() {
             <Row className="productimageanddetail py-lg-4 py-2">
 
                 <Col className="border-bottom pb-3 ">
-                    <ImageAndThumbnail data={data}/>
+                    <ImageAndThumbnail productImage={productData.product_images}/>
                 </Col>
 
                 <Col className="d-flex flex-column gap-3 border-bottom pb-3 ">
 
                     <Row className="productmaintitle">
-                        <SingleProductTitle data={data[0]}/>
+                        <SingleProductTitle name={productData.name}/>
                         <Share/>
                     </Row>
                     <Row className="starandvender">
@@ -69,25 +62,35 @@ function SingleProductDetail() {
                             <Star/>
                         </Col>
                         <Col className=" col-6 text-md-end text-start ">
-                            <VenderName data={data[0]}/>
+                            <VenderName venderName={productData.vendor_info}/>
                         </Col>
                     </Row>
                     <Row className="priceseller">
                         <Col >
-                            <SingleProductPrice/>
+                            <SingleProductPrice 
+                                productSalePrice={productData.sale_price}
+                                productprice={productData.main_rrp}
+                                productDiscount={productData.discount_percentage}/>
                         </Col>
                         <Col className="otherseller">
                             <OtherSeller/>
                         </Col>
                     </Row>
                     <Row>
-                        <SingleProductColor data={data[0]}/>
+                        <SingleProductCondition productCondition = {productData.product_condition}/>
                     </Row>
+                    {productData.color != "" &&
+                        <Row>
+                                <SingleProductColor productColor={productData.color}/>
+                        </Row>
+                    }
+                    {productData.size != "" &&
+                        <Row>
+                                <SingleProductSize productSize={productData.size}/>
+                        </Row>
+                    }
                     <Row>
-                        <SingleProductSize data={data[0]}/>
-                    </Row>
-                    <Row>
-                        <SingleProductQuantity/>
+                        <SingleProductQuantity />
                     </Row>
                     <Row className=" d-flex d-md-none ">
                         <SingleProductStockInfo/>
@@ -98,14 +101,19 @@ function SingleProductDetail() {
                     <Row className=" border-top border-bottom">
                         <SingleProductDeliveryinfo/>
                     </Row>
+                    {productData.stock <= 15 &&
                     <Row className=" d-none d-md-flex ">
-                        <SingleProductStockInfo/>
+                        <SingleProductStockInfo productInStock={productData.stock}
+                            productview={productData.product_view}/>
                     </Row>
+                    }
                     <Row className=" d-none d-md-flex ">
                         <SingleProductCartBtn/>
                     </Row>
                     <Row>
-                        <SingleProductDeliveryTime/>
+                        {productData.expected_delivery &&
+                            <SingleProductDeliveryTime productDeliveryTime={productData.expected_delivery}/>
+                        }
                     </Row>
                 </Col>
 
@@ -114,7 +122,8 @@ function SingleProductDetail() {
 
             <Row className="d-block d-lg-flex flex-lg-row-reverse">
 
-                <SingleProductHighlight/>
+                <SingleProductHighlight productPurchaseCount={productData.purchase_count}
+                    productDescription={productData.description}/>
 
                 <SingleProductReview/>
 

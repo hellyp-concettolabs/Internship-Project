@@ -1,19 +1,23 @@
 import PropTypes from 'prop-types';
 
 SingleProductSize.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  productSize: PropTypes.arrayOf(PropTypes.object),
 };
-function SingleProductSize(props) {
+function SingleProductSize({productSize}) {
   return (
     <>
-        <div className="sizecontainer">Size:
-            {props.data.size.map((d)=>(
-                <div key={d} className='sizediv rounded-4 '>
-                    {d}
-                </div>
-            ))}
-        </div>
-        <div className=" mt-2 sizeguide">Size Guide</div> 
+      {productSize &&
+        <>
+          <div className="sizecontainer">Size:
+              {productSize.map((d)=>(
+                  <div key={d.variation_id} className='sizediv rounded-4 '>
+                      {d.variation_name}
+                  </div>
+              ))}
+          </div>
+          <div className=" mt-2 sizeguide">Size Guide</div> 
+        </>
+      }
     </>
   )
 }

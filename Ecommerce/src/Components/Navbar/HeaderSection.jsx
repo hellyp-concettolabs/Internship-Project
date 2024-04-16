@@ -11,6 +11,7 @@ import { UserContext } from '../UserData/StoreUserContext';
 import axios from 'axios';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
+import { Link, useNavigate} from 'react-router-dom';
 
 function HeaderSection() {
 
@@ -42,16 +43,16 @@ function HeaderSection() {
       link: `profile`
     },
   ]
-
   const { userData } = useContext(UserContext);
   const { setUserData } = useContext(UserContext);
 
   const [isLoading, setIsLoading] = useState(false);
   const [searchResult,setSearchResult] = useState([])
   const [query,setQuery] = useState('');
-
-  //const [filterProductData,setFilterProductData] = useState(productData.name);
-
+  const [searchText,setSearchText] = useState("");
+  
+  const navigate = useNavigate();
+//For Logout
   const handleLogout = () => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
     axios.get(' https://bargainfox-dev.concettoprojects.com/api/logout')
@@ -67,10 +68,8 @@ function HeaderSection() {
 
   }
   
-   
 
   const handleSearch = async (query) =>{
-
     if(query.length > 0 ){
       setIsLoading(true);
     }
@@ -81,6 +80,7 @@ function HeaderSection() {
       })
       if(response.status === 200){
         setSearchResult(response.data.result.data);
+        setSearchText(query)
         setIsLoading(false);
       }
     }
@@ -89,8 +89,16 @@ function HeaderSection() {
     }
   }
   const filterBy = () => true;
- 
   
+  //For search-icon
+  const handleProductListSearch = () =>{
+
+    setTimeout(() => {
+      navigate(`/productList/search?searchText=${searchText}`)
+    }, 300);
+
+  }
+
   return (
     <div>
       <header className='shadow-sm mb-3'>
@@ -122,22 +130,26 @@ function HeaderSection() {
                 placeholder="Search Products..."
                 renderMenuItemChildren={(item) => (
                 <>
-                <div className='suggestion d-flex'>
-                  <img
-                    src={item.product_images[0].product_image_url}
-                    style={{
-                      height: "24px",
-                      marginRight: "10px",
-                      width: "24px",
-                    }}
-                  />
-                  <div className='suggestiontext'>{item.name}</div>
-                </div>
+                <Link className=" text-decoration-none " style={{color:"black"}}
+                    to={`/singleproduct/${item.sku}/${item.unique_id}`}>
+                    <div className='suggestion d-flex'>
+                      <img
+                        src={item.product_images[0].product_image_url}
+                        style={{
+                          height: "24px",
+                          marginRight: "10px",
+                          width: "24px",
+                        }}
+                      />
+                      <div className='suggestiontext'>{item.name}</div>
+                    </div>
+                </Link>
                 </>
                 )}
                 selected={query}
               />
-              <Button className='search-icon rounded-end-2 rounded-start-0'>
+              <Button className='search-icon rounded-end-2 rounded-start-0'
+                onClick={handleProductListSearch}>
                 <img src={search} alt="Search" />
               </Button>
               </div>

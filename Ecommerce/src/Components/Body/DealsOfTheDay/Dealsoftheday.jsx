@@ -6,9 +6,8 @@ import sportsshoe from "../../../assets/sportsshoe.png"
 import jewellery from "../../../assets/jewellery.png"
 import sunglasses from "../../../assets/sunglasses.png"
 import Slider from "react-slick"
-import FilterSection from "../../ProductSection/FilterSection"
-import ProductList from "../../ProductSection/ProductsList"
 import {useRef } from "react"
+import ProductListPage from "../../ProductSection/ProductListPage"
 
 
 function Dealsoftheday() {
@@ -159,12 +158,7 @@ function Dealsoftheday() {
 
       <Container fluid className=" container-lg mt-5">
           <Row>
-          <Col className="className= col-3 d-none d-lg-block">
-              <FilterSection/>
-          </Col>
-          <Col className=" d-flex flex-column col-lg-9 col-12">
-              <ProductList/>
-          </Col>
+                  <ProductListPage/>
           </Row>
       </Container>
 

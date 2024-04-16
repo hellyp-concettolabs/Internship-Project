@@ -2,14 +2,12 @@ import { Image } from "react-bootstrap"
 import PropTypes from 'prop-types';
 import Star from "./Star";
 import "./productcard.scss"
-import { Link } from "react-router-dom";
 
 ProductCard.propTypes = {
     d: PropTypes.object.isRequired,
   };
 function ProductCard(props) {
   return (
-    <Link to="/singleproduct" className=" text-decoration-none " style={{color:"black"}}>
         <div className=" border rounded-4 ProductCard">
             <div>
                 {props.d.product_images && props.d.product_images.length > 0 &&(
@@ -31,7 +29,6 @@ function ProductCard(props) {
                 </div>
             </div>
         </div>
-    </Link>
   )
 }
 

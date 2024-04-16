@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 
 ImageAndThumbnail.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  productImage: PropTypes.arrayOf(PropTypes.object),
 };
-function ImageAndThumbnail(props) {
+function ImageAndThumbnail({productImage}) {
 
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
@@ -53,9 +53,9 @@ function ImageAndThumbnail(props) {
         {/* ----------product main image---------*/}
         <Col className="image-slider-wrap bg-body-secondary col-10 ">
           <Slider {...settingsMain} asNavFor={nav2} ref={slider => (setSlider1(slider))}>
-              {props.data.map((slide,id) =>
-                  <div className="slick-slide" key={id}>
-                      <Image className="slick-slide-image img-fluid" src={slide.img1} />
+              {productImage && productImage.map((slide) =>
+                  <div className="slick-slide" key={productImage.id}>
+                      <Image className="slick-slide-image img-fluid" src={slide.product_image_url} />
                   </div>
           )}
           </Slider>
@@ -64,9 +64,9 @@ function ImageAndThumbnail(props) {
         {/* ----------Thumbnail---------- */}
         <Col className="thumbnail-slider-wrap col-2">
           <Slider {...settingsThumbs} asNavFor={nav1} ref={slider => (setSlider2(slider))}>
-              {props.data.map((slide,id) =>
+            {productImage && productImage.map((slide,id) =>
                   <div className="slick-slide" key={id}>
-                      <Image className="slick-slide-thumbimage img-fluid " src={slide.img1} />
+                      <Image className="slick-slide-thumbimage img-fluid " src={slide.product_image_url} />
                   </div>
               )}
           </Slider>

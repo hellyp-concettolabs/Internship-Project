@@ -7,6 +7,7 @@ import ProductCard from "../../ProductCard/ProductCard";
 import {useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import axios from "axios";
+import { Link } from "react-router-dom";
 function Trending() {
 
   const[trendingProduct,setTrendingProduct] = useState([]);
@@ -84,7 +85,13 @@ function Trending() {
           <Col className="centerslider">
             <Slider ref={sliderRef} {...settings}>
                 {trendingProduct.map((d,i) =>(
+                  <div key={i}>
+                  <Link
+                    className=" text-decoration-none " style={{color:"black"}}
+                    to={`/singleproduct/${d.sku}/${d.unique_id}`}>
                     <ProductCard d={d} key={i}/>
+                    </Link>
+                    </div>
                 ))}
             </Slider>
           </Col>
