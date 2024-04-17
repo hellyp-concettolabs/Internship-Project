@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 
 ImageAndThumbnail.propTypes = {
-  productImage: PropTypes.arrayOf(PropTypes.object),
+  productImage: PropTypes.arrayOf(PropTypes.shape({
+    product_image_url: PropTypes.string,
+  })),
 };
-function ImageAndThumbnail({productImage}) {
+function ImageAndThumbnail({productImage = []}) {
 
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
@@ -20,7 +22,6 @@ function ImageAndThumbnail({productImage}) {
     setNav2(slider2);
 
   });
-
 
   const settingsMain = {
     slidesToShow: 1,
@@ -42,7 +43,7 @@ function ImageAndThumbnail({productImage}) {
     swipeToSlide: true,
     focusOnSelect: true,
     //centerPadding: '10px',
-    infinite : true,
+    infinite : productImage.length > 1,
     vertical: true,
     verticalSwiping: true,
   };

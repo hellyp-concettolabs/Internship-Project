@@ -1,15 +1,20 @@
-import {useState } from "react";
+import { useState } from "react";
 import { Pagination } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 
-const PaginationDetail = ({ lastpage }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const PaginationDetail = ({ lastpage, pageNumber}) => {
+
+
 
   const navigate = useNavigate();
   const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const pageParams = queryParams.get("page");
 
-  const handlePageItem = (pageId) => {
+  const [currentPage, setCurrentPage] = useState(parseInt(pageNumber) ? parseInt(pageNumber) : parseInt(pageParams) ? parseInt(pageParams) : 1);
+  // console.log(pageNumber)
+  const handleCurrentPage = (pageId) => {
     const queryParams = new URLSearchParams(location.search);
     const pageParams = queryParams.get("page");
     const page = pageId
@@ -20,6 +25,8 @@ const PaginationDetail = ({ lastpage }) => {
       setCurrentPage(page);
     navigate(`?page=${page}`);
   };
+
+  
 
   const handlePrev = () => {
     const prevPage = currentPage - 1;
@@ -38,28 +45,31 @@ const PaginationDetail = ({ lastpage }) => {
     pageItems.push(
       <Pagination.Item
         key={page}
-        active={page === currentPage}
-        onClick={() => handlePageItem(page)}
+        onClick={() => handleCurrentPage(page)}
+        active={parseInt(pageNumber) ? page === parseInt(pageNumber) : page === 1}
       >
         {page}
       </Pagination.Item>
     );
   }
-
   return (
     <>
-      <div className="d-flex align-items-center justify-content-center mt-5">
-        <Pagination>
+      <div className="d-flex align-items-center justify-content-center mt-4">
+        <Pagination
+          className=" d-flex gap-3">
+
           <Pagination.Prev disabled={currentPage == 1} onClick={handlePrev}>
             &laquo; Previous
           </Pagination.Prev>
+
           {pageItems}
+          
           <Pagination.Next
             disabled={currentPage === lastpage}
-            onClick={handleNext}
-          >
+            onClick={handleNext}>
             Next &raquo;
           </Pagination.Next>
+
         </Pagination>
       </div>
     </>
@@ -67,5 +77,6 @@ const PaginationDetail = ({ lastpage }) => {
 };
 PaginationDetail.propTypes ={
   lastpage: PropTypes.number, 
+  pageNumber: PropTypes.string, 
 }
 export default PaginationDetail;

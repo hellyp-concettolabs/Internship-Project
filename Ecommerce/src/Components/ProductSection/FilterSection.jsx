@@ -5,50 +5,50 @@ import PropTypes from 'prop-types';
 FilterSection.propTypes ={
     setFilterDiscount: PropTypes.function, 
     setFilterPrice:PropTypes.function,
-    setFilterCondition:PropTypes.function,
+    // setFilterCondition:PropTypes.function,
     filterDiscount:PropTypes.string,
     filterPrice:PropTypes.string,
 }
-function FilterSection({setFilterDiscount,setFilterPrice,setFilterCondition,filterDiscount,filterPrice}) {
+function FilterSection({setFilterDiscount,setFilterPrice,filterDiscount,filterPrice}) {
     
-    const conditions = [
-        {
-            label:'Brand new',
-            id:`1`,
-            slug:`brand-new`,
-            value:`condition-brand-new`,
-        },
-        {
-            label:'Open Box',
-            id:`2`,
-            slug:`open-box`,
-            value:`condition-open-box`,
-        },
-        {
-            label:'Like New',
-            id:`3`,
-            slug:`like-new`,
-            value:`condition-like-new`,
-        },
-        {
-            label:'Very Good',
-            id:`4`,
-            slug:`very-good`,
-            value:`condition-very-good`,
-        },
-        {
-            label:'Good',
-            id:`5`,
-            slug:`good`,
-            value:`condition-good`,
-        },
-        {
-            label:'Acceptable',
-            id:'6',
-            slug:`acceptable`,
-            value:'condition-acceptable',
-        }
-    ]
+    // const conditions = [
+    //     {
+    //         label:'Brand new',
+    //         id:`1`,
+    //         slug:`brand-new`,
+    //         value:`condition-brand-new`,
+    //     },
+    //     {
+    //         label:'Open Box',
+    //         id:`2`,
+    //         slug:`open-box`,
+    //         value:`condition-open-box`,
+    //     },
+    //     {
+    //         label:'Like New',
+    //         id:`3`,
+    //         slug:`like-new`,
+    //         value:`condition-like-new`,
+    //     },
+    //     {
+    //         label:'Very Good',
+    //         id:`4`,
+    //         slug:`very-good`,
+    //         value:`condition-very-good`,
+    //     },
+    //     {
+    //         label:'Good',
+    //         id:`5`,
+    //         slug:`good`,
+    //         value:`condition-good`,
+    //     },
+    //     {
+    //         label:'Acceptable',
+    //         id:'6',
+    //         slug:`acceptable`,
+    //         value:'condition-acceptable',
+    //     }
+    // ]
     const filterData = [
         {
           id: 6,
@@ -80,16 +80,15 @@ function FilterSection({setFilterDiscount,setFilterPrice,setFilterCondition,filt
         },
       ];
 
-    const handleConditionChange = (e) =>{
-        const selectedCondition = e.target.value;
-        setFilterCondition(selectedCondition)
+    // const handleConditionChange = (e) =>{
+    //     const selectedCondition = e.target.value;
+    //     setFilterCondition(selectedCondition)
 
-    };
+    // };
     const handleDiscountChange = (e) => {
         const selectedDiscount = e.target.value;
         if(filterDiscount === selectedDiscount){
-            setFilterDiscount(null);
-            console.log(filterDiscount)
+            setFilterDiscount(null);        //Deselect the current selected option
         }else{
         setFilterDiscount(selectedDiscount);
         }
@@ -97,7 +96,7 @@ function FilterSection({setFilterDiscount,setFilterPrice,setFilterCondition,filt
     const handlePriceChange = (e) =>{
         const selectedPrice = e.target.value;
         if(filterPrice === selectedPrice){
-            setFilterPrice(null);
+            setFilterPrice(null);       //Deselect the current selected option
         }else{
         setFilterPrice(selectedPrice);
         }
@@ -108,7 +107,7 @@ function FilterSection({setFilterDiscount,setFilterPrice,setFilterCondition,filt
             <div className="filterheading text-secondary fw-bold fs-5">Filters</div>
         </Row>
         
-        <Row className=" mt-3 ">
+        {/* <Row className=" mt-3 ">
         <div className="subheading">Condition</div>
         <Col className=" mt-3 ">
             <Form>
@@ -126,7 +125,7 @@ function FilterSection({setFilterDiscount,setFilterPrice,setFilterCondition,filt
             ))}
             </Form>
         </Col>
-        </Row>
+        </Row> */}
 
         <Row className=" mt-3 ">
         <div className="subheading">Discount</div>
@@ -140,7 +139,9 @@ function FilterSection({setFilterDiscount,setFilterPrice,setFilterCondition,filt
                     id={title.id}
                     value={title.slug}
                     label={title.title}
-                    onChange={handleDiscountChange}/>
+                    onClick={handleDiscountChange}
+                    onChange={handleDiscountChange}
+                    checked={filterDiscount === title.slug}/>
                     
                 </div>
             ))}
@@ -160,7 +161,9 @@ function FilterSection({setFilterDiscount,setFilterPrice,setFilterCondition,filt
                     id={title.id}
                     value={title.slug}
                     label={title.title}
-                    onChange={handlePriceChange}/>
+                    onClick={handlePriceChange}
+                    onChange={handlePriceChange}
+                    checked={filterPrice === title.slug}/>
                 </div>
                 )
             )}

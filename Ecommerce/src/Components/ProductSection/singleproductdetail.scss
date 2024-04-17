@@ -33,22 +33,22 @@ $base-font2-size :20px;
 
 //----------title----------
 .productmaintitle{
-  font-size: $base-font2-size;
+  font-size: $base-font2-size - 3;
   font-weight: 600;
 }
 @media (max-width:630px) {
   .productmaintitle{
-      font-size: $base-font2-size * 0.8;
+      font-size: ($base-font2-size - 3) * 0.8;
   }
 }
 @media (max-width:500px) {
   .productmaintitle{
-      font-size: $base-font2-size * 0.7;
+      font-size: ($base-font2-size - 3) * 0.7;
   }
 }
 @media (max-width:400px) {
   .productmaintitle{
-      font-size: $base-font2-size * 0.6;
+      font-size: ($base-font2-size - 3) * 0.6;
   }
 }
 //----------starandvender--------
@@ -66,7 +66,7 @@ $base-font2-size :20px;
     gap: 12px;
 
     .price{
-        font-size: $base-font-size;
+        font-size: $base-font-size - 14;
         font-weight: 600;
     }
     .cutprice{
@@ -77,14 +77,14 @@ $base-font2-size :20px;
     }
     .discountoff{
         background-color: #0036FF;
-        font-size: $base-font-size - 24;
+        font-size: $base-font-size - 25;
         font-weight: normal;
         color: white;
         padding: 6px 12px;
     }
     @media (max-width:1250px) {
       .price{
-        font-size: $base-font-size * 0.8;
+        font-size: ($base-font-size - 14) * 0.8;
       }
       .cutprice{
         font-size: ($base-font-size - 24) * 0.8;
@@ -95,7 +95,7 @@ $base-font2-size :20px;
     }
     @media (max-width:425px) {
       .price{
-        font-size: $base-font-size * 0.7;
+        font-size: ($base-font-size - 14) * 0.7;
       }
       .cutprice{
         font-size: ($base-font-size - 24) * 0.8;
@@ -194,7 +194,7 @@ $base-font2-size :20px;
 
 //----------quantity---------
 .quantityheading{
-  font-size: $base-font2-size - 2;
+  font-size: $base-font2-size - 4;
   color: #A4A4B8;
   font-weight: 600;
   display: flex;
@@ -203,7 +203,7 @@ $base-font2-size :20px;
 }
 @media (max-width:450px) {
   .quantityheading{
-    font-size: ($base-font2-size - 2) * 0.8;
+    font-size: ($base-font2-size - 4) * 0.8;
   }
 }
 .quantitycontainer{

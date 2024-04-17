@@ -1,18 +1,57 @@
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import PropTypes from 'prop-types';
 
-function SingleProductProgressbar() {
+SingleProductProgressbar.propTypes = {
+    ratingCount: PropTypes.object,
+  };
+function SingleProductProgressbar({ratingCount}) {
+
   return (
     <>
-        {[5, 4, 3, 2, 1].map((i) => (
-        <div key={i} className='progressbarcontainer mb-3'>
-            <div className='starnum'>{i}</div>
+    {ratingCount &&
+      <div>
+        <div key={5} className='progressbarcontainer mb-3'>
+            <div className='starnum'>{5}</div>
             <div className='starreview'><i className="bi bi-star-fill"></i></div>
             <div className=' w-100 '>
-                <ProgressBar variant="success" now={0} className='pb'/>
+                <ProgressBar variant="success" now={ratingCount.five_star} className='pb'/>
             </div>
-            <div className='reviewcout'>0</div>
+            <div className='reviewcout'>{ratingCount.five_star}</div>
         </div>
-        ))}
+        <div key={4} className='progressbarcontainer mb-3'>
+            <div className='starnum'>{4}</div>
+            <div className='starreview'><i className="bi bi-star-fill"></i></div>
+            <div className=' w-100 '>
+                <ProgressBar variant="success" now={ratingCount.four_star} className='pb'/>
+            </div>
+            <div className='reviewcout'>{ratingCount.four_star}</div>
+        </div>
+        <div key={3} className='progressbarcontainer mb-3'>
+            <div className='starnum'>{3}</div>
+            <div className='starreview'><i className="bi bi-star-fill"></i></div>
+            <div className=' w-100 '>
+                <ProgressBar variant="success" now={ratingCount.three_star} className='pb'/>
+            </div>
+            <div className='reviewcout'>{ratingCount.three_star}</div>
+        </div>
+        <div key={2} className='progressbarcontainer mb-3'>
+            <div className='starnum'>{2}</div>
+            <div className='starreview'><i className="bi bi-star-fill"></i></div>
+            <div className=' w-100 '>
+                <ProgressBar variant="success" now={ratingCount.two_star} className='pb'/>
+            </div>
+            <div className='reviewcout'>{ratingCount.two_star}</div>
+        </div>
+        <div key={1} className='progressbarcontainer mb-3'>
+            <div className='starnum'>{1}</div>
+            <div className='starreview'><i className="bi bi-star-fill"></i></div>
+            <div className=' w-100 '>
+                <ProgressBar variant="success" now={ratingCount.one_star} className='pb'/>
+            </div>
+            <div className='reviewcout'>{ratingCount.one_star}</div>
+        </div>
+      </div>
+    }
     </>
   )
 }

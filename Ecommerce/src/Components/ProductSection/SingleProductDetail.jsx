@@ -23,15 +23,56 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import SingleProductCondition from "./SingleProductCondition.jsx";
 
+
 function SingleProductDetail() {
 
       const[productData,setProductData] = useState({});
-      const{sku , unique_id} = useParams();
-
+      //const[variationList,setVariationList] = useState([]);
+      const{slug , unique_id , sku } = useParams();
+      const searchParams = new URLSearchParams(location.search);
+      const color = searchParams.get("color");
+      const size = searchParams.get("size");
+      console.log(color)
+      console.log(size)
       const fetchData = async() =>{
-        await axios.get(` https://bargainfox-dev.concettoprojects.com/api/product/detail/${sku}/${unique_id}`)
+        await axios.get(` https://bargainfox-dev.concettoprojects.com/api/product/detail/${slug}/${unique_id}?/${sku}`)
         .then(response =>{
-            setProductData(response.data.result)
+            const result = response.data.result;
+            setProductData(response.data.result);
+            //setVariationList(response.data.result.variation_list);
+            if(response.data.result.variation_list && response.data.result.variation_list.length > 0 ){
+                const productVariation =  (color && size) ? 
+                response.data.result.variation_list.find((item) => item.color === parseInt(color) && item.size === parseInt(size)) :
+            color ? 
+                response.data.result.variation_list.find((item) => item.color === parseInt(color)) :
+            size ?
+                response.data.result.variation_list.find((item) => item.size === parseInt(size)) :
+            response.data.result.variation_list.find((item) => item.sku === sku);
+                const newProductData = {...productData,
+                vendor_info: result.vendor_info,
+                color: result.color,
+                size: result.size,
+                colorVariation: productVariation?.color,
+                sizeVariation: productVariation?.size,
+                sku: productVariation?.sku || result.sku,
+                name: productVariation?.name || result.name,
+                share_url: productVariation?.share_url || result.share_url,
+                product_images: productVariation?.product_images || result.product_images,
+                sale_price: productVariation?.sale_price || result.sale_price,
+                main_rrp: productVariation?.rrp || result.main_rrp,
+                discount_percentage: productVariation?.percentage_discount || result.discount_percentage,
+                product_condition: productVariation?.product_condition || result.product_condition,
+                purchase_count: productVariation?.purchase_count || result.purchase_count,
+                description: productVariation?.description || result.description,
+                product_specification: productVariation?.product_specification || result.product_specification,
+                stock: productVariation?.stock || result.stock,
+                product_view: productVariation?.product_view || result.product_view,
+                expected_delivery: productVariation?.expected_delivery || result.expected_delivery,
+                total_review: productVariation?.total_review || result.total_review,
+                rating_count: productVariation?.rating_count || result.rating_count,
+                }
+                setProductData(newProductData)
+            }
         })
         .catch(error =>{
             console.error('Error making GET request:', error);
@@ -39,8 +80,9 @@ function SingleProductDetail() {
       }
       useEffect(() => {
         fetchData(); 
-      },[])
-console.log(productData)
+      },[color,size])
+console.log(productData);
+//console.log(variationList);
   return (
     <>
         <Container fluid id="productdetailcontainer">
@@ -55,7 +97,7 @@ console.log(productData)
 
                     <Row className="productmaintitle">
                         <SingleProductTitle name={productData.name}/>
-                        <Share/>
+                        <Share shareURL={productData.share_url}/>
                     </Row>
                     <Row className="starandvender">
                         <Col className="d-flex col-6">
@@ -81,12 +123,12 @@ console.log(productData)
                     </Row>
                     {productData.color != "" &&
                         <Row>
-                                <SingleProductColor productColor={productData.color}/>
+                                <SingleProductColor productColor={productData.color} size={size}/>
                         </Row>
                     }
                     {productData.size != "" &&
                         <Row>
-                                <SingleProductSize productSize={productData.size}/>
+                                <SingleProductSize productSize={productData.size} color={color}/>
                         </Row>
                     }
                     <Row>
@@ -121,11 +163,11 @@ console.log(productData)
 
 
             <Row className="d-block d-lg-flex flex-lg-row-reverse">
-
+                
                 <SingleProductHighlight productPurchaseCount={productData.purchase_count}
-                    productDescription={productData.description}/>
-
-                <SingleProductReview/>
+                    productDescription={productData.description}
+                    productBrand={productData.product_specification}/>
+                <SingleProductReview totalReview={productData.total_review} ratingCount={productData.rating_count}/>
 
             </Row>
 

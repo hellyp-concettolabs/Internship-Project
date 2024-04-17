@@ -1,7 +1,12 @@
 import Star from "../ProductCard/Star"
 import SingleProductProgressbar from "./SingleProductProgressbar"
+import PropTypes from 'prop-types';
 
-function SingleProductReview() {
+SingleProductReview.propTypes = {
+    totalReview: PropTypes.string,
+    ratingCount: PropTypes.object,
+  };
+function SingleProductReview({totalReview,ratingCount}) {
   return (
     <>
         <div className="reviewcontainer col-lg-6 col-md-12">
@@ -12,17 +17,17 @@ function SingleProductReview() {
             <div className="ratingdetail">
                 <div className="col-6 d-flex flex-column gap-3" id="review">
                     <div>
-                        <span className="rating">0</span>
+                        <span className="rating">{totalReview}</span>
                     </div>
                     <div>
                         <Star/>
                     </div>
                     <div>
-                        <span className="rr">0 Ratings & Review</span>
+                        <span className="rr">{totalReview} Ratings & Review</span>
                     </div>
                 </div>
                 <div className="col-6 reviewprogressbar">
-                    <SingleProductProgressbar/>
+                    <SingleProductProgressbar ratingCount={ratingCount}/>
                 </div>
             </div>
 

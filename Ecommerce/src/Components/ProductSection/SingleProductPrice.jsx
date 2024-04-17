@@ -7,7 +7,6 @@ SingleProductPrice.propTypes = {
   };
 
 function SingleProductPrice({productSalePrice,productprice,productDiscount}) {
-
   return (
     <>
       {productSalePrice && productprice && productDiscount &&

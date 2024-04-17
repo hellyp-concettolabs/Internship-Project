@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 SingleProductHighlight.propTypes = {
     productPurchaseCount: PropTypes.number,
     productDescription: PropTypes.string,
+    productBrand: PropTypes.array,
 };
-function SingleProductHighlight({productPurchaseCount,productDescription}) {
+
+function SingleProductHighlight({productPurchaseCount,productDescription,productBrand}) {
+
   return (
     <>
         <div className="highlightcontainer col-lg-6 col-md-12 ">
@@ -23,6 +26,17 @@ function SingleProductHighlight({productPurchaseCount,productDescription}) {
                 <div className="desclist">
                     {productDescription}
                 </div>
+                {productBrand &&
+                <div className=' mt-3'>
+                    {productBrand.map((s) =>(
+                    <div key={s.id}
+                        className=' d-flex gap-2 '>
+                        <sapn className=" fw-bold ">{s.spec_name}:</sapn>
+                        <span>{s.spec_value}</span>
+                    </div>
+                     ))}
+                </div>
+                }
             </div>
         </div>
     </>

@@ -21,7 +21,7 @@ function App() {
             <Route path="/productlist" element={<ProductListPage/>}/>
             <Route path="/:category_id?/:sub_category_id?/:collection_id?" element={<ProductListPage/>}/>
             <Route path="/dealsoftheday" element={<Dealsoftheday/>}/>
-            <Route path="/singleproduct/:sku/:unique_id" element={<SingleProductDetail/>}/>
+            <Route path="/singleproduct/:slug/:unique_id?/:sku" element={<SingleProductDetail/>}/>
             <Route path="/cart" element={<CartPage/>}/>
           </Routes>
           <Footer/>
