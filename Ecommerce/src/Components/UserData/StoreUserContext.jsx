@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react"
 import PropTypes from 'prop-types';
 
-
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
@@ -15,10 +14,14 @@ export const UserProvider = ({ children }) => {
             return {};
           }
       });
+
       useEffect(() => {
         // Save user data to localStorage whenever it changes
         localStorage.setItem("userData", JSON.stringify(userData));
       }, [userData]);
+
+
+      console.log(userData);
     return (
       <UserContext.Provider value={{ userData, setUserData }}>
         {children}

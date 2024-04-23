@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 FilterSection.propTypes ={
     setFilterDiscount: PropTypes.function, 
     setFilterPrice:PropTypes.function,
-    // setFilterCondition:PropTypes.function,
+    setFilterCondition:PropTypes.function,
     filterDiscount:PropTypes.string,
     filterPrice:PropTypes.string,
 }
@@ -82,9 +82,16 @@ function FilterSection({setFilterDiscount,setFilterPrice,filterDiscount,filterPr
 
     // const handleConditionChange = (e) =>{
     //     const selectedCondition = e.target.value;
-    //     setFilterCondition(selectedCondition)
-
+    //     const isChecked = e.target.checked;
+    //     if(isChecked){
+    //         setFilterCondition((prevSelectedCondition) => [...prevSelectedCondition , selectedCondition]);
+    //     }else{
+    //         setFilterCondition((prevSelectedCondition) =>
+    //             prevSelectedCondition.filter((condition) => condition !== selectedCondition)
+    //         )
+    //     }
     // };
+
     const handleDiscountChange = (e) => {
         const selectedDiscount = e.target.value;
         if(filterDiscount === selectedDiscount){
@@ -93,6 +100,7 @@ function FilterSection({setFilterDiscount,setFilterPrice,filterDiscount,filterPr
         setFilterDiscount(selectedDiscount);
         }
     }
+
     const handlePriceChange = (e) =>{
         const selectedPrice = e.target.value;
         if(filterPrice === selectedPrice){
@@ -114,7 +122,6 @@ function FilterSection({setFilterDiscount,setFilterPrice,filterDiscount,filterPr
             {conditions.map((condition,id) =>(
             <div className="form-check pb-2" key={id}>
                 <Form.Check 
-                    className=" rounded-circle "
                     type="checkbox"
                     id={condition.id}
                     value={condition.slug}

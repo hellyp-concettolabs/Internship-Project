@@ -1,8 +1,8 @@
 import { Navbar, Row, Col, Nav, Form, Button, Container, Image, ListGroup, Offcanvas } from 'react-bootstrap';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import eCart from "../../assets/eCart.svg"
 import search from '../../assets/search-normal.png'
-import wishlist from '../../assets/wishlist.png'
+// import wishlist from '../../assets/wishlist.png'
 import shopping_cart from '../../assets/shopping-cart.png'
 import usericon from '../../assets/user.png'
 import "../Navbar/header.scss"
@@ -12,6 +12,7 @@ import axios from 'axios';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { Link, useNavigate} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function HeaderSection() {
 
@@ -38,10 +39,10 @@ function HeaderSection() {
       item: `Notifications`,
       link: `profile`
     },
-    {
-      item: `Wishlists`,
-      link: `profile`
-    },
+    // {
+    //   item: `Wishlists`,
+    //   link: `profile`
+    // },
   ]
   const { userData } = useContext(UserContext);
   const { setUserData } = useContext(UserContext);
@@ -51,6 +52,8 @@ function HeaderSection() {
   const [query,setQuery] = useState('');
   const [searchText,setSearchText] = useState("");
   
+  const [cartProductCount,setCartProductCount] = useState("");
+  const cartProductQuantity = useSelector((state) => state.cartCount.count)
   const navigate = useNavigate();
 //For Logout
   const handleLogout = () => {
@@ -67,7 +70,6 @@ function HeaderSection() {
       });
 
   }
-  
 
   const handleSearch = async (query) =>{
     if(query.length > 0 ){
@@ -98,6 +100,25 @@ function HeaderSection() {
     }, 300);
 
   }
+
+  const cartQuantity = async () => {
+    if(userData.token){
+    axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+    axios.get(' https://bargainfox-dev.concettoprojects.com/api/cart-item-count')
+      .then(response => {
+        //console.log(response);
+        if (response.data.status === 200) {
+          setCartProductCount(response.data.result);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  }
+  useEffect(() => {
+    cartQuantity();
+  },[cartProductQuantity,userData.token])
 
   return (
     <div>
@@ -156,17 +177,17 @@ function HeaderSection() {
             </Col>
 
             <Col className=' rightsection d-flex align-items-center gap-3 gap-sm-4 justify-content-end '>
-              <Nav.Link href='#wishlist'>
+              {/* <Nav.Link href='#wishlist'> */}
                 <div className='wishlist-container'>
-                  <Image src={wishlist} className=' img-fluid wishlist-icon' />
-                  <div className='wishlist-count'>0</div>
+                  {/* <Image src={wishlist} className=' img-fluid wishlist-icon' /> */}
+                  {/* <div className='wishlist-count'>0</div> */}
                 </div>
-              </Nav.Link>
+              {/* </Nav.Link> */}
 
               <Nav.Link href='/cart'>
                 <div className='shopping-cart-container'>
                   <Image src={shopping_cart} className='img-fluid shopping-cart-icon' />
-                  <div className='shopping-cart-count'>0</div>
+                  <div className='shopping-cart-count'>{userData.token ? cartProductCount.cart_item_count : 0}</div>
                 </div>
               </Nav.Link>
 
@@ -182,7 +203,7 @@ function HeaderSection() {
                     {userData ? ('ACCOUNT & ORDER') : ('SIGN IN/REGISTER')}
                   </span>
                 </div>
-                <div className=' p-0 dropdown-content dropdown-menu position-md-static' id="SignupDropdown" >
+                <div className={` p-0  dropdown-menu position-md-static ${userData ? 'dropdown-after-login' : 'dropdown-before-login' }`} id="SignupDropdown" >
                   <ListGroup as="ul" className=' dropdown-item p-0 '>
                     {!userData ?
                       (<ListGroup.Item as="li" className=' px-2'>

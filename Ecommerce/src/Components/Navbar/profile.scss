@@ -6,6 +6,16 @@ $base-font-size :32px;
     align-items: center;
     margin-bottom: 80px !important;
 }
+.profileBreadcrumb{
+    .breadcrumb{
+        display: flex !important;
+        justify-content: start !important;
+    .breadcrumb-item{
+        font-size: $base-font-size - 19px !important;
+        font-weight: 500;
+    }
+    }
+}
 
 .profileheading{
     width: 80% !important;
@@ -35,7 +45,7 @@ $base-font-size :32px;
 }
 
 .profileform{
-    margin-top: 40px !important;
+    margin-top: 25px !important;
     width: 40% !important;
 }
 @media (max-width:1024px) {

@@ -1,14 +1,22 @@
-import { useState } from "react"
+import PropTypes from 'prop-types';
 
-function SingleProductQuantity() {
+SingleProductQuantity.propTypes = {
+    productData: PropTypes.object,
+    productQuantity: PropTypes.number,
+    setproductQuantity: PropTypes.function,
+};
+function SingleProductQuantity({productData,productQuantity,setproductQuantity}) {
 
-    const [counter,setCounter] = useState(1);
-    const handleadd = () => { setCounter(counter+1)}
+    const handleadd = () => { 
+        if(productQuantity < productData.stock){
+            setproductQuantity(productQuantity+1);
+        }
+    }
     const handlesub = () => { 
-        if(counter <= 1){
-            setCounter(1);
+        if(productQuantity <= 1){
+            setproductQuantity(1);
         } else{
-            setCounter(counter-1);
+            setproductQuantity(productQuantity-1);
         }
     }
   return (
@@ -17,7 +25,7 @@ function SingleProductQuantity() {
             Quantity:
             <div className="quantitycontainer d-flex justify-content-center align-items-center ">
                 <button className="minusoperator rounded-start-2 rounded-end-0" onClick={handlesub}>-</button>
-                <div className="counting">{counter}</div>
+                <div className="counting">{productQuantity}</div>
                 <button className="plusoperator rounded-start-0 rounded-end-2" onClick={handleadd}>+</button>
             </div>
         </div> 

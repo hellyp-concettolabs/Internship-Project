@@ -3,7 +3,7 @@ import SingleProductProgressbar from "./SingleProductProgressbar"
 import PropTypes from 'prop-types';
 
 SingleProductReview.propTypes = {
-    totalReview: PropTypes.string,
+    totalReview: PropTypes.number,
     ratingCount: PropTypes.object,
   };
 function SingleProductReview({totalReview,ratingCount}) {

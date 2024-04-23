@@ -30,18 +30,29 @@
     width: 75%;
     transition: 0.2s;
   }
- .dropdown-content :hover {
+ .dropdown-before-login :hover {
    background-color: #ddd;
+ }
+ .dropdown-after-login :hover{
+  background-color: #ddd;
  }
  @media (min-width:768px) {
  .Signup:hover >
-   .dropdown-content {
+   .dropdown-before-login {
    display: block;
    cursor: pointer;
    position: absolute;
    z-index: 1;
-   margin-top: 340px;
+   margin-top: 290px;
  }
+ .Signup:hover >
+ .dropdown-after-login {
+ display: block;
+ cursor: pointer;
+ position: absolute;
+ z-index: 1;
+ margin-top: 350px;
+}
  }
 
   #SignupDropdown {

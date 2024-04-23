@@ -1,4 +1,4 @@
-import { Col, Container,Row } from "react-bootstrap"
+import { Col, Container,Row, Spinner } from "react-bootstrap"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./singleproductdetail.scss"
@@ -28,13 +28,18 @@ function SingleProductDetail() {
 
       const[productData,setProductData] = useState({});
       //const[variationList,setVariationList] = useState([]);
+      const [loading,setLoading] = useState(false);
+      const [productQuantity,setproductQuantity] = useState(1);
       const{slug , unique_id , sku } = useParams();
       const searchParams = new URLSearchParams(location.search);
       const color = searchParams.get("color");
       const size = searchParams.get("size");
-      console.log(color)
-      console.log(size)
+      const [addToCart,setAddToCart] = useState(false);
+      //console.log(color)
+      //console.log(size)
+
       const fetchData = async() =>{
+        setLoading(true);
         await axios.get(` https://bargainfox-dev.concettoprojects.com/api/product/detail/${slug}/${unique_id}?/${sku}`)
         .then(response =>{
             const result = response.data.result;
@@ -49,12 +54,18 @@ function SingleProductDetail() {
                 response.data.result.variation_list.find((item) => item.size === parseInt(size)) :
             response.data.result.variation_list.find((item) => item.sku === sku);
                 const newProductData = {...productData,
+                id: productVariation?.product_id || result.id,
+                category_info: productVariation?.category_info || result.category_info,
+                unique_id: productVariation?.unique_id || result.unique_id,
+                vendor_id: productVariation?.vendor_id || result.vendor_id,
                 vendor_info: result.vendor_info,
                 color: result.color,
                 size: result.size,
                 colorVariation: productVariation?.color,
                 sizeVariation: productVariation?.size,
                 sku: productVariation?.sku || result.sku,
+                slug: productVariation?.slug || result.slug,
+                category_id: productVariation?.category_id || result.category_id,
                 name: productVariation?.name || result.name,
                 share_url: productVariation?.share_url || result.share_url,
                 product_images: productVariation?.product_images || result.product_images,
@@ -70,23 +81,70 @@ function SingleProductDetail() {
                 expected_delivery: productVariation?.expected_delivery || result.expected_delivery,
                 total_review: productVariation?.total_review || result.total_review,
                 rating_count: productVariation?.rating_count || result.rating_count,
+                is_added_cart: productVariation?.is_added_cart || result.is_added_cart,
+                product_variation_id: productVariation?.product_variation_id,
                 }
-                setProductData(newProductData)
+                setProductData(newProductData);
             }
+            setLoading(false);
         })
         .catch(error =>{
+            setLoading(false);
             console.error('Error making GET request:', error);
           })
       }
       useEffect(() => {
-        fetchData(); 
-      },[color,size])
-console.log(productData);
-//console.log(variationList);
+        fetchData();
+      },[color,size,addToCart])
+
+    console.log(productData);
+    //console.log(productId)
+
+
   return (
     <>
-        <Container fluid id="productdetailcontainer">
-
+        {loading ? 
+            <div className=" d-flex justify-content-center align-items-center ">
+                <Spinner animation="border" variant="primary" />
+            </div>:
+        (<Container fluid id="productdetailcontainer">
+            {/* BreadCrumb */}
+            <Row>
+                <nav style={{'--bs-breadcrumb-divider': '>'}} aria-label="breadcrumb" className=" p-0 ">
+                    <ol className="breadcrumb">
+                    <li className="breadcrumb-item">
+                        <a href="/" className=" text-decoration-none text-secondary">Home</a>
+                    </li>
+                    {productData && productData.category_info &&
+                    <li className="breadcrumb-item">
+                        <a href={`/${productData.category_info[0].slug}`} className=" text-decoration-none text-secondary">
+                            &gt; &nbsp; {productData.category_info[0].title}
+                        </a>
+                    </li>
+                    }
+                    {productData && productData.category_info  && productData.category_info[0].subcategory[0].title &&
+                    <li className="breadcrumb-item">
+                        <a href={`/${productData.category_info[0].slug}/${productData.category_info[0].subcategory[0].slug}`}className=" text-decoration-none text-secondary">
+                            &gt; &nbsp; {productData.category_info[0].subcategory[0].title}
+                        </a>
+                    </li>
+                    }
+                    {productData && productData.category_info  && productData.category_info[0].subcategory[0].collection[0].title &&
+                    <li className="breadcrumb-item">
+                        <a href={`/${productData.category_info[0].slug}/${productData.category_info[0].subcategory[0].slug}/${productData.category_info[0].subcategory[0].collection[0].slug}`}className=" text-decoration-none text-secondary">
+                             &gt; &nbsp; {productData.category_info[0].subcategory[0].collection[0].title}
+                        </a>
+                    </li>
+                    }
+                    {productData && productData.name  && 
+                    <li className="breadcrumb-item active" aria-current="page"
+                        style={{overflow:"hidden", width:"500px", height:"22px"}}> 
+                        &gt; &nbsp; {productData.name}
+                    </li>
+                    }
+                    </ol>
+                </nav>
+            </Row>
             <Row className="productimageanddetail py-lg-4 py-2">
 
                 <Col className="border-bottom pb-3 ">
@@ -123,22 +181,22 @@ console.log(productData);
                     </Row>
                     {productData.color != "" &&
                         <Row>
-                                <SingleProductColor productColor={productData.color} size={size}/>
+                                <SingleProductColor colorVariation={productData.colorVariation} productColor={productData.color} size={size}/>
                         </Row>
                     }
                     {productData.size != "" &&
                         <Row>
-                                <SingleProductSize productSize={productData.size} color={color}/>
+                                <SingleProductSize sizeVariation={productData.sizeVariation} productSize={productData.size} color={color}/>
                         </Row>
                     }
                     <Row>
-                        <SingleProductQuantity />
+                        <SingleProductQuantity productData={productData} productQuantity={productQuantity} setproductQuantity={setproductQuantity}/>
                     </Row>
                     <Row className=" d-flex d-md-none ">
                         <SingleProductStockInfo/>
                     </Row>
                     <Row className=" d-flex d-md-none ">
-                        <SingleProductCartBtn/>
+                        <SingleProductCartBtn addToCart={addToCart} setAddToCart={setAddToCart} productData={productData} productQuantity={productQuantity}/>
                     </Row>
                     <Row className=" border-top border-bottom">
                         <SingleProductDeliveryinfo/>
@@ -150,7 +208,7 @@ console.log(productData);
                     </Row>
                     }
                     <Row className=" d-none d-md-flex ">
-                        <SingleProductCartBtn/>
+                        <SingleProductCartBtn addToCart={addToCart} setAddToCart={setAddToCart} productData={productData} productQuantity={productQuantity}/>
                     </Row>
                     <Row>
                         {productData.expected_delivery &&
@@ -171,7 +229,8 @@ console.log(productData);
 
             </Row>
 
-        </Container> 
+        </Container>      
+    )} 
     </>
   )
 }

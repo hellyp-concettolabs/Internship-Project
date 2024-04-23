@@ -100,7 +100,7 @@ function Electronics() {
                   <div key={i}>
                   <Link
                     className=" text-decoration-none " style={{color:"black"}}
-                    to={`/singleproduct/${d.sku}/${d.unique_id}`}>
+                    to={`/singleproduct/${d.slug}/${d.unique_id}/${d.sku}`}>
                     <ProductCard d={d} key={i}/>
                     </Link>
                     </div>

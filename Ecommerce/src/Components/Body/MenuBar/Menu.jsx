@@ -1,4 +1,4 @@
-import { Container, Row, Col, Image } from "react-bootstrap"
+import { Container, Row, Col, Image, Spinner } from "react-bootstrap"
 import '../MenuBar/menu.scss'
 import { useEffect, useState } from "react"
 import axios from "axios"
@@ -7,12 +7,14 @@ import { Link } from "react-router-dom";
 function Menu() {
 
 const [data,setData] = useState([]);
-
+const[loading,setLoading] = useState(false);
 useEffect( () => {
   const fetchData = async() =>{
+    setLoading(true);
      await axios.get(' https://bargainfox-dev.concettoprojects.com/api/category-list')
     .then(response => {
       setData(response.data.result);
+      setLoading(false);
     })
     .catch(error =>{
       console.error('Error making GET request:', error);
@@ -50,7 +52,13 @@ useEffect( () =>{
 
 
   return (
-    <Container fluid className=" container-lg mb-4">
+    <>
+    {loading ? 
+      <div className=" d-flex justify-content-center align-items-center ">
+          <Spinner animation="border" variant="primary" />
+      </div>:
+
+      (<Container fluid className=" container-lg mb-4">
       <Row className="menusection">
 
       {data.map((d) => (
@@ -99,6 +107,8 @@ useEffect( () =>{
 
       </Row>
     </Container>
+    )}
+  </>
   );
 }
 

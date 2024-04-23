@@ -1,4 +1,4 @@
-import { Col, Container, Form, FormControl, Offcanvas, Row } from "react-bootstrap"
+import { Col, Container, Form, FormControl, Offcanvas, Row, Spinner } from "react-bootstrap"
 import "./productlistpage.scss"
 import FilterSection from "./FilterSection"
 import { useEffect, useState} from "react"
@@ -8,12 +8,13 @@ import SingleProductCard from "./SingleProductCard";
 import "./productlist.scss"
 import PaginationDetail from "../PaginationSection/PaginationDetail.jsx"
 import{useLocation, useNavigate} from 'react-router'
+import NoProduct from "../ProductNotFoundPage/NoProduct.jsx";
 
 function ProductListPage() {
 
     const[productData,setProductData] = useState([]);
     const[pageData, setPageData] = useState({});
-    //const[isLoading,setIsLoading] = useState(false);
+    const[loading,setLoading] = useState(false);
 
     const priceFilter = [
       {
@@ -51,7 +52,7 @@ function ProductListPage() {
 
     const searchParams = new URLSearchParams(location.search);
     const pageNumber = searchParams.get("page");
-    // const conditionValue = searchParams.get("condition")
+    //const conditionValue = searchParams.get("condition")
     const discountValue = searchParams.get("discount");
     const priceRange = searchParams.get("price_range")
     const sortbyValue = searchParams.get('sort_by')
@@ -62,7 +63,8 @@ function ProductListPage() {
     const[selectedSortValue,setSelectedSortValue] = useState('');
     const[sortValue,setSortValue] = useState(sortbyValue);
     //For Condition
-    // const [filterCondition, setFilterCondition] = useState(conditionValue);
+    // const [filterCondition, setFilterCondition] = useState([]);
+    //const [selectedCondition,setSelectedCondition] = useState([]);
     //For Discount
     const[filterDiscount, setFilterDiscount] = useState(discountValue);
     //For Price
@@ -73,7 +75,7 @@ function ProductListPage() {
     const handleFilter = () => setShow(true);
 
     useEffect(() => {
-      if(filterDiscount || filterPrice || sortValue){
+      if(filterDiscount || filterPrice || sortValue ){
       let path = `?page=${pageNumber ? parseInt(pageNumber) : 1}`;
 
       if (filterDiscount) {
@@ -86,6 +88,9 @@ function ProductListPage() {
       if(sortValue){
         path += `&sort_by=${sortValue}`;
       }
+      // if(filterCondition.length > 0){
+      //   path += `&condition=${filterCondition.join(',')}`;
+      // }
       navigate(path);
     }
     },[filterDiscount,filterPrice,sortValue,pageNumber])
@@ -103,8 +108,8 @@ function ProductListPage() {
       if(collection_id){
         data.collection_id = collection_id;
       }
-      // if(filterCondition){
-      //   data.condition_id[1] = filterCondition
+      // if(filterCondition.length > 0){
+      //   data.condition_id = [filterCondition]
       // }
       if(searchTextParam){
         let searchText = searchTextParam.get('searchText')
@@ -129,16 +134,19 @@ function ProductListPage() {
         data.min_price = price.min;
         data.max_price = price.max;
       }
-
+    
+    setLoading(true);
     await axios.post(' https://bargainfox-dev.concettoprojects.com/api/product/list',
       data
    )
     .then(response =>{
-      setProductData(response.data.result.data)
-      setPageData(response.data.result)
+      setProductData(response.data.result.data);
+      setPageData(response.data.result);
+      setLoading(false);
     })
     .catch(error =>{
       console.error('Error making GET request:', error);
+      setLoading(false);
     })
   }
 
@@ -146,19 +154,54 @@ function ProductListPage() {
       fetchData();
     },[category_id,sub_category_id,collection_id,searchTextParam,filterDiscount,sortValue,pageNumber,filterPrice])
 
-    // console.log(pageData);
+    console.log(productData);
+
+    const formatCategoryName = (label) => {
+      if(label){
+      // Split the label into words
+      const words = label.split('-');
+      // Capitalize the first letter of each word and join them with a &
+      return words.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' & ');
+      }
+    };
 
   return (
     <>
-     <Container fluid >
-
+    {loading ? 
+            <div className=" d-flex justify-content-center align-items-center ">
+                <Spinner animation="border" variant="primary" />
+            </div>:
+     (<Container fluid >
+         {/* BreadCrumb */}
+        <Row className="productlistcontainer0">
+            <nav style={{'--bs-breadcrumb-divider': '>'}} aria-label="breadcrumb">
+              <ol className="breadcrumb">
+                <li className="breadcrumb-item">
+                    <a href="/" className=" text-decoration-none text-secondary">Home</a>
+                </li>
+                {category_id &&
+                <li className="breadcrumb-item">
+                    <a href={`/${category_id}`} className=" text-decoration-none text-secondary">&gt; &nbsp; {formatCategoryName(category_id)}</a>
+                </li>
+                }
+                {sub_category_id &&
+                <li className="breadcrumb-item">
+                    <a href={`/${category_id}/${sub_category_id}`}className=" text-decoration-none text-secondary">&gt; &nbsp; {formatCategoryName(sub_category_id)}</a>
+                </li>
+                }
+                {collection_id &&
+                <li className="breadcrumb-item active" aria-current="page"> &gt; &nbsp; {formatCategoryName(collection_id)}</li>
+                }
+              </ol>
+            </nav>
+        </Row>
         <Row className="productlistcontainer">
             <Col className=" d-none d-lg-flex filtersec">
                 <FilterSection filterDiscount={filterDiscount} filterPrice={filterPrice} 
                 setFilterDiscount={setFilterDiscount} setFilterPrice={setFilterPrice} />        
             </Col>
-
-            <Col className=" d-flex flex-column productlistsec">
+            {productData.length > 0 ? 
+            (<Col className=" d-flex flex-column productlistsec">
               <Row className=" mb-3 justify-content-between flex-row-reverse flex-lg-row ">
                 <Col className="d-none d-lg-flex ">
                   <div className="resultheading">Showing {pageData.from} - {pageData.to} of {pageData.total} results</div>
@@ -238,11 +281,18 @@ function ProductListPage() {
                   <PaginationDetail pageNumber={pageNumber} lastpage={pageData.last_page}/>
                 </Col>
               </Row>
-            </Col>
+            </Col>):
+              <Col className=" d-flex justify-content-center productlistsec">
+                <NoProduct heading={'No Product Found'} 
+                  desc={`Looks like there are no product available in selected category. Go ahead & explore top categories.`}/>
+              </Col>
+            }  
         </Row>
 
 
-    </Container> 
+    </Container>
+     )} 
+
     </>
   )
 }

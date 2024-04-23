@@ -1,4 +1,4 @@
-import { Button, Col, Container, Form, Row } from "react-bootstrap"
+import { Button, Col, Container, Form, Image, Row } from "react-bootstrap"
 import "./profile.scss"
 import { useContext } from "react";
 import { UserContext } from "../UserData/StoreUserContext";
@@ -11,9 +11,26 @@ function Profile() {
 
   return (
     <div>
+      {/* BreadCrumb */}
+      <Container fluid className="profileBreadcrumb">
+          <nav style={{'--bs-breadcrumb-divider': '>'}} aria-label="breadcrumb">
+            <ol className="breadcrumb d-flex justify-content-start ">
+              <li className="breadcrumb-item">
+                  <a href="/" className=" text-decoration-none text-secondary">Home</a>
+              </li>
+              <li className="breadcrumb-item active" aria-current="page"> &gt; &nbsp; Profile</li>
+            </ol>
+          </nav>
+      </Container>
       <Container className="profilecontainer ">
+
         <Row className="profileheading">
             <h2 className="yprofile">Your Profile</h2>
+        </Row>
+        <Row>
+          <Image src={userData.avatar_url}
+            className=" rounded-circle mt-3 img-fluid "
+            style={{height:"100px"}}/>
         </Row>
         <Row className="profileform">
             <Col>

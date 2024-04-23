@@ -1,9 +1,14 @@
 $base-font-size: 36px;
 
 .cartcontainer{
-    padding: 3rem 60px;
+    padding: 0.5rem 60px 3rem;
     display: flex;
     gap: 2rem;
+}
+
+.breadcrumb-item{
+    font-size: $base-font-size - 23px;
+    font-weight: 500;
 }
 
 .cc1{
@@ -37,8 +42,9 @@ $base-font-size: 36px;
 }
 
 .cartproducttitle{
+    height: 24px;
     overflow: hidden;
-    font-size: $base-font-size - 18;
+    font-size: $base-font-size - 20;
     font-weight: normal;
     color: #292D32;
 }
