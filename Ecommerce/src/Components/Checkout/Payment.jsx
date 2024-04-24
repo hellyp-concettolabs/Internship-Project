@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+
 import mastercard from "../../assets/mastercard.png";
 import american from "../../assets/american.png";
 import visa from "../../assets/visa.png";
@@ -6,42 +6,15 @@ import visa from "../../assets/visa.png";
 import "./payment.scss";
 import { Row, Col, Container, Form } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
-import axios from "axios";
+
 import * as yup from "yup";
 import { Formik, ErrorMessage } from "formik";
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "../UserData/StoreUserContext";
+
 
 const paymentImage = [visa, mastercard, american];
 
 const Payment = () => {
-    const { userData } = useContext(UserContext);
-  const [showPopup, setShowPopup] = useState(false);
-  const [deliveryAddress, setDeliverAddress] = useState("");
-  const [showEditAddress, setShowEditAddress] = useState("");
-  const [selectedAddress, setSelectedAddress] = useState(null);
-  const navigate = useNavigate();
 
-  const handleSelectedAddress = (addressId) => {
-    setSelectedAddress(addressId);
-    console.log(addressId);
-  };
-
-  const handleClose = () => {
-    setShowPopup(!showPopup);
-  };
-
-  const defaultValues = {
-    id: showEditAddress ? showEditAddress.id : "",
-    selectField: showEditAddress ? showEditAddress.selectField : "",
-    fullName: showEditAddress ? showEditAddress.full_name : "",
-    phoneNumber: showEditAddress ? showEditAddress.phoneNumber : "",
-    city: showEditAddress ? showEditAddress.city : "",
-    postcode: showEditAddress ? showEditAddress.postcode : "",
-    address: showEditAddress ? showEditAddress.address : "",
-    address2: showEditAddress ? showEditAddress.address2 : "",
-    state: showEditAddress ? showEditAddress.state : "",
-  };
 
   const validationSchema = yup.object({
     fullName: yup
@@ -88,81 +61,7 @@ const Payment = () => {
     selectField: yup.string().required("* Please select country"),
   });
 
-  const newDeliveryAddress = async (values) => {
-    // console.log("values from formik form", values);
-    try {
-      const {
-        id,
-        selectField,
-        fullName,
-        address,
-        city,
-        postcode,
-        phoneNumber,
-        state,
-        address2,
-      } = values;
-      const response = 
-      axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
-      await axios.post(' https://bargainfox-dev.concettoprojects.com/api/store-delivery-address',
-        {
-          id: id,
-          country: selectField,
-          full_name: fullName,
-          address: address,
-          address2: address2,
-          city: city,
-          state: state,
-          postcode: postcode,
-          phone: phoneNumber,
-        },
-      );
-      if (response.status === 200) {
-        // console.log("Stored address successfully", response);
-        setShowPopup(false);
-      }
-    } catch (error) {
-      console.log("Error while storing the Address", error);
-    }
-  };
 
-  const getDeliveryAddress = async () => {
-    try {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
-      const response = await axios.get( 'https://bargainfox-dev.concettoprojects.com/api/get-delivery-address');
-      if (response.status === 200) {
-        setDeliverAddress(response.data.result);
-        console.log("Successfull retrieved api call", response.data.result);
-      }
-    } catch (error) {
-      console.log("Some error while getting Address", error);
-    }
-  };
-
-  useEffect(() => {
-    getDeliveryAddress();
-  }, []);
-
-  const handleEditAddress = (values) => {
-    // console.log("values in edit address", values);
-    setShowPopup(true);
-    setShowEditAddress({
-      id: values.id,
-      selectField: values.country,
-      full_name: values.full_name,
-      phoneNumber: values.mobile,
-      city: values.city,
-      postcode: values.postcode,
-      address: values.address,
-      address2: values.address2,
-      state: values.state,
-    });
-  };
-
-  const handleNewAddress = () => {
-    setShowPopup(true);
-    setShowEditAddress();
-  };
 
   return (
     <>
@@ -177,7 +76,7 @@ const Payment = () => {
                 <div className="d-flex align-items-center justify-content-end gap-2">
                   <button
                     className="border-0 addNew-button"
-                    onClick={handleNewAddress}
+                   
                   >
                     {/* <img src={add} className="img-fluid" /> <span>Add new</span> */}
                   </button>
@@ -185,10 +84,7 @@ const Payment = () => {
               </Col>
             </Row>
             <hr className="mt-3 mt-sm-0" />
-            {deliveryAddress &&
-              deliveryAddress.map((addressItem) => {
-                return (
-                  <Row key={addressItem.id}>
+                  <Row >
                     <span className="fw-bold text-warning d-flex d-sm-none align-items-center justify-content-end">
                       Edit Address
                     </span>
@@ -197,26 +93,22 @@ const Payment = () => {
                       <div>
                         <Form.Check
                           type="radio"
-                          onChange={() => handleSelectedAddress(addressItem.id)}
-                          checked={selectedAddress === addressItem.id}
                           aria-label="radio 1"
                         />
                       </div>
 
                       <span>
                         <span className="fw-bold h5">
-                          {addressItem.full_name}
+                          
                         </span>{" "}
                         <br />
-                        {addressItem.address} {addressItem.address2},{" "}
-                        {addressItem.city}, {addressItem.state},{" "}
-                        {addressItem.country}, {addressItem.postcode} <br />
-                        Phone number: {addressItem.mobile}
+ <br />
+                        Phone number: 
                       </span>
                     </Col>
                     <Col className="d-md-flex align-items-baseline d-none  justify-content-end ">
                       <button
-                        onClick={() => handleEditAddress(addressItem)}
+                      
                         className="editAddress-button text-warning fw-bold d-flex align-items-center justify-content-end"
                       >
                         Edit address
@@ -224,8 +116,6 @@ const Payment = () => {
                     </Col>
                     <hr />
                   </Row>
-                );
-              })}
           </Col>
 
           {/* Column for payment section  */}
@@ -234,9 +124,7 @@ const Payment = () => {
             <Row className="border-bottom p-3 d-flex align-items-center justify-content-center">
               <button
                 onClick={() => {
-                  navigate("/payment", {
-                    state: { selectedAddress },
-                  });
+                  
                 }}
                 className="continue-button btn btn-primary w-100 "
               >
@@ -258,10 +146,7 @@ const Payment = () => {
           </Col>
         </Row>
       </Container>
-      {showPopup && (
         <Modal
-          show={showPopup}
-          onHide={handleClose}
           backdrop="static"
           className="p-0"
         >
@@ -276,12 +161,9 @@ const Payment = () => {
           <Modal.Body>
             <Formik
               validationSchema={validationSchema}
-              initialValues={defaultValues}
               onSubmit={(values, { resetForm }) => {
                 // console.log("values from on submit", values);
-                newDeliveryAddress(values);
-                setShowEditAddress(values);
-                getDeliveryAddress();
+
                 resetForm();
               }}
             >
@@ -451,7 +333,6 @@ const Payment = () => {
             </Formik>
           </Modal.Body>
         </Modal>
-      )}
     </>
   );
 };

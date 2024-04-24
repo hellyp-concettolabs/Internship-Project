@@ -3,19 +3,22 @@ import SingleProductQuantity from "../ProductSection/SingleProductQuantity.jsx"
 import SingleProductTitle from "../ProductSection/SingleProductTitle.jsx"
 import PropTypes from 'prop-types';
 import axios from "axios";
-import { useContext} from "react";
+import { useContext, useEffect, useState} from "react";
 import { UserContext } from "../UserData/StoreUserContext.jsx";
 // import { useState } from "react";
 
 CartProductCard.propTypes = {
     cartData: PropTypes.array,
     setDeleteItem: PropTypes.function,
+    isQuantityChange: PropTypes.function,
 };
-function CartProductCard({cartData,setDeleteItem}) {
+function CartProductCard({cartData,setDeleteItem,isQuantityChange}) {
 console.log(cartData)
     const { userData } = useContext(UserContext);
     //const[cartProductData,setCartProductData] = useState({});
-    //const [productQuantity, setproductQuantity] = useState();
+    const [productQuantity, setproductQuantity] = useState([]);
+
+    
     const handleItemDelete = async(cartProductID) =>{
             axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
             await axios.post(' https://bargainfox-dev.concettoprojects.com/api/remove-from-cart',{
@@ -30,12 +33,57 @@ console.log(cartData)
                 console.error('Error making Post request:', error);
               })
         }
-
+        const updateItemQuantity = async (index, id, variationId) => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+         await axios.post(' https://bargainfox-dev.concettoprojects.com/api/add-to-cart',
+                {
+                  quantity: index,
+                  product_id: id,
+                  product_variation_id: variationId,
+                }
+              ).then((response) => {
+                if(response.status === 200){
+                isQuantityChange(true);
+                }
+              }).catch(error => {
+              console.log("Some error in cart Item quantity", error);
+            })
+          };
         
+          const updateProductQuantity = (index, newQuantity) => {
+            const updatedQuantity = [...productQuantity];
+            updatedQuantity[index] = newQuantity;
+            setproductQuantity(updatedQuantity);
+          };
+
+    const handlesub = (index, id, variationId) =>{
+        if (productQuantity[index] > 1) {
+            updateProductQuantity(index, productQuantity[index] - 1);
+            updateItemQuantity(productQuantity[index] - 1, id, variationId);
+          }
+    }
+        
+    const handleadd = (index, id, variation_id) =>{
+        if(productQuantity[index] < (variation_id === null ? cartData[index].product_info.stock 
+            : cartData[index].product_info.product_variation_detail[0].stock)){
+        updateProductQuantity(index, productQuantity[index] + 1);
+        updateItemQuantity(productQuantity[index] + 1, id, variation_id);
+            }
+    }
+    useEffect(() => {
+    //   for(let i = 0 ; i < cartData.length ; i++ ){
+    //     setproductQuantity(cartData[i].quantity);
+    //   }
+    if (cartData) {
+        const initialQuantities = cartData.map(item => item.quantity);
+        setproductQuantity(initialQuantities);
+    }
+    }, [cartData])
+    //console.log(productQuantity)
   return (
     <>
       <>
-      {cartData && cartData.map((d) => (
+      {cartData && cartData.map((d,i) => (
         <div key={d.id} className=" py-4 border-bottom d-lg-flex d-block align-items-center">
 
             <div className=" d-flex align-items-center gap-4">
@@ -52,14 +100,26 @@ console.log(cartData)
                                 <div className=" fw-bold fs-6"><sup>$</sup>{d.product_variation_id === null ?  
                                     d.product_info.sale_price : d.product_info.product_variation_detail[0].sale_price}</div>
                                 <div className=" small text-decoration-line-through">${d.product_variation_id === null ?  
-                                    d.product_info.sale_price : d.product_info.product_variation_detail[0].rrp}</div>
+                                    d.product_info.main_rrp : d.product_info.product_variation_detail[0].rrp}</div>
                                 <div className=" small text-primary">{Math.floor(d.product_variation_id === null ?  
-                                    d.product_info.sale_price : d.product_info.product_variation_detail[0].percentage_discount)}%</div>
+                                    d.product_info.percentage_discount : d.product_info.product_variation_detail[0].percentage_discount)}%</div>
                             </div>
                         </div>
                     <div className=" d-none d-md-flex ">
                         <div className=" d-flex align-items-center gap-3">
-                            <SingleProductQuantity productData={d.product_info} productQuantity={d.quantity} />
+                            {/* <SingleProductQuantity productData={d.product_info} productQuantity={d.quantity} /> */}
+                            <div className="quantityheading">
+                                Quantity:
+                                <div className="quantitycontainer d-flex justify-content-center align-items-center ">
+                                    <button className="minusoperator rounded-start-2 rounded-end-0" onClick={() =>handlesub(
+                                        i, d.product_id,d.product_variation_id
+                                    )}>-</button>
+                                    <div className="counting">{productQuantity[i]}</div>
+                                    <button className="plusoperator rounded-start-0 rounded-end-2" onClick={() =>handleadd(
+                                        i,d.product_id,d.product_variation_id
+                                    )}>+</button>
+                                </div>
+                            </div>
                             <button className=" bg-transparent border-0 "
                                 onClick={() => handleItemDelete(d.id)}>
                             <div className="fw-bold px-2 " style={{borderLeft:"2px solid #A4A4B8"}}>

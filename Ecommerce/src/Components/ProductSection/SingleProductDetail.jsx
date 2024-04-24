@@ -1,4 +1,4 @@
-import { Col, Container,Row, Spinner } from "react-bootstrap"
+import { Col, Container,Row } from "react-bootstrap"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./singleproductdetail.scss"
@@ -28,7 +28,7 @@ function SingleProductDetail() {
 
       const[productData,setProductData] = useState({});
       //const[variationList,setVariationList] = useState([]);
-      const [loading,setLoading] = useState(false);
+      //const [loading,setLoading] = useState(false);
       const [productQuantity,setproductQuantity] = useState(1);
       const{slug , unique_id , sku } = useParams();
       const searchParams = new URLSearchParams(location.search);
@@ -39,7 +39,7 @@ function SingleProductDetail() {
       //console.log(size)
 
       const fetchData = async() =>{
-        setLoading(true);
+        //setLoading(true);
         await axios.get(` https://bargainfox-dev.concettoprojects.com/api/product/detail/${slug}/${unique_id}?/${sku}`)
         .then(response =>{
             const result = response.data.result;
@@ -86,10 +86,10 @@ function SingleProductDetail() {
                 }
                 setProductData(newProductData);
             }
-            setLoading(false);
+            //setLoading(false);
         })
         .catch(error =>{
-            setLoading(false);
+            //setLoading(false);
             console.error('Error making GET request:', error);
           })
       }
@@ -103,11 +103,11 @@ function SingleProductDetail() {
 
   return (
     <>
-        {loading ? 
+        {/* {loading ? 
             <div className=" d-flex justify-content-center align-items-center ">
                 <Spinner animation="border" variant="primary" />
-            </div>:
-        (<Container fluid id="productdetailcontainer">
+            </div>:( */}
+            <Container fluid id="productdetailcontainer">
             {/* BreadCrumb */}
             <Row>
                 <nav style={{'--bs-breadcrumb-divider': '>'}} aria-label="breadcrumb" className=" p-0 ">
@@ -230,7 +230,7 @@ function SingleProductDetail() {
             </Row>
 
         </Container>      
-    )} 
+    {/* )}  */}
     </>
   )
 }

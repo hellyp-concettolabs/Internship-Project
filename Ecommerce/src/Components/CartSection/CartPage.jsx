@@ -6,14 +6,17 @@ import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../UserData/StoreUserContext"
 import NoProduct from "../ProductNotFoundPage/NoProduct"
-import {ReactCompoent as EmptyCart} from "../../assets/empty-cart.svg"
+import { useDispatch } from "react-redux";
+import { cartProductCount } from "../CartProductCount/CartProductCount.jsx"
 
 function CartPage() {
 
     const { userData } = useContext(UserContext);
+    const dispatch = useDispatch();
     const [loading,setLoading] = useState(false);
     const[cartProductData,setCartProductData] = useState({});
-    const[deleteItem,setDeleteItem] = useState(false)
+    const[deleteItem,setDeleteItem] = useState(false);
+    const[quantityChange,isQuantityChange] = useState(false);
     const fetchData = async() =>{
         setLoading(true);
         axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
@@ -22,6 +25,7 @@ function CartPage() {
             console.log(response.data.result);
             setCartProductData(response.data.result);
             setLoading(false);
+            dispatch(cartProductCount(response.data.result.user_cart.length));
         })
         .catch(error =>{
             console.error('Error making Post request:', error);
@@ -32,11 +36,12 @@ function CartPage() {
     useEffect(() => {
         fetchData();
         setDeleteItem(false);
-    }, [deleteItem])
-    
+        isQuantityChange(false);
+    }, [deleteItem,quantityChange])
+    console.log(quantityChange)
   return (
     <>
-    {cartProductData.length > 0 ? 
+    {cartProductData && cartProductData.user_cart && cartProductData.user_cart.length > 0 ? 
     <>
      {loading ? 
             <div className=" d-flex justify-content-center align-items-center ">
@@ -68,7 +73,7 @@ function CartPage() {
                         </Col>
                     </Row>
                     <Row>
-                        <CartProductCard cartData={cartProductData.user_cart} setDeleteItem={setDeleteItem}/>
+                        <CartProductCard cartData={cartProductData.user_cart} setDeleteItem={setDeleteItem} isQuantityChange={isQuantityChange}/>
                     </Row>
                 
                 </Col>
@@ -86,8 +91,7 @@ function CartPage() {
             <Col className=" d-flex justify-content-center productlistsec">
                 <NoProduct heading={'Your cart is empty'} 
                   desc={`Looks like you have not added something to you cart.
-                  Go ahead & explore top categories.`}
-                  image={<EmptyCart fill="#0036FF"/>}/>
+                  Go ahead & explore top categories.`}/>
             </Col>
         </Container>
      )}
