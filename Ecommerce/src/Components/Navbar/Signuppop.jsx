@@ -95,6 +95,7 @@ function Signuppop(props) {
         </div>
       </Modal>
       <Verifypop show={verify} setVerify={setVerify} useremail={userValues} onHide={() => setVerify(false)}/>
+
     </>
   )
 }

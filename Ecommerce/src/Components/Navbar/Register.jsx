@@ -5,6 +5,7 @@ import {Formik} from 'formik'
 import axios from 'axios';
 import { useContext } from "react";
 import { UserContext } from "../UserData/StoreUserContext";
+import { useSelector } from "react-redux";
 
 Register.propTypes = {
     onHide: PropTypes.func.isRequired,
@@ -16,7 +17,19 @@ Register.propTypes = {
 function Register(props) {
 
   const {setUserData} = useContext(UserContext);
-
+  const userName = useSelector((state) => state.userData.name);
+  const defaultValues = {
+    name: "",
+    email: "",
+    phoneNumber: "",
+  };
+  if (userName) {
+    if (typeof userName === "string" && userName.includes("@")) {
+      defaultValues.email = userName;
+    } else if (!isNaN(userName)) {
+      defaultValues.phoneNumber = userName.toString();
+    }
+  }
   return (
     <>
         <Modal {...props} size="lg" centered className='rounded-5 '>
@@ -50,6 +63,8 @@ function Register(props) {
                         .then(response => {
                           console.log(response.data);
                          if(response.status === 200){
+                          localStorage.setItem("token", response.data.result.token);
+                          console.log(localStorage.getItem("token"));
                           setUserData(response.data.result);
                           props.setRegister(false);
                          }

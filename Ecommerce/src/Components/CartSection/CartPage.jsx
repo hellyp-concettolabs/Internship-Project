@@ -3,23 +3,25 @@ import OrderSummary from "./OrderSummary"
 import CartProductCard from "./CartProductCard"
 import "./cartpage.scss"
 import axios from "axios"
-import { useContext, useEffect, useState } from "react"
-import { UserContext } from "../UserData/StoreUserContext"
+import {useEffect, useState } from "react"
 import NoProduct from "../ProductNotFoundPage/NoProduct"
 import { useDispatch } from "react-redux";
 import { cartProductCount } from "../CartProductCount/CartProductCount.jsx"
 
+
 function CartPage() {
 
-    const { userData } = useContext(UserContext);
     const dispatch = useDispatch();
     const [loading,setLoading] = useState(false);
     const[cartProductData,setCartProductData] = useState({});
     const[deleteItem,setDeleteItem] = useState(false);
     const[quantityChange,isQuantityChange] = useState(false);
+
+
     const fetchData = async() =>{
+        if(localStorage.getItem("token") !== null){
         setLoading(true);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
         await axios.post(' https://bargainfox-dev.concettoprojects.com/api/my-cart')
         .then((response) =>{
             console.log(response.data.result);
@@ -31,6 +33,7 @@ function CartPage() {
             console.error('Error making Post request:', error);
             setLoading(false);
           })
+        }
     }
 
     useEffect(() => {
@@ -38,7 +41,7 @@ function CartPage() {
         setDeleteItem(false);
         isQuantityChange(false);
     }, [deleteItem,quantityChange])
-    console.log(quantityChange)
+    //console.log(quantityChange)
   return (
     <>
     {cartProductData && cartProductData.user_cart && cartProductData.user_cart.length > 0 ? 

@@ -1,16 +1,39 @@
 import { Button, Col, Container, Form, Image, Row } from "react-bootstrap"
 import "./profile.scss"
 import { useContext } from "react";
-import { UserContext } from "../UserData/StoreUserContext";
+import { UserContext, userResultDetails } from "../UserData/StoreUserContext";
 import {Formik} from 'formik'
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router";
 
 function Profile() {
 
-    const {userData} = useContext(UserContext);
+    const {userData, setUserData} = useContext(UserContext);
+    const navigate = useNavigate();
+
+    const handleAddress = () =>{
+      navigate('/address')
+    }
+    const deleteAccount = async() =>{
+      axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
+      await axios.get(' https://bargainfox-dev.concettoprojects.com/api/user-delete')
+      .then((response) => {
+        if(response.data.status === 200){
+          localStorage.removeItem("token");
+          setUserData(userResultDetails);
+          navigate('/')
+        }
+
+      })
+      .catch(error => {
+        console.error('Error making Get request of Delete Account:', error);
+      })
+    }
 
   return (
-    <div>
+    <>
       {/* BreadCrumb */}
       <Container fluid className="profileBreadcrumb">
           <nav style={{'--bs-breadcrumb-divider': '>'}} aria-label="breadcrumb">
@@ -36,15 +59,17 @@ function Profile() {
             <Col>
             <Formik
                       initialValues={{
-                        name:'',
+                        name:`${userData.name}`,
                         mobile:'',
                         email:`${userData.email}`,
                       }}
                       
                       onSubmit={(values) => {
-                        axios.post('https://bargainfox-dev.concettoprojects.com/api/register', values)
+                        axios.post('https://bargainfox-dev.concettoprojects.com/api/update-profile', values)
                         .then(response => {
                           console.log(response.data);
+                          setUserData(response.data.result)
+                          toast.success("Your Profile is been updated successfully");
                           })
                           .catch(error => {
                             console.error(error);
@@ -52,7 +77,7 @@ function Profile() {
                       }}
                     >
                       {({
-                        //values,
+                        values,
                         //touched,
                         handleChange,
                         handleBlur,
@@ -65,7 +90,7 @@ function Profile() {
                             type="text" 
                             id="name" 
                             name="name"
-                            value={userData.name}
+                            value={values.name}
                             onChange={handleChange}
                             onBlur={handleBlur} 
                             className='signupemail rounded-5 w-100 px-3 py-2'/>
@@ -100,11 +125,22 @@ function Profile() {
                       </form>
                       )}
                     </Formik>
-            <div className=" mt-4 text-center text-primary ">Manage Addresses</div>
+            <div className=" mt-4 d-flex justify-content-center align-items-center gap-2 fw-medium ">
+              <button className=" border-0 p-0 bg-transparent "
+                onClick={() => handleAddress()}>
+                <div className=" text-center text-primary ">Manage Addresses</div>
+              </button>
+              <div className=" text-secondary ">|</div>
+              <button className=" border-0 p-0 bg-transparent "
+                onClick={() => deleteAccount()}>
+                <div>Delete Account</div>
+              </button>
+            </div>
             </Col>
         </Row>
       </Container>
-    </div>
+      <ToastContainer position="top-right"/>
+    </>
   )
 }
 

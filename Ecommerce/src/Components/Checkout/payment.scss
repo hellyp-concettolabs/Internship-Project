@@ -1,16 +1,14 @@
-.addNew-button {
-    background: none;
-  }
-  
-  .payment-border {
-    // border: 2px solid grey;
-    border-radius: 10px;
-    margin-right: 55px;
-    height: 200px;
-  }
-  
-  .editAddress-button {
-    border: none;
-    background-color: white;
-  }
-  
+.productimages{
+    aspect-ratio: 1 !important;
+    object-fit: contain !important;
+    vertical-align: middle !important;
+    border: 1px solid #e9ecef;
+}
+
+.addressSummaryConatiner{
+    width: 67% !important;
+}
+
+.orderSummaryContainer{
+    width: 30% !important;
+}

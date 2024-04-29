@@ -3,8 +3,7 @@ import SingleProductQuantity from "../ProductSection/SingleProductQuantity.jsx"
 import SingleProductTitle from "../ProductSection/SingleProductTitle.jsx"
 import PropTypes from 'prop-types';
 import axios from "axios";
-import { useContext, useEffect, useState} from "react";
-import { UserContext } from "../UserData/StoreUserContext.jsx";
+import { useEffect, useState} from "react";
 // import { useState } from "react";
 
 CartProductCard.propTypes = {
@@ -14,13 +13,12 @@ CartProductCard.propTypes = {
 };
 function CartProductCard({cartData,setDeleteItem,isQuantityChange}) {
 console.log(cartData)
-    const { userData } = useContext(UserContext);
     //const[cartProductData,setCartProductData] = useState({});
     const [productQuantity, setproductQuantity] = useState([]);
 
     
     const handleItemDelete = async(cartProductID) =>{
-            axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+            axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
             await axios.post(' https://bargainfox-dev.concettoprojects.com/api/remove-from-cart',{
                 cart_product_id: [cartProductID],
             })
@@ -34,7 +32,7 @@ console.log(cartData)
               })
         }
         const updateItemQuantity = async (index, id, variationId) => {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
          await axios.post(' https://bargainfox-dev.concettoprojects.com/api/add-to-cart',
                 {
                   quantity: index,
@@ -146,10 +144,10 @@ console.log(cartData)
             <div className=" col-lg-4 col-12 px-2 ">
                 <div className="d-flex flex-lg-column gap-3 text-md-end mt-lg-0 mt-2 ">
                     <span className=" small ">Condition: 
-                        {d.product_info.product_condition && 
+                        {d.product_info && d.product_info.product_condition && 
                          d.product_variation_id === null ?
                          d.product_info.product_condition.title :
-                         d.product_info.product_variation_detail[0].product_condition.title 
+                         d.product_info && d.product_info.product_variation_detail.length === 0 ? (d.product_info.product_condition === null ? ("Brand New") : (d.product_info.product_condition.title)) :(d.product_info.product_variation_detail[0].product_condition.title) 
                         }</span>
                     <span className=" small ">{d.product_info.total_review} sold, 
                         by {d.product_info.vendor_info.first_name} {d.product_info.vendor_info.last_name}, 

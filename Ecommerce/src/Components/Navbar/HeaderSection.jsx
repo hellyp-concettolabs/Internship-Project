@@ -1,4 +1,4 @@
-import { Navbar, Row, Col, Nav, Form, Button, Container, Image, ListGroup, Offcanvas } from 'react-bootstrap';
+import { Navbar, Row, Col, Nav, Form, Button, Container, Image, ListGroup, Offcanvas, Spinner } from 'react-bootstrap';
 import { useContext, useEffect, useState } from 'react';
 import eCart from "../../assets/eCart.svg"
 import search from '../../assets/search-normal.png'
@@ -7,7 +7,7 @@ import shopping_cart from '../../assets/shopping-cart.png'
 import usericon from '../../assets/user.png'
 import "../Navbar/header.scss"
 import Signuppop from './Signuppop';
-import { UserContext } from '../UserData/StoreUserContext';
+import { UserContext, userResultDetails } from '../UserData/StoreUserContext';
 import axios from 'axios';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
@@ -29,11 +29,11 @@ function HeaderSection() {
     },
     {
       item: `Your Orders`,
-      link: `profile`
+      link: `orders`
     },
     {
       item: `Address`,
-      link: `profile`
+      link: `address`
     },
     {
       item: `Notifications`,
@@ -44,10 +44,9 @@ function HeaderSection() {
     //   link: `profile`
     // },
   ]
-  const { userData } = useContext(UserContext);
-  const { setUserData } = useContext(UserContext);
-
+  const { userData , setUserData } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [isCartLoading,setIsCartLoading] = useState(false);
   const [searchResult,setSearchResult] = useState([])
   const [query,setQuery] = useState('');
   const [searchText,setSearchText] = useState("");
@@ -57,12 +56,13 @@ function HeaderSection() {
   const navigate = useNavigate();
 //For Logout
   const handleLogout = () => {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
     axios.get(' https://bargainfox-dev.concettoprojects.com/api/logout')
       .then(response => {
         console.log(response);
         if (response.data.status === 200) {
-          setUserData('');
+          localStorage.removeItem("token");
+          setUserData(userResultDetails);
         }
       })
       .catch(error => {
@@ -102,23 +102,27 @@ function HeaderSection() {
   }
 
   const cartQuantity = async () => {
-    if(userData.token){
-    axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+    setIsCartLoading(true);
+    if(localStorage.getItem("token") !== null){
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
     axios.get(' https://bargainfox-dev.concettoprojects.com/api/cart-item-count')
       .then(response => {
         //console.log(response);
         if (response.data.status === 200) {
           setCartProductCount(response.data.result);
+          setIsCartLoading(false);
         }
       })
       .catch(error => {
         console.log(error);
       });
-  }
+    }else{
+      setIsCartLoading(false);
+    }
   }
   useEffect(() => {
     cartQuantity();
-  },[cartProductQuantity,userData.token])
+  },[cartProductQuantity,localStorage.getItem("token")])
 
   return (
     <div>
@@ -187,7 +191,14 @@ function HeaderSection() {
               <Nav.Link href='/cart'>
                 <div className='shopping-cart-container'>
                   <Image src={shopping_cart} className='img-fluid shopping-cart-icon' />
-                  <div className='shopping-cart-count'>{userData.token ? cartProductCount.cart_item_count : 0}</div>
+                  <div className='shopping-cart-count'>
+                    {localStorage.getItem("token") === null ? 0 : 
+                    (isCartLoading ? 
+                      <div className=" d-flex justify-content-center align-items-center ">
+                          <Spinner animation="border" variant='light' size='sm'/>
+                      </div> :
+                    cartProductCount.cart_item_count)}
+                  </div>
                 </div>
               </Nav.Link>
 
@@ -195,36 +206,51 @@ function HeaderSection() {
                 <Nav.Link href='#user' onClick={() => setShow(true)} className=''>
                   <div className='user-container'><Image src={usericon} className=' img-fluid user-icon' /></div>
                 </Nav.Link>
-                <div className='d-flex flex-column  small d-none d-xl-block'>
-                  <p className='greet mb-0'>
-                    {userData ? (`Welcome ${userData.name},`) : (`Hello there,`)}
-                  </p>
-                  <span className='signin'>
-                    {userData ? ('ACCOUNT & ORDER') : ('SIGN IN/REGISTER')}
-                  </span>
-                </div>
-                <div className={` p-0  dropdown-menu position-md-static ${userData ? 'dropdown-after-login' : 'dropdown-before-login' }`} id="SignupDropdown" >
+                {localStorage.getItem("token") === null ?
+                  (<div className='d-flex flex-column  small d-none d-xl-block'>
+                    <p className='greet mb-0'>
+                      Hello there,
+                    </p>
+                    <span className='signin'>
+                      SIGN IN/REGISTER
+                    </span>
+                  </div>):
+                (userData.name !== "" ? 
+                  (<div className='d-flex flex-column  small d-none d-xl-block'>
+                    <p className='greet mb-0'>
+                      Welcome {userData.name},
+                    </p>
+                    <span className='signin'>
+                      ACCOUNT & ORDER
+                    </span>
+                  </div>) : 
+                  <div className=" d-flex justify-content-center align-items-center ">
+                    <Spinner animation="border" variant='primary' />
+                  </div> ) }
+                <div className={` p-0  dropdown-menu position-md-static ${userData.name !== "" ? 'dropdown-after-login' : 'dropdown-before-login' }`} id="SignupDropdown" >
                   <ListGroup as="ul" className=' dropdown-item p-0 '>
-                    {!userData ?
+                    {userData.name === "" ?
                       (<ListGroup.Item as="li" className=' px-2'>
                         <Button onClick={() => setShow(true)} className=' text-center bg-primary text-light border-0 rounded-5 py-2 px-3 '>Login/Register</Button>
                       </ListGroup.Item>) :
-                      (<ListGroup.Item as="li" className=' px-2'>
-                        <a href='/profile' className=' d-flex align-items-center gap-2 text-black text-decoration-none '>
+                      (<button onClick={() => {navigate(`/profile`)}} className=' text-decoration-none border-0 bg-transparent p-0'>
+                      <ListGroup.Item as="li" className='d-flex align-items-center gap-2 text-black px-2'>
                           <Image src={usericon} className=' img-fluid' style={{ width: "28px", height: "28px" }} />
                           <p className=' m-0 ' style={{ fontSize: "15px", fontWeight: "500", color: "#0036FF", textTransform: "capitalize" }}>
                             {userData.name}
                             <div style={{ fontSize: "13px", color: "black", fontWeight: "500" }}>View Profile</div>
                           </p>
-                        </a>
-                      </ListGroup.Item>)
+                      </ListGroup.Item>
+                      </button>)
                     }
+            
                     {data.map((d, i) => (
-                      <a href={`/${d.link}`} key={i} className=' text-decoration-none '>
+                      <button onClick={() => { localStorage.getItem("token") === null ? (setShow(true)) :
+                        navigate(`/${d.link}`)}} key={i} className=' text-decoration-none border-0 bg-light p-0 '>
                         <ListGroup.Item as="li" className='dropdown-item '>{d.item}</ListGroup.Item>
-                      </a>
+                      </button>
                     ))}
-                    {userData &&
+                    {userData.name !== "" &&
                       (<ListGroup.Item as="li" className=' px-2'>
                         <Button onClick={handleLogout} className=' text-center bg-primary text-light border-0 rounded-5 p-1 w-100 '>Logout</Button>
                       </ListGroup.Item>)}
@@ -234,6 +260,7 @@ function HeaderSection() {
             </Col>
           </Row>
           <Signuppop show={show} setShow={setShow} onHide={() => setShow(false)} />
+
 
           <Row>
             <Offcanvas show={showList} onHide={handleHamburgerClose}>

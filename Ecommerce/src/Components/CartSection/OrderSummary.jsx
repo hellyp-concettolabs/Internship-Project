@@ -44,17 +44,13 @@ function OrderSummary({cartDetail}) {
                     <div>Subtotal:</div>
                     <div>${cartDetail.product_sub_total}</div>
                 </div>
-                <div className=" d-flex justify-content-between align-items-center ">
-                    <div>Delivery:</div>
-                    <div className=" text-success ">FREE</div>
-                </div>
                 </div>
                 <div className=" d-flex justify-content-between align-items-center mt-2 mb-2 fw-bold ">
                     <div>Total ({cartDetail.user_cart && cartDetail.user_cart.length} Items):</div>
                     <div>${cartDetail.grand_total}</div>
                 </div>
                 <Button variant="primary" className=" w-100 rounded-5 "
-                  onClick={() => navigate("/checkout")}>
+                  onClick={() => navigate("/checkout/address")}>
                   Proceed to Checkout
                 </Button>
                 <div className=" mt-2 small text-start ">Order within {time} and choose {shipping} to get it by {date}</div>

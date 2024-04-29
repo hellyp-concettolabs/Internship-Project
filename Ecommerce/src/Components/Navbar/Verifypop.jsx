@@ -95,6 +95,7 @@ function Verifypop(props) {
     {otp: combinedOtp,
     email: props.useremail})
     .then(response => {
+    localStorage.setItem("token", response.data.result.token);
     console.log(response.data);
     console.log(response.data.result);
     setOtp(Array(length).fill(""));

@@ -28,10 +28,10 @@ function SingleProductCartBtn({productData, productQuantity,setAddToCart}) {
   const[loading,setLoading] = useState(false);
 
   const handleAddtocart = async() =>{
-    if(userData){
+    if(userData.name !== ""){
       setLoading(true);
       if(productData && productData.size && productData.size.length === 0){
-        axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
         await axios.post(` https://bargainfox-dev.concettoprojects.com/api/add-to-cart`,{
           product_id: productData.id,
           product_variation_id: productData.product_variation_id,
@@ -51,7 +51,7 @@ function SingleProductCartBtn({productData, productQuantity,setAddToCart}) {
         })
       }
       else if(productData && productData.size && productData.size.length > 0){
-        axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
         await axios.post(` https://bargainfox-dev.concettoprojects.com/api/add-to-cart`,{
           product_id: productData.id,
           product_variation_id: productData.product_variation_id,
