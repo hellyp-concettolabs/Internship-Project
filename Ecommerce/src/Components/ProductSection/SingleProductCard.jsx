@@ -8,6 +8,7 @@ SingleProductCard.propTypes = {
   };
 function SingleProductCard(props) {
   return (
+    <>
         <div className=" border rounded-4 SProductCard">
             <div>
                 <Image src={props.d.product_images[0].product_image_url} className="SProductCardimg img-fluid" />
@@ -18,8 +19,8 @@ function SingleProductCard(props) {
                 <div className="sstars d-flex justify-content-start "><Star/></div>
                 <div className=" d-flex justify-content-between align-items-center ">
                     <div className=" d-flex justify-content-between align-items-center gap-2 ">
-                        <span className="sdisprice"><sup>$</sup>{props.d.my_sale_price}</span>
-                        <span className="sactualprice text-decoration-line-through ">${props.d.main_rrp}</span>
+                        <span className="sdisprice"><sup>$</sup>{Math.floor(props.d.my_sale_price)}</span>
+                        <span className="sactualprice text-decoration-line-through ">${Math.floor(props.d.main_rrp)}</span>
                     </div>
                     <div>
                         <span className="sdiscount d-none d-md-flex ">{Math.floor(props.d.discount_percentage)}%</span>
@@ -27,6 +28,7 @@ function SingleProductCard(props) {
                 </div>
             </div>
         </div>
+    </>
   )
 }
 

@@ -6,7 +6,12 @@ $base-font2-size :20px;
   padding-right: 15px;
   padding-bottom: 30px;
 }
-
+.singleproductwishlist{
+  position: absolute;
+  margin-top: 12px !important;
+  margin-left: 500px !important;
+  height: 40px;
+}
 
 @media (min-width:426px) {
   #productdetailcontainer{

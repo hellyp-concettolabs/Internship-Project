@@ -1,108 +1,31 @@
-.search{
+$base-font-size:14px;
+$md:768px;
+$primary-color:#0063FF;
+$secondary-color:#707070;
+$background-color:#ddd;
+@mixin breakpoint($type, $size) {
+  @if $type == 'min' {
+    @media (min-width: $size) {
+      @content;
+    }
+  }
+  @else if $type == 'max' {
+    @media (max-width: $size) {
+      @content;
+    }
+  }
+}
+
+// Search Bar
+  .centersection{
+    position: relative;
+  }
+  .search{
     .search-icon{
       background-color: #0063FF;
     }
   }
-
-  .searchtext::placeholder {
-    font-size: 14px !important;
-    color: #707070 !important;
-    font-weight: 450;
-  }
-  .form-control{
-    border-end-end-radius: 0px !important;
-    border-start-end-radius: 0px !important;
-  }  :focus{
-    box-shadow: none !important;
-  }
-
-  .greet{
-    font-size: 14px;
-    text-align: right;
-  }
-  .signin{
-    font-size: 14px;
-    font-weight: 600;
-  }
-
-  #responsive-navbar-nav{
-    z-index: 1;
-    width: 75%;
-    transition: 0.2s;
-  }
- .dropdown-before-login :hover {
-   background-color: #ddd;
- }
- .dropdown-after-login :hover{
-  background-color: #ddd;
- }
- @media (min-width:768px) {
- .Signup:hover >
-   .dropdown-before-login {
-   display: block;
-   cursor: pointer;
-   position: absolute;
-   z-index: 1;
-   margin-top: 290px;
- }
- .Signup:hover >
- .dropdown-after-login {
- display: block;
- cursor: pointer;
- position: absolute;
- z-index: 1;
- margin-top: 350px;
-}
- }
-
-  #SignupDropdown {
-    right: 5px;
-  }
- 
-
- .shopping-cart-container,.wishlist-container,.user-container {
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-}
-@media (max-width:768px) {
-  .shopping-cart-container,.wishlist-container,.user-container {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-.shopping-cart-count, .wishlist-count {
-  position: absolute;
-  top: -10px; 
-  right: -10px; 
-  width: 22px; 
-  height: 22px; 
-  background-color: #0036FF; 
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px; 
-  font-weight: 600;
-  color: white;
-}
-@media (max-width:768px) {
-  .shopping-cart-count, .wishlist-count{
-    width: 14px;
-    height: 14px;
-    font-size: 6px;
-    top: -4px; 
-    right: -5px;
-  }
-}
-.centersection{
-  position: relative;
-}
-  
-  #async-example{
+  #searchResult{
     list-style: none;
     width: 116% !important;
     .suggestiontext{
@@ -120,6 +43,96 @@
       margin: 0px 12px 0px 0px;
     }
   }
+  .searchtext::placeholder {
+    font-size: $base-font-size !important;
+    color: $secondary-color !important;
+    font-weight: 450;
+  }
+  .form-control{
+    border-end-end-radius: 0px !important;
+    border-start-end-radius: 0px !important;
+  }  :focus{
+    box-shadow: none !important;
+  }
+
+  // User Login and Signin status
+  .greet{
+    font-size: $base-font-size;
+    text-align: right;
+  }
+  .signin{
+    font-size: $base-font-size;
+    font-weight: 600;
+  }
+  .dropdown-before-login :hover {
+    background-color: $background-color;
+  }
+  .dropdown-after-login :hover{
+   background-color: $background-color;
+  }
+  @include breakpoint(min,$md){
+    .Signup:hover >
+      .dropdown-before-login {
+      display: block;
+      cursor: pointer;
+      position: absolute;
+      z-index: 1;
+      margin-top: 330px;
+    }
+    .Signup:hover >
+    .dropdown-after-login {
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    margin-top: 390px;
+    } 
+  }
+  #SignupDropdown {
+    right: 5px;
+  }
+ 
+
+  .shopping-cart-container,.wishlist-container,.user-container {
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    @include breakpoint(max,$md){
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+
+  .shopping-cart-count, .wishlist-count {
+    position: absolute;
+    top: -10px; 
+    right: -10px; 
+    width: 22px; 
+    height: 22px; 
+    background-color: $primary-color; 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px; 
+    font-weight: 600;
+    color: white;
+    @include breakpoint(max,$md ){
+      width: 14px;
+      height: 14px;
+      font-size: 6px;
+      top: -4px; 
+      right: -5px;
+    }
+  }
+
+
+
+  
+
 
 
 

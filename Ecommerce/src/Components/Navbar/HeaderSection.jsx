@@ -2,7 +2,7 @@ import { Navbar, Row, Col, Nav, Form, Button, Container, Image, ListGroup, Offca
 import { useContext, useEffect, useState } from 'react';
 import eCart from "../../assets/eCart.svg"
 import search from '../../assets/search-normal.png'
-// import wishlist from '../../assets/wishlist.png'
+import wishlist from '../../assets/wishlist.png'
 import shopping_cart from '../../assets/shopping-cart.png'
 import usericon from '../../assets/user.png'
 import "../Navbar/header.scss"
@@ -39,10 +39,10 @@ function HeaderSection() {
       item: `Notifications`,
       link: `profile`
     },
-    // {
-    //   item: `Wishlists`,
-    //   link: `profile`
-    // },
+    {
+      item: `Wishlists`,
+      link: `wishlist`
+    },
   ]
   const { userData , setUserData } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
@@ -52,7 +52,9 @@ function HeaderSection() {
   const [searchText,setSearchText] = useState("");
   
   const [cartProductCount,setCartProductCount] = useState("");
-  const cartProductQuantity = useSelector((state) => state.cartCount.count)
+  const cartProductQuantity = useSelector((state) => state.cartCount.count);
+  const [wishListProductCount,setWishListProductCount] = useState("");
+  const wishListProductQuantity = useSelector((state) => state.wishListCount.count);
   const navigate = useNavigate();
 //For Logout
   const handleLogout = () => {
@@ -124,6 +126,29 @@ function HeaderSection() {
     cartQuantity();
   },[cartProductQuantity,localStorage.getItem("token")])
 
+  const wishlistQuantity = async () => {
+    setIsCartLoading(true);
+    if(localStorage.getItem("token") !== null){
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
+    axios.get(' https://bargainfox-dev.concettoprojects.com/api/wishlist-count')
+      .then(response => {
+        //console.log(response);
+        if (response.data.status === 200) {
+          setWishListProductCount(response.data.result);
+          setIsCartLoading(false);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    }else{
+      setIsCartLoading(false);
+    }
+  }
+  useEffect(() => {
+    wishlistQuantity();
+  },[wishListProductQuantity,localStorage.getItem("token")])
+
   return (
     <div>
       <header className='shadow-sm mb-3'>
@@ -144,7 +169,7 @@ function HeaderSection() {
               <div className=' d-flex '>
               <AsyncTypeahead
                 filterBy={filterBy}
-                id="async-example"
+                id="searchResult"
                 className="w-100 "
                 isLoading={isLoading}
                 labelKey="name"
@@ -181,12 +206,19 @@ function HeaderSection() {
             </Col>
 
             <Col className=' rightsection d-flex align-items-center gap-3 gap-sm-4 justify-content-end '>
-              {/* <Nav.Link href='#wishlist'> */}
+              <Nav.Link href='/wishlist'>
                 <div className='wishlist-container'>
-                  {/* <Image src={wishlist} className=' img-fluid wishlist-icon' /> */}
-                  {/* <div className='wishlist-count'>0</div> */}
+                  <Image src={wishlist} className=' img-fluid wishlist-icon' />
+                  <div className='wishlist-count'>
+                    {localStorage.getItem("token") === null ? 0 : 
+                    (isCartLoading ? 
+                      <div className=" d-flex justify-content-center align-items-center ">
+                          <Spinner animation="border" variant='light' size='sm'/>
+                      </div> :
+                    wishListProductCount.wishlistcount)}
+                  </div>
                 </div>
-              {/* </Nav.Link> */}
+              </Nav.Link>
 
               <Nav.Link href='/cart'>
                 <div className='shopping-cart-container'>
@@ -215,7 +247,7 @@ function HeaderSection() {
                       SIGN IN/REGISTER
                     </span>
                   </div>):
-                (userData.name !== "" ? 
+                (localStorage.getItem("token") !== null && userData.name !== "" ? 
                   (<div className='d-flex flex-column  small d-none d-xl-block'>
                     <p className='greet mb-0'>
                       Welcome {userData.name},

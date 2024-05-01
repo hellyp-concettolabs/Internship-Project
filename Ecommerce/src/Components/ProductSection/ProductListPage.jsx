@@ -9,6 +9,7 @@ import "./productlist.scss"
 import PaginationDetail from "../PaginationSection/PaginationDetail.jsx"
 import{useLocation, useNavigate} from 'react-router'
 import NoProduct from "../ProductNotFoundPage/NoProduct.jsx";
+import WishListBtn from "../WishListSection/WishListBtn.jsx";
 
 function ProductListPage() {
 
@@ -146,7 +147,6 @@ function ProductListPage() {
     })
     .catch(error =>{
       console.error('Error making GET request:', error);
-      setLoading(false);
     })
   }
 
@@ -165,13 +165,17 @@ function ProductListPage() {
       }
     };
 
+    const handleWishListChange = (productId, isWishListed) => {
+      // Update the productData state based on productId and isWishListed
+      setProductData((prevProductData) =>
+        prevProductData.map((product) =>
+          product.id === productId ? { ...product, is_wishlisted: isWishListed } : product
+        )
+      );
+    };
   return (
     <>
-    {loading ? 
-            <div className=" d-flex justify-content-center align-items-center ">
-                <Spinner animation="border" variant="primary" />
-            </div>:
-     (<Container fluid >
+    <Container fluid >
          {/* BreadCrumb */}
         <Row className="productlistcontainer0">
             <nav style={{'--bs-breadcrumb-divider': '>'}} aria-label="breadcrumb">
@@ -262,25 +266,38 @@ function ProductListPage() {
                     </Form>
                 </Col>
               </Row>
-
-              <Row>
+              {loading ? 
+                <div className=" d-flex justify-content-center align-items-center ">
+                    <Spinner animation="border" variant="primary" />
+                </div>:
+                (<>
+                <Row>
                 {productData
                 .map((d) => (
                   <div key={d.id} className="singleproductcard">
+                    <div className="productlistwishlist">
+                      <WishListBtn 
+                        isWishList={d.is_wishlisted} 
+                        d={d}  
+                        id={d.id}
+                        variationId={d.product_variation_detail ? d.product_variation_detail.id : null} 
+                        handleWishListChange={handleWishListChange}/>
+                    </div>
                     <Link
                       className=" text-decoration-none " style={{color:"black"}}
                       to={`/singleproduct/${d.slug}/${d.unique_id}/${d.sku}`}>
                       <SingleProductCard d={d} key={d.id}/>
                     </Link>
                   </div>
-                ))}     
-              </Row>  
+                  ))}     
+                </Row>  
         
-              <Row>
-                <Col>
-                  <PaginationDetail pageNumber={pageNumber} lastpage={pageData.last_page}/>
-                </Col>
-              </Row>
+                <Row>
+                  <Col>
+                    <PaginationDetail pageNumber={pageNumber} lastpage={pageData.last_page}/>
+                  </Col>
+                </Row>
+              </>)} 
             </Col>):
               <Col className=" d-flex justify-content-center productlistsec">
                 <NoProduct heading={'No Product Found'} 
@@ -291,7 +308,7 @@ function ProductListPage() {
 
 
     </Container>
-     )} 
+
 
     </>
   )

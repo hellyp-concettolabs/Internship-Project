@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Form, Image, Row } from "react-bootstrap"
 import { useLocation, useNavigate } from "react-router"
 import axios from "axios";
-import "./payment.scss"
+import "./payment.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Payment() {
 
@@ -21,7 +23,13 @@ function Payment() {
                                                   city:'',
                                                   state:'',
                                                   postcode:'',
-                                                  phone:'',})
+                                                  phone:'',});
+  const [cartItemId,setCartItemId] = useState();
+  // const[storeCardDetail,setStoreCardDetail] = useState({card_holder_name:'',
+  //                                                 card_number:'',
+  //                                                 month:'',
+  //                                                 year:'',
+  //                                                 cvv:'',});
 
 
   const fetchAddress = async () => {
@@ -53,6 +61,7 @@ function Payment() {
       .then((response) => {
         console.log(response.data.result);
         setCartProductData(response.data.result);
+        setCartItemId(response.data.result.user_cart.map((item) => item.id));
       })
       .catch(error => {
         console.error('Error making Post request:', error);
@@ -75,7 +84,67 @@ function Payment() {
       postcode:storeAddress.postcode,
       phone:storeAddress.mobile,})
   }
- console.log(storeBillAdd)
+
+  const handleItemDelete = async() =>{
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
+    await axios.post(' https://bargainfox-dev.concettoprojects.com/api/remove-from-cart',{
+        cart_product_id: cartItemId,
+    })
+    .then((response) =>{
+        console.log(response);
+        if(response.data.status === 200){
+
+          navigate('/cart');
+        }
+    })
+    .catch(error =>{
+        console.error('Error making Post request:', error);
+      })
+}
+
+  const handlePayNow = async() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
+    await axios.post('https://bargainfox-dev.concettoprojects.com/api/place-order',{
+      address_id:addressId,
+      delivery_type_id:deliveryTypeId,
+      shipping_address:{
+        country : storeAddress.country,
+        full_name :storeAddress.full_name,
+        address :storeAddress.address,
+        address2 : storeAddress.address2 ? storeAddress.address2 : '',
+        state :storeAddress.state,
+        city :storeAddress.city,
+        mobile :storeAddress.mobile,
+        postcode :storeAddress.postcode,
+      },
+      billing_address:{
+        country : storeBillAdd.country,
+        full_name :storeBillAdd.full_name,
+        address :storeBillAdd.address,
+        address2 :storeBillAdd.address2 ? storeBillAdd.address2 : '',
+        state :storeBillAdd.state,
+        city :storeBillAdd.city,
+        mobile :storeBillAdd.phone,
+        postcode :storeBillAdd.postcode,
+      },
+      selected_cart:cartItemId
+
+    })
+      .then((response) => {
+        console.log(response);
+        if(response.data.status === 200){
+          toast.success("Place Order Successfully.");
+          setTimeout(() => {
+            handleItemDelete();
+          }, 400);          
+        }
+      })
+      .catch(error => {
+        console.error('Error making Post request:', error);
+      })
+  }
+
+// console.log(storeBillAdd)
   return (
     <>
       <Container fluid className=" my-5">
@@ -252,7 +321,8 @@ function Payment() {
                     type="radio"
                     name="billing_address"
                     id="different_billing_address"
-                    onChange={() => {setDiffBillAdd(""); setDiffBillAdd(true)}}
+                    onChange={() => {setStoreBillAdd({id:storeBillAdd.id,country:'',full_name:'',address:'',address2:'',city:'',
+                                                  state:'',postcode:'',phone:'',}); setDiffBillAdd(true)}}
                 />
                 <span>Use Different Address</span>
               </Col>
@@ -268,9 +338,10 @@ function Payment() {
                         type="text" 
                         id="country" 
                         name="country"
-                        onChange={(e) => 
-                          {const country = e.target.value ;
-                            setDiffBillAdd({country :country})}}
+                        onChange={(e) => setStoreBillAdd((prev) => ({
+                          ...prev,
+                          country: e.target.value
+                        }))}
                         className='signupemail rounded-5 w-100 px-3 py-2'/>
                     </Form.Group>
                     <Form.Group style={{width:"50%"}}>
@@ -279,6 +350,10 @@ function Payment() {
                         type="text" 
                         id="full_name" 
                         name="full_name"
+                        onChange={(e) => setStoreBillAdd((prev) => ({
+                          ...prev,
+                          full_name: e.target.value
+                        }))}
                         className='signupemail rounded-5 w-100 px-3 py-2'/>
                     </Form.Group>
                   </div>
@@ -289,6 +364,10 @@ function Payment() {
                         type="text" 
                         id="address" 
                         name="address"
+                        onChange={(e) => setStoreBillAdd((prev) => ({
+                          ...prev,
+                          address: e.target.value
+                        }))}
                         className='signupemail rounded-5 w-100 px-3 py-2'/>
                     </Form.Group>
                     <Form.Group style={{width:"50%"}}>
@@ -297,6 +376,10 @@ function Payment() {
                         type="text" 
                         id="address2" 
                         name="address2"
+                        onChange={(e) => setStoreBillAdd((prev) => ({
+                          ...prev,
+                          address2: e.target.value
+                        }))}
                         className='signupemail rounded-5 w-100 px-3 py-2'/>
                     </Form.Group>
                   </div>
@@ -307,6 +390,10 @@ function Payment() {
                         type="text" 
                         id="state" 
                         name="state"
+                        onChange={(e) => setStoreBillAdd((prev) => ({
+                          ...prev,
+                          state: e.target.value
+                        }))}
                         className='signupemail rounded-5 w-100 px-3 py-2'/>
                     </Form.Group>
                     <Form.Group style={{width:"50%"}}>
@@ -315,6 +402,10 @@ function Payment() {
                         type="text" 
                         id="city" 
                         name="city"
+                        onChange={(e) => setStoreBillAdd((prev) => ({
+                          ...prev,
+                          city: e.target.value
+                        }))}
                         className='signupemail rounded-5 w-100 px-3 py-2'/>
                     </Form.Group>
                   </div>
@@ -325,6 +416,10 @@ function Payment() {
                         type="text" 
                         id="postcode" 
                         name="postcode"
+                        onChange={(e) => setStoreBillAdd((prev) => ({
+                          ...prev,
+                          postcode: e.target.value
+                        }))}
                         className='signupemail rounded-5 w-100 px-3 py-2'/>
                     </Form.Group>
                     <Form.Group style={{width:"50%"}}>
@@ -333,6 +428,10 @@ function Payment() {
                         type="text" 
                         id="phone" 
                         name="phone"
+                        onChange={(e) => setStoreBillAdd((prev) => ({
+                          ...prev,
+                          phone: e.target.value
+                        }))}
                         className='signupemail rounded-5 w-100 px-3 py-2'/>
                     </Form.Group>
                   </div>
@@ -383,14 +482,14 @@ function Payment() {
                 </div>
                 <hr className=" m-0 "/>
                 <Button variant="primary" className=" w-100 rounded-5 mt-3"
-                  onClick={() => navigate("/checkout/address")}>
+                  onClick={handlePayNow}>
                   Pay Now
                 </Button>
               </Card.Text>
             </Card.Body>
         </Card>
           </Col>
-
+          <ToastContainer />
         </Row>
       </Container>
     </>

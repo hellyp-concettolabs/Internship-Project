@@ -1,0 +1,30 @@
+.wishlist{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    padding-top: 5px;
+    font-size: small;
+    border: 0;
+    height: 28px;
+    position: absolute;
+    background-color: white;
+    color: grey;
+    border-radius: 50%;
+    width: 28px;
+}
+.wishlistactive{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    font-size: small;       
+    padding-top: 5px;
+    border: 0;
+    height: 28px;
+    position: absolute;
+    background-color: blue;
+    color: white;
+    border-radius: 50%;
+    width: 28px;
+}

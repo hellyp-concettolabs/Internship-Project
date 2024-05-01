@@ -8,6 +8,7 @@ import {useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import WishListBtn from "../../WishListSection/WishListBtn";
 function Trending() {
 
   const[trendingProduct,setTrendingProduct] = useState([]);
@@ -60,6 +61,14 @@ function Trending() {
         sliderRef.current.slickNext();
       };
 
+      const handleWishListChange = (productId, isWishListed) => {
+        // Update the productData state based on productId and isWishListed
+        setTrendingProduct((prevProductData) =>
+          prevProductData.map((product) =>
+            product.id === productId ? { ...product, is_wishlisted: isWishListed } : product
+          )
+        );
+      };
   return (
     <>
 
@@ -86,12 +95,20 @@ function Trending() {
             <Slider ref={sliderRef} {...settings}>
                 {trendingProduct.map((d,i) =>(
                   <div key={i}>
-                  <Link
-                    className=" text-decoration-none " style={{color:"black"}}
-                    to={`/singleproduct/${d.slug}/${d.unique_id}/${d.sku}`}>
-                    <ProductCard d={d} key={i}/>
-                    </Link>
+                    <div className="gardenlistwishlist">
+                      <WishListBtn 
+                      isWishList={d.is_wishlisted} 
+                      d={d} 
+                      id={d.id}
+                      variationId={d.product_variation_detail ? d.product_variation_detail.id : null} 
+                      handleWishListChange={handleWishListChange}/>
                     </div>
+                    <Link
+                      className=" text-decoration-none " style={{color:"black"}}
+                      to={`/singleproduct/${d.slug}/${d.unique_id}/${d.sku}`}>
+                      <ProductCard d={d} key={i}/>
+                    </Link>
+                  </div>
                 ))}
             </Slider>
           </Col>

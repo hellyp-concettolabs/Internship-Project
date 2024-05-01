@@ -22,6 +22,7 @@ import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import SingleProductCondition from "./SingleProductCondition.jsx";
+import WishListBtn from "../WishListSection/WishListBtn.jsx";
 
 
 function SingleProductDetail() {
@@ -40,6 +41,7 @@ function SingleProductDetail() {
 
       const fetchData = async() =>{
         //setLoading(true);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
         await axios.get(` https://bargainfox-dev.concettoprojects.com/api/product/detail/${slug}/${unique_id}?/${sku}`)
         .then(response =>{
             const result = response.data.result;
@@ -81,6 +83,7 @@ function SingleProductDetail() {
                 expected_delivery: productVariation?.expected_delivery || result.expected_delivery,
                 total_review: productVariation?.total_review || result.total_review,
                 rating_count: productVariation?.rating_count || result.rating_count,
+                is_wishlisted: productVariation?.is_wishlisted || result.is_wishlisted,
                 is_added_cart: productVariation?.is_added_cart || result.is_added_cart,
                 product_variation_id: productVariation?.product_variation_id,
                 }
@@ -146,7 +149,10 @@ function SingleProductDetail() {
                 </nav>
             </Row>
             <Row className="productimageanddetail py-lg-4 py-2">
-
+                <Col className="singleproductwishlist">
+                    <WishListBtn isWishList={productData.is_wishlisted} d={productData} id={productData.id}
+                       variationId={productData.product_variation_id ? productData.product_variation_id : null} />
+                </Col>
                 <Col className="border-bottom pb-3 ">
                     <ImageAndThumbnail productImage={productData.product_images}/>
                 </Col>

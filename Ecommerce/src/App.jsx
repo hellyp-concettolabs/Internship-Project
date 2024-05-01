@@ -14,6 +14,7 @@ import store from "./app/store.js";
 import Payment from "./Components/Checkout/Payment.jsx";
 import ManageAddress from "./Components/Navbar/ManageAddress.jsx";
 import YourOrders from "./Components/Navbar/YourOrders.jsx";
+import WishList from "./Components/WishListSection/WishList.jsx";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path="/checkout/payment" element={<Payment/>}/>
             <Route path="/address" element={<ManageAddress/>}/>
             <Route path="/orders" element={<YourOrders/>}/>
+            <Route path="/wishlist" element={<WishList/>}/>
           </Routes>
           <Footer/>
         </BrowserRouter>

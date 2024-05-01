@@ -13,11 +13,10 @@ CartProductCard.propTypes = {
 };
 function CartProductCard({cartData,setDeleteItem,isQuantityChange}) {
 console.log(cartData)
-    //const[cartProductData,setCartProductData] = useState({});
     const [productQuantity, setproductQuantity] = useState([]);
 
     
-    const handleItemDelete = async(cartProductID) =>{
+        const handleItemDelete = async(cartProductID) =>{
             axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
             await axios.post(' https://bargainfox-dev.concettoprojects.com/api/remove-from-cart',{
                 cart_product_id: [cartProductID],
@@ -25,7 +24,6 @@ console.log(cartData)
             .then((response) =>{
                 console.log(response);
                 setDeleteItem(true);
-                //setCartProductData(response.data.result);
             })
             .catch(error =>{
                 console.error('Error making Post request:', error);

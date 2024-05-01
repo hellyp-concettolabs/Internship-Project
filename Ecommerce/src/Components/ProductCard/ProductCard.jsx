@@ -13,7 +13,7 @@ function ProductCard(props) {
                 {props.d.product_images && props.d.product_images.length > 0 &&(
                 <Image src={props.d.product_images[0].product_image_url} className="productimg img-fluid"/>
                 )}
-                <span className="discount1 d-flex d-md-none ">-{props.d.discount_percentage}%</span>
+                <span className="discount1 d-flex d-md-none ">{Math.floor(props.d.discount_percentage)}%</span>
             </div>
             <div className="detailsection ">
                 <div className="cardtitle"><p className="titletext m-0 ">{props.d.name}</p></div>

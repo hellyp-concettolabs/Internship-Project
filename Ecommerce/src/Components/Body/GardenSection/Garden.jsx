@@ -9,6 +9,7 @@ import "./garden.scss"
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import WishListBtn from "../../WishListSection/WishListBtn";
 
 function Garden() {
 
@@ -75,7 +76,15 @@ function Garden() {
       const goToNext = () => {
         sliderRef.current.slickNext();
       };
-
+      
+      const handleWishListChange = (productId, isWishListed) => {
+        // Update the productData state based on productId and isWishListed
+        setProductData((prevProductData) =>
+          prevProductData.map((product) =>
+            product.id === productId ? { ...product, is_wishlisted: isWishListed } : product
+          )
+        );
+      };
   return (
     <>
      <Container className="gardencontainer">
@@ -100,6 +109,14 @@ function Garden() {
             <Slider ref={sliderRef} {...settings}>
                 {productData.map((d,i) =>(
                   <div key={i}>
+                    <div className="gardenlistwishlist">
+                      <WishListBtn 
+                        isWishList={d.is_wishlisted} 
+                        d={d} 
+                        id={d.id}
+                        variationId={d.product_variation_detail ? d.product_variation_detail.id : null}
+                        handleWishListChange={handleWishListChange} />
+                    </div>
                   <Link
                     className=" text-decoration-none " style={{color:"black"}}
                     to={`/singleproduct/${d.slug}/${d.unique_id}/${d.sku}`}>
