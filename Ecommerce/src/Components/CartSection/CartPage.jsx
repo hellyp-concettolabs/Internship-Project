@@ -44,13 +44,12 @@ function CartPage() {
     //console.log(quantityChange)
   return (
     <>
-    {cartProductData && cartProductData.user_cart && cartProductData.user_cart.length > 0 ? 
-    <>
      {loading ? 
             <div className=" d-flex justify-content-center align-items-center ">
                 <Spinner animation="border" variant="primary" />
             </div>:
-     (<Container fluid>
+     (!loading && cartProductData && cartProductData.user_cart && cartProductData.user_cart.length > 0 &&
+     <Container fluid>
         {/* BreadCrumb */}
             <Row>
                 <nav style={{'--bs-breadcrumb-divider': '>'}} aria-label="breadcrumb">
@@ -89,15 +88,15 @@ function CartPage() {
             </Row>
         </Container> 
      )}
-     </> :(
-        <Container fluid style={{padding:"80px 50px 60px"}}>
-            <Col className=" d-flex justify-content-center productlistsec">
-                <NoProduct heading={'Your cart is empty'} 
-                  desc={`Looks like you have not added something to you cart.
-                  Go ahead & explore top categories.`}/>
-            </Col>
-        </Container>
-     )}
+{!loading && cartProductData && cartProductData.user_cart && cartProductData.user_cart.length <= 0 &&
+            <Container fluid style={{padding:"80px 50px 60px"}}>
+                <Col className=" d-flex justify-content-center productlistsec">
+                    <NoProduct heading={'Your cart is empty'} 
+                      desc={`Looks like you have not added something to you cart.
+                      Go ahead & explore top categories.`}/>
+                </Col>
+            </Container>
+        }
     </>
   )
 }

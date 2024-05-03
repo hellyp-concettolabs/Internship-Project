@@ -33,7 +33,7 @@ function WishList() {
     useEffect(() => {
         handleWishlist();
         setRemoveWishListItem(false);
-      },[removeWishListItem])
+    },[removeWishListItem])
 
     const handleWishListChange = (productId, isWishListed) => {
       // Update the productData state based on productId and isWishListed
@@ -46,8 +46,6 @@ function WishList() {
     };
       // console.log(wishListData)
   return (
-    <>
-    {wishListData && wishListData.length > 0 ? 
     <>
      {loading ? 
             <div className=" d-flex justify-content-center align-items-center ">
@@ -92,15 +90,17 @@ function WishList() {
                 ))}     
               </Row>    
         </Container> 
-        </>)}
-        </> :(
+        {!loading && wishListData <= 0 &&
         <Container fluid style={{padding:"80px 50px 60px"}}>
             <Col className=" d-flex justify-content-center productlistsec">
                 <NoProduct heading={'Your wishlist is empty'} 
                   desc={`Looks like you have not added something to you wishlist.
                   Go ahead & explore top categories.`}/>
             </Col>
-        </Container>)}
+        </Container>
+        }
+        </>)}
+        
     </>
   )
 }

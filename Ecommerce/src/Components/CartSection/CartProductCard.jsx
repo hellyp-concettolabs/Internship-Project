@@ -84,8 +84,9 @@ function CartProductCard({cartData,setDeleteItem,isQuantityChange}) {
 
             <div className=" d-flex align-items-center gap-4">
                 {/* <Form.Check checked></Form.Check> */}
-                <div className="  col-sm-2 col-3" >
-                    <Image src={d.product_info.product_images[0] && d.product_info.product_images[0].product_image_url} className=" img-fluid rounded-4"/>
+                <div className="  col-sm-2 col-3 d-flex align-items-center justify-content-center " >
+                    <Image src={d.product_info.product_images[0] && d.product_info.product_images[0].product_image_url} className=" img-fluid rounded-4"
+                        style={{height:"100px"}}/>
                 </div>
                 <div className=" col-lg-10 d-flex flex-column gap-2">
                         <div className="cartproducttitle">

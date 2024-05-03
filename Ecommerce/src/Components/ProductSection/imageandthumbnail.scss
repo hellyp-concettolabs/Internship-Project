@@ -1,86 +1,31 @@
-.thumbnail-slider-wrap  .slick-slide .slick-slide-thumbimage{
-  align-items: center;
-  width: 70px !important;
-  height: 70px !important;
-  border-radius: 20%;
-  margin-bottom: 10px;
-} 
-
 .image-slider-wrap{
-    width: 82% !important;
+    width: 80% !important;
     height: 346px !important;
 }
-
 .slick-slide-image{
     margin: 0 auto !important;
     height: 346px !important;
 }
-
 .thumbnail-slider-wrap{
-    height: 346px !important;
-    overflow: hidden;
+    max-height: 346px !important;
+    overflow-y: auto;
+    padding: 0 !important;
+    width: fit-content;
+}
+.slick-slider .slick-track{
+    overflow-y: auto;
 }
 .slick-slider .slick-track, .slick-slider .slick-list{
     padding: 0 !important;
 }
+.thumbnail-slider-wrap  .slick-slide .slick-slide-thumbimage{
+    align-items: center;
+    width: 70px !important;
+    height: 70px !important;
+    border-radius: 20%;
+    margin-bottom: 10px;
+  } 
 
-@media (max-width:998px) {
-    .image-slider-wrap{
-        width: 80% !important;
-        height: 346px !important;
-    }
-    .slick-slide-image{
-        width: auto !important;
-        height: 346px !important;
-    }
-    .thumbnail-slider-wrap{
-        width: 20% !important;
-    }
 
-}
-
-@media (max-width:794px) {
-    .image-slider-wrap{
-        width: 80% !important;
-        height: 340px !important;
-    }
-    .slick-slide-image{
-        width: auto !important;
-        height: 340px !important;
-    }
-    .thumbnail-slider-wrap{
-        width: 20% !important;
-    }
-    .slick-slide-thumbimage{
-        width: 50% !important;
-    }
-}
-
-@media (max-width:650px) {
-    .thumbnail-slider-wrap  .slick-slide .slick-slide-thumbimage{
-        width: 60% !important;
-    }
-}
-@media (max-width:425px) {
-    .slick-slide-thumbimage{
-        width: 70% !important;
-    }
-}
-@media (max-width:350px) {
-    .image-slider-wrap{
-        width: 80% !important;
-        height: 60% !important;
-    }
-    .slick-slide-image{
-        width: 100% !important;
-        height: auto !important;
-    }
-    .thumbnail-slider-wrap{
-        width: 20% !important;
-    }
-    .thumbnail-slider-wrap  .slick-slide .slick-slide-thumbimage{
-        width: 80% !important;
-    }
-}
 
 

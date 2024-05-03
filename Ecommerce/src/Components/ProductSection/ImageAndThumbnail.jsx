@@ -39,10 +39,11 @@ function ImageAndThumbnail({productImage = []}) {
     asNavFor: '.slider-for',
     dots: false,
     arrows:false,
-    centerMode: true,
+    scroll:false,
+    // centerMode: true,
     swipeToSlide: true,
     focusOnSelect: true,
-    //centerPadding: '10px',
+    speed: 500,
     infinite : productImage.length > 1,
     vertical: true,
     verticalSwiping: true,
@@ -52,7 +53,7 @@ function ImageAndThumbnail({productImage = []}) {
     <>
       <Row className="slider-wrapper d-flex flex-row-reverse ">
         {/* ----------product main image---------*/}
-        <Col className="image-slider-wrap bg-body-secondary col-10 ">
+        <Col className="image-slider-wrap bg-body-secondary">
           <Slider {...settingsMain} asNavFor={nav2} ref={slider => (setSlider1(slider))}>
               {productImage && productImage.map((slide,i) =>
                   <div className="slick-slide" key={i} >

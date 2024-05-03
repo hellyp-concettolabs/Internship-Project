@@ -5,10 +5,10 @@ import {Formik} from 'formik'
 import axios from 'axios';
 
 AddAddressPopUp.propTypes = {
-    onHide: PropTypes.function,
-    show: PropTypes.boolean,
-    setShow: PropTypes.function,
-    setNewAdd: PropTypes.function,
+    onHide: PropTypes.func,
+    show: PropTypes.bool,
+    setShow: PropTypes.func,
+    setNewAdd: PropTypes.func,
     addressId: PropTypes.number,
     storeEditAddress: PropTypes.object
   };

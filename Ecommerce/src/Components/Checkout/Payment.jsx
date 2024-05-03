@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Form, Image, Row } from "react-bootstrap"
+import { Button, Card, Col, Container, Form, Image, Row, Spinner } from "react-bootstrap"
 import { useLocation, useNavigate } from "react-router"
 import axios from "axios";
 import "./payment.scss";
@@ -164,23 +164,32 @@ function Payment() {
                 <div className=" fw-bold fs-5 text-secondary ">
                   Delivery Address
                 </div>
-                {storeAddress &&
-                <div className=" d-flex flex-column justify-content-center p-4 border border-1 border-secondary rounded-3 ">
-                  <span className=" fw-bold ">{storeAddress.full_name}</span>
-                  <span>{storeAddress.address}, {storeAddress.address2 === null ?(""): (`${storeAddress.address2},`)} {storeAddress.city}, {storeAddress.state}, {storeAddress.country}, {storeAddress.postcode}</span>
-                  <span className=" fw-bold ">Phone Number : <span className=" fw-normal ">{storeAddress.mobile}</span></span>
-                </div>
-                }
+                {!storeAddress ? 
+                (
+                  <div className=" d-flex justify-content-center align-items-center ">
+                    <Spinner animation="border" variant="primary" />
+                  </div>
+                ):
+                (
+                  <>
+                    <div className=" d-flex flex-column justify-content-center p-4 border border-1 border-secondary rounded-3 ">
+                      <span className=" fw-bold ">{storeAddress.full_name}</span>
+                      <span>{storeAddress.address}, {storeAddress.address2 === null ?(""): (`${storeAddress.address2},`)} {storeAddress.city}, {storeAddress.state}, {storeAddress.country}, {storeAddress.postcode}</span>
+                      <span className=" fw-bold ">Phone Number : <span className=" fw-normal ">{storeAddress.mobile}</span></span>
+                    </div>
 
-                <div className="d-flex align-items-baseline justify-content-end ">
-                  <button
-                    className="editadd text-primary fw-bold d-flex align-items-center justify-content-end"
-                    onClick={() => {
-                      navigate('/checkout/address')
-                    }}>
-                    Change address
-                  </button>
-                </div>
+
+                    <div className="d-flex align-items-baseline justify-content-end ">
+                      <button
+                        className="editadd text-primary fw-bold d-flex align-items-center justify-content-end"
+                        onClick={() => {
+                          navigate('/checkout/address')
+                        }}>
+                        Change address
+                      </button>
+                    </div>
+                  </>
+                )}
               </Col>
               <Col className=" col-5 px-4 " style={{borderLeft:"2px solid #f5f5fc"}}>
                 <Row className=" fw-bold fs-5 text-secondary ">
@@ -223,25 +232,32 @@ function Payment() {
               </div>
               
               <div className="d-flex flex-wrap justify-content-start align-items-center gap-4 ">
-              {cartProductData && cartProductData.user_cart && cartProductData.user_cart.map((d) => (
-                <Col key={d.id} className=" col-2">
-                <div>
-                    <Image src={d.product_info.product_images[0] && d.product_info.product_images[0].product_image_url} className="productimages img-fluid rounded-4 "/>
-                    <div className=" d-flex align-items-center gap-3 mt-3">
-                    <span className=" fw-bold fs-5"><sup>$</sup>{Math.floor(d.product_variation_id === null ?  
-                        d.product_info.sale_price : 
-                        d.product_info.product_variation_detail && d.product_info.product_variation_detail[0].sale_price)}</span>
-                    <span className=" small text-decoration-line-through">${Math.floor(d.product_variation_id === null ?  
-                        d.product_info.main_rrp : 
-                        d.product_info.product_variation_detail && d.product_info.product_variation_detail[0].rrp)}</span>
-                    </div>
-                    <div>
-                      <span className=" fw-semibold text-secondary ">Quantity:</span>
-                      <span className=" fw-bold "> {d.quantity}</span>
-                    </div>
+
+              {!cartProductData.user_cart ? 
+              (
+                <div className=" d-flex justify-content-center align-items-center ">
+                  <Spinner animation="border" variant="primary" />
                 </div>
+              ) : 
+              (cartProductData && cartProductData.user_cart && cartProductData.user_cart.map((d) => (
+                <Col key={d.id} className=" col-2">
+                  <div>
+                      <Image src={d.product_info.product_images[0] && d.product_info.product_images[0].product_image_url} className="productimages img-fluid rounded-4 "/>
+                      <div className=" d-flex align-items-center gap-3 mt-3">
+                      <span className=" fw-bold fs-5"><sup>$</sup>{Math.floor(d.product_variation_id === null ?  
+                          d.product_info.sale_price : 
+                          d.product_info.product_variation_detail && d.product_info.product_variation_detail[0].sale_price)}</span>
+                      <span className=" small text-decoration-line-through">${Math.floor(d.product_variation_id === null ?  
+                          d.product_info.main_rrp : 
+                          d.product_info.product_variation_detail && d.product_info.product_variation_detail[0].rrp)}</span>
+                      </div>
+                      <div>
+                        <span className=" fw-semibold text-secondary ">Quantity:</span>
+                        <span className=" fw-bold "> {d.quantity}</span>
+                      </div>
+                  </div>
                 </Col>
-              ))}
+              )))}
               </div>
             </Row>
             <Row>

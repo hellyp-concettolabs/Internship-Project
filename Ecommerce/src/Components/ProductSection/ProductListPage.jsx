@@ -204,7 +204,13 @@ function ProductListPage() {
                 <FilterSection filterDiscount={filterDiscount} filterPrice={filterPrice} 
                 setFilterDiscount={setFilterDiscount} setFilterPrice={setFilterPrice} />        
             </Col>
-            {productData.length > 0 ? 
+            {!loading && productData.length <= 0 ? 
+            (
+              <Col className=" d-flex justify-content-center productlistsec">
+                <NoProduct heading={'No Product Found'} 
+                  desc={`Looks like there are no product available in selected category. Go ahead & explore top categories.`}/>
+              </Col>
+            ) :
             (<Col className=" d-flex flex-column productlistsec">
               <Row className=" mb-3 justify-content-between flex-row-reverse flex-lg-row ">
                 <Col className="d-none d-lg-flex ">
@@ -298,11 +304,7 @@ function ProductListPage() {
                   </Col>
                 </Row>
               </>)} 
-            </Col>):
-              <Col className=" d-flex justify-content-center productlistsec">
-                <NoProduct heading={'No Product Found'} 
-                  desc={`Looks like there are no product available in selected category. Go ahead & explore top categories.`}/>
-              </Col>
+            </Col>)
             }  
         </Row>
 

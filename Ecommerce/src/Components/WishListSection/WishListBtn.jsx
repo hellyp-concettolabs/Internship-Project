@@ -32,6 +32,8 @@ function WishListBtn({isWishList,variationId,id,handleWishListChange}) {
       }
     }
 
+    
+
     const handleWishlist = async() =>{
         if(localStorage.getItem("token") !== null){
         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;

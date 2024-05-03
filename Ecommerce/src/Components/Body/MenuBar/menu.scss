@@ -61,7 +61,7 @@ $base-font-size: 12px;
           background-color: white;
           text-align: start;
       
-          .submenu {
+        .submenu {
                 padding: 6px;
                 height: fit-content;
                 span {
@@ -73,9 +73,10 @@ $base-font-size: 12px;
                     white-space: nowrap;
                     padding: 0.5rem 1rem;
                 }
-                }
+        }
 
             .submenusubcat {
+                margin-top: 2%;
                 li {
                   padding:  0.35rem 1rem;
                   :hover{
