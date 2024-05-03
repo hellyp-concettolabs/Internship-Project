@@ -64,8 +64,8 @@ function YourOrders() {
     const fetchYourOrder = async () => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
       await axios.post(' https://bargainfox-dev.concettoprojects.com/api/my-order-list')
-        .then((response) => {
-          console.log(response);
+        .then(() => {
+          // console.log(response);
         })
         .catch(error => {
           console.error('Error making Post request:', error);

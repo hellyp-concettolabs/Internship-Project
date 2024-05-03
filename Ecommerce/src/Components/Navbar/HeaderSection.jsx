@@ -11,7 +11,7 @@ import { UserContext, userResultDetails } from '../UserData/StoreUserContext';
 import axios from 'axios';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
-import { Link, useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function HeaderSection() {
@@ -37,7 +37,7 @@ function HeaderSection() {
     },
     {
       item: `Notifications`,
-      link: `profile`
+      link: `notification`
     },
     {
       item: `Wishlists`,
@@ -61,7 +61,7 @@ function HeaderSection() {
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
     axios.get(' https://bargainfox-dev.concettoprojects.com/api/logout')
       .then(response => {
-        console.log(response);
+        // console.log(response);
         if (response.data.status === 200) {
           localStorage.removeItem("token");
           setUserData(userResultDetails);
@@ -180,8 +180,8 @@ function HeaderSection() {
                 placeholder="Search Products..."
                 renderMenuItemChildren={(item) => (
                 <>
-                <Link className=" text-decoration-none " style={{color:"black"}}
-                    to={`/singleproduct/${item.sku}/${item.unique_id}`}>
+                <button className=" text-decoration-none bg-transparent border-0 w-100" style={{color:"black"}}
+                    onClick={() => navigate(`/singleproduct/${item.slug}/${item.unique_id}/${item.sku}`)}>
                     <div className='suggestion d-flex'>
                       <img
                         src={item.product_images[0].product_image_url}
@@ -193,10 +193,10 @@ function HeaderSection() {
                       />
                       <div className='suggestiontext'>{item.name}</div>
                     </div>
-                </Link>
+                </button>
                 </>
                 )}
-                selected={query}
+                selected={query ? [query] : []}
               />
               <Button className='search-icon rounded-end-2 rounded-start-0'
                 onClick={handleProductListSearch}>
@@ -206,7 +206,8 @@ function HeaderSection() {
             </Col>
 
             <Col className=' rightsection d-flex align-items-center gap-3 gap-sm-4 justify-content-end '>
-              <Nav.Link href='/wishlist'>
+              <button className=' p-0 bg-transparent border-0 ' onClick={() => { localStorage.getItem("token") === null ? (setShow(true)) :
+                        navigate(`/wishlist`)}}>
                 <div className='wishlist-container'>
                   <Image src={wishlist} className=' img-fluid wishlist-icon' />
                   <div className='wishlist-count'>
@@ -218,7 +219,7 @@ function HeaderSection() {
                     wishListProductCount.wishlistcount)}
                   </div>
                 </div>
-              </Nav.Link>
+              </button>
 
               <Nav.Link href='/cart'>
                 <div className='shopping-cart-container'>
@@ -235,23 +236,23 @@ function HeaderSection() {
               </Nav.Link>
 
               <div className=' Signup d-flex align-items-center navbar navbar-expand-md position-relative dropdown ' aria-expanded="false">
-                <Nav.Link href='#user' onClick={() => setShow(true)} className=''>
+                <Button onClick={() => setShow(true)} className=' bg-transparent border-0 p-0 '>
                   <div className='user-container'><Image src={usericon} className=' img-fluid user-icon' /></div>
-                </Nav.Link>
+                </Button>
                 {localStorage.getItem("token") === null ?
                   (<div className='d-flex flex-column  small d-none d-xl-block'>
-                    <p className='greet mb-0'>
+                    <div className='greet mb-0'>
                       Hello there,
-                    </p>
+                    </div>
                     <span className='signin'>
                       SIGN IN/REGISTER
                     </span>
                   </div>):
                 (localStorage.getItem("token") !== null && userData.name !== "" ? 
                   (<div className='d-flex flex-column  small d-none d-xl-block'>
-                    <p className='greet mb-0'>
+                    <div className='greet mb-0'>
                       Welcome {userData.name},
-                    </p>
+                    </div>
                     <span className='signin'>
                       ACCOUNT & ORDER
                     </span>
@@ -266,12 +267,12 @@ function HeaderSection() {
                         <Button onClick={() => setShow(true)} className=' text-center bg-primary text-light border-0 rounded-5 py-2 px-3 '>Login/Register</Button>
                       </ListGroup.Item>) :
                       (<button onClick={() => {navigate(`/profile`)}} className=' text-decoration-none border-0 bg-transparent p-0'>
-                      <ListGroup.Item as="li" className='d-flex align-items-center gap-2 text-black px-2'>
+                      <ListGroup.Item as="li" className='d-flex justify-content-center align-items-center gap-2 text-black px-2'>
                           <Image src={usericon} className=' img-fluid' style={{ width: "28px", height: "28px" }} />
-                          <p className=' m-0 ' style={{ fontSize: "15px", fontWeight: "500", color: "#0036FF", textTransform: "capitalize" }}>
+                          <div className=' m-0 ' style={{ fontSize: "15px", fontWeight: "500", color: "#0036FF", textTransform: "capitalize" }}>
                             {userData.name}
                             <div style={{ fontSize: "13px", color: "black", fontWeight: "500" }}>View Profile</div>
-                          </p>
+                          </div>
                       </ListGroup.Item>
                       </button>)
                     }
@@ -305,8 +306,8 @@ function HeaderSection() {
                     onClick={() => setShow(true)}>
                     Login/Register
                   </li>
-                  {data.map((d, i) => (
-                    <a key={i} href={`/${d.link}`} className=' text-decoration-none text-dark'>
+                  {data.map((d) => (
+                    <a key={d.link} href={`/${d.link}`} className=' text-decoration-none text-dark'>
                       <li>{d.item}</li>
                     </a>
                   ))}

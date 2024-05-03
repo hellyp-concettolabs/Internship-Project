@@ -11,9 +11,9 @@ import { useContext} from 'react';
 import { UserContext } from '../UserData/StoreUserContext';
 
 Verifypop.propTypes = {
-  onHide: PropTypes.func.isRequired,
+  onHide: PropTypes.func,
   useremail: PropTypes.string.isRequired,
-  setVerify: PropTypes.func.isRequired,
+  setVerify: PropTypes.func,
   show: PropTypes.bool.isRequired
 };
 
@@ -96,8 +96,8 @@ function Verifypop(props) {
     email: props.useremail})
     .then(response => {
     localStorage.setItem("token", response.data.result.token);
-    console.log(response.data);
-    console.log(response.data.result);
+    // console.log(response.data);
+    // console.log(response.data.result);
     setOtp(Array(length).fill(""));
     if(response.data.status === 200 && response.data.result.is_new_user === false){
       setUserData(response.data.result)
@@ -120,7 +120,7 @@ function Verifypop(props) {
 
   return (
     <div>
-      <Modal{...props} centered className=' rounded-5 '>
+      <Modal show={props.show} onHide={props.onHide} centered className=' rounded-5 '>
         <div className='signupcontainer'>
           <Modal.Header className=' d-flex flex-column p-2 border-0 '>
             <div className='closebtn col-12 d-flex '>

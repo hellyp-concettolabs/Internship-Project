@@ -105,8 +105,8 @@ function Electronics() {
           </Col>
           <Col className="centerslider">
             <Slider ref={sliderRef} {...settings}>
-                {productData.map((d,i) =>(
-                  <div key={i}>
+                {productData.map((d) =>(
+                  <div key={d.id}>
                     <div className="gardenlistwishlist">
                       <WishListBtn 
                         isWishList={d.is_wishlisted} 
@@ -118,7 +118,7 @@ function Electronics() {
                     <Link
                       className=" text-decoration-none " style={{color:"black"}}
                       to={`/singleproduct/${d.slug}/${d.unique_id}/${d.sku}`}>
-                      <ProductCard d={d} key={i}/>
+                      <ProductCard d={d} key={d.id}/>
                     </Link>
                     </div>
                 ))}

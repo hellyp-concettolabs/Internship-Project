@@ -24,7 +24,7 @@ useEffect( () => {
 }, [])
 
 useEffect( () =>{
-  console.log(data);
+  // console.log(data);
 },[data])
 
   const [hoveredMenu, setHoveredMenu] = useState(new Array(data.length).fill(false));

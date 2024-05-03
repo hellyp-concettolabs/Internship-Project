@@ -25,9 +25,13 @@ function Profile() {
           setUserData(userResultDetails);
           navigate('/')
         }
-
       })
       .catch(error => {
+        if(error.response.status === 422){
+            toast.error(`Can't delete account. It seems your orders are in process.`);
+        } else {
+            toast.error(`An error occurred while deleting account. Please try again later.`);
+        }
         console.error('Error making Get request of Delete Account:', error);
       })
     }
@@ -67,7 +71,7 @@ function Profile() {
                       onSubmit={(values) => {
                         axios.post('https://bargainfox-dev.concettoprojects.com/api/update-profile', values)
                         .then(response => {
-                          console.log(response.data);
+                          // console.log(response.data);
                           setUserData(response.data.result)
                           toast.success("Your Profile is been updated successfully");
                           })

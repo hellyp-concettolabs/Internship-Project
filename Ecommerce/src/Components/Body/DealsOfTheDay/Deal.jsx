@@ -161,8 +161,8 @@ function Deal() {
               </Col>
               <Col className="centerslider">
                   <Slider ref={sliderRef} {...settings}>
-                    {data.map((d,i) => (
-                      <Link key={i} to="/productlist" className=" text-decoration-none ">
+                    {data.map((d) => (
+                      <Link key={d.title} to="/productlist" className=" text-decoration-none ">
                         <DealCard d={d} key={d.title}/>
                       </Link>
                     ))}

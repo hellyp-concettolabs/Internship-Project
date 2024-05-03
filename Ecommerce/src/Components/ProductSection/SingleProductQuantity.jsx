@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 SingleProductQuantity.propTypes = {
     productData: PropTypes.object,
     productQuantity: PropTypes.number,
-    setproductQuantity: PropTypes.function,
+    setproductQuantity: PropTypes.func,
 };
 function SingleProductQuantity({productData,productQuantity,setproductQuantity}) {
 

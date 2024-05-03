@@ -43,7 +43,7 @@ function Footer() {
                             <div className="footerheading">{d.heading}</div>
                             <ul className=" list-unstyled">
                                 {d.list.map((l) => (
-                                    <a key={i} href="" className="text-decoration-none ">
+                                    <a key={l} href="" className="text-decoration-none ">
                                         <li className="footersublist">{l}</li>
                                     </a>
                                 ))}

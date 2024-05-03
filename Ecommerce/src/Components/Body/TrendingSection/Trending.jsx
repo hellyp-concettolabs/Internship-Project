@@ -72,7 +72,7 @@ function Trending() {
   return (
     <>
 
-<Container className="gardencontainer">
+    <Container className="gardencontainer">
       <div>
         <Row className="mb-3 mb-md-4 ">
           <Col className="d-flex align-items-center col-8 ">
@@ -93,8 +93,8 @@ function Trending() {
           </Col>
           <Col className="centerslider">
             <Slider ref={sliderRef} {...settings}>
-                {trendingProduct.map((d,i) =>(
-                  <div key={i}>
+                {trendingProduct.map((d) =>(
+                  <div key={d.id}>
                     <div className="gardenlistwishlist">
                       <WishListBtn 
                       isWishList={d.is_wishlisted} 
@@ -106,7 +106,7 @@ function Trending() {
                     <Link
                       className=" text-decoration-none " style={{color:"black"}}
                       to={`/singleproduct/${d.slug}/${d.unique_id}/${d.sku}`}>
-                      <ProductCard d={d} key={i}/>
+                      <ProductCard d={d} key={d.id}/>
                     </Link>
                   </div>
                 ))}

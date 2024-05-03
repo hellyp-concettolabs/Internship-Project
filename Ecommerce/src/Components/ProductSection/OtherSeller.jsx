@@ -1,9 +1,11 @@
 
 function OtherSeller() {
   return (
-    <div>
-       View this product from other sellers
-    </div>
+    <>
+      <div>
+         View this product from other sellers
+      </div>
+    </>
   )
 }
 

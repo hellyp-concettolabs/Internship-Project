@@ -59,7 +59,7 @@ function Payment() {
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
     await axios.post(' https://bargainfox-dev.concettoprojects.com/api/my-cart')
       .then((response) => {
-        console.log(response.data.result);
+        // console.log(response.data.result);
         setCartProductData(response.data.result);
         setCartItemId(response.data.result.user_cart.map((item) => item.id));
       })
@@ -91,7 +91,7 @@ function Payment() {
         cart_product_id: cartItemId,
     })
     .then((response) =>{
-        console.log(response);
+        // console.log(response);
         if(response.data.status === 200){
 
           navigate('/cart');
@@ -107,6 +107,7 @@ function Payment() {
     await axios.post('https://bargainfox-dev.concettoprojects.com/api/place-order',{
       address_id:addressId,
       delivery_type_id:deliveryTypeId,
+      selected_cart:cartItemId,
       shipping_address:{
         country : storeAddress.country,
         full_name :storeAddress.full_name,
@@ -127,13 +128,12 @@ function Payment() {
         mobile :storeBillAdd.phone,
         postcode :storeBillAdd.postcode,
       },
-      selected_cart:cartItemId
 
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         if(response.data.status === 200){
-          toast.success("Place Order Successfully.");
+          toast.success("Order placed Successfully.");
           setTimeout(() => {
             handleItemDelete();
           }, 400);          
@@ -144,7 +144,7 @@ function Payment() {
       })
   }
 
-// console.log(storeBillAdd)
+// console.log(cartItemId)
   return (
     <>
       <Container fluid className=" my-5">
@@ -153,11 +153,11 @@ function Payment() {
           <Col className="addressSummaryConatiner col-sm-12">
 
             <Row className="d-flex align-items-center justify-content-between">
-              <Col className="text-center text-sm-start">
-                <p className="fw-bold fs-3">Payment</p>
+              <Col className="text-center text-sm-start border-bottom mb-3 pb-2">
+                <div className="fw-bold fs-3">Payment</div>
               </Col>
             </Row>
-            <hr className="mt-3 mt-sm-0" />
+            
 
             <Row>
               <Col className=" col-12 col-md-7 mt-2 mb-2 d-flex flex-column gap-3">
@@ -218,10 +218,10 @@ function Payment() {
             </Row>
 
             <Row>
-              <div className=" fs-5 fw-bold text-secondary mb-3">
+              <div className=" fs-5 fw-bold text-secondary border-bottom mb-3 pb-3">
                 Item Details({ cartProductData && cartProductData.user_cart && cartProductData.user_cart.length})
               </div>
-              <hr/>
+              
               <div className="d-flex flex-wrap justify-content-start align-items-center gap-4 ">
               {cartProductData && cartProductData.user_cart && cartProductData.user_cart.map((d) => (
                 <Col key={d.id} className=" col-2">
@@ -272,8 +272,9 @@ function Payment() {
                         <Form.Group className="col-4">
                           <Form.Label>Month<span className=" text-danger ">*</span></Form.Label>
                           <Form.Select
-                            className='signupemail rounded-5 w-100 px-3 py-2 '>
-                              <option value="" disabled selected hidden>Select...</option>
+                            className='signupemail rounded-5 w-100 px-3 py-2 '
+                            defaultValue="">
+                              <option value="" disabled hidden>Select...</option>
                             {[1,2,3,4,5,6,7,8,9,10,11,12].map((i) => (
                               <option value={i} key={i}>{i}</option>
                             ))}
@@ -282,8 +283,9 @@ function Payment() {
                         <Form.Group className="col-4">
                           <Form.Label>Year<span className=" text-danger ">*</span></Form.Label>
                           <Form.Select 
-                            className='signupemail rounded-5 w-100 px-3 py-2 '>
-                              <option value="" disabled selected hidden>Select...</option>
+                            className='signupemail rounded-5 w-100 px-3 py-2 '
+                            defaultValue="">
+                              <option value="" disabled hidden>Select...</option>
                             {[24,25,26,27,28,29,30,31,32,33,34].map((i) => (
                               <option value={`20${i}`} key={i}>20{i}</option>
                             ))}
@@ -303,10 +305,10 @@ function Payment() {
               </Col>
             </Row>
             <Row className=" d-flex flex-column gap-3 ">
-              <div className=" fw-bold fs-4 mt-5 ">
+              <div className=" fw-bold fs-4 mt-5 border-bottom mb-3 pb-2">
                 Billing Address
               </div>
-              <hr/>
+              
               <Col className=" d-flex gap-3 ">
                 <Form.Check
                     type="radio"
@@ -445,10 +447,10 @@ function Payment() {
           <Col className="orderSummaryContainer">
           <Card>
             <Card.Body>
-              <Card.Title>Order Summary</Card.Title>
+              <Card.Title className="border-bottom mb-3 pb-2">Order Summary</Card.Title>
               <Card.Text>
-                <hr className=" m-0 "/>
-                <div className=" d-flex flex-column gap-3 py-3">
+                
+                <div className=" d-flex flex-column gap-3 py-3 border-bottom mb-3 pb-2">
                 <div className=" d-flex justify-content-between align-items-center ">
                     <div>Item(s) total:</div>
                     <div>${cartProductData.cart_total}</div>
@@ -470,17 +472,17 @@ function Payment() {
                     <div className="">$0.00</div>
                 </div>
                 </div>
-                <hr className=" m-0 "/>
-                <div className=" d-flex justify-content-between align-items-center mt-3 mb-3 fw-bold ">
+                
+                <div className=" d-flex justify-content-between align-items-center mt-3 fw-bold border-bottom mb-3 pb-2">
                     <div>Total:</div>
                     <div>${cartProductData.grand_total}</div>
                 </div>
-                <hr className=" m-0 "/>
-                <div className=" d-flex justify-content-between align-items-center mt-3 mb-3 fw-bold ">
+                
+                <div className=" d-flex justify-content-between align-items-center mt-3 border-bottom mb-3 pb-2 fw-bold ">
                     <div className=" text-primary "> Grand Total:</div>
                     <div className=" text-primary ">${cartProductData.grand_total}</div>
                 </div>
-                <hr className=" m-0 "/>
+                
                 <Button variant="primary" className=" w-100 rounded-5 mt-3"
                   onClick={handlePayNow}>
                   Pay Now

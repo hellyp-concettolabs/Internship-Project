@@ -14,19 +14,21 @@ function WishList() {
     const [loading,setLoading] = useState(false);
 
     const handleWishlist = async() =>{
+      if(localStorage.getItem("token")){
       setLoading(true);
         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
         await axios.post(' https://bargainfox-dev.concettoprojects.com/api/wishlist',{
             per_page: 100,
         })
         .then((response) =>{
-            console.log(response);
+            // console.log(response);
             setWishListData(response.data.result.data);
             setLoading(false);
         })
         .catch(error =>{
             console.error('Error making Post request:', error);
           })
+      }
     }
     useEffect(() => {
         handleWishlist();
@@ -42,7 +44,7 @@ function WishList() {
       );
       setRemoveWishListItem(true);
     };
-      console.log(wishListData)
+      // console.log(wishListData)
   return (
     <>
     {wishListData && wishListData.length > 0 ? 
@@ -65,8 +67,8 @@ function WishList() {
         </div>
         <Container fluid className="my-5 px-5 ">
             <Row className="d-flex align-items-center justify-content-between">
-              <Col className="text-center text-sm-start">
-                <p className="fw-bold fs-3">Wishlist</p>
+              <Col className="text-center text-sm-start mb-3 ">
+                <div className="fw-bold fs-3">Wishlist</div>
               </Col>
             </Row>
             <Row className=" d-flex align-items-center flex-wrap ">

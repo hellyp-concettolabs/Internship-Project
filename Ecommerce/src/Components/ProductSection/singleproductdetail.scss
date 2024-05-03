@@ -8,9 +8,27 @@ $base-font2-size :20px;
 }
 .singleproductwishlist{
   position: absolute;
+  z-index: 1;
   margin-top: 12px !important;
-  margin-left: 500px !important;
+  margin-left: 35% !important;
   height: 40px;
+  width: 40px !important;
+}
+@media (max-width:1200px) {
+  .singleproductwishlist{
+  margin-left: 36% !important;
+  }
+}
+@media (max-width:992px) {
+  .singleproductwishlist{
+  margin-left: 69% !important;
+  }
+}
+
+.breadcrumbproductname{
+  overflow:hidden;
+  width:500px;
+  height:22px;
 }
 
 @media (min-width:426px) {
@@ -30,7 +48,7 @@ $base-font2-size :20px;
   display: flex;
   gap:54px !important;
 }
-@media (max-width:998px) {
+@media (max-width:992px) {
   .productimageanddetail{
     display: block !important;
   }

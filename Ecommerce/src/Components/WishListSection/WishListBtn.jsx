@@ -6,11 +6,11 @@ import { wishListProductCount } from "../WishListProductCount/WishListProductCou
 import { useState } from "react";
 
 WishListBtn.propTypes = {
-    isWishList: PropTypes.boolean,
+    isWishList: PropTypes.bool,
     d: PropTypes.object,
     variationId:PropTypes.number,
     id:PropTypes.number,
-    handleWishListChange: PropTypes.function
+    handleWishListChange: PropTypes.func
 };
 
 function WishListBtn({isWishList,variationId,id,handleWishListChange}) {
@@ -40,8 +40,8 @@ function WishListBtn({isWishList,variationId,id,handleWishListChange}) {
             product_variation_id : variationId,
             action : wishList
         })
-        .then((response) =>{
-            console.log(response);
+        .then(() =>{
+            // console.log(response);
             handleWishListChange(id, !isWishList);
             wishlistQuantity();
             dispatch(wishListProductCount(wishListCount));
@@ -51,8 +51,8 @@ function WishListBtn({isWishList,variationId,id,handleWishListChange}) {
           })
         }
     }
-    console.log(wishListCount)
-    console.log(wishList)
+    // console.log(wishListCount)
+    // console.log(wishList)
   return (
     <>
         <button 

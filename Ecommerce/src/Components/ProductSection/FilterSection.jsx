@@ -3,9 +3,9 @@ import "./filtersection.scss"
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
 FilterSection.propTypes ={
-    setFilterDiscount: PropTypes.function, 
-    setFilterPrice:PropTypes.function,
-    setFilterCondition:PropTypes.function,
+    setFilterDiscount: PropTypes.func, 
+    setFilterPrice:PropTypes.func,
+    setFilterCondition:PropTypes.func,
     filterDiscount:PropTypes.string,
     filterPrice:PropTypes.string,
 }
@@ -110,6 +110,7 @@ function FilterSection({setFilterDiscount,setFilterPrice,filterDiscount,filterPr
         }
     }
   return (
+    <>
     <div>
         <Row>
             <div className="filterheading text-secondary fw-bold fs-5">Filters</div>
@@ -178,6 +179,7 @@ function FilterSection({setFilterDiscount,setFilterPrice,filterDiscount,filterPr
         </Col>
         </Row>
     </div>
+    </>
   )
 }
 

@@ -154,7 +154,7 @@ function ProductListPage() {
       fetchData();
     },[category_id,sub_category_id,collection_id,searchTextParam,filterDiscount,sortValue,pageNumber,filterPrice])
 
-    console.log(productData);
+    // console.log(productData);
 
     const formatCategoryName = (label) => {
       if(label){

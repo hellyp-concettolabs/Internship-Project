@@ -1,31 +1,46 @@
 $base-font-size :16px;
 $base-font1-size :30px;
 $base-font2-size :14px;
-
+$xxl:1400px;
+$xl:1200px;
+$lg:991px;
+$md:650px;
+$sm:560px;
+@mixin breakpoint($type, $size) {
+    @if $type == 'min' {
+      @media (min-width: $size) {
+        @content;
+      }
+    }
+    @else if $type == 'max' {
+      @media (max-width: $size) {
+        @content;
+      }
+    }
+}
 .singleproductcard{
-    width: 25% !important;
+    width: 20% !important;
     margin-bottom: 2%;
     padding-left: 0;
     padding-right: 0;
-}
-@media (max-width:1400px) {
-    .singleproductcard{
+    @include breakpoint(max,$xxl){
         width: 33% !important;
     }
-}
-@media (max-width:560px) {
-    .singleproductcard{
+    @include breakpoint(max,$sm){
         width: 50% !important;
     }
 }
 
-    .SProductCardimg{
-        aspect-ratio: 3/2 !important;
-        object-fit: contain !important;
-        border-radius: 20px 20px 0px 0px;
-        vertical-align: middle !important;
-        height: 179.33px !important;
+.SProductCardimg{
+    aspect-ratio: 3/2 !important;
+    object-fit: contain !important;
+    border-radius: 20px 20px 0px 0px;
+    vertical-align: middle !important;
+    height: 179.33px !important;
+    @include breakpoint(max,$lg){
+        height: 160px !important;
     }
+}
 
 .sdetailsection{
     display: flex;
@@ -47,11 +62,26 @@ $base-font2-size :14px;
     color: #292D32;
     font-size: $base-font-size * 0.8;
     font-weight: normal;
+    @include breakpoint(max,$lg){
+        font-size: $base-font-size * 0.9;
+    }
+    @include breakpoint(max,$md){
+        font-size: $base-font-size * 0.8;
+    }
 }
 .sdisprice{
     font-size: $base-font1-size * 0.75;
     font-weight: 600;
     color: #292D32;
+    @include breakpoint(max,$xl){
+        font-size: $base-font1-size * 0.7;
+    }
+    @include breakpoint(max,$lg){
+        font-size: $base-font1-size * 0.8;
+    }
+    @include breakpoint(max,$md){
+        font-size: $base-font1-size * 0.6;
+    }
 }
 .sdiscount{
     font-size: $base-font2-size * 0.75;
@@ -64,49 +94,22 @@ $base-font2-size :14px;
     align-items: center;
     justify-content: center;
     color: white;
-}
-
-@media (max-width:1200px) {
-    .sdisprice{
-        font-size: $base-font1-size * 0.7;
-    }
-    .sdiscount{
+    @include breakpoint(max,$xl){
         font-size: $base-font2-size * 0.7;
         width: 38px;
         height: 38px;
     }
-}
-
-@media (max-width:991px) {
-    .SProductCardimg{
-        height: auto !important;
-    }
-    .sdisprice{
-        font-size: $base-font1-size * 0.8;
-    }
-    .sactualprice{
-        font-size: $base-font-size * 0.9;
-    }
-    .sdiscount{
+    @include breakpoint(max,$lg){
         font-size: $base-font2-size * 0.8;
         width: 42px;
         height: 42px;
     }
 }
-@media (max-width:650px) {
-    .sdisprice{
-        font-size: $base-font1-size * 0.6;
-    }
-    .sactualprice{
-        font-size: $base-font-size * 0.8;
-    }
-}
-
 .sdiscount1{
     font-size: $base-font2-size * 0.6;
     font-weight: 600;
     position: absolute;
-    margin-top: -28%;
+    margin-top: -14%;
     width: 36px;
     height: 36px;
     background-color: #0036FF; 
@@ -116,34 +119,19 @@ $base-font2-size :14px;
     justify-content: center;
     z-index: 1;
     color: white;
-    margin-left: 0.3%;
-}
-
-@media (max-width:600px) {
-    .sdiscount1{
+    margin-left: -20%;
+    @include breakpoint(max,$md){
         font-size: $base-font2-size * 0.5;
         width: 30px;
         height: 30px;
     }
-}
-@media (max-width:560px) {
-    .sdiscount1{
+    @include breakpoint(max,$sm){
         font-size: $base-font2-size * 0.6;
         width: 34px;
         height: 34px;
-        margin-top: -43%;
-    }
+        margin-top: -20%;
+        margin-left: -30%;
+    }    
 }
-@media (max-width:460px) {
-    .sdiscount1{
-        font-size: $base-font2-size * 0.4;
-        width: 25px;
-        height: 25px;
-    }
-}
-@media (max-width:425px) {
-    .sdiscount1{
-        margin-top: -40%;
-    }
-}
+
 

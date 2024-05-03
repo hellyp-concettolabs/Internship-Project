@@ -8,11 +8,11 @@ import { useEffect, useState} from "react";
 
 CartProductCard.propTypes = {
     cartData: PropTypes.array,
-    setDeleteItem: PropTypes.function,
-    isQuantityChange: PropTypes.function,
+    setDeleteItem: PropTypes.func,
+    isQuantityChange: PropTypes.func,
 };
 function CartProductCard({cartData,setDeleteItem,isQuantityChange}) {
-console.log(cartData)
+// console.log(cartData)
     const [productQuantity, setproductQuantity] = useState([]);
 
     
@@ -21,8 +21,8 @@ console.log(cartData)
             await axios.post(' https://bargainfox-dev.concettoprojects.com/api/remove-from-cart',{
                 cart_product_id: [cartProductID],
             })
-            .then((response) =>{
-                console.log(response);
+            .then(() =>{
+                // console.log(response);
                 setDeleteItem(true);
             })
             .catch(error =>{

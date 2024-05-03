@@ -62,7 +62,9 @@ const PaginationDetail = ({ lastpage, pageNumber}) => {
             &laquo; Previous
           </Pagination.Prev>
 
-          {pageItems}
+          <div className=" d-none d-md-flex ">
+            {pageItems}
+          </div>
           
           <Pagination.Next
             disabled={currentPage === lastpage}

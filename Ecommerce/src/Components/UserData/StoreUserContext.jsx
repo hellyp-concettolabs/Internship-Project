@@ -45,7 +45,7 @@ export const UserProvider = ({ children }) => {
 
       useEffect(() => {
         const token = localStorage.getItem("token");
-        console.log(token)
+        // console.log(token)
         if (token) {
           getCurrentUser();
         }
@@ -66,7 +66,7 @@ export const UserProvider = ({ children }) => {
         }
       };
 
-      console.log(userData);
+      // console.log(userData);
     return (
       <UserContext.Provider value={{ userData, setUserData }}>
         {children}

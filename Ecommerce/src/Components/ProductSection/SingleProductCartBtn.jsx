@@ -13,8 +13,8 @@ import { cartProductCount } from "../CartProductCount/CartProductCount";
 SingleProductCartBtn.propTypes = {
     productData: PropTypes.object,
     productQuantity: PropTypes.number,
-    addToCart: PropTypes.boolean,
-    setAddToCart: PropTypes.function,
+    addToCart: PropTypes.bool,
+    setAddToCart: PropTypes.func,
 };
 function SingleProductCartBtn({productData, productQuantity,setAddToCart}) {
 
@@ -37,7 +37,7 @@ function SingleProductCartBtn({productData, productQuantity,setAddToCart}) {
           product_variation_id: productData.product_variation_id,
           quantity: productQuantity,
         }).then(response =>{
-          console.log(response.data.result);
+          // console.log(response.data.result);
           //setCartProductData(response.data.result);
           if(response.status === 200){
             dispatch(cartProductCount(response.data.result.quantity));
@@ -77,6 +77,7 @@ function SingleProductCartBtn({productData, productQuantity,setAddToCart}) {
   }
 
   return (
+    <>
     <div className="buybtncontainer ">
         <div className=" w-100 ">
           { productData.is_added_cart ? 
@@ -87,10 +88,14 @@ function SingleProductCartBtn({productData, productQuantity,setAddToCart}) {
               ):
               'Go To Cart'}
             </Button>
-            : <Button className="cartbtn rounded-5"
+            : (productData.stock === null ? 
+              <Button className="cartbtn rounded-5">
+                Out Of Stock
+              </Button>
+              : <Button className="cartbtn rounded-5"
                 onClick={handleAddtocart}>
                 Add to cart
-              </Button>}
+              </Button>)}
 
             <ToastContainer position="top-right"/>
             <Signuppop show={show} setShow={setShow} onHide={() => setShow(false)} />
@@ -99,6 +104,7 @@ function SingleProductCartBtn({productData, productQuantity,setAddToCart}) {
             <Button className="buybtn rounded-5">Buy now</Button>
         </div>
     </div>
+    </>
   )
 }
 

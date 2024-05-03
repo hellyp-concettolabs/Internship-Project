@@ -75,8 +75,8 @@ const Address = () => {
     phone:data.mobile,})
     setShow(true);
   }
-  console.log(storeAddress)
-  console.log(storeEditAddress)
+  // console.log(storeAddress)
+  // console.log(storeEditAddress)
   return (
     <>
       <Container fluid className="my-5">
@@ -86,7 +86,7 @@ const Address = () => {
             
             <Row className="d-flex align-items-center justify-content-between">
               <Col className="text-center text-sm-start">
-                <p className="fw-bold fs-3">Select Delivery address</p>
+                <div className="fw-bold fs-3">Select Delivery address</div>
               </Col>
               <Col className="col-md-3 col-4">
                 <div className=" d-flex justify-content-end ">

@@ -1,3 +1,18 @@
+$xxl:1400px;
+$xl:1200px;
+$lg:992px;
+@mixin breakpoint($type, $size) {
+    @if $type == 'min' {
+      @media (min-width: $size) {
+        @content;
+      }
+    }
+    @else if $type == 'max' {
+      @media (max-width: $size) {
+        @content;
+      }
+    }
+}
 .productlistcontainer0{
     padding: 0px 30px;
 }
@@ -16,9 +31,21 @@
 }
 .productlistwishlist{
     position: absolute;
-    margin-top: 12px;
-    margin-left: 230px;
+    margin-top: 1%;
+    margin-left: 9% ;
     height: 40px;
+    @include breakpoint(max,$xxl){
+        margin-top: 1%;
+        margin-left: 18%;
+    }
+    @include breakpoint(max,$xl){
+        margin-top: 1.4%;
+        margin-left: 17%;
+    }
+    @include breakpoint(max,$lg){
+        margin-top: 1.6%;
+        margin-left: 23%;
+    }
     
 }
 @media (max-width:1400px) {

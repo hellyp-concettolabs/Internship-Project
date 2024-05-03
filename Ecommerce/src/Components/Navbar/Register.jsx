@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 Register.propTypes = {
     onHide: PropTypes.func.isRequired,
-    register: PropTypes.bool.isRequired,
+    register: PropTypes.bool,
     setRegister: PropTypes.func.isRequired,
     useremail: PropTypes.string.isRequired,
   };
@@ -61,10 +61,10 @@ function Register(props) {
                       onSubmit={(values) => {
                         axios.post('https://bargainfox-dev.concettoprojects.com/api/register', values)
                         .then(response => {
-                          console.log(response.data);
+                          // console.log(response.data);
                          if(response.status === 200){
                           localStorage.setItem("token", response.data.result.token);
-                          console.log(localStorage.getItem("token"));
+                          // console.log(localStorage.getItem("token"));
                           setUserData(response.data.result);
                           props.setRegister(false);
                          }

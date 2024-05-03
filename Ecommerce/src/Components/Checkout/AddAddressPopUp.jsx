@@ -78,7 +78,7 @@ function AddAddressPopUp({show,setShow,onHide,setNewAdd,addressId,storeEditAddre
                         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
                         await axios.post(' https://bargainfox-dev.concettoprojects.com/api/store-delivery-address', values)
                         .then(response => {
-                          console.log(response.data);
+                          // console.log(response.data);
                          if(response.status === 200){
                             setNewAdd(true);
                             setShow(false);

@@ -10,7 +10,7 @@ function SingleProductCard(props) {
   return (
     <>
         <div className=" border rounded-4 SProductCard">
-            <div>
+            <div className=" d-flex flex-column align-items-center justify-content-center ">
                 <Image src={props.d.product_images[0].product_image_url} className="SProductCardimg img-fluid" />
                 <span className="sdiscount1 d-flex d-md-none ">{Math.floor(props.d.discount_percentage)}%</span>
             </div>

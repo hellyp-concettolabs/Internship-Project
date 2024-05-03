@@ -31,7 +31,7 @@ function SingleProductHighlight({productPurchaseCount,productDescription,product
                     {productBrand.map((s) =>(
                     <div key={s.id}
                         className=' d-flex gap-2 '>
-                        <sapn className=" fw-bold ">{s.spec_name}:</sapn>
+                        <span className=" fw-bold ">{s.spec_name}:</span>
                         <span>{s.spec_value}</span>
                     </div>
                      ))}

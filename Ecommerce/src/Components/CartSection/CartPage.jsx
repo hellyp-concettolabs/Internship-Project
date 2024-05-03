@@ -24,7 +24,7 @@ function CartPage() {
         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
         await axios.post(' https://bargainfox-dev.concettoprojects.com/api/my-cart')
         .then((response) =>{
-            console.log(response.data.result);
+            // console.log(response.data.result);
             setCartProductData(response.data.result);
             setLoading(false);
             dispatch(cartProductCount(response.data.result.user_cart.length));

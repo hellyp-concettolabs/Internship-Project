@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import "./dealcard.scss"
 
 DealCard.propTypes = {
-    d: PropTypes.arrayOf(PropTypes.object).isRequired,
+    d: PropTypes.object,
   };
 function DealCard(props) {
   return (

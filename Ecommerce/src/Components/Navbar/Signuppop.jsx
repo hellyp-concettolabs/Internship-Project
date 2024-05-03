@@ -9,9 +9,9 @@ import "./signuppop.scss"
 import { useState } from 'react';
 
 Signuppop.propTypes = {
-  show: PropTypes.bool.isRequired,
-  setShow: PropTypes.func.isRequired,
-  onHide: PropTypes.func.isRequired,
+  show: PropTypes.bool,
+  setShow: PropTypes.func,
+  onHide: PropTypes.func,
 };
 function Signuppop(props) {
 
@@ -50,9 +50,9 @@ function Signuppop(props) {
               onSubmit={(values, { setSubmitting }) => {
                 axios.post('https://bargainfox-dev.concettoprojects.com/api/send-otp', values)
                 .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 setValues(values.email);
-                console.log(values.email);
+                // console.log(values.email);
                 if(response.data.status === 200){
                   props.setShow(false)
                   setVerify(true)

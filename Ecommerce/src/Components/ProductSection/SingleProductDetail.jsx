@@ -100,7 +100,13 @@ function SingleProductDetail() {
         fetchData();
       },[color,size,addToCart])
 
-    console.log(productData);
+      const handleWishListChange = (productId, isWishListed) => {
+        // Update the productData state based on productId and isWishListed
+        setProductData((prevProductData) =>
+          prevProductData.id === productId ? { ...prevProductData, is_wishlisted: isWishListed } : prevProductData
+        );
+      };
+    // console.log(productData);
     //console.log(productId)
 
 
@@ -112,7 +118,7 @@ function SingleProductDetail() {
             </div>:( */}
             <Container fluid id="productdetailcontainer">
             {/* BreadCrumb */}
-            <Row>
+            <Row className=" d-none d-md-flex ">
                 <nav style={{'--bs-breadcrumb-divider': '>'}} aria-label="breadcrumb" className=" p-0 ">
                     <ol className="breadcrumb">
                     <li className="breadcrumb-item">
@@ -140,8 +146,7 @@ function SingleProductDetail() {
                     </li>
                     }
                     {productData && productData.name  && 
-                    <li className="breadcrumb-item active" aria-current="page"
-                        style={{overflow:"hidden", width:"500px", height:"22px"}}> 
+                    <li className="breadcrumbproductname breadcrumb-item active" aria-current="page"> 
                         &gt; &nbsp; {productData.name}
                     </li>
                     }
@@ -150,8 +155,13 @@ function SingleProductDetail() {
             </Row>
             <Row className="productimageanddetail py-lg-4 py-2">
                 <Col className="singleproductwishlist">
-                    <WishListBtn isWishList={productData.is_wishlisted} d={productData} id={productData.id}
-                       variationId={productData.product_variation_id ? productData.product_variation_id : null} />
+                    <WishListBtn 
+                        isWishList={productData.is_wishlisted} 
+                        d={productData} 
+                        id={productData.id}
+                        variationId={productData.product_variation_id ? productData.product_variation_id : null} 
+                        handleWishListChange={handleWishListChange}
+                        />
                 </Col>
                 <Col className="border-bottom pb-3 ">
                     <ImageAndThumbnail productImage={productData.product_images}/>
