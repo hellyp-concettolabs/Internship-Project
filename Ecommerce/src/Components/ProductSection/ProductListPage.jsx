@@ -17,6 +17,10 @@ function ProductListPage() {
     const[pageData, setPageData] = useState({});
     const[loading,setLoading] = useState(false);
 
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+
     const priceFilter = [
       {
           min:'0',
@@ -291,7 +295,8 @@ function ProductListPage() {
                     </div>
                     <Link
                       className=" text-decoration-none " style={{color:"black"}}
-                      to={`/singleproduct/${d.slug}/${d.unique_id}/${d.sku}`}>
+                      to={`/singleproduct/${d.slug}/${d.unique_id}/${d.sku}`}
+                    >
                       <SingleProductCard d={d} key={d.id}/>
                     </Link>
                   </div>

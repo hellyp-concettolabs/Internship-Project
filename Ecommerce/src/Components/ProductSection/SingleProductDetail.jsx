@@ -39,6 +39,10 @@ function SingleProductDetail() {
       //console.log(color)
       //console.log(size)
 
+      useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+
       const fetchData = async() =>{
         //setLoading(true);
         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
