@@ -24,9 +24,9 @@ function Menu() {
     fetchData();
   }, [])
 
-  useEffect( () =>{
-    console.log(data);
-  },[data])
+  // useEffect( () =>{
+  //   console.log(data);
+  // },[data])
 
     const [hoveredMenu, setHoveredMenu] = useState(new Array(data.length).fill(false));
 

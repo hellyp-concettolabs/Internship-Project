@@ -12,45 +12,46 @@ CartProductCard.propTypes = {
     isQuantityChange: PropTypes.func,
 };
 function CartProductCard({cartData,setDeleteItem,isQuantityChange}) {
-// console.log(cartData)
+    // console.log(cartData)
     const [productQuantity, setproductQuantity] = useState([]);
 
     
-        const handleItemDelete = async(cartProductID) =>{
-            axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
-            await axios.post(' https://bargainfox-dev.concettoprojects.com/api/remove-from-cart',{
-                cart_product_id: [cartProductID],
-            })
-            .then(() =>{
-                // console.log(response);
-                setDeleteItem(true);
-            })
-            .catch(error =>{
-                console.error('Error making Post request:', error);
-              })
-        }
-        const updateItemQuantity = async (index, id, variationId) => {
+    const handleItemDelete = async(cartProductID) =>{
         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
-         await axios.post(' https://bargainfox-dev.concettoprojects.com/api/add-to-cart',
-                {
-                  quantity: index,
-                  product_id: id,
-                  product_variation_id: variationId,
-                }
-              ).then((response) => {
-                if(response.status === 200){
-                isQuantityChange(true);
-                }
-              }).catch(error => {
-              console.log("Some error in cart Item quantity", error);
-            })
-          };
+        await axios.post(' https://bargainfox-dev.concettoprojects.com/api/remove-from-cart',{
+            cart_product_id: [cartProductID],
+        })
+        .then(() =>{
+            // console.log(response);
+            setDeleteItem(true);
+        })
+        .catch(error =>{
+            console.error('Error making Post request:', error);
+          })
+    }
+
+    const updateItemQuantity = async (index, id, variationId) => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
+        await axios.post(' https://bargainfox-dev.concettoprojects.com/api/add-to-cart',
+            {
+              quantity: index,
+              product_id: id,
+              product_variation_id: variationId,
+            }
+        ).then((response) => {
+            if(response.status === 200){
+            isQuantityChange(true);
+            }
+        }).catch(error => {
+          console.log("Some error in cart Item quantity", error);
+        })
+    };
         
-          const updateProductQuantity = (index, newQuantity) => {
-            const updatedQuantity = [...productQuantity];
-            updatedQuantity[index] = newQuantity;
-            setproductQuantity(updatedQuantity);
-          };
+    const updateProductQuantity = (index, newQuantity) => {
+      const updatedQuantity = [...productQuantity];
+      updatedQuantity[index] = newQuantity;
+      setproductQuantity(updatedQuantity);
+    };
 
     const handlesub = (index, id, variationId) =>{
         if (productQuantity[index] > 1) {
@@ -75,6 +76,7 @@ function CartProductCard({cartData,setDeleteItem,isQuantityChange}) {
         setproductQuantity(initialQuantities);
     }
     }, [cartData])
+    
     //console.log(productQuantity)
   return (
     <>

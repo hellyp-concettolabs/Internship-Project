@@ -319,7 +319,7 @@ function HeaderSection() {
           <Row>
             <Col className='centersection d-md-none m-2'>
               <Form className='search d-flex w-100 '>
-                <Form.Control type="text" placeholder="Search Products" className='rounded-start-2 rounded-end-0' />
+                <Form.Control id='sm_product_search' type="text" placeholder="Search Products" className='rounded-start-2 rounded-end-0' />
                 <Button variant="outline-success" className='search-icon rounded-end-2 rounded-start-0'>
                   <img src={search} alt="Search" />
                 </Button>

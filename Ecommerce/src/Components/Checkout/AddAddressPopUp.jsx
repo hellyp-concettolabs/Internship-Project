@@ -99,7 +99,7 @@ function AddAddressPopUp({show,setShow,onHide,setNewAdd,addressId,storeEditAddre
                       }) => (
                       <form onSubmit={handleSubmit} className='d-flex flex-column gap-3'>
                         <Form.Group>
-                          <Form.Label>Country/Region<span className=" text-danger ">*</span></Form.Label>
+                          <Form.Label htmlFor="country">Country/Region<span className=" text-danger ">*</span></Form.Label>
                           <Form.Control 
                             type="text" 
                             id="country" 
@@ -107,11 +107,12 @@ function AddAddressPopUp({show,setShow,onHide,setNewAdd,addressId,storeEditAddre
                             value={values.country}
                             onChange={handleChange}
                             onBlur={handleBlur} 
+                            autoComplete="off"
                             className='signupemail rounded-5 w-100 px-3 py-2'/>
                             {errors.country && <div style={{ color: "red", fontSize:"10px" }}>{errors.country}</div>}                        
                         </Form.Group>
                         <Form.Group>
-                          <Form.Label>Full Name<span className=" text-danger ">*</span></Form.Label>
+                          <Form.Label htmlFor="full_name">Full Name<span className=" text-danger ">*</span></Form.Label>
                           <Form.Control 
                             type="text" 
                             id="full_name" 
@@ -119,11 +120,12 @@ function AddAddressPopUp({show,setShow,onHide,setNewAdd,addressId,storeEditAddre
                             value={values.full_name}
                             onChange={handleChange}
                             onBlur={handleBlur} 
+                            autoComplete="off"
                             className='signupemail rounded-5 w-100 px-3 py-2'/>
                             {errors.full_name && <div style={{ color: "red", fontSize:"10px" }}>{errors.full_name}</div>}
                         </Form.Group>
                         <Form.Group>
-                          <Form.Label>Address<span className=" text-danger ">*</span></Form.Label>
+                          <Form.Label htmlFor="address">Address<span className=" text-danger ">*</span></Form.Label>
                           <Form.Control 
                             type="text" 
                             id="address" 
@@ -131,11 +133,12 @@ function AddAddressPopUp({show,setShow,onHide,setNewAdd,addressId,storeEditAddre
                             value={values.address}
                             onChange={handleChange}
                             onBlur={handleBlur} 
+                            autoComplete="off"
                             className='signupemail rounded-5 w-100 px-3 py-2'/>
                             {errors.address && <div style={{ color: "red", fontSize:"10px" }}>{errors.address}</div>}
                         </Form.Group>
                         <Form.Group>
-                          <Form.Label>Apartment,Suite,etc.</Form.Label>
+                          <Form.Label htmlFor="address2">Apartment,Suite,etc.</Form.Label>
                           <Form.Control 
                             type="text" 
                             id="address2" 
@@ -147,7 +150,7 @@ function AddAddressPopUp({show,setShow,onHide,setNewAdd,addressId,storeEditAddre
                         </Form.Group>
                         <div className=" d-flex justify-content-between align-items-center gap-3">
                         <Form.Group>
-                          <Form.Label>State<span className=" text-danger ">*</span></Form.Label>
+                          <Form.Label htmlFor="state">State<span className=" text-danger ">*</span></Form.Label>
                           <Form.Control 
                             type="text" 
                             id="state" 
@@ -159,7 +162,7 @@ function AddAddressPopUp({show,setShow,onHide,setNewAdd,addressId,storeEditAddre
                             {errors.state && <div style={{ color: "red", fontSize:"10px" }}>{errors.state}</div>}
                         </Form.Group>
                         <Form.Group>
-                          <Form.Label>City<span className=" text-danger ">*</span></Form.Label>
+                          <Form.Label htmlFor="city">City<span className=" text-danger ">*</span></Form.Label>
                           <Form.Control 
                             type="text" 
                             id="city" 
@@ -173,7 +176,7 @@ function AddAddressPopUp({show,setShow,onHide,setNewAdd,addressId,storeEditAddre
                         </div>
                         <div className=" d-flex justify-content-between align-items-center gap-3">
                         <Form.Group>
-                          <Form.Label>Postcode<span className=" text-danger ">*</span></Form.Label>
+                          <Form.Label htmlFor="postcode">Postcode<span className=" text-danger ">*</span></Form.Label>
                           <Form.Control 
                             type="text" 
                             id="postcode" 
@@ -185,7 +188,7 @@ function AddAddressPopUp({show,setShow,onHide,setNewAdd,addressId,storeEditAddre
                             {errors.postcode && <div style={{ color: "red", fontSize:"10px" }}>{errors.postcode}</div>}
                         </Form.Group>
                         <Form.Group>
-                          <Form.Label>Phone<span className=" text-danger ">*</span></Form.Label>
+                          <Form.Label htmlFor="phone">Phone<span className=" text-danger ">*</span></Form.Label>
                           <Form.Control 
                             type="text" 
                             id="phone" 
@@ -193,6 +196,7 @@ function AddAddressPopUp({show,setShow,onHide,setNewAdd,addressId,storeEditAddre
                             value={values.phone}
                             onChange={handleChange}
                             onBlur={handleBlur} 
+                            autoComplete="off"
                             className='signupemail rounded-5 w-100 px-3 py-2'/>
                             {errors.phone && <div style={{ color: "red", fontSize:"10px" }}>{errors.phone}</div>}
                         </Form.Group>

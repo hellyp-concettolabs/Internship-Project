@@ -21,7 +21,7 @@ function Subscribe() {
                     </Col>
                     <Col className=" col-5 subscon2">
                         <Form className='d-flex w-100 '>
-                            <Form.Control type="text" placeholder="Enter your email" className='subsearch rounded-start-5 rounded-end-0' />
+                            <Form.Control id="sub_email" type="text" placeholder="Enter your email" className='subsearch rounded-start-5 rounded-end-0' />
                             <Button  className='subnow rounded-end-5 rounded-start-0 col-sm-4 col-6 '>
                                 Subscibe Now
                             </Button>

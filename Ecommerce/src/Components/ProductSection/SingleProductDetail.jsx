@@ -36,6 +36,7 @@ function SingleProductDetail() {
       const color = searchParams.get("color");
       const size = searchParams.get("size");
       const [addToCart,setAddToCart] = useState(false);
+      const[reviewChange,isReviewChange] = useState(false);
       //console.log(color)
       //console.log(size)
 
@@ -58,7 +59,7 @@ function SingleProductDetail() {
                 response.data.result.variation_list.find((item) => item.color === parseInt(color)) :
             size ?
                 response.data.result.variation_list.find((item) => item.size === parseInt(size)) :
-            response.data.result.variation_list.find((item) => item.sku === sku);
+                response.data.result.variation_list.find((item) => item.sku === sku);
                 const newProductData = {...productData,
                 id: productVariation?.product_id || result.id,
                 category_info: productVariation?.category_info || result.category_info,
@@ -87,8 +88,11 @@ function SingleProductDetail() {
                 expected_delivery: productVariation?.expected_delivery || result.expected_delivery,
                 total_review: productVariation?.total_review || result.total_review,
                 rating_count: productVariation?.rating_count || result.rating_count,
+                review: productVariation?.review || result.review,
+                avg_rating: productVariation?.variation_avg_rating || result.avg_rating,
                 is_wishlisted: productVariation?.is_wishlisted || result.is_wishlisted,
                 is_added_cart: productVariation?.is_added_cart || result.is_added_cart,
+                is_purchased: productVariation?.is_purchased || result.is_purchased,
                 product_variation_id: productVariation?.product_variation_id,
                 }
                 setProductData(newProductData);
@@ -102,7 +106,8 @@ function SingleProductDetail() {
       }
       useEffect(() => {
         fetchData();
-      },[color,size,addToCart])
+        isReviewChange(false);
+      },[color,size,addToCart,reviewChange])
 
       const handleWishListChange = (productId, isWishListed) => {
         // Update the productData state based on productId and isWishListed
@@ -110,7 +115,8 @@ function SingleProductDetail() {
           prevProductData.id === productId ? { ...prevProductData, is_wishlisted: isWishListed } : prevProductData
         );
       };
-    // console.log(productData);
+
+    console.log(productData);
     //console.log(productId)
 
 
@@ -165,24 +171,28 @@ function SingleProductDetail() {
                         id={productData.id}
                         variationId={productData.product_variation_id ? productData.product_variation_id : null} 
                         handleWishListChange={handleWishListChange}
-                        />
+                    />
                 </Col>
                 <Col className="border-bottom pb-3 ">
-                    <ImageAndThumbnail productImage={productData.product_images}/>
+                    <ImageAndThumbnail 
+                        productImage={productData.product_images}/>
                 </Col>
 
                 <Col className="d-flex flex-column gap-3 border-bottom pb-3 ">
 
                     <Row className="productmaintitle">
-                        <SingleProductTitle name={productData.name}/>
-                        <Share shareURL={productData.share_url}/>
+                        <SingleProductTitle 
+                            name={productData.name}/>
+                        <Share 
+                            shareURL={productData.share_url}/>
                     </Row>
                     <Row className="starandvender">
                         <Col className="d-flex col-6">
-                            <Star/>
+                            <Star totalstar={productData.avg_rating}/>
                         </Col>
                         <Col className=" col-6 text-md-end text-start ">
-                            <VenderName venderName={productData.vendor_info}/>
+                            <VenderName 
+                                venderName={productData.vendor_info}/>
                         </Col>
                     </Row>
                     <Row className="priceseller">
@@ -197,38 +207,57 @@ function SingleProductDetail() {
                         </Col>
                     </Row>
                     <Row>
-                        <SingleProductCondition productCondition = {productData.product_condition}/>
+                        <SingleProductCondition 
+                            productCondition = {productData.product_condition}/>
                     </Row>
                     {productData.color != "" &&
                         <Row>
-                                <SingleProductColor colorVariation={productData.colorVariation} productColor={productData.color} size={size}/>
+                                <SingleProductColor 
+                                    colorVariation={productData.colorVariation} 
+                                    productColor={productData.color} 
+                                    size={size}/>
                         </Row>
                     }
                     {productData.size != "" &&
                         <Row>
-                                <SingleProductSize sizeVariation={productData.sizeVariation} productSize={productData.size} color={color}/>
+                                <SingleProductSize 
+                                    sizeVariation={productData.sizeVariation} 
+                                    productSize={productData.size} 
+                                    color={color}/>
                         </Row>
                     }
                     <Row>
-                        <SingleProductQuantity productData={productData} productQuantity={productQuantity} setproductQuantity={setproductQuantity}/>
+                        <SingleProductQuantity 
+                            productData={productData} 
+                            productQuantity={productQuantity} 
+                            setproductQuantity={setproductQuantity}/>
                     </Row>
                     <Row className=" d-flex d-md-none ">
                         <SingleProductStockInfo/>
                     </Row>
                     <Row className=" d-flex d-md-none ">
-                        <SingleProductCartBtn addToCart={addToCart} setAddToCart={setAddToCart} productData={productData} productQuantity={productQuantity}/>
+                        <SingleProductCartBtn 
+                            addToCart={addToCart} 
+                            setAddToCart={setAddToCart} 
+                            productData={productData} 
+                            productQuantity={productQuantity}/>
                     </Row>
                     <Row className=" border-top border-bottom">
                         <SingleProductDeliveryinfo/>
                     </Row>
                     {productData.stock <= 15 &&
                     <Row className=" d-none d-md-flex ">
-                        <SingleProductStockInfo productInStock={productData.stock}
+                        <SingleProductStockInfo 
+                            productInStock={productData.stock}
                             productview={productData.product_view}/>
                     </Row>
                     }
                     <Row className=" d-none d-md-flex ">
-                        <SingleProductCartBtn addToCart={addToCart} setAddToCart={setAddToCart} productData={productData} productQuantity={productQuantity}/>
+                        <SingleProductCartBtn 
+                            addToCart={addToCart} 
+                            setAddToCart={setAddToCart} 
+                            productData={productData} 
+                            productQuantity={productQuantity}/>
                     </Row>
                     <Row>
                         {productData.expected_delivery &&
@@ -242,10 +271,16 @@ function SingleProductDetail() {
 
             <Row className="d-block d-lg-flex flex-lg-row-reverse">
                 
-                <SingleProductHighlight productPurchaseCount={productData.purchase_count}
+                <SingleProductHighlight 
+                    productPurchaseCount={productData.purchase_count}
                     productDescription={productData.description}
                     productBrand={productData.product_specification}/>
-                <SingleProductReview totalReview={productData.total_review} ratingCount={productData.rating_count}/>
+                <SingleProductReview 
+                    productData={productData} 
+                    totalReview={productData.total_review} 
+                    ratingCount={productData.rating_count}
+                    isReviewChange={isReviewChange}
+                    reviewChange={reviewChange}/>
 
             </Row>
 

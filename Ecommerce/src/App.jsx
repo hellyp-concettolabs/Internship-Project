@@ -13,8 +13,9 @@ import { Provider } from "react-redux";
 import store from "./app/store.js";
 import Payment from "./Components/Checkout/Payment.jsx";
 import ManageAddress from "./Components/Navbar/ManageAddress.jsx";
-import YourOrders from "./Components/Navbar/YourOrders.jsx";
+import YourOrders from "./Components/OrdersSection/YourOrders.jsx";
 import WishList from "./Components/WishListSection/WishList.jsx";
+import OrderDetailPage from "./Components/OrdersSection/OrderDetailPage.jsx";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <Route path="/address" element={<ManageAddress/>}/>
             <Route path="/orders" element={<YourOrders/>}/>
             <Route path="/wishlist" element={<WishList/>}/>
+            <Route path="/orders/:order_number/:order_id" element={<OrderDetailPage/>}/>
           </Routes>
           <Footer/>
         </BrowserRouter>

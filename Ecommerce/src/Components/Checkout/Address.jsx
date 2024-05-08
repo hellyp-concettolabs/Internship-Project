@@ -123,6 +123,8 @@ const Address = () => {
                   <Form.Check
                     type="radio"
                     aria-label="radio 1"
+                    name="user_address"
+                    id={data.id}
                     onChange={() => {handleSelect(data.id)}}
                   />
                 </div>

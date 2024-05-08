@@ -89,7 +89,7 @@ function Profile() {
                       }) => (
                       <form onSubmit={handleSubmit} className='d-flex flex-column gap-3'>
                         <Form.Group>
-                          <Form.Label>Name<span className=" text-danger ">*</span></Form.Label>
+                          <Form.Label htmlFor="name">Name<span className=" text-danger ">*</span></Form.Label>
                           <Form.Control 
                             type="text" 
                             id="name" 
@@ -97,10 +97,11 @@ function Profile() {
                             value={values.name}
                             onChange={handleChange}
                             onBlur={handleBlur} 
+                            autoComplete="off"
                             className='signupemail rounded-5 w-100 px-3 py-2'/>
                         </Form.Group>
                         <Form.Group>
-                          <Form.Label>Phone Number</Form.Label>
+                          <Form.Label htmlFor="phone_number">Phone Number</Form.Label>
                           <Form.Control 
                             type="text" 
                             id="phone_number" 
@@ -112,7 +113,7 @@ function Profile() {
                             className='signupemail rounded-5 w-100 px-3 py-2'/>
                         </Form.Group>
                         <Form.Group>
-                          <Form.Label>Email</Form.Label>
+                          <Form.Label htmlFor="email">Email</Form.Label>
                           <Form.Control 
                             type="email" 
                             value={userData.email}
@@ -121,6 +122,7 @@ function Profile() {
                             name="email"
                             onChange={handleChange}
                             onBlur={handleBlur} 
+                            autoComplete="off"
                             className='signupemail rounded-5 w-100 px-3 py-2'/>
                         </Form.Group>
                         <Button className='search-icon rounded-5 bg-primary text-light w-100 border-0 py-2 ' type="submit">

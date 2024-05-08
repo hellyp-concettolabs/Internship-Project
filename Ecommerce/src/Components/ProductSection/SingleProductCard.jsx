@@ -16,10 +16,10 @@ function SingleProductCard(props) {
             </div>
             <div className="sdetailsection p-2 p-lg-3 ">
                 <div className="scardtitle"><p className="stitletext m-0 ">{props.d.name}</p></div>
-                <div className="sstars d-flex justify-content-start "><Star/></div>
+                <div className="sstars d-flex justify-content-start "><Star totalstar={props.d.avg_rating}/></div>
                 <div className=" d-flex justify-content-between align-items-center ">
                     <div className=" d-flex justify-content-between align-items-center gap-2 ">
-                        <span className="sdisprice"><sup>$</sup>{Math.floor(props.d.my_sale_price)}</span>
+                        <span className="sdisprice"><sup>$</sup>{props.d.sale_price}</span>
                         <span className="sactualprice text-decoration-line-through ">${Math.floor(props.d.main_rrp)}</span>
                     </div>
                     <div>

@@ -231,7 +231,8 @@ function ProductListPage() {
                   <Offcanvas show={show} onHide={handleClose}>
                       <Offcanvas.Header className=" d-flex justify-content-end " closeButton></Offcanvas.Header>
                       <Offcanvas.Body>
-                          <FilterSection setFilterDiscount={setFilterDiscount}/>
+                          <FilterSection filterDiscount={filterDiscount} filterPrice={filterPrice} 
+                            setFilterDiscount={setFilterDiscount} setFilterPrice={setFilterPrice}/>
                       </Offcanvas.Body>
                   </Offcanvas>
 
@@ -240,9 +241,9 @@ function ProductListPage() {
                 <Col className=" col-sm-5 col-9 ">
                     <Form>
                         <div className=" align-items-center d-flex rounded-5 border border-secondary p-1">
-                            <Form.Label className="sortby col-4">Sort By:</Form.Label>
+                            <Form.Label htmlFor="selectsortoption" className="sortby col-4">Sort By:</Form.Label>
                             <div className="dropdown d-flex justify-content-center align-items-center col-7">
-                                <FormControl type="select" placeholder="Select..." className="border-0 p-0" 
+                                <FormControl id='selectsortoption' type="select" placeholder="Select..." className="border-0 p-0" 
                                     style={{ boxShadow:"none", cursor:"pointer"}} data-bs-toggle="dropdown"
                                     value={selectedSortValue} 
                                     onChange={(e) => {

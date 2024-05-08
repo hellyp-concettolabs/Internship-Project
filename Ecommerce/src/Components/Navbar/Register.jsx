@@ -9,12 +9,12 @@ import { useSelector } from "react-redux";
 
 Register.propTypes = {
     onHide: PropTypes.func.isRequired,
-    register: PropTypes.bool,
-    setRegister: PropTypes.func.isRequired,
+    show: PropTypes.bool.isRequired,
+    setregister: PropTypes.func.isRequired,
     useremail: PropTypes.string.isRequired,
   };
 
-function Register(props) {
+function Register({onHide,show,setregister,useremail}) {
 
   const {setUserData} = useContext(UserContext);
   const userName = useSelector((state) => state.userData.name);
@@ -30,13 +30,14 @@ function Register(props) {
       defaultValues.phoneNumber = userName.toString();
     }
   }
+
   return (
     <>
-        <Modal {...props} size="lg" centered className='rounded-5 '>
+        <Modal show={show} onHide={onHide} size="lg" centered className='rounded-5 '>
             <div className='signupcontainer'>
                 <Modal.Header className=' d-flex flex-column p-2 border-0 '>
                   <div className='closebtn'>
-                    <CloseButton style={{boxShadow:"none"}} onClick={props.onHide}/>
+                    <CloseButton style={{boxShadow:"none"}} onClick={onHide}/>
                   </div>
                   <Modal.Title id="contained-modal-title-vcenter" className=' text-center col-11'>
                     <div className='signin-register'>
@@ -54,7 +55,7 @@ function Register(props) {
                       initialValues={{
                         name:'',
                         mobile:'',
-                        email:`${props.useremail}`,
+                        email:`${useremail}`,
                         //country_code:'+91'
                       }}
                       
@@ -66,7 +67,7 @@ function Register(props) {
                           localStorage.setItem("token", response.data.result.token);
                           // console.log(localStorage.getItem("token"));
                           setUserData(response.data.result);
-                          props.setRegister(false);
+                          setregister(false);
                          }
                           })
                           .catch(error => {
@@ -110,7 +111,7 @@ function Register(props) {
                           <Form.Label>Email<span className=" text-danger ">*</span></Form.Label>
                           <Form.Control 
                             type="email" 
-                            value={props.useremail}
+                            value={useremail}
                             disabled
                             id="email" 
                             name="email"

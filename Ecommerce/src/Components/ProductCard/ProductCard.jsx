@@ -17,11 +17,11 @@ function ProductCard(props) {
             </div>
             <div className="detailsection ">
                 <div className="cardtitle"><p className="titletext m-0 ">{props.d.name}</p></div>
-                <div className="stars d-flex justify-content-start "style={{color:"black"}}><Star/></div>
+                <div className="stars d-flex justify-content-start "style={{color:"black"}}><Star totalstar={props.d.avg_rating}/></div>
                 <div className=" d-flex justify-content-between align-items-center ">
                     <div className=" d-flex justify-content-between align-items-center gap-2 ">
-                        <span className="disprice"><sup>$</sup>{props.d.my_sale_price}</span>
-                        <span className="actualprice text-decoration-line-through ">${props.d.main_rrp}</span>
+                        <span className="disprice"><sup>$</sup>{Math.floor(props.d.my_sale_price)}</span>
+                        <span className="actualprice text-decoration-line-through ">${Math.floor(props.d.main_rrp)}</span>
                     </div>
                     <div>
                         <span className="discount d-none d-md-flex ">{Math.floor(props.d.discount_percentage)}%</span>

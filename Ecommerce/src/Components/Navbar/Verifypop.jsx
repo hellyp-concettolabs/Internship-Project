@@ -176,7 +176,9 @@ function Verifypop(props) {
           </Modal.Body>
         </div>
       </Modal>
-      <Register show={register} useremail={props.useremail} setRegister={setRegister} onHide={() => setRegister(false)}/>
+      {register &&
+        <Register show={register} useremail={props.useremail} setregister={setRegister} onHide={() => setRegister(false)}/>
+      }
     </div>
   )
 }

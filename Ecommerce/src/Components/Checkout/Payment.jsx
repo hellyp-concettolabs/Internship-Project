@@ -218,7 +218,7 @@ function Payment() {
                   <Form.Check
                       type="radio"
                       name="delivery_method"
-                      id="express"
+                      id="subscribed"
                       className=" p-0 mt-3"
                   />
                   <span className=" fw-bold fs-6">FASTFOX</span>
@@ -269,7 +269,7 @@ function Payment() {
                 style={{border:"1.5px solid #f5f5fc"}}>
                       <Form className='d-flex flex-column gap-3'>
                         <Form.Group>
-                          <Form.Label>Name on Card<span className=" text-danger ">*</span></Form.Label>
+                          <Form.Label htmlFor="card_holder_name">Name on Card<span className=" text-danger ">*</span></Form.Label>
                           <Form.Control 
                             type="text" 
                             id="card_holder_name" 
@@ -277,7 +277,7 @@ function Payment() {
                             className='signupemail rounded-5 w-100 px-3 py-2'/>                      
                         </Form.Group>
                         <Form.Group>
-                          <Form.Label>Card Number<span className=" text-danger ">*</span></Form.Label>
+                          <Form.Label htmlFor="card_number">Card Number<span className=" text-danger ">*</span></Form.Label>
                           <Form.Control 
                             type="text" 
                             id="card_number" 
@@ -286,8 +286,9 @@ function Payment() {
                         </Form.Group>
                         <div className=" d-flex justify-content-between align-items-center gap-1">
                         <Form.Group className="col-4">
-                          <Form.Label>Month<span className=" text-danger ">*</span></Form.Label>
+                          <Form.Label htmlFor="select_month">Month<span className=" text-danger ">*</span></Form.Label>
                           <Form.Select
+                            id="select_month"
                             className='signupemail rounded-5 w-100 px-3 py-2 '
                             defaultValue="">
                               <option value="" disabled hidden>Select...</option>
@@ -297,8 +298,9 @@ function Payment() {
                           </Form.Select>
                         </Form.Group>
                         <Form.Group className="col-4">
-                          <Form.Label>Year<span className=" text-danger ">*</span></Form.Label>
+                          <Form.Label htmlFor="select_year">Year<span className=" text-danger ">*</span></Form.Label>
                           <Form.Select 
+                            id="select_year"
                             className='signupemail rounded-5 w-100 px-3 py-2 '
                             defaultValue="">
                               <option value="" disabled hidden>Select...</option>
@@ -308,7 +310,7 @@ function Payment() {
                           </Form.Select>
                         </Form.Group>
                         <Form.Group className="col-4">
-                          <Form.Label>CVV<span className=" text-danger ">*</span></Form.Label>
+                          <Form.Label htmlFor="cvv">CVV<span className=" text-danger ">*</span></Form.Label>
                           <Form.Control 
                             type="text" 
                             id="cvv" 
@@ -351,11 +353,12 @@ function Payment() {
                 <Form  className='d-flex flex-column gap-4'>
                   <div className=" d-flex gap-4">
                     <Form.Group style={{width:"50%"}}>
-                      <Form.Label>Country/Region<span className=" text-danger ">*</span></Form.Label>
+                      <Form.Label htmlFor="country">Country/Region<span className=" text-danger ">*</span></Form.Label>
                       <Form.Control 
                         type="text" 
                         id="country" 
                         name="country"
+                        autoComplete="off"
                         onChange={(e) => setStoreBillAdd((prev) => ({
                           ...prev,
                           country: e.target.value
@@ -363,11 +366,12 @@ function Payment() {
                         className='signupemail rounded-5 w-100 px-3 py-2'/>
                     </Form.Group>
                     <Form.Group style={{width:"50%"}}>
-                      <Form.Label>Full Name<span className=" text-danger ">*</span></Form.Label>
+                      <Form.Label htmlFor="full_name">Full Name<span className=" text-danger ">*</span></Form.Label>
                       <Form.Control 
                         type="text" 
                         id="full_name" 
                         name="full_name"
+                        autoComplete="off"
                         onChange={(e) => setStoreBillAdd((prev) => ({
                           ...prev,
                           full_name: e.target.value
@@ -377,11 +381,12 @@ function Payment() {
                   </div>
                   <div className=" d-flex gap-4">
                     <Form.Group style={{width:"50%"}}>
-                      <Form.Label>Address<span className=" text-danger ">*</span></Form.Label>
+                      <Form.Label htmlFor="address">Address<span className=" text-danger ">*</span></Form.Label>
                       <Form.Control 
                         type="text" 
                         id="address" 
                         name="address"
+                        autoComplete="off"
                         onChange={(e) => setStoreBillAdd((prev) => ({
                           ...prev,
                           address: e.target.value
@@ -389,11 +394,12 @@ function Payment() {
                         className='signupemail rounded-5 w-100 px-3 py-2'/>
                     </Form.Group>
                     <Form.Group style={{width:"50%"}}>
-                      <Form.Label>Apartment,Suite,etc.</Form.Label>
+                      <Form.Label htmlFor="address2">Apartment,Suite,etc.</Form.Label>
                       <Form.Control 
                         type="text" 
                         id="address2" 
                         name="address2"
+                        autoComplete="off"
                         onChange={(e) => setStoreBillAdd((prev) => ({
                           ...prev,
                           address2: e.target.value
@@ -403,7 +409,7 @@ function Payment() {
                   </div>
                   <div className=" d-flex gap-4">
                     <Form.Group style={{width:"50%"}}>
-                      <Form.Label>State<span className=" text-danger ">*</span></Form.Label>
+                      <Form.Label htmlFor="state">State<span className=" text-danger ">*</span></Form.Label>
                       <Form.Control 
                         type="text" 
                         id="state" 
@@ -415,7 +421,7 @@ function Payment() {
                         className='signupemail rounded-5 w-100 px-3 py-2'/>
                     </Form.Group>
                     <Form.Group style={{width:"50%"}}>
-                      <Form.Label>City<span className=" text-danger ">*</span></Form.Label>
+                      <Form.Label htmlFor="city">City<span className=" text-danger ">*</span></Form.Label>
                       <Form.Control 
                         type="text" 
                         id="city" 
@@ -429,7 +435,7 @@ function Payment() {
                   </div>
                   <div className=" d-flex gap-4">
                     <Form.Group style={{width:"50%"}}>
-                      <Form.Label>Postcode<span className=" text-danger ">*</span></Form.Label>
+                      <Form.Label htmlFor="postcode">Postcode<span className=" text-danger ">*</span></Form.Label>
                       <Form.Control 
                         type="text" 
                         id="postcode" 
@@ -441,11 +447,12 @@ function Payment() {
                         className='signupemail rounded-5 w-100 px-3 py-2'/>
                     </Form.Group>
                     <Form.Group style={{width:"50%"}}>
-                      <Form.Label>Phone<span className=" text-danger ">*</span></Form.Label>
+                      <Form.Label htmlFor="phone">Phone<span className=" text-danger ">*</span></Form.Label>
                       <Form.Control 
                         type="text" 
                         id="phone" 
                         name="phone"
+                        autoComplete="off"
                         onChange={(e) => setStoreBillAdd((prev) => ({
                           ...prev,
                           phone: e.target.value
@@ -464,7 +471,7 @@ function Payment() {
           <Card>
             <Card.Body>
               <Card.Title className="border-bottom mb-3 pb-2">Order Summary</Card.Title>
-              <Card.Text>
+              {/* <Card.Text> */}
                 
                 <div className=" d-flex flex-column gap-3 py-3 border-bottom mb-3 pb-2">
                 <div className=" d-flex justify-content-between align-items-center ">
@@ -503,7 +510,7 @@ function Payment() {
                   onClick={handlePayNow}>
                   Pay Now
                 </Button>
-              </Card.Text>
+              {/* </Card.Text> */}
             </Card.Body>
         </Card>
           </Col>

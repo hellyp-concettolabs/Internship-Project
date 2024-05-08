@@ -10,7 +10,7 @@ function SingleProductStockInfo({productInStock,productview}) {
     <>
         <div className="stockinfocontainer">
             <div>
-                <span className="stock">HURRY, THERE ARE ONLY {productInStock} ITEM(S) LEFT!</span>
+                <span className="stock">HURRY, THERE ARE ONLY {productInStock === null ? 0 : productInStock} ITEM(S) LEFT!</span>
             </div>
             <div>
                 <span className="viewercount rounded-3"><i className="bi bi-people"></i>{productview}</span>

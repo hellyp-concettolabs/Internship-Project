@@ -30,7 +30,7 @@ function OrderSummary({cartDetail}) {
         <Card>
             <Card.Body>
               <Card.Title>Order Summary</Card.Title>
-              <Card.Text>
+              {/* <Card.Text> */}
                 <div className=" border-top border-bottom d-flex flex-column gap-3 py-3">
                 <div className=" d-flex justify-content-between align-items-center ">
                     <div>Item(s) total:</div>
@@ -54,7 +54,7 @@ function OrderSummary({cartDetail}) {
                   Proceed to Checkout
                 </Button>
                 <div className=" mt-2 small text-start ">Order within {time} and choose {shipping} to get it by {date}</div>
-              </Card.Text>
+              {/* </Card.Text> */}
             </Card.Body>
         </Card>
     </>

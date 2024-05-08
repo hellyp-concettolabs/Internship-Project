@@ -26,17 +26,17 @@ function ManageAddress() {
   
     const fetchAddress = async() => {
       if(localStorage.getItem("token") !== ""){
-      isLoading(true);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
-      await axios.get(' https://bargainfox-dev.concettoprojects.com/api/get-delivery-address')
-      .then((response) => {
-        setStoreAddress(response.data.result);
-        isLoading(false);
-      })
-      .catch(error => {
-        console.error('Error making Get request of Address:', error);
-      })
-    }
+        isLoading(true);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
+        await axios.get(' https://bargainfox-dev.concettoprojects.com/api/get-delivery-address')
+          .then((response) => {
+            setStoreAddress(response.data.result);
+            isLoading(false);
+          })
+          .catch(error => {
+            console.error('Error making Get request of Address:', error);
+          })
+      }
     }
 
     const deleteAddress = async(id) => {
@@ -74,6 +74,7 @@ function ManageAddress() {
       setShow(true);
     }
 
+    // console.log(storeAddress)
   return (
     <>
       {loading ? 
@@ -113,12 +114,13 @@ function ManageAddress() {
             </Row>
 
             <Row>
+              <Col>
               {storeAddress && storeAddress.length > 0 ? 
                 (
                   <> 
-                    {storeAddress.map((data) => ( 
-                      <>
-                        <Row key={data.id} className=" mb-3 pb-3 border-bottom ">
+                    {storeAddress.map((data,i) => ( 
+                      <div key={data.id || i}>
+                        <Row  className=" mb-3 pb-3 border-bottom ">
                           <Col className=" col-12 col-md-8 d-flex  gap-3">
                             <div className=" d-flex flex-column ">
                               <span className=" fw-bold ">{data.full_name}</span>
@@ -142,7 +144,7 @@ function ManageAddress() {
                             </div>
                           </Col>
                         </Row>
-                      </>
+                      </div>
                     ))}
                   </>
                 ):
@@ -151,6 +153,7 @@ function ManageAddress() {
                       desc={'Please add your address for your better experience.'}/>
                   </Row>
                 )}
+                </Col>
             </Row>
               {show &&
                 <AddAddressPopUp show={show} setShow={setShow} onHide={() => setShow(false)} setNewAdd={setNewAdd} 

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 
 SingleProductColor.propTypes = {
   productColor: PropTypes.arrayOf(PropTypes.object),
-  size: PropTypes.number,
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   colorVariation: PropTypes.number,
 };
 function SingleProductColor({productColor,size,colorVariation}) {
