@@ -109,7 +109,7 @@ $sm:560px;
     font-size: $base-font2-size * 0.6;
     font-weight: 600;
     position: absolute;
-    margin-top: -14%;
+    margin-top: -15%;
     width: 36px;
     height: 36px;
     background-color: #0036FF; 
@@ -120,10 +120,14 @@ $sm:560px;
     z-index: 1;
     color: white;
     margin-left: -20%;
+    @include breakpoint(max,720px){
+        margin-top: -16%;
+    }
     @include breakpoint(max,$md){
         font-size: $base-font2-size * 0.5;
         width: 30px;
         height: 30px;
+        margin-top: -17%;
     }
     @include breakpoint(max,$sm){
         font-size: $base-font2-size * 0.6;
@@ -132,6 +136,32 @@ $sm:560px;
         margin-top: -20%;
         margin-left: -30%;
     }    
+    @include breakpoint(max,540px){
+        margin-top: -21%;
+    }    
+    @include breakpoint(max,500px){
+        margin-top: -23%;
+    }    
+    @include breakpoint(max,460px){
+        margin-top: -24%;
+    }    
+    @include breakpoint(max,420px){
+        margin-top: -26% ;
+    }    
+    @include breakpoint(max,400px){
+        margin-top: -28% ;
+    }    
+    @include breakpoint(max,380px){
+        margin-top: -30% ;
+        margin-left: -27%;
+    }    
+    @include breakpoint(max,370px){
+        margin-top: -32% ;
+    }   
+    @include breakpoint(max,340px){
+        margin-top: -34% ;
+        margin-left: -26%;
+    }  
 }
 
 

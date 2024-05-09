@@ -5,7 +5,7 @@ import {useEffect, useRef, useState} from "react";
 import axios from 'axios';
 import { useForm } from "react-hook-form";
 import Register from "./Register";
-//import { ToastContainer, toast } from 'react-toastify';
+//import { toast } from 'react-toastify';
 //import 'react-toastify/dist/ReactToastify.css';
 import { useContext} from 'react';
 import { UserContext } from '../UserData/StoreUserContext';
@@ -166,7 +166,6 @@ function Verifypop(props) {
                   <button onClick={handleResend} className="text-primary small border-0 " style={{backgroundColor:"white"}}>
                   Resend Code
                   </button>
-                  {/* <ToastContainer position="top-right"/> */}
                 </div>
                 } 
               </div>

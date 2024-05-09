@@ -1,6 +1,8 @@
 $xxl:1400px;
 $xl:1200px;
 $lg:992px;
+$md:768px;
+$sm:560px;
 @mixin breakpoint($type, $size) {
     @if $type == 'min' {
       @media (min-width: $size) {
@@ -21,12 +23,23 @@ $lg:992px;
     margin-bottom: 50px !important;
     padding: 0px 60px;
     gap: 1.5%;
-
+    @include breakpoint(max,$xxl){
+        padding: 0px 30px;
+    }
+    @include breakpoint(max,$md){
+        padding: 0px 15px;
+    }
+    @include breakpoint(max,330px){
+        padding: 0px 0px;
+    }
     .filtersec{
         max-width: 24% !important;
     }
     .productlistsec{
         width: 75% !important;
+        @include breakpoint(max,$lg){
+            max-width: 100% !important;
+        }
     }
 }
 .productlistwishlist{
@@ -44,30 +57,25 @@ $lg:992px;
     }
     @include breakpoint(max,$lg){
         margin-top: 1.6%;
-        margin-left: 23%;
+        margin-left: 21%;
     }
+    @include breakpoint(max,650px){
+        margin-left: 20%;
+    }
+    @include breakpoint(max,$sm){
+        margin-left: 35%;
+    }
+    @include breakpoint(max,500px){
+        margin-left: 33%;
+    }
+    @include breakpoint(max,400px){
+        margin-left: 30%;
+    }
+
     
 }
-@media (max-width:1400px) {
-    .productlistcontainer{
-    padding: 0px 30px;
-}
-}
-@media (max-width:991px) {
-    .productlistsec{
-        max-width: 100% !important;
-    }
-}
-@media (max-width:768px) {
-    .productlistcontainer{
-    padding: 0px 15px;
-}
-}
-@media (max-width:330px) {
-    .productlistcontainer{
-    padding: 0px 0px;
-}
-}
+
+
 
 
 

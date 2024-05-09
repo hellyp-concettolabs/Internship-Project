@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { UserContext, userResultDetails } from "../UserData/StoreUserContext";
 import {Formik} from 'formik'
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router";
 
@@ -145,7 +145,6 @@ function Profile() {
             </Col>
         </Row>
       </Container>
-      <ToastContainer position="top-right"/>
     </>
   )
 }

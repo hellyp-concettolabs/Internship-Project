@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import NoProduct from "../ProductNotFoundPage/NoProduct";
 import AddAddressPopUp from "./AddAddressPopUp";
 import { useNavigate } from "react-router";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Address = () => {
@@ -159,7 +159,6 @@ const Address = () => {
               >
                 Continue To Payment
               </button>
-              <ToastContainer />
             </Row>
             <Row className="py-4">
               <div>

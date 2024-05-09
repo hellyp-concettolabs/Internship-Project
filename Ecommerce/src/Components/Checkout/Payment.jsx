@@ -3,7 +3,7 @@ import { Button, Card, Col, Container, Form, Image, Row, Spinner } from "react-b
 import { useLocation, useNavigate } from "react-router"
 import axios from "axios";
 import "./payment.scss";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Payment() {
@@ -514,7 +514,6 @@ function Payment() {
             </Card.Body>
         </Card>
           </Col>
-          <ToastContainer />
         </Row>
       </Container>
     </>

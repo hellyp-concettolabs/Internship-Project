@@ -4,9 +4,10 @@ import Form from 'react-bootstrap/Form';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import NoProduct from "../ProductNotFoundPage/NoProduct";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
+import "./yourorders.scss";
 
 function YourOrders() {
 
@@ -60,7 +61,7 @@ function YourOrders() {
         period: selectedPeriod
       })
         .then((response) => {
-          console.log(response.data.result.data);
+          // console.log(response.data.result.data);
           setStoreOrderDetail(response.data.result.data);
           isLoading(false);
         })
@@ -93,7 +94,7 @@ function YourOrders() {
   return (
     <>
       {/* BreadCrumb */}
-      <Container fluid className="profileBreadcrumb">
+      <Container fluid className="orderBreadcrumb d-none d-md-block ">
           <nav style={{'--bs-breadcrumb-divider': '>'}} aria-label="breadcrumb">
             <ol className="breadcrumb d-flex justify-content-start ">
               <li className="breadcrumb-item">
@@ -103,16 +104,16 @@ function YourOrders() {
             </ol>
           </nav>
       </Container>
-      <Container fluid style={{padding: "0.5rem 50px 3rem"}}>
 
-        <Row className=" mb-2 d-flex justify-content-between" style={{borderBottom:"3px solid #f5f5fc"}}>
-            <Col className="d-flex justify-content-between col-4 ">
-                <h3 className="yprofile">Your Orders</h3>
+      <Container fluid className="ordercontainer">
+
+        <Row className="orderheading mb-2 d-flex flex-md-row flex-column justify-content-between align-items-md-center ">
+            <Col className="d-flex align-items-center justify-content-between col-md-4 col-6">
+                <h3 className="yprofile pb-md-0">Your Orders</h3>
             </Col>
-            <Col className=" col-4 p-0 ">
-            <Form className=" d-flex gap-3 ">
-                <Form.Group className=" d-flex align-items-center border border-1 border-secondary rounded-5 py-1 "
-                  style={{width:"50%", paddingLeft:"12px"}}>
+            <Col className=" d-flex mx-sm-3 mx-0 justify-content-md-end justify-content-start align-items-baseline col-md-6 col-11">
+            <Form className="orderfiltercontainer d-flex gap-3 ">
+                <Form.Group className="orderfilter d-flex align-items-center border border-1 border-secondary rounded-5 py-1 ">
                     <Form.Label htmlFor="select_period" className=" fw-semibold text-secondary fs-6 m-0 ">Period: </Form.Label>
                     <Form.Select
                       id="select_period"
@@ -128,8 +129,7 @@ function YourOrders() {
                         ))}
                     </Form.Select>
                 </Form.Group>
-                <Form.Group className=" d-flex align-items-center border border-1 border-secondary rounded-5 py-1 "
-                  style={{width:"50%", paddingLeft:"12px"}}>
+                <Form.Group className="orderfilter d-flex align-items-center border border-1 border-secondary rounded-5 py-1 ">
                     <Form.Label htmlFor="select_type" className=" fw-semibold text-secondary fs-6 m-0 ">Type: </Form.Label>
                     <Form.Select
                       id="select_type"
@@ -156,15 +156,15 @@ function YourOrders() {
                 <div className=" mb-3 ">
                     Order #: <b>{d.sub_order_number}</b>
                 </div>
-                <div className=" d-flex align-items-center gap-4 mb-3 ">
-                    <div className="  col-sm-2 col-4" 
-                      style={{height:"100px", width:"100px",cursor:"pointer"}}
+                <div className="orderitemcontainer">
+                  <div className="orderimgtitle col-8 ">
+                    <div className="orderitemimgcontainer col-2" 
+                      style={{cursor:"pointer"}}
                       onClick={() => navigate(`/orders/${d.sub_order_number}/${d.id}`)}>
-                        <Image src={d.product_info.product_images[0].product_image_url} className=" img-fluid rounded-4 "
-                          style={{width:"100px", height:"100px"}}/>
+                        <Image src={d.product_info.product_images[0].product_image_url} className="orderitemimg img-fluid rounded-4 "/>
                     </div>
                     <div className=" col-lg-8 d-flex flex-column gap-2">
-                        <div className="cartproducttitle"
+                        <div className="orderitemtitle"
                           style={{cursor:"pointer"}}
                           onClick={() => navigate(`/orders/${d.sub_order_number}/${d.id}`)}>
                                 <SingleProductTitle name={d.product_info.name}/>
@@ -183,16 +183,17 @@ function YourOrders() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-2 d-flex flex-column gap-4 justify-content-end align-items-center ">
-                      <div className=" text-success ">{d.order_status.name}</div>
-                      {d.is_cancel_enabled === true &&
-                      <button className=" border-1 rounded-5 px-2 bg-transparent d-flex align-items-center "
-                        onClick={() => handleCancelOrder(d.order_id)}>
-                        <div className="bi bi-x text-primary" style={{fontSize:"21px", height:"30px", fontWeight:"bold"}}></div>
-                        <div className="fw-medium fst-normal " style={{fontSize:"14px"}}>Cancel Order</div>
-                      </button>
-                      }
-                    </div>
+                  </div>
+                  <div className="orderitemstatus col-2 ">
+                    <div className="orderstatus">{d.order_status.name}</div>
+                    {d.is_cancel_enabled === true &&
+                    <button className="cancelbtn border-1 rounded-5 px-2 bg-transparent d-flex align-items-center "
+                      onClick={() => handleCancelOrder(d.order_id)}>
+                      <div className="bi bi-x text-primary" style={{fontSize:"21px", height:"30px", fontWeight:"bold"}}></div>
+                      <div className="fw-medium fst-normal ">Cancel Order</div>
+                    </button>
+                    }
+                  </div>
                 </div>
             </div>
             ))}
@@ -205,8 +206,6 @@ function YourOrders() {
             </>
           }
         </Row>
-
-        <ToastContainer position="top-right"/>
 
         </Container>
     </>

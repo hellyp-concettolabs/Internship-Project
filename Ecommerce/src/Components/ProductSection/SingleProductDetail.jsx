@@ -232,9 +232,13 @@ function SingleProductDetail() {
                             productQuantity={productQuantity} 
                             setproductQuantity={setproductQuantity}/>
                     </Row>
-                    <Row className=" d-flex d-md-none ">
-                        <SingleProductStockInfo/>
+                    {productData.stock <= 15 &&
+                    <Row className="d-flex d-md-none ">
+                        <SingleProductStockInfo 
+                            productInStock={productData.stock}
+                            productview={productData.product_view}/>
                     </Row>
+                    }
                     <Row className=" d-flex d-md-none ">
                         <SingleProductCartBtn 
                             addToCart={addToCart} 

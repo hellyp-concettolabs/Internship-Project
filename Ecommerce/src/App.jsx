@@ -16,6 +16,9 @@ import ManageAddress from "./Components/Navbar/ManageAddress.jsx";
 import YourOrders from "./Components/OrdersSection/YourOrders.jsx";
 import WishList from "./Components/WishListSection/WishList.jsx";
 import OrderDetailPage from "./Components/OrdersSection/OrderDetailPage.jsx";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
 
 
 function App() {
@@ -43,6 +46,7 @@ function App() {
           </Routes>
           <Footer/>
         </BrowserRouter>
+        <ToastContainer position="top-right" autoClose={800}/>
     </UserProvider>
     </Provider>
     </>
