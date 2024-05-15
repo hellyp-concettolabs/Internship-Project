@@ -6,8 +6,11 @@ NoProduct.propTypes = {
     heading: PropTypes.string,
     desc: PropTypes.string,
 };
+
 function NoProduct({heading,desc}) {
+
     const navigate = useNavigate();
+    
   return (
     <>
       <div className=" d-flex flex-column justify-content-center align-items-center ">

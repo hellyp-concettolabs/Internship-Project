@@ -5,6 +5,7 @@ import axios from "axios";
 import "./payment.scss";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Domain_Base_Url } from "../../app/DomainBaseUrl/BaseUrl";
 
 function Payment() {
 
@@ -31,46 +32,39 @@ function Payment() {
   //                                                 year:'',
   //                                                 cvv:'',});
 
+  useEffect(() => {
+    fetchAddress();
+    fetchOrderSummary();
+  }, []);
 
   const fetchAddress = async () => {
+    try{
     if (localStorage.getItem("token") !== null) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
-      await axios.get(`https://bargainfox-dev.concettoprojects.com/api/get-delivery-address`)
-        .then((response) => {
+      const response = await axios.get(`${Domain_Base_Url}/get-delivery-address`)
           setStoreAddress(response.data.result);
           if(addressId !== null){
             const storeIdAddress = response.data.result.find((item) => item.id === addressId);
           setStoreAddress(storeIdAddress);
         }
-        })
-        .catch(error => {
-          console.error('Error making Get request of Address:', error);
-        })
+    }}
+    catch(error) {
+      console.error('Error making Get request of Payment:', error);
     }
-  }
-
-  useEffect(() => {
-    fetchAddress();
-  }, []);
-
-
+    }
 
   const fetchOrderSummary = async () => {
+    try{
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
-    await axios.post(' https://bargainfox-dev.concettoprojects.com/api/my-cart')
-      .then((response) => {
+    const response = await axios.post(`${Domain_Base_Url}/my-cart`)
         // console.log(response.data.result);
         setCartProductData(response.data.result);
         setCartItemId(response.data.result.user_cart.map((item) => item.id));
-      })
-      .catch(error => {
-        console.error('Error making Post request:', error);
-      })
+    }
+    catch(error) {
+        console.error('Error making Post request for payment:', error);
+    }
   }
-
-  useEffect(() => {
-    fetchOrderSummary();
-  }, [])
 
   const handleSameBillAddress = () => {
     setDiffBillAdd(false);
@@ -86,25 +80,24 @@ function Payment() {
   }
 
   const handleItemDelete = async() =>{
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
-    await axios.post(' https://bargainfox-dev.concettoprojects.com/api/remove-from-cart',{
-        cart_product_id: cartItemId,
-    })
-    .then((response) =>{
-        // console.log(response);
-        if(response.data.status === 200){
-
-          navigate('/cart');
-        }
-    })
-    .catch(error =>{
-        console.error('Error making Post request:', error);
+    try{
+      axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
+      const response = await axios.post(`${Domain_Base_Url}/remove-from-cart`,{
+          cart_product_id: cartItemId,
       })
+      // console.log(response);
+      if(response.data.status === 200){
+        navigate('/cart');
+      }
+    }
+    catch(error) {
+      console.error('Error making Post request:', error);
+    }
 }
 
   const handlePayNow = async() => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
-    await axios.post('https://bargainfox-dev.concettoprojects.com/api/place-order',{
+    await axios.post(`${Domain_Base_Url}/place-order`,{
       address_id:addressId,
       delivery_type_id:deliveryTypeId,
       selected_cart:cartItemId,

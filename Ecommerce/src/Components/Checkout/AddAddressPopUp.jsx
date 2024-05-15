@@ -1,8 +1,9 @@
 import { Button, CloseButton, Container, Form, Modal } from "react-bootstrap"
 import PropTypes from 'prop-types';
-import '../Navbar/register.scss'
 import {Formik} from 'formik'
 import axios from 'axios';
+import '../Header/register.scss'
+import { Domain_Base_Url } from "../../app/DomainBaseUrl/BaseUrl";
 
 AddAddressPopUp.propTypes = {
     onHide: PropTypes.func,
@@ -75,18 +76,18 @@ function AddAddressPopUp({show,setShow,onHide,setNewAdd,addressId,storeEditAddre
                       }}
                       
                       onSubmit={async (values) => {
+                        try{
                         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
-                        await axios.post(' https://bargainfox-dev.concettoprojects.com/api/store-delivery-address', values)
-                        .then(response => {
+                        const response = await axios.post(`${Domain_Base_Url}/store-delivery-address`, values)
                           // console.log(response.data);
                          if(response.status === 200){
                             setNewAdd(true);
                             setShow(false);
                          }
-                          })
-                          .catch(error => {
+                          }
+                          catch(error) {
                             console.error(error);
-                          });
+                          }
                       }}
                     >
                       {({

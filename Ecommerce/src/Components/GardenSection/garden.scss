@@ -1,0 +1,115 @@
+$base-font-size :16px;
+$base-font1-size :36px;
+
+.gardencontainer{
+    padding-top: 30px ;
+    padding-bottom: 30px ;
+}
+@media (max-width:1024px) {
+    .gardencontainer{
+      padding-top: 15px ;
+      padding-bottom: 15px ;
+    }
+}
+.gardenlistwishlist{
+  position: absolute;
+  margin-top: 12px;
+  margin-left: 215px;
+  height: 40px;
+}
+.slick-prev{
+  display: none !important;
+}
+.slick-next{
+  display: none !important;
+}
+
+.leftarrow ,.rightarrow{
+  width: 3% !important;
+  height: 44px !important;
+  padding: 0 !important;
+}
+@media (max-width:1400px) {
+  .leftarrow ,.rightarrow{
+    height: 40px !important;
+  }
+}
+@media (max-width:1200px) {
+  .leftarrow ,.rightarrow{
+    height: 32px !important;
+  }
+}
+@media (max-width:990px) {
+  .leftarrow ,.rightarrow{
+    height: 24px !important;
+  }
+  .bi-arrow-left-short, .bi-arrow-right-short{
+    font-size: 8px;
+  }  
+}
+@media (max-width:769px) {
+  .leftarrow ,.rightarrow{
+    display: none;
+  }
+}
+.centerslider{
+  width: 94% !important;
+}
+@media (max-width:768px) {
+  .centerslider{
+    width: 100% !important;
+  }
+}
+.bi-arrow-left-short, .bi-arrow-right-short{
+  font-size: 22px;
+}
+@media (max-width:1400px) {
+  .bi-arrow-left-short, .bi-arrow-right-short{
+    font-size: 16px;
+  }  
+}
+@media (max-width:1200px) {
+  .bi-arrow-left-short, .bi-arrow-right-short{
+    font-size: 15px;
+  }  
+}
+
+.viewall{
+    font-size: $base-font-size;
+    font-weight:600;
+  }
+  @media (max-width: 768px) {
+    .viewall{
+      font-size: $base-font-size * 0.8; 
+    }
+  }
+  @media (max-width:456px) {
+    .viewall{
+        font-size: $base-font-size * 0.6;
+    }
+  }
+
+  .gardenheader{
+    font-size: $base-font1-size;
+    font-weight: bold;
+  }
+  @media (max-width:1024px) {
+    .gardenheader{
+        font-size: $base-font1-size * 0.8;
+    }
+  }
+  @media (max-width:768px) {
+    .gardenheader{
+        font-size: $base-font1-size * 0.6;
+    }
+  }
+  @media (max-width:456px) {
+    .gardenheader{
+        font-size: $base-font1-size * 0.5;
+    }
+  }
+  @media (max-width:388px) {
+    .gardenheader{
+        font-size: $base-font1-size * 0.4;
+    }
+  }

@@ -1,0 +1,1 @@
+export const Domain_Base_Url = import.meta.env.VITE_BASE_URL;

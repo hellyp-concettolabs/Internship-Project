@@ -1,24 +1,23 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HeaderSection from "./Components/Navbar/HeaderSection"
-import Footer from "./Components/FooterSection/Footer"
-import HomeBody from "./Components/Body/HomeBody"
-import ProductListPage from "./Components/ProductSection/ProductListPage";
-import Dealsoftheday from "./Components/Body/DealsOfTheDay/Dealsoftheday";
-import CartPage from "./Components/CartSection/CartPage";
-import Profile from "./Components/Navbar/Profile";
-import SingleProductDetail from "./Components/ProductSection/SingleProductDetail";
-import Address from "./Components/Checkout/Address.jsx";
-import { UserProvider } from "./Components/UserData/StoreUserContext.jsx";
+import { ToastContainer } from 'react-toastify';
 import { Provider } from "react-redux";
 import store from "./app/store.js";
+import HeaderSection from "./Components/Header/HeaderSection";
+import HomeBody from "./Components/Home/HomeBody.jsx";
+import Footer from "./Components/Footer/Footer.jsx"
+import ProductListPage from "./Components/ProductListPage/ProductListPage.jsx";
+// import Dealsoftheday from "./Components/Body/DealsOfTheDay/Dealsoftheday";
+import CartPage from "./Components/Cart/CartPage";
+import Profile from "./Components/UserProfile/Profile.jsx";
+import SingleProductDetail from "./Components/ProductDetailPage/SingleProductDetail";
+import Address from "./Components/Checkout/Address.jsx";
+import { UserProvider } from "./Components/UserData/StoreUserContext.jsx";
 import Payment from "./Components/Checkout/Payment.jsx";
-import ManageAddress from "./Components/Navbar/ManageAddress.jsx";
-import YourOrders from "./Components/OrdersSection/YourOrders.jsx";
-import WishList from "./Components/WishListSection/WishList.jsx";
-import OrderDetailPage from "./Components/OrdersSection/OrderDetailPage.jsx";
+import ManageAddress from "./Components/Checkout/ManageAddress.jsx";
+import YourOrders from "./Components/YourOrders/YourOrders.jsx";
+import WishList from "./Components/WishList/WishList.jsx";
+import OrderDetailPage from "./Components/YourOrders/OrderDetailPage.jsx";
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
-
 
 
 function App() {
@@ -34,7 +33,7 @@ function App() {
             <Route path="/profile" element={<Profile/>}/>
             <Route path="/productlist" element={<ProductListPage/>}/>
             <Route path="/:category_id?/:sub_category_id?/:collection_id?" element={<ProductListPage/>}/>
-            <Route path="/dealsoftheday" element={<Dealsoftheday/>}/>
+            {/* <Route path="/dealsoftheday" element={<Dealsoftheday/>}/> */}
             <Route path="/singleproduct/:slug/:unique_id?/:sku" element={<SingleProductDetail/>}/>
             <Route path="/cart" element={<CartPage/>}/>
             <Route path="/checkout/address" element={<Address/>}/>

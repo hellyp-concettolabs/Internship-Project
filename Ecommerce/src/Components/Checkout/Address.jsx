@@ -1,16 +1,17 @@
+import { Row, Col, Container, Form, Spinner} from "react-bootstrap";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import mastercard from "../../assets/mastercard.png";
 import american from "../../assets/american.png";
 import visa from "../../assets/visa.png";
 import add from "../../assets/plus.svg"
-import "./address.scss";
-import { Row, Col, Container, Form, Spinner} from "react-bootstrap";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import NoProduct from "../ProductNotFoundPage/NoProduct";
 import AddAddressPopUp from "./AddAddressPopUp";
-import { useNavigate } from "react-router";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "./address.scss";
+import { Domain_Base_Url } from "../../app/DomainBaseUrl/BaseUrl";
 
 const Address = () => {
 
@@ -31,25 +32,24 @@ const Address = () => {
     const[addressId,setAddressId] = useState(null);
     const navigate = useNavigate();
 
-    const fetchAddress = async() => {
-      if(localStorage.getItem("token") !== ""){
-        isLoading(true);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
-        await axios.get(' https://bargainfox-dev.concettoprojects.com/api/get-delivery-address')
-        .then((response) => {
-          setStoreAddress(response.data.result);
-          isLoading(false);
-        })
-        .catch(error => {
-          console.error('Error making Get request of Address:', error);
-        })
-      }
-    }
-
     useEffect(() => {
       fetchAddress();
       setNewAdd(false);
-    }, [newadd])
+    }, [newadd]);
+
+    const fetchAddress = async() => {
+      try{
+      if(localStorage.getItem("token") !== ""){
+        isLoading(true);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
+        const response = await axios.get(`${Domain_Base_Url}/get-delivery-address`)
+          setStoreAddress(response.data.result);
+          isLoading(false);
+      }}
+      catch(error) {
+        console.error('Error making Get request of Address:', error);
+      }
+    }
 
     const handlePayment = () =>{
       if(addressId){
