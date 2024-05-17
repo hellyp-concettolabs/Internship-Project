@@ -1,0 +1,94 @@
+$base-font-size : 36px;
+$xxl:1400px;
+$xl:1200px;
+$lg:992px;
+$md:768px;
+$sm:560px;
+@mixin breakpoint($type, $size) {
+    @if $type == 'min' {
+      @media (min-width: $size) {
+        @content;
+      }
+    }
+    @else if $type == 'max' {
+      @media (max-width: $size) {
+        @content;
+      }
+    }
+}
+.productlistcontainer0{
+    padding: 0px 30px;
+}
+.productlistcontainer{
+    margin-top: 20px !important;
+    margin-bottom: 50px !important;
+    padding: 0px 60px;
+    gap: 1.5%;
+    @include breakpoint(max,$xxl){
+        padding: 0px 30px;
+    }
+    @include breakpoint(max,$md){
+        padding: 0px 15px;
+    }
+    @include breakpoint(max,330px){
+        padding: 0px 0px;
+    }
+    .filtersec{
+        max-width: 24% !important;
+    }
+    .productlistsec{
+        width: 75% !important;
+        @include breakpoint(max,$lg){
+            max-width: 100% !important;
+        }
+    }
+}
+.productlistwishlist{
+    position: absolute;
+    margin-top: 1%;
+    margin-left: 9% ;
+    height: 40px;
+    @include breakpoint(max,$xxl){
+        margin-top: 1%;
+        margin-left: 18%;
+    }
+    @include breakpoint(max,$xl){
+        margin-top: 1.4%;
+        margin-left: 17%;
+    }
+    @include breakpoint(max,$lg){
+        margin-top: 1.6%;
+        margin-left: 21%;
+    }
+    @include breakpoint(max,650px){
+        margin-left: 20%;
+    }
+    @include breakpoint(max,$sm){
+        margin-left: 35%;
+    }
+    @include breakpoint(max,500px){
+        margin-left: 33%;
+    }
+    @include breakpoint(max,400px){
+        margin-left: 30%;
+    }
+
+    
+}
+.resultheading{
+    color: #292D32;
+    font-size: $base-font-size - 18;
+    font-weight: 500;
+}
+
+.sortby{
+    color: #A4A4B8;
+    margin: 0 !important;
+    text-align: center;
+    font-size: $base-font-size - 20;
+    font-weight: 600;
+}
+
+li{
+    cursor: pointer;
+}

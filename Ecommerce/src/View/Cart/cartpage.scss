@@ -1,0 +1,106 @@
+$base-font-size: 36px;
+$xxl:1280px;
+$xl:1200px;
+$lg:990px;
+$md:766px;
+$sm:575px;
+@mixin breakpoint($type, $size) {
+    @if $type == 'min' {
+      @media (min-width: $size) {
+        @content;
+      }
+    }
+    @else if $type == 'max' {
+      @media (max-width: $size) {
+        @content;
+      }
+    }
+}
+.cartcontainer{
+    padding: 0.5rem 60px 3rem;
+    display: flex;
+    gap: 2rem;
+    @include breakpoint(max,$xxl){
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    @include breakpoint(max,$lg){
+        padding: 0.5rem 15px;
+    }
+    @include breakpoint(max,$md){
+        flex-direction: column;
+    }
+}
+
+.breadcrumb-item{
+    font-size: $base-font-size - 23px;
+    font-weight: 500;
+}
+
+.cc1{
+    max-width: 70% !important;
+    @include breakpoint(max,$md){
+        max-width: 100% !important;
+    }
+}
+.cc2{
+    max-width:28% !important;
+    @include breakpoint(max,$md){
+        max-width:100% !important;
+    }
+}
+
+.cartheading{
+    display: flex;
+    align-items: end;
+    gap: 1rem;
+    @include breakpoint(max,$sm){
+        align-items: start;
+        gap: 0rem;
+        flex-direction: column;
+    }
+
+    .shoppingcartheading{
+        font-size: $base-font-size;
+        font-weight: bold;
+        @include breakpoint(max,$xl){
+            font-size: $base-font-size * 0.8 !important;
+        }
+        @include breakpoint(max,1035px){
+            font-size: $base-font-size * 0.6 !important;
+        }
+        @include breakpoint(max,$sm){
+            font-size: $base-font-size * 0.5 !important;
+        }
+    }
+    .cartnoitems{
+        margin-bottom: 1.5%;
+        font-size: ($base-font-size - 18);
+        color: #A4A4B8;
+        font-weight: 600;
+        @include breakpoint(max,1035px){
+            margin-bottom: 0 !important;
+            font-size: ($base-font-size - 18) * 0.8 !important;
+        }
+    }
+}
+
+.carttowish{
+    font-size: ($base-font-size - 18);
+    font-weight: 600;
+    color: #A4A4B8;
+    @include breakpoint(max,1035px){
+        font-size: ($base-font-size - 18) * 0.8 !important;
+    }
+}
+
+.cartproducttitle{
+    height: 24px;
+    overflow: hidden;
+    font-size: $base-font-size - 20;
+    font-weight: normal;
+    color: #292D32;
+}
+
+
+
