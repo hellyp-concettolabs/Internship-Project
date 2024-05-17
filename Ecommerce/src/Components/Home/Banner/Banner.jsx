@@ -1,5 +1,5 @@
 import { Image, Container, Row, Col } from "react-bootstrap"
-import banner from "../../assets/banner.png"
+import banner from "../../../assets/banner.png"
 
 
 function Banner() {

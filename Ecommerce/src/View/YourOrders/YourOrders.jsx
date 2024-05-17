@@ -1,9 +1,9 @@
 import { Col, Container, Image, Row, Spinner } from "react-bootstrap"
-import SingleProductTitle from "../ProductDetailPage/SingleProductTitle"
+import SingleProductTitle from "../../Components/ProductDetailPage/SingleProductTitle"
 import Form from 'react-bootstrap/Form';
 import { useEffect, useState } from "react";
 import axios from "axios";
-import NoProduct from "../ProductNotFoundPage/NoProduct";
+import NoProduct from "../../Components/ProductNotFoundPage/NoProduct";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";

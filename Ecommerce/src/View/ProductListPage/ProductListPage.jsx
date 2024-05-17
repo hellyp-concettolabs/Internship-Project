@@ -3,11 +3,11 @@ import { useEffect, useState} from "react";
 import axios from "axios";
 import{useLocation, useNavigate} from 'react-router';
 import{Link, useParams, useSearchParams} from 'react-router-dom';
-import FilterSection from "./FilterSection.jsx";
-import SingleProductCard from "./SingleProductCard.jsx";
-import PaginationDetail from "../PaginationSection/PaginationDetail.jsx";
-import NoProduct from "../ProductNotFoundPage/NoProduct.jsx";
-import WishListBtn from "../WishList/WishListBtn.jsx";
+import FilterSection from "../../Components/ProductListPage/FilterSection.jsx";
+import SingleProductCard from "../../Components/ProductListPage/SingleProductCard.jsx";
+import PaginationDetail from "../../Components/PaginationSection/PaginationDetail.jsx";
+import NoProduct from "../../Components/ProductNotFoundPage/NoProduct.jsx";
+import WishListBtn from "../../Components/WishList/WishListBtn.jsx";
 import "./productlistpage.scss"
 import { Domain_Base_Url } from "../../app/DomainBaseUrl/BaseUrl.js";
 

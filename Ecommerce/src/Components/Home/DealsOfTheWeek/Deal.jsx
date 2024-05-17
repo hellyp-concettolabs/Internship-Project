@@ -4,14 +4,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link} from "react-router-dom";
 import { useRef } from "react";
-import rightarrow from "../../assets/rightarrow.png";
-import womenclothes from "../../assets/womanclothes.png";
-import manclothing from "../../assets/manclothing.png";
-import shoes from "../../assets/shoes.png";
-import sportsshoe from "../../assets/sportsshoe.png";
-import jewellery from "../../assets/jewellery.png";
-import sunglasses from "../../assets/sunglasses.png";
-import "../DealsOfTheWeek/deal.scss";
+import rightarrow from "../../../assets/rightarrow.png";
+import womenclothes from "../../../assets/womanclothes.png";
+import manclothing from "../../../assets/manclothing.png";
+import shoes from "../../../assets/shoes.png";
+import sportsshoe from "../../../assets/sportsshoe.png";
+import jewellery from "../../../assets/jewellery.png";
+import sunglasses from "../../../assets/sunglasses.png";
+import "./deal.scss";
 import DealCard from "./DealCard";
 
 function Deal() {

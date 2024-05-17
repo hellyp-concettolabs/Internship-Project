@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom";
 import './menu.scss'
-import {Domain_Base_Url} from "../../app/DomainBaseUrl/BaseUrl.js"
+import {Domain_Base_Url} from "../../../app/DomainBaseUrl/BaseUrl.js"
 
 function Menu() {
 

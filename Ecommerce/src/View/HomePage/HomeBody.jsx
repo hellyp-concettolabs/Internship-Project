@@ -1,11 +1,11 @@
-import CategoryMenu from "../CategoryMenu/Menu";
-import Banner from "../Banner/Banner";
-import Deal from "../DealsOfTheWeek/Deal";
-import Trending from "../Trending/Trending"
-import DealTrendingSection from "../Deal&TrendingSection/DealTrendingSection"
-import Garden from "../GardenSection/Garden"
-import Subscribe from "../SubscribeSection/Subscribe"
-import Electronics from "../ElectronicsSection/Electronics"
+import CategoryMenu from "../../Components/Home/CategoryMenu/Menu";
+import Banner from "../../Components/Home/Banner/Banner";
+import Deal from "../../Components/Home/DealsOfTheWeek/Deal";
+import Trending from "../../Components/Home/Trending/Trending"
+import DealTrendingSection from "../../Components/Home/Deal&TrendingSection/DealTrendingSection"
+import Garden from "../../Components/Home/GardenSection/Garden"
+import Subscribe from "../../Components/Home/SubscribeSection/Subscribe"
+import Electronics from "../../Components/Home/ElectronicsSection/Electronics"
 //import Blogs from "./BlogsSection/Blogs"
 
 function MainBody() {

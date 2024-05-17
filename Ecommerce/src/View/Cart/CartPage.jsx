@@ -2,10 +2,10 @@ import { Col, Container, Row, Spinner } from "react-bootstrap";
 import axios from "axios";
 import {useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import OrderSummary from "./OrderSummary";
-import CartProductCard from "./CartProductCard";
-import NoProduct from "../ProductNotFoundPage/NoProduct";
-import { cartProductCount } from "../CartProductCount/CartProductCount.jsx";
+import OrderSummary from "../../Components/Cart/OrderSummary.jsx";
+import CartProductCard from "../../Components/Cart/CartProductCard.jsx";
+import NoProduct from "../../Components/ProductNotFoundPage/NoProduct.jsx";
+import { cartProductCount } from "../../Components/CartProductCount/CartProductCount.jsx";
 import "./cartpage.scss";
 import { Domain_Base_Url } from "../../app/DomainBaseUrl/BaseUrl.js";
 

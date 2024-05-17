@@ -3,19 +3,19 @@ import { ToastContainer } from 'react-toastify';
 import { Provider } from "react-redux";
 import store from "./app/store.js";
 import HeaderSection from "./Components/Header/HeaderSection";
-import HomeBody from "./Components/Home/HomeBody.jsx";
+import HomeBody from "./View/HomePage/HomeBody.jsx";
 import Footer from "./Components/Footer/Footer.jsx"
-import ProductListPage from "./Components/ProductListPage/ProductListPage.jsx";
+import ProductListPage from "./View/ProductListPage/ProductListPage.jsx";
 // import Dealsoftheday from "./Components/Body/DealsOfTheDay/Dealsoftheday";
-import CartPage from "./Components/Cart/CartPage";
-import Profile from "./Components/UserProfile/Profile.jsx";
-import SingleProductDetail from "./Components/ProductDetailPage/SingleProductDetail";
-import Address from "./Components/Checkout/Address.jsx";
+import CartPage from "./View/Cart/CartPage";
+import Profile from "./View/Profile/Profile.jsx";
+import SingleProductDetail from "./View/SingleProductDetail/SingleProductDetail";
+import Address from "./View/Checkout-address/Address.jsx";
 import { UserProvider } from "./Components/UserData/StoreUserContext.jsx";
-import Payment from "./Components/Checkout/Payment.jsx";
+import Payment from "./View/Checkout-payment/Payment.jsx";
 import ManageAddress from "./Components/Checkout/ManageAddress.jsx";
-import YourOrders from "./Components/YourOrders/YourOrders.jsx";
-import WishList from "./Components/WishList/WishList.jsx";
+import YourOrders from "./View/YourOrders/YourOrders.jsx";
+import WishList from "./View/Wishlist/WishList.jsx";
 import OrderDetailPage from "./Components/YourOrders/OrderDetailPage.jsx";
 import 'react-toastify/dist/ReactToastify.css';
 

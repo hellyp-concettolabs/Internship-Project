@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
-import SingleProductCard from "../ProductListPage/SingleProductCard";
+import SingleProductCard from "../../Components/ProductListPage/SingleProductCard";
 import { Link } from "react-router-dom";
-import WishListBtn from "./WishListBtn";
+import WishListBtn from "../../Components/WishList/WishListBtn";
 import "./wishlist.scss"
-import NoProduct from "../ProductNotFoundPage/NoProduct";
+import NoProduct from "../../Components/ProductNotFoundPage/NoProduct";
 import { Domain_Base_Url } from "../../app/DomainBaseUrl/BaseUrl";
 
 function WishList() {

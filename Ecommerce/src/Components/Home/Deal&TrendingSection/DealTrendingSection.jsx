@@ -1,8 +1,8 @@
 import { Col, Container, Image, Row } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import dealsofweek from "../../assets/dealsofweek.png"
-import trending from "../../assets/trending.png"
-import clearance2 from "../../assets/clearance2.png"
+import dealsofweek from "../../../assets/dealsofweek.png"
+import trending from "../../../assets/trending.png"
+import clearance2 from "../../../assets/clearance2.png"
 import "./dealtrending.scss"
 
 

@@ -8,8 +8,8 @@ import mastercard from "../../assets/mastercard.png";
 import american from "../../assets/american.png";
 import visa from "../../assets/visa.png";
 import add from "../../assets/plus.svg"
-import NoProduct from "../ProductNotFoundPage/NoProduct";
-import AddAddressPopUp from "./AddAddressPopUp";
+import NoProduct from "../../Components/ProductNotFoundPage/NoProduct";
+import AddAddressPopUp from "../../Components/Checkout/AddAddressPopUp";
 import "./address.scss";
 import { Domain_Base_Url } from "../../app/DomainBaseUrl/BaseUrl";
 

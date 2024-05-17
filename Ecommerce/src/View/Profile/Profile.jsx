@@ -1,7 +1,7 @@
 import { Button, Col, Container, Form, Image, Row } from "react-bootstrap"
 import "./profile.scss"
 import { useContext } from "react";
-import { UserContext, userResultDetails } from "../UserData/StoreUserContext";
+import { UserContext, userResultDetails } from "../../Components/UserData/StoreUserContext";
 import {Formik} from 'formik'
 import axios from 'axios';
 import { toast } from 'react-toastify';

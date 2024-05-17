@@ -5,11 +5,11 @@ import {useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import rightarrow from "../../assets/rightarrow.png";
-import ProductCard from "../ProductCard/ProductCard";
-import WishListBtn from "../WishList/WishListBtn";
+import rightarrow from "../../../assets/rightarrow.png";
+import ProductCard from "../../ProductCard/ProductCard";
+import WishListBtn from "../../WishList/WishListBtn";
 import "../ElectronicsSection/electronics.scss"
-import { Domain_Base_Url } from "../../app/DomainBaseUrl/BaseUrl";
+import { Domain_Base_Url } from "../../../app/DomainBaseUrl/BaseUrl";
 
 function Trending() {
 

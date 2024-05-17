@@ -1,5 +1,5 @@
 import { Button, Col, Container, Form, Image, Row } from "react-bootstrap"
-import subscribearrow from "../../assets/subscribearrow.png"
+import subscribearrow from "../../../assets/subscribearrow.png"
 import "./subscribe.scss"
 
 function Subscribe() {

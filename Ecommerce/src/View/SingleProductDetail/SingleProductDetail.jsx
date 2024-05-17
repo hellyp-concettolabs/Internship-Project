@@ -2,27 +2,27 @@ import { Col, Container,Row } from "react-bootstrap"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./singleproductdetail.scss"
-import Star from "../ProductCard/Star";
-import ImageAndThumbnail from "./ImageAndThumbnail";
-import SingleProductTitle from "./SingleProductTitle";
-import Share from "./Share";
-import VenderName from "./VenderName";
-import SingleProductPrice from "./SingleProductPrice";
-import OtherSeller from "./OtherSeller";
-import SingleProductColor from "./SingleProductColor.jsx"
-import SingleProductSize from "./SingleProductSize.jsx";
-import SingleProductQuantity from "./SingleProductQuantity.jsx";
-import SingleProductDeliveryinfo from "./SingleProductDeliveryinfo.jsx";
-import SingleProductStockInfo from "./SingleProductStockInfo.jsx";
-import SingleProductCartBtn from "./SingleProductCartBtn.jsx";
-import SingleProductDeliveryTime from "./SingleProductDeliveryTime.jsx";
-import SingleProductHighlight from "./SingleProductHighlight.jsx";
-import SingleProductReview from "./SingleProductReview.jsx";
+import Star from "../../Components/ProductCard/Star.jsx";
+import ImageAndThumbnail from "../../Components/ProductDetailPage/ImageAndThumbnail.jsx";
+import SingleProductTitle from "../../Components/ProductDetailPage/SingleProductTitle.jsx";
+import Share from "../../Components/ProductDetailPage/Share";
+import VenderName from "../../Components/ProductDetailPage/VenderName";
+import SingleProductPrice from "../../Components/ProductDetailPage/SingleProductPrice";
+import OtherSeller from "../../Components/ProductDetailPage/OtherSeller";
+import SingleProductColor from "../../Components/ProductDetailPage/SingleProductColor.jsx"
+import SingleProductSize from "../../Components/ProductDetailPage/SingleProductSize.jsx";
+import SingleProductQuantity from "../../Components/ProductDetailPage/SingleProductQuantity.jsx";
+import SingleProductDeliveryinfo from "../../Components/ProductDetailPage/SingleProductDeliveryinfo.jsx";
+import SingleProductStockInfo from "../../Components/ProductDetailPage/SingleProductStockInfo.jsx";
+import SingleProductCartBtn from "../../Components/ProductDetailPage/SingleProductCartBtn.jsx";
+import SingleProductDeliveryTime from "../../Components/ProductDetailPage/SingleProductDeliveryTime.jsx";
+import SingleProductHighlight from "../../Components/ProductDetailPage/SingleProductHighlight.jsx";
+import SingleProductReview from "../../Components/ProductDetailPage/SingleProductReview.jsx";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import SingleProductCondition from "./SingleProductCondition.jsx";
-import WishListBtn from "../WishList/WishListBtn.jsx";
+import SingleProductCondition from "../../Components/ProductDetailPage/SingleProductCondition.jsx";
+import WishListBtn from "../../Components/WishList/WishListBtn.jsx";
 import { Domain_Base_Url } from "../../app/DomainBaseUrl/BaseUrl.js";
 
 
